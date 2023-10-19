@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  aiod-marketplace-frontend:
+    container_name: aiod_marketplace_frontend
+    build:
+      context: .
+      dockerfile: docker/marketplace/dev/Dockerfile
+    command: ["ng", "serve", "--port=8080", "--host=0.0.0.0", "-c development-ai4eosc"]
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+    - 8080:8080
+  proxy:
+    container_name: ngix-proxy
+    image: nginx
+    environment:
+      - MY_PATH_API_AIOD_CATALOGUE=https://aiod-dev.i3a.es
+      - MY_PATH_API_MY_LIB=http://91.235.109.228:9092
+    command: sh -c "/etc/nginx/script.sh"
+    volumes:
+      - ./docker/marketplace/script.sh:/etc/nginx/script.sh
+      - ./docker/nginx/nginx-proxy.conf:/etc/nginx/nginx.conf.template
+    ports:
+      - 80:80

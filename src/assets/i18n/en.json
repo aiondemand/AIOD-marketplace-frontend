@@ -1,0 +1,180 @@
+{
+    "HEADQUARTER": "test",
+    "SIDENAV": {
+        "DASHBOARD": "Dashboard",
+        "MODULES": "Modules (marketplace)",
+        "DEPLOYMENTS": "Deployments",
+        "IAM": "Identity and Access",
+        "AI4EOSC-DOCUMENTATION": "AI4EOSC documentation",
+        "IMAGINE-DOCUMENTATION": "iMagine AI platform documentation",
+        "PROJECT-PAGE": "Project page",
+        "OTHER-LINKS": "Other links",
+        "TERMS-OF-USE": "Terms of use",
+        "PRIVACY-POLICY": "Privacy policy",
+        "ACKNOWLEDGMENTS": "The iMagine platform dashboard is a service provided by CSIC, co-funded by",
+        "MARKETPLACE": "Marketplace",
+        "MY-LIBRARY": "My Library",
+        "SELECT-PLATFORM": "Select platform"
+    },
+    "TOP-NAVBAR": {
+        "LOGOUT": "Log out",
+        "LOGIN-REGISTER": "Login - Register"
+    },
+    "DEPLOYMENTS": {
+        "TITLE": "Deployments",
+        "DEPLOYMENT-DETAIL": {
+            "TITLE": "Deployment detail",
+            "STATUS": "Status",
+            "DOCKER-IMAGE": "Docker image",
+            "DESCRIPTION": "Description",
+            "CREATION-TIME": "Creation time",
+            "DEPLOYMENT-ID": "Deployment ID",
+            "RESOURCES-ASSIGNED": "Resources assigned",
+            "ENDPOINTS": "Endpoints",
+            "RESOURCES": {
+                "CPU_NUM": "Number of CPUs",
+                "GPU_NUM": "Number of GPUs",
+                "DISKMB": "Disk memory",
+                "MEMORYMB": "RAM memory"
+            }
+        },
+        "DEPLOYMENT-NAME": "Name",
+        "BULK-ACTIONS": "Bulk actions",
+        "UUID": "Deployment uuid",
+        "STATUS": "Status",
+        "CONTAINER-NAME": "Container name",
+        "GPUS": "GPUs",
+        "CREATION-TIME": "Creation time",
+        "DEPLOYED-AT": "Deployed at",
+        "ACTIONS": "Actions",
+        "NAMESPACE": "Namespace",
+        "NEW-DEPLOYMENT": "New deployment",
+        "NO-DEPLOYMENTS": "Nothing deployed yet"
+    },
+    "MODULES": {
+        "TITLE": "Marketplace",
+        "NEW-DEPLOYMENT": "New deployment",
+        "MODULE-DETAIL": {
+            "TITLE": "Module",
+            "BUILD-STATUS": "Build status",
+            "LICENSE": "License",
+            "CREATED": "Created",
+            "CATEGORIES": "Categories",
+            "ADDITIONAL-RESOURCES": "Additional Resources",
+            "GET-THE-CODE": "Get the code",
+            "GET-THE-DATA": "Get the data",
+            "DATASET": "Dataset",
+            "TRAIN-MODULE": "Train module"
+        },
+        "MODULE-TRAIN": {
+            "TITLE": "Configure training",
+            "GENERAL-CONF": "General configuration",
+            "HARDWARE-CONF": "Hardware configuration",
+            "STORAGE-CONF": "Storage configuration",
+            "OUT-OF-RANGE-ERROR": "Should be between {{min}} and {{max}}",
+            "GENERAL-CONF-FORM": {
+                "TITLE": "Deployment options",
+                "DEPLOYMENT-TITLE": "Deployment title",
+                "DEPLOYMENT-TITLE-REQUIRED": "Please add a title for the deployment",
+                "DEPLOYMENT-DESCRIPTION": "Deployment description",
+                "DEPLOYMENT-DESCRIPTION-PLACEHOLDER": "Useful when you have lots of different active deployments",
+                "SERVICE-TO-RUN": "Service to run",
+                "PASSWORD": "Password",
+                "JUPYTERLAB-PASS": "JupyterLab password",
+                "JUPYTERLAB-PASS-REQUIRED": "A password is required",
+                "JUPYTERLAB-PASS-LENGTH-ERROR": "The password must be at least 9 characters long",
+                "DOCKER-OPTIONS": "Docker options",
+                "DOCKER-IMAGE": "Docker image",
+                "DOCKER-TAG": "Docker tag"
+            },
+            "HARDWARE-CONF-FORM": {
+                "TITLE": "Hardware options",
+                "NUMBER-OF-CPUS": "Number of CPUs",
+                "NUMBER-OF-GPUS": "Number of GPUs",
+                "GPU-MODEL": "GPU model",
+                "RAM-MEMORY": "RAM memory (in MB)",
+                "DISK-MEMORY": "Disk memory (in MB)"
+            },
+            "STORAGE-CONF-FORM": {
+                "TITLE": "Storage options",
+                "RCLONE-CONF": "RCLONE configuration",
+                "STORAGE-URL": "Storage URL",
+                "RCLONE-VENDOR": "RCLONE vendor (webdav)",
+                "RCLONE-USER": "RCLONE user",
+                "RCLONE-PASS": "RCLONE password"
+            }
+        }
+    },
+    "GENERAL-BUTTONS": {
+        "DELETE": "Delete",
+        "ACCEPT": "Accept",
+        "ACCESS": "Access",
+        "YES": "Yes",
+        "NO": "No",
+        "BACK": "Back",
+        "NEXT": "Next",
+        "SUBMIT": "Submit",
+        "QUICK-SUBMIT": "Quick submit",
+        "GITHUB": "Github",
+        "DOCKERHUB": "Dockerhub"
+    },
+    "ERRORS": {
+        "SERVICE-ERROR": "Error calling the API, please retry later",
+        "NOT-AUTHORIZED-ERROR": "*You need to be enrolled in the '{{vo}}' VO to be able to deploy"
+    },
+    "ASSETS": {
+        "TITLE": "Marketplace",
+        "DISTRIBUTION": {
+            "TITLE": "Distribution",
+            "NAME": "Name",
+            "DESCRIPTION": "Description",
+            "SIZE": "Size",
+            "URL": "Url",
+            "CHECKSUM": "Checksum"
+        },
+        "ASSET-DETAIL": {
+            "TITLE": "Asset",
+            "CATEGORY": "Category",
+            "PLATFORM": "Platform",
+            "DESCRIPTION": "Description",
+            "KEYWORDS": "Keywords",
+            "LICENSE": "License",
+            "RESEARCH_AREA": "Research Area",
+            "SCIENTIFIC_DOMAIN": "Scientific Domain",
+            "DATE_PUBLISHED" : "Date Published",
+            "SAMEAS" : "Same as"
+        }
+    },
+    "DATASET": {
+        "VERSION": "Version",
+        "CREATED": "Created",
+        "MODIFIED": "Modified",
+        "SAME_AS": "Same as",
+        "CREATOR": "Creator",
+        "CONTACT": "Contact",
+        "ISSN": "ISSN",
+        "SIZE": "Size",
+        "SPATIAL": "Spatial",
+        "TEMPORAL_COVERAGE": "Temporal coverage",
+        "FUNDER" : "Funder",
+        "MEASURED_VALUES" : "Measured values"
+    },
+
+    "AIMODEL" : {
+        "PID" : "pid",
+        "NOTE" : "Note",
+        "TYPE" : "Type"
+    },
+
+    "MY-LIBRARY": {
+        "TITLE": "My Library",
+        "SIDENAV-FILTER": "All Assets",
+        "DISPLAY-COLUMNS": {
+            "NAME": "Name",
+            "CATEGORY": "Category",
+            "PRICE": "Price",
+            "LINK": "Url Metadata",
+            "ACTIONS": "Delete"
+        }
+    }
+}

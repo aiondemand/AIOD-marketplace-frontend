@@ -1,0 +1,242 @@
+@use '@angular/material' as mat;
+//@import 'exports/variables';
+
+@include mat.core();
+
+$ai4eosc-palette-primary: (
+    50: #e3ecf5,
+    100: #bad0e6,
+    200: #8cb0d6,
+    300: #5e90c5,
+    400: #3c79b8,
+    500: #1961ac,
+    600: #1659a5,
+    700: #124f9b,
+    800: #0e4592,
+    900: #083382,
+    A100: #b1c8ff,
+    A200: #7ea4ff,
+    A400: #4b81ff,
+    A700: #316fff,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$ai4eosc-palette-secondary: (
+    50: #fdefe3,
+    100: #fad8b9,
+    200: #f7be8b,
+    300: #f4a45d,
+    400: #f1913a,
+    500: #ef7d17,
+    600: #ed7514,
+    700: #eb6a11,
+    800: #e8600d,
+    900: #e44d07,
+    A100: #ffffff,
+    A200: #ffe4da,
+    A400: #ffbea7,
+    A700: #ffab8d,
+    contrast: (
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000,
+        700: #000000,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
+);
+
+$ai4eosc-app-primary: mat.define-palette($ai4eosc-palette-primary);
+$ai4eosc-app-accent: mat.define-palette($ai4eosc-palette-secondary);
+$ai4eosc-app-warn: mat.define-palette(mat.$red-palette);
+
+$ai4eosc-app-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $ai4eosc-app-primary,
+            accent: $ai4eosc-app-accent,
+            warning: $ai4eosc-app-warn,
+        ),
+        typography:
+            mat.define-typography-config(
+                $font-family: "'Raleway', Arial, Helvetica, sans-serif",
+            ),
+        density: 0,
+    )
+);
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.all-component-themes($ai4eosc-app-theme);
+
+.cdk-overlay-pane {
+    max-width: 100vw !important;
+    justify-content: center;
+
+    .mat-dialog-container {
+        border-radius: 0;
+        width: 100vw;
+        height: 100vh;
+
+        @media (min-width: breakpoint('md')) {
+            width: 576px;
+            height: auto;
+            border-radius: 16px;
+        }
+
+        @media (min-width: breakpoint('lg')) {
+            width: 760px;
+        }
+
+        .mat-dialog-content {
+            max-height: 75vh;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--white-two);
+
+            @media (min-width: breakpoint('md')) {
+                padding-bottom: 8px;
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+.mat-form-field-appearance-outline {
+    &.mat-focused {
+        .mat-form-field-outline-thick {
+            color: var(--greyish-brown);
+        }
+    }
+
+    &.mat-form-field-invalid {
+        &.mat-form-field-invalid {
+            .mat-form-field-outline-thick {
+                color: var(--neon-red);
+            }
+        }
+    }
+}
+
+.mat-form-field-flex {
+    align-items: center !important;
+}
+
+.mat-form-field {
+    .mat-form-field-label {
+        color: var(--black-60);
+    }
+
+    &.mat-focused {
+        .mat-form-field-label {
+            color: var(--greyish-brown);
+        }
+    }
+
+    &.mat-form-field-invalid {
+        .mat-form-field-label {
+            color: var(--neon-red);
+        }
+    }
+
+    &.mat-form-field-flex {
+        align-items: center;
+    }
+
+    &.mat-form-field-appearance-outline {
+        .mat-form-field-suffix {
+            color: var(--neon-red);
+
+            .mat-icon-button:not([disabled]) {
+                color: var(--neon-red);
+            }
+        }
+    }
+}
+
+.mat-input-element {
+    caret-color: var(--greyish-brown);
+}
+
+.mat-form-field-invalid {
+    .mat-input-element {
+        caret-color: var(--neon-red);
+    }
+}
+
+.mat-error {
+    color: var(--neon-red);
+}
+
+.mat-dialog-title {
+    margin: 0 0 30px;
+    font-size: 24px;
+    font-weight: var(--raleway-light);
+    color: var(--warm-grey);
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+
+    .mat-button {
+        color: var(--neon-red);
+
+        &.primary {
+            font-weight: var(--raleway-bold);
+        }
+
+        .mat-riple {
+            background-color: var(--neon-red);
+        }
+    }
+}
+
+.mat-checkbox-frame {
+    border-color: var(--neon-red);
+}
+
+.mat-checkbox-indeterminate,
+.mat-checkbox-checked {
+    &.mat-accent {
+        .mat-checkbox-background {
+            background-color: var(--neon-red);
+        }
+    }
+}
+
+.mat-checkbox-frame {
+    border-color: var(--neon-red);
+}
+
+.mat-checkbox-label {
+    color: var(--greyish-brown);
+}
+
+button.mat-menu-item {
+    color: var(--warm-grey);
+    font-size: var(--font-l);
+    font-weight: var(--raleway-medium);
+    outline: none;
+}

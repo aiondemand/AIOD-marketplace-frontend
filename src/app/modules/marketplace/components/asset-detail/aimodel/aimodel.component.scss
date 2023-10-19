@@ -1,0 +1,11 @@
+.aimodel-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+h2,h3,h4{
+    color: var(--accent);
+}

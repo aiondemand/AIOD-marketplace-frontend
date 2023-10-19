@@ -1,0 +1,26 @@
+<mat-toolbar class="mb-3 marketplace-toolbar">
+    <span>Marketplace <mat-icon>shopping_cart</mat-icon></span>
+</mat-toolbar>
+
+<div *ngIf="isLoading; else assetList" class="spinner">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+</div>
+<mat-paginator (page)="handlePageEvent($event)" [length]="assetsSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+</mat-paginator>
+
+<ng-template #assetList>
+    <div class="asset-cards-container">
+        <div
+            fxFlex
+            *ngFor="
+                let asset of assets 
+            "
+            class="m-2"
+        >
+            <app-asset-card [asset]="asset"></app-asset-card>
+        </div>
+    </div>
+</ng-template>
+
+<!-- | search: this.searchFormGroup.get('search')?.value as AssetModel -->

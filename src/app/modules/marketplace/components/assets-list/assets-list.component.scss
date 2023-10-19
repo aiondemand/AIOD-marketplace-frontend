@@ -1,0 +1,10 @@
+.asset-cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.marketplace-toolbar {
+    background-color: var(--white);
+    justify-content: space-between;
+}

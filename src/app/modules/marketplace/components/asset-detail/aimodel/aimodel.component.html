@@ -1,0 +1,19 @@
+<div *ngIf="aiModel" class="aimodel-body">
+    <div *ngIf="!!aiModel.pid">
+        <h3>{{ 'AIMODEL.PID' | translate }}</h3>
+        <markdown>{{aiModel.pid}}</markdown>
+    </div>
+    <div *ngIf="!!aiModel.note && aiModel.note.length>0">
+        <h3>{{ 'AIMODEL.NOTE' | translate }}</h3>
+        <div *ngFor="let point of aiModel.note">
+            <ul>
+                <li>{{point}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div *ngIf="!!aiModel.type">
+        <h3>{{ 'AIMODEL.TYPE' | translate }}</h3>
+        <markdown>{{aiModel.type}}</markdown>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.deployment-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.mat-mdc-card-header {
+    display: block;
+    padding: 16px 16px 0;
+}
+
+.deployment-detail-title {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,39 @@
+{
+    "title": "AI4EOSC - Dashboard",
+    "sidenavMenu": [
+        {
+            "name": "SIDENAV.IAM",
+            "url": "https://aai.egi.eu/"
+        },
+        {
+            "name": "SIDENAV.AI4EOSC-DOCUMENTATION",
+            "url": "https://docs.ai4eosc.eu/"
+        },
+        {
+            "name": "SIDENAV.PROJECT-PAGE",
+            "url": "https://ai4eosc.eu"
+        }
+    ],
+    "voName": "vo.ai4eosc.eu",
+    "projectName": "AI4EOSC",
+    "projectUrl": "https://ai4eosc.eu",
+    "acknowledgments": "The AI4EOSC dashboard is a service provided by CSIC, co-funded by ",
+    "assets": {
+        "dataset": {
+            "icon":"dataset",
+            "color":"#B5EAD7"
+        },
+        "service": {
+            "icon":"design_services",
+            "color":"#FFFFD8"
+        },
+        "experiment": {
+            "icon":"science",
+            "color":"#C997C6"
+        },
+        "aimodel": {
+            "icon":"model_training",
+            "color":"#FCDCDF"
+        }
+    }
+}

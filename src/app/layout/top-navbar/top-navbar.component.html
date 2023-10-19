@@ -1,0 +1,56 @@
+<mat-toolbar class="top-navbar-container">
+    <div *ngIf="mobileQuery.matches" class="dashboard-logo-container">
+        <div class="corner-ribbon red" *ngIf="environment.develop">Dev</div>
+        <button mat-icon-button (click)="toggleSidenav()" style="z-index: 99">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <span class="spacer"></span>
+    <div class="cart-section" [matMenuTriggerFor]="menuCart">
+        <mat-icon [matBadge]="cartItems" matBadgeColor="primary">shopping_cart</mat-icon>
+    </div>
+    <div *ngIf="isLoggedIn(); else showSignInLink">
+        <button
+            #button
+            mat-button
+            [matMenuTriggerFor]="loginMenuAccess"
+            #menuTrigger="matMenuTrigger"
+            (mouseenter)="buttonEnter(menuTrigger)"
+            (mouseleave)="buttonLeave(menuTrigger, button)"
+            class="profile-button"
+        >
+            <mat-icon color="accent" class="mat-icon-filled">person</mat-icon>
+            {{ userProfile?.name }}
+        </button>
+
+        <mat-menu
+            #loginMenuAccess="matMenu"
+            class="logoutDropdownMenu"
+            hasBackdrop="false"
+        >
+            <button
+                mat-menu-item
+                (click)="logout()"
+                (mouseenter)="menuenter()"
+                (mouseleave)="menuLeave(menuTrigger, button)"
+            >
+                <mat-icon>logout</mat-icon>
+                {{ 'TOP-NAVBAR.LOGOUT' | translate }}
+            </button>
+        </mat-menu>
+    </div>
+
+    <ng-template #showSignInLink>
+        <a mat-button (click)="login()">
+            <mat-icon>person</mat-icon>
+            {{ 'TOP-NAVBAR.LOGIN-REGISTER' | translate }}
+        </a>
+    </ng-template>
+</mat-toolbar>
+
+
+<mat-menu #menuCart="matMenu">
+    <button mat-menu-item (click)="goToShoppingCart()">
+      <span>View shopping cart</span>
+    </button>
+  </mat-menu>
