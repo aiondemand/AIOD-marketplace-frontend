@@ -1,0 +1,39 @@
+<div class="dataset-body" *ngIf="dataset">
+    <div *ngIf="!!dataset.funder && dataset.funder.length>0">
+        <h3>{{ 'DATASET.FUNDER' | translate }}</h3>
+        <div *ngFor="let funder of dataset.funder">
+            <markdown>{{funder}}</markdown>
+        </div>
+    </div>
+
+    <div *ngIf="!!dataset.issn">
+        <h3>{{ 'DATASET.ISSN' | translate }}</h3>
+        <markdown>{{dataset.issn}}</markdown>
+    </div>
+
+
+    <div class="dataset-values">
+        <div *ngIf="!!dataset.measuredValues && dataset.measuredValues.length>0" class="dataset-values-column">
+            <h3>{{ 'DATASET.MEASURED_VALUES' | translate }}</h3>
+            <div *ngFor="let item of dataset.measuredValues" class="measured-values-style">
+                <p>variable:</p>
+                <markdown>{{item.variable}}</markdown>
+                <p>mesurement technique:</p>
+                <markdown>{{item.technique}}</markdown>
+            </div>
+        </div>
+        <div>
+            <div *ngIf="!!dataset.temporalCoverageFrom && !!dataset.temporalCoverageTo" class="dataset-values-column">
+                <h3>{{ 'DATASET.TEMPORAL_COVERAGE' | translate }}</h3>
+                <div>
+                    <p>Temporal coverage from:</p>
+                    <markdown>{{dataset.temporalCoverageFrom}}</markdown>
+                    <p>Temporal coverage to:</p>
+                    <markdown>{{dataset.temporalCoverageTo}}</markdown>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

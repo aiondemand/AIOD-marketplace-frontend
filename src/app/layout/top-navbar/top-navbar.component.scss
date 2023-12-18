@@ -1,0 +1,54 @@
+.top-navbar-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 0.5rem;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.dashboard-logo {
+    width: 200px;
+}
+
+.dashboard-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-button {
+    z-index: 1050;
+}
+
+::ng-deep {
+    .mat-mdc-menu-panel.logoutDropdownMenu {
+        width: 215px;
+    }
+}
+
+.not-authorized-error {
+    margin-left: 25rem;
+}
+
+.corner-ribbon {
+    width: 180px;
+    background: #e43;
+    position: absolute;
+    top: 5px;
+    left: -85px;
+    text-align: center;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    z-index: 1000;
+    font-size: 1rem;
+}
+.cart-section {
+    padding-right: 1em;
+    padding-top: 10px;
+    cursor: pointer;
+}

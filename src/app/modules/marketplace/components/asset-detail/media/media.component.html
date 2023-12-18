@@ -1,0 +1,70 @@
+<mat-card class="media-card">
+    <mat-card-header>
+        <div mat-card-avatar class="card-avatar">
+            <mat-icon>{{media.type}}</mat-icon>
+        </div>
+        <mat-card-title>{{ media.name }}</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>{{ 'ASSETS.MEDIA.DESCRIPTION' | translate }}</h4>
+                        
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p class="media-card-description">
+                    {{media.description}}
+                </p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h4>{{ 'ASSETS.MEDIA.PROPS' | translate }}</h4>
+                        
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="media-card-props">
+                    <ng-container *ngIf="media.checksumAlgorithm" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.checksumAlgorithm, subtitle: 'ASSETS.MEDIA.CHECKSUM_ALGORITHM' | translate, icon: 'lock' }">
+                    </ng-container>
+                    <ng-container *ngIf="media.encodingFormat" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.encodingFormat, subtitle: 'ASSETS.MEDIA.ENCODING_FORMAT' | translate, icon: 'code' }">
+                    </ng-container>
+                    <ng-container *ngIf="media.contentSizeKb" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.contentSizeKb, subtitle: 'ASSETS.MEDIA.CONTENT_SIZE_KB' | translate, icon: 'sd_card' }">
+                    </ng-container>
+                    <ng-container *ngIf="media.checksum" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.checksum, subtitle: 'ASSETS.MEDIA.CHECKSUM' | translate, icon: 'verified_user' }">
+                    </ng-container>
+                    <ng-container *ngIf="media.copyright" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.copyright, subtitle: 'ASSETS.MEDIA.COPYRIGHT' | translate, icon: 'copyright' }">
+                    </ng-container>
+                    <ng-container *ngIf="media.datePublished" [ngTemplateOutlet]="mediaProps"
+                        [ngTemplateOutletContext]="{title: media.datePublished, subtitle: 'ASSETS.MEDIA.DATE_PUBLISHED' | translate, icon: 'event' }">
+                    </ng-container>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-divider></mat-divider>
+
+    </mat-card-content>
+    <mat-card-actions class="card-actions" *ngIf="!!media.contentUrl">
+        <a mat-button [href]="media.contentUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>open_in_new</mat-icon>Source
+        </a>
+    </mat-card-actions>
+</mat-card>
+
+<ng-template #mediaProps let-title="title" let-subtitle="subtitle" let-icon="icon">
+    <div class="props-chip">
+        <div class="icon"><mat-icon>{{icon}}</mat-icon></div>
+        <div class="content">
+            <div class="title">{{title}}</div>
+            <div class="subtitle">{{subtitle}}</div>
+        </div>
+    </div>
+</ng-template>

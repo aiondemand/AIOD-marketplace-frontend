@@ -1,0 +1,131 @@
+@use 'sass:map';
+
+.container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+
+.sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    min-height: 655px;
+    background: var(--white-three);
+    padding-top: 1.5em;
+}
+
+::ng-deep .sidenav .mat-drawer-inner-container {
+    overflow: hidden !important;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidenav-item {
+    padding: 0 25px;
+}
+
+.sidenav-item:hover .mdc-list-item {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.sidenav-link {
+    border-radius: 3px;
+    color: var(--greyish-brown);
+    font-size: 15px;
+    padding: 15px 20px;
+
+    & ::ng-deep .mdc-list-item__content .mdc-list-item__primary-text {
+        white-space: break-spaces;
+    }
+}
+
+.active {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.other-links {
+    display: flex;
+    align-items: center;
+    color: var(--warm-grey);
+    & .mat-icon {
+        transform: scale(0.7);
+    }
+}
+
+.mat-drawer-content {
+    background-color: var(--white-three);
+}
+
+.sidenav-footer {
+    position: absolute;
+    bottom: 1rem;
+}
+
+.dashboard-logo-container {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    height: 60px;
+    margin-left: 0.6rem;
+
+    & img {
+        max-width: 200px;
+    }
+}
+
+.sidenav-content {
+    background-color: var(--white);
+}
+
+.acknowledgments {
+    font-size: 0.9rem;
+}
+
+.corner-ribbon {
+    width: 200px;
+    background: #e43;
+    position: absolute;
+    top: 0px;
+    left: -80px;
+    text-align: center;
+    line-height: 40px;
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    z-index: 1000;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+  
+  .filters {
+    margin-left: 2em;
+  }
+
+  .buttons-container {
+    margin-left: 60%;
+  }

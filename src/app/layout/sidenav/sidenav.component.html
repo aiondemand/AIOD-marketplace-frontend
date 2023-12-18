@@ -1,0 +1,92 @@
+<mat-sidenav-container class="container mat-primary">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" class="sidenav"
+        [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+        [fixedBottomGap]="options.value.bottom">
+        <div class="corner-ribbon red" *ngIf="environment.develop">Dev</div>
+        <div class="dashboard-logo-container">
+            <button *ngIf="mobileQuery.matches" mat-icon-button (click)="toggleSidenav()" style="z-index: 99">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <a routerLink="">
+                <img src="../../../assets/images/dashboard-logo.png" />
+            </a>
+        </div>
+
+        <nav id="sidebarMenu" class="">
+            <mat-nav-list>
+                <ng-container *ngFor="let link of mainLinks">
+                    <mat-list-item *ngIf="
+                            !link.isRestricted ||
+                            (link.isRestricted && isLoggedIn())
+                        " class="sidenav-item" [disabled]="link.isDisabled">
+                        <a mat-list-item [routerLink]="!link.isDisabled ? link.url : null" routerLinkActive="active"
+                            class="sidenav-link" [routerLinkActiveOptions]="
+                                link.url === '/'
+                                    ? { exact: true }
+                                    : { exact: false }
+                            ">{{ link.name | translate }}</a>
+                    </mat-list-item>
+                </ng-container>
+
+                <mat-divider class="mt-3 mb-3"></mat-divider>
+            </mat-nav-list>
+        </nav>
+        <div *ngIf="isFiltersVisible">
+            <div class="filters" *ngIf="!isFilterLibraryVisible">
+                <mat-form-field>
+                    <mat-label>{{'SIDENAV.SELECT-PLATFORM' | translate}}</mat-label>
+                    <mat-select [(value)]="selectedPlatform" (selectionChange)="onSelectPlatformChange()">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let platform of platforms" [value]="platform.name">
+                            {{platform.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filters">
+                <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" [(ngModel)]="selectedCategory"
+                    (change)="onRadioTypeChange()">
+                    <mat-radio-button *ngIf="isFilterLibraryVisible" class="radio-button" [value]="'any'">{{
+                        'MY-LIBRARY.SIDENAV-FILTER' | translate }}</mat-radio-button>
+                    <mat-radio-button class="radio-button" *ngFor="let category of assetCategories" [value]="category">
+                        {{category}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div class="filters" *ngIf="!isFilterLibraryVisible">
+                <form [formGroup]="searchFormGroup" class="example-form">
+                    <mat-form-field class="">
+                        <mat-icon matPrefix>search</mat-icon>
+                        <mat-label>Search assets</mat-label>
+                        <input matInput type="search" formControlName="search" placeholder="Enter text to search" (input)="onInputChange()" />
+                    </mat-form-field>
+                    <div class="buttons-container">
+                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="sidenav-footer mb-3 ml-3">
+            <img src="../../../assets/images/eu-flag.jpg" width="50" class="mr-2" />
+            <img src="../../../assets/images/dashboard-logo.png" width="100" class="mb-1" />
+            <!-- <p class="acknowledgments">
+                {{ acknowledgments }}
+                <a [href]="projectUrl">{{ projectName }}</a>
+            </p>
+            <a routerLink="conditions-of-use">{{
+                'SIDENAV.TERMS-OF-USE' | translate
+                }}</a>
+            <a routerLink="privacy-policy" class="ml-3">{{
+                'SIDENAV.PRIVACY-POLICY' | translate
+                }}</a> -->
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content class="pl-3 pr-3 sidenav-content">
+        <app-top-navbar class="top-navbar"></app-top-navbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

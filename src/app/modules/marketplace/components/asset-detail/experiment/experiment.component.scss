@@ -1,0 +1,16 @@
+$colorBoder: rgb(212, 212, 212);
+
+.experiment-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 1px solid $colorBoder ;
+}
+
+
+h2,
+h3,
+h4 {
+    color: var(--accent);
+}

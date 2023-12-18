@@ -1,0 +1,33 @@
+{
+    "title": "iMagine platform dashboard",
+    "sidenavMenu": [
+        {
+            "name": "SIDENAV.IAM",
+            "url": "https://aai.egi.eu/"
+        },
+        {
+            "name": "SIDENAV.IMAGINE-DOCUMENTATION",
+            "url": "https://docs.ai4eosc.eu/"
+        },
+        {
+            "name": "SIDENAV.PROJECT-PAGE",
+            "url": "https://www.imagine-ai.eu/"
+        }
+    ],
+    "tags": [
+        {
+            "tags": "general purpose",
+            "tags_any": "*image*"
+        },
+        {
+            "tags": "vo.imagine-ai.eu"
+        },
+        {
+            "tags": "development"
+        }
+    ],
+    "voName": "vo.imagine-ai.eu",
+    "projectName": "iMagine",
+    "projectUrl": "https://www.imagine-ai.eu/",
+    "acknowledgments": "The iMagine platform dashboard is a service provided by CSIC, co-funded by "
+}

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nginx-marketplace-frontend:
+    container_name: nginx-marketplace-frontend
+    build:
+      context: .
+      dockerfile: docker/marketplace/prod/Dockerfile
+    environment:
+      - MY_PATH_API_AIOD_CATALOGUE=https://api.aiod.eu
+      - MY_PATH_API_MY_LIB=http://172.17.0.1:8090
+    command: sh -c "/etc/nginx/script.sh"
+    volumes:
+      - ./docker/marketplace/script.sh:/etc/nginx/script.sh
+      - ./docker/nginx/nginx-proxy.conf:/etc/nginx/nginx.conf.template
+    ports:
+      - 9092:80
