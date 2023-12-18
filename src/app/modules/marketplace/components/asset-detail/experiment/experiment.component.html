@@ -1,1 +1,30 @@
+<div class="experiment-body" *ngIf="experiment">
+    <div *ngIf="!!experiment.pid">
+        <h3>{{ 'EXPERIMENT.PID' | translate }}</h3>
+        <markdown>{{experiment.pid}}</markdown>
+    </div>
 
+    <div *ngIf="!!experiment.pid">
+        <h3>{{ 'EXPERIMENT.EXPERIMENTAL_WORKFLOW' | translate }}</h3>
+        <markdown>{{experiment.experimentalWorkflow}}</markdown>
+    </div>
+
+
+    <div *ngIf="!!experiment.pid">
+        <h3>{{ 'EXPERIMENT.EXEMPLARY_EXECUTION_SETTINGS' | translate }}</h3>
+        <markdown>{{experiment.exemplaryExecutionSettings}}</markdown>
+    </div>
+
+
+    <div *ngIf="!!experiment.reproducibilityExplanation">
+        <h3>{{ 'EXPERIMENT.REPRODUCIBILITY_EXPLANATION' | translate }}</h3>
+        <markdown>{{experiment.reproducibilityExplanation}}</markdown>
+    </div>
+
+    <div *ngIf="!!experiment.badge && experiment.badge.length>0">
+        <h3>{{ 'EXPERIMENT.BADGE' | translate }}</h3>
+        <div *ngFor="let item of experiment.badge">
+            <markdown>{{experiment.badge}}</markdown>
+        </div>        
+    </div>
+</div>

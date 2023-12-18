@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: docker/marketplace/prod/Dockerfile
     environment:
-      - MY_PATH_API_AIOD_CATALOGUE=https://aiod-dev.i3a.es
-      - MY_PATH_API_MY_LIB=http://192.168.1.141:9090
+      - MY_PATH_API_AIOD_CATALOGUE=https://api.aiod.eu
+      - MY_PATH_API_MY_LIB=http://172.17.0.1:8090
     command: sh -c "/etc/nginx/script.sh"
     volumes:
       - ./docker/marketplace/script.sh:/etc/nginx/script.sh

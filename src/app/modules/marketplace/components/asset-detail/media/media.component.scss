@@ -1,0 +1,53 @@
+$urlColor: #31488b;
+.media-card {
+    width: 350px;
+    border-left: 5px solid #008792 !important;
+    .card-avatar {
+        color: #504a4a;
+        border: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    p {
+        text-align: justify;
+    }
+    .card-actions {
+        margin-top: auto;
+        a{
+            color: $urlColor;
+        }
+    }
+    .media-card-description {
+        overflow: auto;
+        margin-right: 1em;
+    }
+}
+
+.props-chip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    color: #504a4a;
+    border-radius: 10px;
+    border: 1px solid #504a4a;
+    padding: 5px 10px;
+    margin: 5px;
+    align-items: center;
+}
+.props-chip .icon {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+}
+
+.props-chip .content {
+    padding-left: 10px;
+}
+
+.props-chip .title {
+    font-weight: bold;
+}
+
+.props-chip .subtitle {
+    font-size: 12px;
+}

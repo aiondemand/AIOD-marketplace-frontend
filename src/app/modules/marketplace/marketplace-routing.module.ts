@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: '',
         component: AssetsListComponent,
-        data: { breadcrumb: 'assets' },
+        data: { breadcrumb: '' },
     },
     {
         path: ':id',

@@ -1,8 +1,7 @@
 @use '@angular/material' as mat;
 .asset-card {
-    //max-width: 500px;
-    min-height: 225px;
-    // max-width: 284px;
+    max-width: 500px;
+    height: 300px;
 
     &:hover {
         @include mat.elevation(12);
@@ -28,7 +27,7 @@
 
 .asset-card-content {
     color: var(--dark-grey);
-    max-height: 5em;
+    max-height: 150px;
     max-width: 255px;
     overflow: hidden; 
     text-overflow: ellipsis;

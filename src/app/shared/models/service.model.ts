@@ -10,31 +10,16 @@ export interface AiodEntry {
     status: string;
 }
 
-export interface Media {
-    checksum: string;
-    checksumAlgorithm: string;
-    copyright: string;
-    contentUrl: string;
-    contentSizeKb: number;
-    datePublished: string;
-    description: string;
-    encodingFormat: string;
-    name: string;
-    technologyReadinessLevel: number;
-}
-
 export class ServiceModel extends AssetModel {
     slogan: string;
     termsOfService: string;
     aiodEntry: AiodEntry;
-    alternateName: string[];
     applicationArea: string[];
     contact: any[];
     hasPart: any[];
     industrialSector: string[];
     isPartOf: any[];
     keyword: string[];
-    media: Media[];
     researchArea: string[];
     resourceIdentifier: number;
     scientificDomain: string[];
@@ -51,14 +36,12 @@ export class ServiceModel extends AssetModel {
             editor: data.aiod_entry.editor,
             status: data.aiod_entry.status,
         };
-        this.alternateName = data.alternate_name;
         this.applicationArea = data.application_area;
         this.contact = data.contact;
         this.hasPart = data.has_part;
         this.industrialSector = data.industrial_sector;
         this.isPartOf = data.is_part_of;
         this.keyword = data.keyword;
-        this.media = data.media;
         this.researchArea = data.research_area;
         this.resourceIdentifier = data.resource_identifier;
         this.scientificDomain = data.scientific_domain;

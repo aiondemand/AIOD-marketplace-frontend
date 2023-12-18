@@ -25,7 +25,7 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
         throw new Error("Method not implemented.");
     }
 
-    public setCategoryAsset(category: AssetCategory): void {
+    public setAssetCategory(category: AssetCategory): void {
         this.assetCategory = category;
         this.setEndpoint();
     }

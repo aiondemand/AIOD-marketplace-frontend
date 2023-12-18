@@ -49,7 +49,7 @@ export const environment = {
 
 >NOTE:
 >
-> In this development environment, there is a Docker Compose service that runs an Nginx reverse proxy to configure CORS and have a single domain for the API REST [AIOD-rest-api](https://github.com/aiondemand/AIOD-rest-api), [marketplace backend](https://egitlab.iti.es/ai4europe/marketplace-mylibrary-backend)consumed by the Marketplace frontend application.
+> In this development environment, there is a Docker Compose service that runs an Nginx reverse proxy to configure CORS and have a single domain for the API REST [AIOD-rest-api](https://github.com/aiondemand/AIOD-rest-api), [marketplace backend](https://egitlab.iti.es/ai4europe/marketplace-mylibrary-backend) consumed by the Marketplace frontend application.
 
 Example of `endpoints.ts`:
 
@@ -89,6 +89,10 @@ To stop the services, you can use the following command:
 ```bash
 docker compose -f docker-compose-dev.yaml down
 ```
+
+>NOTE:
+>
+>If you are running Docker containers of the `AIOD-rest-api` and `marketplace backend` on a local environment (on the same machine) as the `marketplace frontend`, you should check the Docker service gateway (using the **ifconfig** command and looking at the IP of the **docker0** interface). Such an IP (together with the corresponding port if applicable) is the one that has to be used to configure the environment variables `MY_PATH_API_AIOD_CATALOGUE` and `MY_PATH_API_MY_LIB`.
 
 ### Production Environment
 
@@ -132,6 +136,13 @@ In the `docker-compose.yaml` file, you will find a service with its respective c
 
 - **nginx-marketplace-frontend**: This service uses Nginx as a reverse proxy for the necessary API RESTs and as a web server for the Angular application. Configure environment variables, such as `MY_PATH_API_AIOD_CATALOGUE` and `MY_PATH_API_MY_LIB`.
 
+>NOTE:
+>
+>Furthermore, the environment variable (`MY_PATH_API_MY_LIB`) in the Docker Compose production file on the VM has been updated to use the gateway of the Docker service interface. This change was made because the marketplace-backend service is running on the same machine.
+>
+>To find out the gateway of the Docker service, you can run the **ifconfig** command and look for the IP of the **docker0** interface.
+
+---
 To start the Docker service in production, use the following command:
 
 ```bash

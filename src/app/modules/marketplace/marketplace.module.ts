@@ -12,6 +12,8 @@ import { DatasetComponent } from './components/asset-detail/dataset/dataset.comp
 import { ExperimentComponent } from './components/asset-detail/experiment/experiment.component';
 import { ServiceComponentComponent } from './components/asset-detail/service-component/service-component.component';
 import { AimodelComponent } from './components/asset-detail/aimodel/aimodel.component';
+import { MediaComponent } from './components/asset-detail/media/media.component';
+import { MatExpansionModule } from '@angular/material/expansion'; 
 
 @NgModule({
     declarations: [
@@ -23,12 +25,14 @@ import { AimodelComponent } from './components/asset-detail/aimodel/aimodel.comp
         ExperimentComponent,
         ServiceComponentComponent,
         AimodelComponent,
+        MediaComponent,
     ],
     imports: [
         CommonModule,
         MarketplaceRoutingModule,
         SharedModule,
         MatPaginatorModule,
+        MatExpansionModule,
         MarkdownModule.forChild(),
     ],
 })

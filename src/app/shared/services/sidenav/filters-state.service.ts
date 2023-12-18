@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class FiltersStateService {
     private assetCategory = new BehaviorSubject<AssetCategory>(AssetCategory.Dataset);
     private platform = new BehaviorSubject<string>('');
+    private query = new BehaviorSubject<string>('');
 
     get assetCategorySelected(): AssetCategory {
         return this.assetCategory.getValue();
@@ -22,6 +23,18 @@ export class FiltersStateService {
 
     get platformSelected$(): Observable<string> {
         return this.platform.asObservable();
+    }
+
+    get searchQuery() : string {
+        return this.query.getValue();
+    }
+
+    get searchQuery$() : Observable<string> {
+        return this.query.asObservable();
+    }
+
+    public setSearchQuery(query : string) : void {
+        this.query.next(query);
     }
 
     public setAssetCategorySelected(category: AssetCategory): void {

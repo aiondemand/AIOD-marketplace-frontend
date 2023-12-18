@@ -91,6 +91,10 @@ Para detener los servicios, puedes usar el siguiente comando:
  docker compose -f docker-compose-dev.yaml down
 ```
 
+>NOTE:
+>
+>Si estás ejecutando contenedores Docker de los servicios `AIOD-rest-api` y `marketplace backend` en un entorno local (en la misma máquina) que el `marketplace frontend`, deberías verificar la puerta de enlace del servicio Docker (utilizando el comando **ifconfig** y observando la dirección IP de la interfaz **docker0**). Esa IP (junto con el puerto correspondiente si aplica) es la que debe ser usada para configurar las variables de entorno `MY_PATH_API_AIOD_CATALOGUE` y `MY_PATH_API_MY_LIB`.
+
 ### Entorno de Producción
 
 1. **Clonar el repositorio**
@@ -131,6 +135,12 @@ export const environment = {
 En el archivo` docker-compose.yaml`, encontrarás un servicio con sus respectivas configuraciones:
 
 - **nginx-marketplace-frontend**: Este servicio utiliza Nginx como un proxy inverso para los API REST necesarios y como servidor web para la aplicación Angular. Configura las variables de entorno, como `MY_PATH_API_AIOD_CATALOGUE` y `MY_PATH_API_MY_LIB`.
+
+>NOTE:
+>
+>Además, la variable de entorno (`MY_PATH_API_MY_LIB`) en el archivo Docker Compose de producción en la máquina virtual se ha actualizado para utilizar la puerta de enlace de la interfaz del servicio Docker. Este cambio se realizó porque el servicio `marketplace-backend` se está ejecutando en la misma máquina.
+>
+>Para averiguar la puerta de enlace del servicio Docker, puedes ejecutar el comando **ifconfig** y buscar la dirección IP de la interfaz **docker0**.
 
 Para iniciar el servicio de Docker en producción, utiliza el siguiente comando:
 

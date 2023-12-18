@@ -18,4 +18,7 @@ export const endpoints = {
     prefixApiLibraries: '/api-library/api',
     libraries: '/libraries/:userId',
     librariesAssets: '/libraries/:userId/assets',
+
+    //Search
+    search : '/search',
 };

@@ -33,6 +33,16 @@
                     {{ asset.description }}
                 </markdown>
             </div>
+
+            <div *ngIf="asset.media && asset.media.length > 0">
+                <h3>{{ 'ASSETS.MEDIA.TITLE' | translate }}</h3>
+                <div class="media-container" >
+                    <div *ngFor="let media of asset.media">
+                        <app-media [media]="media"></app-media>
+                    </div>
+                </div>
+            </div>
+            
             <div class="asset-body-category" [ngSwitch]="asset.category">
                 <div *ngSwitchCase="AssetCategory.Dataset"><app-dataset [identifier]="asset.identifier"></app-dataset>
                 </div>
@@ -44,22 +54,33 @@
                 </div>
             </div>
 
-
             <div *ngIf="!!asset.license">
                 <h3>{{ 'ASSETS.ASSET-DETAIL.LICENSE' | translate }}</h3>
                 <div class="field-container">
-                    <markdown>
-                        {{ asset.license }}
-                    </markdown>
+                    <a *ngIf="isURL(asset.license)" [href]="asset.license" target="_blank">
+                        {{ asset.license }} <mat-icon>open_in_new</mat-icon>
+                    </a>
+                    <span *ngIf="!isURL(asset.license)"> {{ asset.license }}</span>
                 </div>
             </div>
 
             <div *ngIf="!!asset.sameAs">
                 <h3>{{ 'ASSETS.ASSET-DETAIL.SAMEAS' | translate }}</h3>
                 <div class="field-container">
-                    <markdown>
-                        {{ asset.sameAs }}
-                    </markdown>
+                    <a [href]="asset.sameAs" target="_blank">
+                        {{ asset.sameAs }} <mat-icon>open_in_new</mat-icon>
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf="asset.citation && asset.citation.length > 0">
+                <h3>{{ 'ASSETS.ASSET-DETAIL.CITATION' | translate }}</h3>
+                <div class="field-container">
+                    <p *ngFor="let url of asset.citation">
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                            {{ url }} <mat-icon>open_in_new</mat-icon>
+                        </a>
+                    </p>
                 </div>
             </div>
 
@@ -86,7 +107,7 @@
             <div *ngIf="!!asset.research_area && asset.research_area.length>0">
                 <h3>{{ 'ASSETS.ASSET-DETAIL.RESEARCH_AREA' | translate }}</h3>
                 <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip *ngFor="let area of asset.research_area">{{ area }}</mat-chip>
+                    <mat-chip *ngFor="let area of asset.research_area">{{ 'area' }}</mat-chip>
                 </mat-chip-listbox>
             </div>
 
@@ -104,11 +125,26 @@
     <div class="asset-tittle">
         <div style="flex-grow: 3;">
             <h1>{{ asset.name | titlecase }}</h1>
-            <markdown> {{'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} : {{asset.date_published | date: 'dd-MM-yyyy'}}</markdown>
+
+            <div class="title-dates"> 
+                <span>
+                    {{'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} : {{asset.date_published | date: 'mediumDate'}} 
+                </span> 
+                <span *ngIf="asset.dateCreated">|</span>
+                <span *ngIf="asset.dateCreated">
+                    {{'ASSETS.ASSET-DETAIL.DATA_CREATED' | translate }} : {{asset.dateCreated | date: 'mediumDate'}}
+                </span>
+                <br>
+                <span class="title-alternames" *ngFor="let name of asset.alternateName">{{ name }}</span>
+            </div>
+        </div>
+        <div *ngif="asset.version">
+            <p>{{ 'ASSETS.ASSET-DETAIL.VERSION' | translate }}</p>
+            <mat-chip class="chip" >{{ asset.version }} </mat-chip>
         </div>
         <div>
             <p>{{ 'ASSETS.ASSET-DETAIL.CATEGORY' | translate }}</p>
-            <mat-chip class="chip" [style.background]="categoryColor">{{ asset.category | lowercase}} </mat-chip>
+            <mat-chip class="chip" >{{ asset.category | lowercase}} </mat-chip>
         </div>
         <div *ngIf="asset.platform">
             <p>{{ 'ASSETS.ASSET-DETAIL.PLATFORM' | translate }}</p>
@@ -145,6 +181,4 @@
             </div>
         </mat-card-content>
     </mat-card>
-
-
 </ng-template>

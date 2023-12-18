@@ -46,7 +46,8 @@
             <div class="filters">
                 <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" [(ngModel)]="selectedCategory"
                     (change)="onRadioTypeChange()">
-                    <mat-radio-button *ngIf="isFilterLibraryVisible" class="radio-button" [value]="'any'">{{ 'MY-LIBRARY.SIDENAV-FILTER' | translate }}</mat-radio-button>
+                    <mat-radio-button *ngIf="isFilterLibraryVisible" class="radio-button" [value]="'any'">{{
+                        'MY-LIBRARY.SIDENAV-FILTER' | translate }}</mat-radio-button>
                     <mat-radio-button class="radio-button" *ngFor="let category of assetCategories" [value]="category">
                         {{category}}
                     </mat-radio-button>
@@ -58,8 +59,13 @@
                     <mat-form-field class="">
                         <mat-icon matPrefix>search</mat-icon>
                         <mat-label>Search assets</mat-label>
-                        <input matInput type="search" formControlName="search" placeholder="Enter text to search" />
+                        <input matInput type="search" formControlName="search" placeholder="Enter text to search" (input)="onInputChange()" />
                     </mat-form-field>
+                    <div class="buttons-container">
+                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -67,7 +73,7 @@
         <div class="sidenav-footer mb-3 ml-3">
             <img src="../../../assets/images/eu-flag.jpg" width="50" class="mr-2" />
             <img src="../../../assets/images/dashboard-logo.png" width="100" class="mb-1" />
-            <p class="acknowledgments">
+            <!-- <p class="acknowledgments">
                 {{ acknowledgments }}
                 <a [href]="projectUrl">{{ projectName }}</a>
             </p>
@@ -76,7 +82,7 @@
                 }}</a>
             <a routerLink="privacy-policy" class="ml-3">{{
                 'SIDENAV.PRIVACY-POLICY' | translate
-                }}</a>
+                }}</a> -->
         </div>
     </mat-sidenav>
     <mat-sidenav-content class="pl-3 pr-3 sidenav-content">

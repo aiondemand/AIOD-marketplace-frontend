@@ -33,7 +33,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
 
   private getAsset(id: number, category: AssetCategory): void {
     this.isLoading = true;
-    this.generalAssetSerice.setCategoryAsset(category);
+    this.generalAssetSerice.setAssetCategory(category);
     
     const subscribe = this.generalAssetSerice.getAsset(id).subscribe( {
       next: (asset: AssetModel) => {
@@ -66,6 +66,14 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
 
   protected addItemCart(): void {
     this.shoppingCartService.addCartItems(this.asset);
+  }
+
+  public isURL(value: string): boolean {
+    try {
+      return new URL(value).href? true:false;;
+    } catch (error) {
+      return false;
+    }
   }
 
   ngOnInit(): void {

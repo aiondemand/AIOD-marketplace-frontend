@@ -1,4 +1,7 @@
-$colorBoder: rgb(212, 212, 212);
+$borderColor: rgb(212, 212, 212);
+$urlColor: #31488b;
+$ligthTextColor: #8b8b8b;
+
 .asset-header {
     display: flex;
     flex-direction: row;
@@ -11,7 +14,6 @@ $colorBoder: rgb(212, 212, 212);
     }
 }
 .asset-content {
-    // border: 1px solid $colorBoder;
     margin-top: 1em;
     padding: 1em;
 }
@@ -19,13 +21,18 @@ $colorBoder: rgb(212, 212, 212);
     display: flex;
     flex-direction: row;
     gap: 1em;
-    margin: 1em;
+    margin: 1em 1em 1em 0;
     color: var(--accent);
     p {
         font-weight: bolder;
         font-size: small;
     }
- 
+    .title-dates span {
+        margin-right: 10px;
+    }
+    .title-alternames {
+        color: $ligthTextColor; 
+    }
 }
 .asset-body {
     display: flex;
@@ -33,15 +40,21 @@ $colorBoder: rgb(212, 212, 212);
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 15px;
+    .mat-icon {
+        vertical-align: middle;
+        font-size: 1.3em;
+    }
 }
 .asset-body-description {
     max-height: 500px; 
     overflow: auto;
+    margin-right: 1em;
 }
 .asset-body-container {
     flex-grow: 3;
     flex-basis: 1em;
-    border-right: 1px solid $colorBoder ;
+    border-right: 1px solid $borderColor ;
+     margin-right: 1em;
 }
 
 .asset-body-keywords{
@@ -49,12 +62,22 @@ $colorBoder: rgb(212, 212, 212);
     flex-basis: 1em;
     margin-bottom: 1em;
 }
+
 h1{
     color: var(--primary);
 }
 
 h2,h3,h4{
     color: var(--accent);
+}
+
+a {
+    text-decoration: none;
+    color: $urlColor;
+}
+a:hover {
+    text-decoration: none;
+    color: var(--primary);
 }
 
 .distribution-title {
@@ -71,4 +94,13 @@ h2,h3,h4{
 
 .distribution-card {
     width: 360px;
+}
+
+.media-container {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    margin: 1em;
+    justify-content: space-between;
+    
 }

@@ -16,7 +16,6 @@ export class DatasetModel extends AssetModel {
     spatialCoverage?: string;
     temporalCoverageFrom?: string;
     temporalCoverageTo?: string;
-    version?: string;
     hasParts?: number[];
     isPart?: number[];
     alternate_names?: string[];
@@ -33,7 +32,6 @@ export class DatasetModel extends AssetModel {
     private parseToData(data: any): void {
         this.name = data.name;
         this.issn = data.issn;
-        this.version = data.version;
         this.contact = data.contact;
         this.creator = data.creator;
         this.funder = data.funder;

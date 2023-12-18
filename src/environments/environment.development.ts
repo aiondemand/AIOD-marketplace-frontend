@@ -6,8 +6,14 @@ export const environment = {
     develop: true,
     production: false,
     api: {
-        base: 'http://localhost',
+        base: 'http://localhost:8083',
         endpoints,
         schemas,
+    },
+    keycloakConfig: {
+        baseUrl: 'https://aiod-dev.i3a.es/aiod-auth',
+        realm: 'aiod',
+        clientId: 'marketplace',
+        showDebugInformation: true,
     },
 };

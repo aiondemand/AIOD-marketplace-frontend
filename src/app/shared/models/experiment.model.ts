@@ -3,10 +3,9 @@ import { AssetModel } from "./asset.model";
 
 export class ExperimentModel extends AssetModel {
     datePublished: string;
-    version: string;
     pid: string;
     experimentalWorkflow: string;
-    executionSettings: string;
+    exemplaryExecutionSettings: string;
     reproducibilityExplanation: string;
     aiodEntry: {
         platform: string;
@@ -16,11 +15,9 @@ export class ExperimentModel extends AssetModel {
         dateModified: string;
         dateCreated: string;
     };
-    alternateName: string[];
     applicationArea: string[];
     assetIdentifier: number;
     badge: string[];
-    citation: any[];
     contact: any[];
     creator: any[];
     distribution: {
@@ -48,18 +45,6 @@ export class ExperimentModel extends AssetModel {
     industrialSector: string[];
     isPartOf: any[];
     keyword: string[];
-    media: {
-        checksum: string;
-        checksumAlgorithm: string;
-        copyright: string;
-        contentUrl: string;
-        contentSizeKb: number;
-        datePublished: string;
-        description: string;
-        encodingFormat: string;
-        name: string;
-        technologyReadinessLevel: number;
-    }[];
     note: string[];
     researchArea: string[];
     resourceIdentifier: number;
@@ -68,10 +53,9 @@ export class ExperimentModel extends AssetModel {
     constructor(data: any) {
         super(data, AssetCategory.Experiment);
         this.datePublished = data.date_published;
-        this.version = data.version;
         this.pid = data.pid;
         this.experimentalWorkflow = data.experimental_workflow;
-        this.executionSettings = data.execution_settings;
+        this.exemplaryExecutionSettings = data.execution_settings;
         this.reproducibilityExplanation = data.reproducibility_explanation;
         this.aiodEntry = {
             platform: data.aiod_entry.platform,
@@ -81,11 +65,9 @@ export class ExperimentModel extends AssetModel {
             dateModified: data.aiod_entry.date_modified,
             dateCreated: data.aiod_entry.date_created,
         };
-        this.alternateName = data.alternate_name;
         this.applicationArea = data.application_area;
         this.assetIdentifier = data.asset_identifier;
         this.badge = data.badge;
-        this.citation = data.citation;
         this.contact = data.contact;
         this.creator = data.creator;
         this.distribution = data.distribution;
@@ -93,7 +75,6 @@ export class ExperimentModel extends AssetModel {
         this.industrialSector = data.industrial_sector;
         this.isPartOf = data.is_part_of;
         this.keyword = data.keyword;
-        this.media = data.media;
         this.note = data.note;
         this.researchArea = data.research_area;
         this.resourceIdentifier = data.resource_identifier;

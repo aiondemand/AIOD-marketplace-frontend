@@ -10,4 +10,10 @@ export const environment = {
         endpoints,
         schemas,
     },
+    keycloakConfig: {
+        baseUrl: 'https://aiod-dev.i3a.es/aiod-auth',
+        realm: 'aiod',
+        clientId: 'marketplace',
+        showDebugInformation: true,
+    },
 };

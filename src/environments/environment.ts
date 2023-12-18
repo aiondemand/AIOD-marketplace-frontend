@@ -10,4 +10,10 @@ export const environment = {
         endpoints,
         schemas,
     },
+    keycloakConfig: {
+        baseUrl: '',
+        realm: '',
+        clientId: '',
+        showDebugInformation: true
+    }
 };

@@ -12,7 +12,7 @@
         "TERMS-OF-USE": "Terms of use",
         "PRIVACY-POLICY": "Privacy policy",
         "ACKNOWLEDGMENTS": "The iMagine platform dashboard is a service provided by CSIC, co-funded by",
-        "MARKETPLACE": "Marketplace",
+        "MARKETPLACE": "Assets catalogue",
         "MY-LIBRARY": "My Library",
         "SELECT-PLATFORM": "Select platform"
     },
@@ -129,8 +129,21 @@
             "NAME": "Name",
             "DESCRIPTION": "Description",
             "SIZE": "Size",
-            "URL": "Url",
+            "URL": "URL",
             "CHECKSUM": "Checksum"
+        },
+        "MEDIA": {
+            "TITLE": "Media",
+            "CHECKSUM": "Checksum",
+            "CHECKSUM_ALGORITHM": "Checksum Algorithm",
+            "COPYRIGHT": "Copyright",
+            "CONTENT_URL": "URL",
+            "CONTENT_SIZE_KB": "Content size (KB)",
+            "DATE_PUBLISHED": "Date Published",
+            "ENCODING_FORMAT": "Encoding Format",
+            "DESCRIPTION": "Description",
+            "NAME": "Name",
+            "PROPS": "Properties"
         },
         "ASSET-DETAIL": {
             "TITLE": "Asset",
@@ -142,7 +155,10 @@
             "RESEARCH_AREA": "Research Area",
             "SCIENTIFIC_DOMAIN": "Scientific Domain",
             "DATE_PUBLISHED" : "Date Published",
-            "SAMEAS" : "Same as"
+            "SAMEAS" : "Same as",
+            "DATA_CREATED": "Date Created",
+            "VERSION": "Version",
+            "CITATION": "Citations"
         }
     },
     "DATASET": {
@@ -158,12 +174,21 @@
         "TEMPORAL_COVERAGE": "Temporal coverage",
         "FUNDER" : "Funder",
         "MEASURED_VALUES" : "Measured values"
+        
     },
 
     "AIMODEL" : {
         "PID" : "pid",
         "NOTE" : "Note",
         "TYPE" : "Type"
+    },
+
+    "EXPERIMENT" : {
+        "PID" : "pid",
+        "EXPERIMENTAL_WORKFLOW" : "Experimental workflow",
+        "EXEMPLARY_EXECUTION_SETTINGS" : "Exemplary execution settings",
+        "REPRODUCIBILITY_EXPLANATION" : "Reproducibility explanation",
+        "BADGE" : "Badge"
     },
 
     "MY-LIBRARY": {
@@ -173,7 +198,7 @@
             "NAME": "Name",
             "CATEGORY": "Category",
             "PRICE": "Price",
-            "LINK": "Url Metadata",
+            "LINK": "URL Metadata",
             "ACTIONS": "Delete"
         }
     }
