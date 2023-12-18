@@ -44,8 +44,8 @@ Here are some snapshots of the AIoD My Library frontend service, which have been
 ## Configuration and Deployment
 
 Configuration and deployment instructinos are provided in more detailed in files:
-* [deployment.en.md]('deployment.en.md') (english version)
-* [deployment.es.md]('deployment.es.md') (spanish version)
+* [deployment.en.md](./deployment.en.md) (english version)
+* [deployment.es.md](./deployment.es.md) (spanish version)
  
 
 ## Support
