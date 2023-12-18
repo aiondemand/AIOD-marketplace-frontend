@@ -24,21 +24,25 @@ Here are some snapshots of the AIoD My Library frontend service, which have been
   <img src="docs/images/mylibrary-front-main.png" alt="main screen">
   <figcaption>Main screen to browse AIoD Catalogue</figcaption>
 </figure>
+</BR>
 
 <figure>
   <img src="docs/images/mylibrary-front-detail.png" alt="assets detailed view">
   <figcaption>Asset's details screen</figcaption>
 </figure>
+</BR>
 
 <figure>
   <img src="docs/images/mylibrary-frontend-shoppingcart.png" alt="shopping cart screen">
   <figcaption>Shopping cart screen, showing assets to be added to user's library</figcaption>
 </figure>
+</BR>
 
 <figure>
   <img src="docs/images/mylibrary-front-mylibrary.png" alt="My Library screen">
   <figcaption>User's "My Library" screen</figcaption>
 </figure>
+</BR>
 
 
 ## Configuration and Deployment
