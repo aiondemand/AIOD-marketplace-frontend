@@ -33,8 +33,8 @@ Here are some snapshots of the AIoD My Library frontend service, which have been
 </BR>
 
 <figure>
-  <img src="docs/images/mylibrary-frontend-shoppingcart.png" alt="shopping cart screen">
-  <figcaption>Shopping cart screen, showing assets to be added to user's library</figcaption>
+  <img src="docs/images/mylibrary-frontend-shoppingcart.png" alt="stash screen">
+  <figcaption>stash screen, showing assets to be added to user's library</figcaption>
 </figure>
 </BR>
 
