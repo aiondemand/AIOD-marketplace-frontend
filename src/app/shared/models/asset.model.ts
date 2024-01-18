@@ -23,7 +23,7 @@ export class AssetModel {
         this.identifier = data.identifier??0;
         this.category = category;
         this.name = data.name??'';
-        this.description = data.description.plain??'';
+        this.description = data.description?.plain ?? '';
         this.platform = data.platform??'';
         this.keywords = data.keyword??[];
         this.sameAs = data.same_as;
