@@ -66,6 +66,12 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             isDisabled: false,
             isRestricted: true,
         },
+        {
+            name: 'SIDENAV.ABOUT',
+            url: '/about',
+            isDisabled: false,
+            isRestricted: false,
+        },
     ];
 
     acknowledgments = '';
