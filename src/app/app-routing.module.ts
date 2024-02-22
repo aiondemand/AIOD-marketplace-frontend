@@ -15,35 +15,6 @@ const routes: Routes = [
                 redirectTo: 'marketplace',
                 pathMatch: 'full',
             },
-/*             {
-                path: 'dashboard',
-                loadChildren: () =>
-                    import('@modules/dashboard/dashboard.module').then(
-                        (m) => m.DashboardModule
-                    ),
-            },
-            {
-                path: 'assets',
-                loadChildren: () =>
-                    import('@modules/marketplace/marketplace.module').then(
-                        (m) => m.MarketplaceModule
-                    ),
-            },
-            {
-                path: 'deployments',
-                canActivate: [AuthenticationGuard],
-                loadChildren: () =>
-                    import('@modules/deployments/deployments.module').then(
-                        (m) => m.DeploymentsModule
-                    ),
-            },
-            {
-                path: 'forbidden',
-                loadChildren: () =>
-                    import('@modules/forbidden/forbidden.module').then(
-                        (m) => m.ForbiddenModule
-                    ),
-            }, */
 
             {
                 path: 'marketplace',
@@ -57,6 +28,13 @@ const routes: Routes = [
                 loadChildren: () =>
                     import('@modules/my-library/my-library.module').then(
                         (m) => m.MyLibraryModule
+                    ),
+            },
+            {
+                path: 'about',
+                loadChildren: () =>
+                    import('@modules/about/about.module').then(
+                        (m) => m.AboutModule
                     ),
             },
             {
@@ -78,4 +56,4 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
