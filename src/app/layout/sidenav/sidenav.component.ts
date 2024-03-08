@@ -71,7 +71,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             url: '/about',
             isDisabled: false,
             isRestricted: false,
-        },
+        }
     ];
 
     acknowledgments = '';
@@ -174,8 +174,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     onInputChange() {
         const searchValue = this.searchFormGroup.get('search')?.value;
 
-        if(!searchValue.trim()) {
-            this.filtersService.setSearchQuery('');            
+        if (!searchValue.trim()) {
+            this.filtersService.setSearchQuery('');
         }
     }
 }
