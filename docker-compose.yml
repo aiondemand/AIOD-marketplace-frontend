@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  nginx-marketplace-frontend:
-    container_name: nginx-marketplace-frontend
+  mylibrary-nginx-frontend:
+    container_name: mylibrary-nginx-frontend
     build:
       context: .
       dockerfile: docker/marketplace/prod/Dockerfile

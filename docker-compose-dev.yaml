@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  aiod-marketplace-frontend:
-    container_name: aiod_marketplace_frontend
+  mylibrary-frontend:
+    container_name: mylibrary-frontend
     build:
       context: .
       dockerfile: docker/marketplace/dev/Dockerfile
@@ -13,7 +13,7 @@ services:
     ports:
     - 9092:8080
   proxy:
-    container_name: ngix-proxy
+    container_name: nginx-proxy
     image: nginx
     environment:
       - MY_PATH_API_AIOD_CATALOGUE=https://aiod-dev.i3a.es

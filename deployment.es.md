@@ -134,7 +134,7 @@ export const environment = {
 3. **Configurar y Ejecutar el Servicio de Docker Compose**
 En el archivo` docker-compose.yaml`, encontrarás un servicio con sus respectivas configuraciones:
 
-- **nginx-marketplace-frontend**: Este servicio utiliza Nginx como un proxy inverso para los API REST necesarios y como servidor web para la aplicación Angular. Configura las variables de entorno, como `MY_PATH_API_AIOD_CATALOGUE` y `MY_PATH_API_MY_LIB`.
+- **mylibrary-nginx-frontend**: Este servicio utiliza Nginx como un proxy inverso para los API REST necesarios y como servidor web para la aplicación Angular. Configura las variables de entorno, como `MY_PATH_API_AIOD_CATALOGUE` y `MY_PATH_API_MY_LIB`.
 
 >NOTE:
 >
