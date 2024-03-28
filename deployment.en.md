@@ -69,7 +69,7 @@ export const endpoints = {
 
 In the `docker-compose-dev.yaml` file, you will find two services with their respective configurations:
 
-- **aiod-marketplace-frontend**: This service runs a Node.js server that launches the Angular application on port 8080.
+- **mylibrary-frontend**: This service runs a Node.js server that launches the Angular application on port 8080.
 - **proxy**: It uses Nginx as a reverse proxy for the necessary API REST. Configure the environment variables to identify where the API RESTs are running, such as `MY_PATH_API_AIOD_CATALOGUE` and `MY_PATH_API_MY_LIB`.
 
 To start the Docker services, use the following command:
@@ -134,7 +134,7 @@ export const environment = {
 
 In the `docker-compose.yaml` file, you will find a service with its respective configuration:
 
-- **nginx-marketplace-frontend**: This service uses Nginx as a reverse proxy for the necessary API RESTs and as a web server for the Angular application. Configure environment variables, such as `MY_PATH_API_AIOD_CATALOGUE` and `MY_PATH_API_MY_LIB`.
+- **mylibrary-nginx-frontend**: This service uses Nginx as a reverse proxy for the necessary API RESTs and as a web server for the Angular application. Configure environment variables, such as `MY_PATH_API_AIOD_CATALOGUE` and `MY_PATH_API_MY_LIB`.
 
 >NOTE:
 >

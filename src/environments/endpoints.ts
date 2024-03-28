@@ -12,7 +12,7 @@ export const endpoints = {
 
     //Payments
     prefixApiPayment: '/api-library/api',
-    payment: '/libraries/:userId/purchases',
+    payment: '/libraries/:userId/assets',
 
     //My-library
     prefixApiLibraries: '/api-library/api',
