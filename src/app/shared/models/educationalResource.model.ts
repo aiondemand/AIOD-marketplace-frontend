@@ -27,7 +27,7 @@ export class EducationalResourceModel extends AssetModel {
   type: string;
 
   constructor(data: any) {
-    super(data, AssetCategory["Educational Resource"]);
+    super(data, AssetCategory["Educational resource"]);
     this.aiodEntry = {
       platform: data.aiod_entry.platform,
       platformIdentifier: data.aiod_entry.platform_identifier,
