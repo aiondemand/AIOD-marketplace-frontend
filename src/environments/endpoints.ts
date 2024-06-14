@@ -9,6 +9,7 @@ export const endpoints = {
     services: '/services/v1',
     expetiments: '/experiments/v1',
     aimodels: '/ml_models/v1',
+    educationalResources: '/educational_resources/v1',
 
     //Payments
     prefixApiPayment: '/api-library/api',
