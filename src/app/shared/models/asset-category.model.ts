@@ -3,5 +3,5 @@ export enum AssetCategory {
     Dataset = 'Dataset',
     Experiment = 'Experiment',
     Service =  'Service',
-    'Educational Resource' = 'Educational resource'
+    'Educational resource' = 'Educational resource'
 }
