@@ -5,25 +5,25 @@
         </div>
         <mat-card-title>{{ media.name }}</mat-card-title>
     </mat-card-header>
-    
+
     <mat-card-content>
         <mat-accordion class="example-headers-align" multi>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngIf="!!media.description">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h4>{{ 'ASSETS.MEDIA.DESCRIPTION' | translate }}</h4>
-                        
+
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <p class="media-card-description">
                     {{media.description}}
                 </p>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngIf="existsMediaProps()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <h4>{{ 'ASSETS.MEDIA.PROPS' | translate }}</h4>
-                        
+
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="media-card-props">
