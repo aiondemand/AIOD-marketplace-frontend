@@ -6,6 +6,7 @@ export class AssetModel {
     name: string;
     description: string;
     platform: string;
+    platform_resource_identifier: number;
     keywords: string[];
     sameAs: string;
     license?: string;
@@ -25,6 +26,7 @@ export class AssetModel {
         this.name = data.name??'';
         this.description = data.description?.plain ?? '';
         this.platform = data.platform??'';
+        this.platform_resource_identifier = data.platform_resource_identifier??0;
         this.keywords = data.keyword??[];
         this.sameAs = data.same_as;
         this.license = data.license;

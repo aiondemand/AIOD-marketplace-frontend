@@ -1,14 +1,6 @@
+import { AiodEntry } from "../interfaces/aiod-entry.interface";
 import { AssetCategory } from "./asset-category.model";
 import { AssetModel } from "./asset.model";
-
-export interface AiodEntry {
-    platform: string;
-    platformIdentifier: string;
-    dateModified: string;
-    dateCreated: string;
-    editor: number[];
-    status: string;
-}
 
 export class ServiceModel extends AssetModel {
     slogan: string;

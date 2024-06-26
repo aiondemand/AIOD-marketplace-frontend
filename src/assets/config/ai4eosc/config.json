@@ -34,6 +34,10 @@
         "aimodel": {
             "icon":"model_training",
             "color":"#FCDCDF"
+        },
+        "educational resource": {
+            "icon":"book",
+            "color":"#FCDFDC"
         }
     }
 }

@@ -39,6 +39,8 @@ export class ElasticSearchService {
             return endpoints.expetiments;
         case AssetCategory.AIModel:
             return endpoints.aimodels;
+        case AssetCategory['Educational resource']:
+            return endpoints.educationalResources;
         default:
             throw new Error('Does not exit category selected');
     }
