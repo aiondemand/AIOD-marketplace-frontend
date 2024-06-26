@@ -10,3 +10,6 @@ RUN npm run build-ai4eosc-prod
 #stage 2
 FROM nginx:alpine
 COPY --from=node /app/dist/ai4-dashboard /usr/share/nginx/html
+
+# Copy the environment template
+COPY src/assets/env.template.js /usr/share/nginx/html/assets/env.template.js
