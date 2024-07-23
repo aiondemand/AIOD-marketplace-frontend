@@ -121,6 +121,7 @@
         "DOCKERHUB": "Dockerhub"
     },
     "ERRORS": {
+        "NOT-FOUND-ERROR": "Not found the API resource",
         "SERVICE-ERROR": "Error calling the API, please retry later",
         "NOT-AUTHORIZED-ERROR": "*You need to be enrolled in the '{{vo}}' VO to be able to deploy"
     },

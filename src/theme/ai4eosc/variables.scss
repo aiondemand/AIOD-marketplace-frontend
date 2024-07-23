@@ -19,6 +19,7 @@
     --sky-blue: #5da9ff;
     --success-green: #44cc11;
     --soft-green: #7cd67e;
+    --warn-yellow: #eed202;
 
     //AI4EOSC
     --primary: #ff5b7f;
@@ -92,6 +93,12 @@
             --mdc-snackbar-container-color: var(--primary);
             --mat-mdc-snack-bar-button-color: var(--white);
             --mdc-snackbar-supporting-text-color: var(--white);
+            white-space: pre-wrap;
+        }
+        &.yellow-snackbar {
+            --mdc-snackbar-container-color: var(--warn-yellow);
+            --mat-mdc-snack-bar-button-color: var(--black);
+            --mdc-snackbar-supporting-text-color: var(--black);
             white-space: pre-wrap;
         }
     }
