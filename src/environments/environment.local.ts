@@ -1,19 +1,22 @@
+import { EnvWindow } from '@app/shared/interfaces/env.interface';
 import { endpoints } from './endpoints';
 import { schemas } from './schemas';
+
+const browserwindow = window as EnvWindow;
 
 export const environment = {
     name: 'dev',
     develop: true,
     production: false,
     api: {
-        base: '',
+        base: browserwindow.env?.['API_URL'] || '',
         endpoints,
         schemas,
     },
     keycloakConfig: {
-        baseUrl: 'https://aiod-dev.i3a.es/aiod-auth',
-        realm: 'aiod',
-        clientId: 'marketplace',
+        baseUrl: browserwindow.env?.['KEYCLOAK_URL'],
+        realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
+        clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
         showDebugInformation: true,
     },
 };

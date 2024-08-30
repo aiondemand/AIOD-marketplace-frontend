@@ -19,4 +19,6 @@ export const authCodeFlowConfig: AuthConfig = {
     scope: 'openid profile microprofile-jwt email',
 
     showDebugInformation: environment.keycloakConfig.showDebugInformation,
+
+    requireHttps: false
 };

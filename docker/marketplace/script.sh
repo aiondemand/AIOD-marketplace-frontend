@@ -1,8 +1,7 @@
 #!/bin/sh
 
-export MY_PATH_API_AIOD_CATALOGUE
-export MY_PATH_API_MY_LIB
+# Substitute environment variables in env.template.js and output the result to env.js
+envsubst < /usr/share/nginx/html/assets/env.template.js > /usr/share/nginx/html/assets/env.js
 
-
-envsubst '${MY_PATH_API_MY_LIB},${MY_PATH_API_AIOD_CATALOGUE}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf 
-nginx -g 'daemon off;'
+# Execute the CMD passed to the container
+exec "$@"
