@@ -15,12 +15,7 @@ COPY --from=node /app/dist/ai4-dashboard /usr/share/nginx/html
 COPY src/assets/env.template.js /usr/share/nginx/html/assets/env.template.js
 
 # Copy the nginx template configuration
-COPY docker/nginx/nginx-proxy.conf /etc/nginx/nginx.conf.template
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Copy the startup script
-COPY docker/marketplace/script.sh /script.sh
-
-# Set the entrypoint
-ENTRYPOINT ["/script.sh"]
 
 CMD  ["nginx", "-g", "daemon off;"]
