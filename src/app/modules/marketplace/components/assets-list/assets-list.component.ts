@@ -68,7 +68,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(subscribe);
 	}
 
-
+	private isValidAssetCategory(category: any): boolean {
+		return Object.values(AssetCategory).includes(category);
+	}
 
 
 	private getAssets(): void {
@@ -110,7 +112,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 	private getFilters(): void {
 		const subscribe = this.filtersStateService.assetCategorySelected$.pipe(
 			switchMap((category: AssetCategory) => {
-				this.categorySelected = category;
+				if (!this.isValidAssetCategory(this.categorySelected)) {
+					this.categorySelected = AssetCategory.AIModel
+					this.filtersStateService.setAssetCategorySelected(AssetCategory.AIModel)
+				} else {
+					this.categorySelected = category;
+				}
 				return this.filtersStateService.platformSelected$;
 			}),
 			switchMap((platform: string) => {
