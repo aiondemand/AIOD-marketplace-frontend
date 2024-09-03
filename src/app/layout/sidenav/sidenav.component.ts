@@ -16,6 +16,7 @@ import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.inte
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -88,6 +89,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     isFiltersVisible = false;
     isFilterLibraryVisible = false;
 
+    private subscription: Subscription | undefined;
+
     initializeForm() {
         this.searchFormGroup = this.fb.group({
             search: '',
@@ -109,6 +112,14 @@ export class SidenavComponent implements OnInit, AfterViewInit {
                 );
             }
         })
+    }
+
+    subscriptionAssetCategory() {
+        return this.filtersService.assetCategorySelected$.subscribe(
+            (category: AssetCategory) => {
+                this.selectedCategory = category;
+            }
+        );
     }
 
     ngOnInit(): void {
@@ -149,6 +160,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             }
         ];
         this.toggleFilterPanel();
+        this.subscription = this.subscriptionAssetCategory();
     }
     onRadioTypeChange() {
         this.filtersService.setAssetCategorySelected(this.selectedCategory);
@@ -176,6 +188,12 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
         if (!searchValue.trim()) {
             this.filtersService.setSearchQuery('');
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 }
