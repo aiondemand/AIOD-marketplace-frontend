@@ -20,7 +20,7 @@ export class ExperimentModel extends AssetModel {
     badge: string[];
     contact: any[];
     creator: any[];
-    distribution: {
+    override distribution: {
         checksum: string;
         checksumAlgorithm: string;
         copyright: string;
