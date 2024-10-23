@@ -13,7 +13,7 @@ export class AssetModel {
     research_area?: string[];
     scientific_domain?: string[];
     date_published?: Date;
-    distributions?: any[];
+    distribution?: any[];
     alternateName?: string[];
     media?: Media[]
     version?: string;
@@ -33,7 +33,7 @@ export class AssetModel {
         this.scientific_domain = data.scientific_domain;
         this.research_area = data.research_area;
         this.date_published = data.date_published;
-        this.distributions = data.distributions;
+        this.distribution = data.distribution;
         this.alternateName = data.alternateName;
         this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
         this.version = data.version;

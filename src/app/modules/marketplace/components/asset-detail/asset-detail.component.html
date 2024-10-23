@@ -84,10 +84,10 @@
                 </div>
             </div>
 
-            <div *ngIf="!!asset.distributions && asset.distributions.length>0">
+            <div *ngIf="!!asset.distribution && asset.distribution.length>0">
                 <h3>{{ 'ASSETS.DISTRIBUTION.TITLE' | translate }}</h3>
                 <div class="distribution-container">
-                    <ng-container *ngFor="let distribution of asset.distributions">
+                    <ng-container *ngFor="let distribution of asset.distribution">
                         <ng-container [ngTemplateOutlet]="distributionDetail"
                             [ngTemplateOutletContext]="{distribution: distribution }">
                         </ng-container>
