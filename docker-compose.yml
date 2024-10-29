@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mylibrary-nginx-frontend:
     container_name: mylibrary-nginx-frontend
@@ -14,9 +12,5 @@ services:
       KEYCLOAK_URL: ${KEYCLOAK_URL}
       KEYCLOAK_REALM: ${KEYCLOAK_REALM}
       KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
-    command: sh -c "/etc/nginx/script.sh"
-    volumes:
-      - ./docker/marketplace/script.sh:/etc/nginx/script.sh
-      - ./docker/nginx/nginx-proxy.conf:/etc/nginx/nginx.conf.template
     ports:
       - 9092:80

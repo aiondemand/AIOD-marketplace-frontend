@@ -8,6 +8,7 @@ import { AssetsListComponent } from './components/assets-list/assets-list.compon
 import { AssetCardComponent } from './components/assets-list/asset-card/asset-card.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AssetDetailComponent } from './components/asset-detail/asset-detail.component';
+import { ComputationalAssetComponent } from './components/asset-detail/computational-asset/computational-asset.component';
 import { DatasetComponent } from './components/asset-detail/dataset/dataset.component';
 import { ExperimentComponent } from './components/asset-detail/experiment/experiment.component';
 import { EducationalResourceComponent } from './components/asset-detail/educational-resource/educational-resource.component';
@@ -27,6 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         ServiceComponentComponent,
         AimodelComponent,
         MediaComponent,
+        ComputationalAssetComponent,
         EducationalResourceComponent,
     ],
     imports: [
