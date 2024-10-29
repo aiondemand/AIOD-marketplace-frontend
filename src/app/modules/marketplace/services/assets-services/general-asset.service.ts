@@ -47,8 +47,11 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
             case AssetCategory["Educational resource"]:
                 this.endpoint = endpoints.educationalResources;
                 break;
+            case AssetCategory["Computational asset"]:
+                    this.endpoint = endpoints.computationalAssets;
+                    break;
             default:
-                throw new Error('Does not exit category selected');
+                throw new Error('The selected category does not exist');
         }
     }
 

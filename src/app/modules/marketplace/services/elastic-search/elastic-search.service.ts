@@ -47,7 +47,7 @@ export class ElasticSearchService {
         case AssetCategory['Educational resource']:
             return endpoints.educationalResources;
         default:
-            throw new Error('Does not exit category selected');
+          throw new Error('The selected category does not exist');
     }
   }
 
