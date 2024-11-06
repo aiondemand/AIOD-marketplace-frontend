@@ -17,7 +17,7 @@ export class AimodelComponent implements OnInit, OnDestroy{
   public aiModel!: AIModelModel;
   @Input() identifier!: number;
 
-  private getDatatset() {
+  private getAimodel() {
     const subscribe = this.aiModelService
       .getAsset(this.identifier).subscribe((aimodel: AIModelModel) => {
         this.aiModel = aimodel;
@@ -27,7 +27,7 @@ export class AimodelComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.getDatatset();
+    this.getAimodel();
   }
 
   ngOnDestroy(): void {
