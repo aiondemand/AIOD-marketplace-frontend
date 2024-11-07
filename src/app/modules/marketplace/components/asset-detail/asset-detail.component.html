@@ -52,6 +52,12 @@
                         [identifier]="asset.identifier"></app-experiment></div>
                 <div *ngSwitchCase="AssetCategory.AIModel"><app-aimodel [identifier]="asset.identifier"></app-aimodel>
                 </div>
+                <div *ngSwitchCase="AssetCategory['Educational resource']">
+                        <app-educational-resource [identifier]="asset.identifier"></app-educational-resource>
+                </div>
+                <div *ngSwitchCase="AssetCategory.ComputationalAsset">
+                    <app-computationalAsset [identifier]="asset.identifier"></app-computationalAsset>
+                </div>   
             </div>
 
             <div *ngIf="!!asset.license">
