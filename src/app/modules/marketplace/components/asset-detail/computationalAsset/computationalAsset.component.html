@@ -1,0 +1,90 @@
+<div class="computationalAsset-body" *ngIf="computationalAsset">
+    <div *ngIf="!!computationalAsset.type">
+        <h3>{{ 'COMPUTATIONAL_ASSET.TYPE' | translate }}</h3>
+        <markdown>{{computationalAsset.type}}</markdown>
+    </div>
+    
+    <div *ngIf="!!computationalAsset.os">
+        <h3>{{ 'COMPUTATIONAL_ASSET.OS' | translate }}</h3>
+        <markdown>{{computationalAsset.os}}</markdown>
+    </div>
+
+    <div *ngIf="!!computationalAsset.kernel">
+        <h3>{{ 'COMPUTATIONAL_ASSET.KERNEL' | translate }}</h3>
+        <markdown>{{computationalAsset.kernel}}</markdown>
+    </div>
+   
+    <div *ngIf="!!computationalAsset.cpu && computationalAsset.cpu.length>0">
+        <h3>{{ 'COMPUTATIONAL_ASSET.CPU' | translate }}</h3>
+        <div class="container-cards">
+            <div *ngFor="let item of computationalAsset.cpu" class="computational-card">
+                <ul>
+                    <li>{{ 'COMPUTATIONAL_ASSET.NUM_CORES' | translate }}: {{item.num_cpu_cores}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.CLOCK_SPEED_GHZ' | translate }}: {{item.clock_speed_ghz}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.ARCHITECTURE' | translate }}: {{item.architecture}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.FAMILY' | translate }}: {{item.cpu_family}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.MODEL' | translate }}: {{item.model_name}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.VENDOR' | translate }}: {{item.vendor}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <BR  *ngIf="computationalAsset.cpu.length>1"><br />
+    </div>
+   
+    <div *ngIf="!!computationalAsset.accelerator && computationalAsset.accelerator.length>0" class="dataset-values">
+        <h3>{{ 'COMPUTATIONAL_ASSET.ACCELERATOR' | translate }}</h3>
+        <div class="container-cards">
+            <div *ngFor="let item of computationalAsset.accelerator" class="computational-card">
+                <ul>
+                    <li>{{ 'COMPUTATIONAL_ASSET.TYPE' | translate }}: {{item.type}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.NUM_CORES' | translate }}: {{item.cores}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.MEMORY_SIZE_GB' | translate }}: {{item.memory_gb}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.ARCHITECTURE' | translate }}: {{item.architecture}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.MODEL' | translate }}: {{item.model_name}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.VENDOR' | translate }}: {{item.vendor}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="!!computationalAsset.memory && computationalAsset.memory.length>0" class="dataset-values">
+        <h3>{{ 'COMPUTATIONAL_ASSET.MEMORY' | translate }}</h3>
+        <div class="container-cards">
+            <div *ngFor="let item of computationalAsset.memory" class="computational-card">
+                <ul>
+                    <li>{{ 'COMPUTATIONAL_ASSET.TYPE' | translate }}: {{item.type}}</li>           
+                    <li>{{ 'COMPUTATIONAL_ASSET.MEMORY_SIZE_GB' | translate }}: {{item.amount_gb}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.RDMA' | translate }}: {{item.rdma}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.READ_BANDWIDTH' | translate }}: {{item.read_bandwidth}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.WRITE_BANDWIDTH' | translate }}: {{item.write_bandwidth}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="!!computationalAsset.storage && computationalAsset.storage.length>0" class="dataset-values">
+        <h3>{{ 'COMPUTATIONAL_ASSET.STORAGE' | translate }}</h3>
+        <div class="container-cards">
+            <div *ngFor="let item of computationalAsset.storage" class="computational-card">
+                <ul>
+                    <li>{{ 'COMPUTATIONAL_ASSET.TYPE' | translate }}: {{item.type}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.SIZE_GB' | translate }}: {{item.amount}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.VENDOR' | translate }}: {{item.vendor}}</li> 
+                    <li>{{ 'COMPUTATIONAL_ASSET.MODEL' | translate }}: {{item.model}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.READ_BANDWIDTH' | translate }}: {{item.read_bandwidth}}</li>
+                    <li>{{ 'COMPUTATIONAL_ASSET.WRITE_BANDWIDTH' | translate }}: {{item.write_bandwidth}}</li>               
+                </ul>
+            </div>
+        </div>
+    </div>
+<!--
+    <div *ngIf="!!computationalAsset.location && computationalAsset.location.length>0" class="dataset-values">
+        <h3>{{ 'COMPUTATIONAL_ASSET.LOCATION' | translate }}</h3>
+        <div *ngFor="let item of computationalAsset.location" class="measured-values-style">
+            <markdown>{{item}}</markdown>
+        </div>
+    </div>
+-->
+</div>

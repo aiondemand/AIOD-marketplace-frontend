@@ -39,7 +39,7 @@
             "icon":"book",
             "color":"#FAD098"
         },
-        "computational asset": {
+        "computationalasset": {
             "icon":"dataset",
             "color":"#A7C7E9"
         }
