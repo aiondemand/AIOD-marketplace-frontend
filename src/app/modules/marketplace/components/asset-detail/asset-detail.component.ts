@@ -51,7 +51,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
     const subscribe = this.route.queryParams.pipe(
       switchMap((params: Params) => {
         const category = params['category']
-        console.log('++++ [asset-detail.components.ts::getParams] Category:', category);
         this.icon = this.appConfig.assets[category.toLocaleLowerCase()]?.icon;
         this.categoryColor = this.appConfig.assets[category.toLocaleLowerCase()]?.color;
         this.category = AssetCategory[category as keyof typeof AssetCategory];

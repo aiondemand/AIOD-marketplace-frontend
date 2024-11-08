@@ -7,52 +7,81 @@ import { MemoryModel } from "./memory.model";
 import { StorageModel } from "./storage.model";
 
 export class ComputationalAssetModel extends AssetModel {
-    accelerator: AcceleratorModel[];
-    aiodEntry: AiodEntry;
+    accelerator?: AcceleratorModel[];
+    cpu?: CpuModel[];
+    kernel?: string;
+    memory?: MemoryModel[];
+    os?: string;
+    storage?: StorageModel[];
+    type?: string;
+
+    // ToDo: Properties that should be defined in AssetModel
     aiResourceIdentifier: number;
-    applicationArea: string[];
-    contact: any[];
-    cpu: CpuModel[];
-    creator: string[];
-    hasPart: any[];
-    isPartOf: any[];
-    kernel: string;
-    location: any[];
-    memory: MemoryModel[];
-    note: any[];
-    os: string;
-    relevantLink: string[];
-    relevantResource: any[];
-    relevantTo: any[];
-    storage: StorageModel[];
+    applicationArea?: string[];
+    contact?: any[];
+    // aiodEntry: AiodEntry;
+    // location?: any[];
+    // note: any[];
+    // creator?: string[];
+    // hasPart?: any[];
+    // isPartOf?: any[];
+    // relevantLink: string[];
+    // relevantResource: any[];
+    // relevantTo: any[];
 
     constructor(data: any) {
-        super(data, AssetCategory["Computational asset"]);
+      super(data, AssetCategory.ComputationalAsset);
+      // this.aiodEntry = {
+      //   // platform: data.aiod_entry.platform,
+      //   // platformIdentifier: data.aiod_entry.platform_identifier,
+      //   dateModified: data.aiod_entry.date_modified,
+      //   dateCreated: data.aiod_entry.date_created,
+      //   editor: data.aiod_entry.editor,
+      //   status: data.aiod_entry.status,
+      // };
 
-      this.accelerator = data.accelerator;
-      this.aiodEntry = {
-        platform: data.aiod_entry.platform,
-        platformIdentifier: data.aiod_entry.platform_identifier,
-        dateModified: data.aiod_entry.date_modified,
-        dateCreated: data.aiod_entry.date_created,
-        editor: data.aiod_entry.editor,
-        status: data.aiod_entry.status,
-      };
+      // ToDo: move this to parent class constructor
       this.aiResourceIdentifier = data.ai_resource_identifier;
       this.applicationArea = data.application_area;
       this.contact = data.contact;
-      this.cpu = data.cpu;
-      this.creator = data.creator;
-      this.hasPart = data.has_part;
-      this.isPartOf = data.is_part_of;
+      // this.location = data.location;
+      // this.creator = data.creator;
+      // this.hasPart = data.has_part;
+      // this.isPartOf = data.is_part_of;
+      // this.note = data.note;
+      // this.relevantLink = data.relevant_link;
+      // this.relevantResource = data.relevant_resource;
+      // this.relevantTo = data.relevant_to;
+
+      if (data) this.parseToData(data);
+    }
+
+    private parseToData(data: any): void {
+      if (data.accelerator && data.accelerator.length > 0) {
+        this.accelerator = data.accelerator.map((item: any) => new AcceleratorModel(item))
+      } else {
+        this.accelerator = []
+      }
+
+      if (data.cpu && data.cpu.length > 0) {
+        this.cpu = data.cpu.map((item: any) => new CpuModel(item))
+      } else {
+        this.cpu = []
+      }
+
       this.kernel = data.kernel;
-      this.location = data.location;
-      this.memory = data.memory;
-      this.note = data.note;
+
+      if (data.memory && data.memory.length > 0) {
+        this.memory = data.memory.map((item: any) => new MemoryModel(item))
+      } else {
+        this.memory = []
+      }
       this.os = data.os;
-      this.relevantLink = data.relevant_link;
-      this.relevantResource = data.relevant_resource;
-      this.relevantTo = data.relevant_to;
-      this.storage = data.storage;
+      if (data.storage && data.storage.length > 0) {
+        this.storage = data.storage.map((item: any) => new StorageModel(item))
+      } else {
+        this.storage = []
+      }
+      this.type = data.type;
     }
 }

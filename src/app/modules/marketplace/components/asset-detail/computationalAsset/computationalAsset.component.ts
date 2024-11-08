@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ComputationalAssetService } from '@app/modules/marketplace/services/assets-services/computational-asset.service';
+import { ComputationalAssetService } from '@app/modules/marketplace/services/assets-services/computationalAsset.service';
 import { ComputationalAssetModel } from '@app/shared/models/computationalAsset.model';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-computational-asset',
-  templateUrl: './computational-asset.component.html',
-  styleUrls: ['./computational-asset.component.scss']
+  selector: 'app-computationalAsset',
+  templateUrl: './computationalAsset.component.html',
+  styleUrls: ['./computationalAsset.component.scss']
 })
 export class ComputationalAssetComponent implements OnInit, OnDestroy {
   constructor(

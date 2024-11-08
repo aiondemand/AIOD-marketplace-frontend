@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComputationalAssetComponent } from './computational-asset.component';
+import { ComputationalAssetComponent } from './computationalAsset.component';
 
 describe('ComputationalAssetComponent', () => {
   let component: ComputationalAssetComponent;

@@ -4,5 +4,5 @@ export enum AssetCategory {
     Experiment = 'Experiment',
     Service =  'Service',
     'Educational resource' = 'Educational resource',
-    'Computational asset' = 'Computational asset',
+    ComputationalAsset = 'Computational asset',
 }
