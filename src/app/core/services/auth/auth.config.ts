@@ -6,8 +6,12 @@ export const authCodeFlowConfig: AuthConfig = {
     issuer: environment.keycloakConfig.baseUrl + '/realms/' + environment.keycloakConfig.realm,
 
     // URL of the SPA to redirect the user to after login
+<<<<<<< HEAD
     //redirectUri: window.location.origin,
     redirectUri : window.location.origin + '/' + environment.keycloakConfig.redirectUri,
+=======
+    redirectUri : window.location.origin + '/',
+>>>>>>> 1e22297 (Removed commented code)
 
     // The SPA's id. The SPA is registerd with this id at the auth-server
     clientId: environment.keycloakConfig.clientId,
