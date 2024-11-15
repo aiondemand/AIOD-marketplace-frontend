@@ -135,6 +135,19 @@
             "URL": "URL",
             "CHECKSUM": "Checksum"
         },
+        "LOCATION": {
+            "ADDRESS": "Address",
+            "COUNTRY": "Country",
+            "GEO": "Geolocation",
+            "ELEVATION": "Elevation (in millimeteres)",
+            "LATITUDE": "Latitude",
+            "LOCALITY": "Locality",
+            "LONGITUDE": "Longitude",
+            "POSTAL_CODE": "Postal Code",
+            "REGION": "Region",
+            "STREET": "Street",
+            "TITLE": "Geographic location"
+        },
         "MEDIA": {
             "TITLE": "Media",
             "CHECKSUM": "Checksum",
