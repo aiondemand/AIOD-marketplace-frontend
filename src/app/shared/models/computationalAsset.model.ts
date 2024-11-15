@@ -19,8 +19,7 @@ export class ComputationalAssetModel extends AssetModel {
     aiResourceIdentifier: number;
     applicationArea?: string[];
     contact?: any[];
-    // aiodEntry: AiodEntry;
-    // location?: any[];
+    aiodEntry: AiodEntry;
     // note: any[];
     // creator?: string[];
     // hasPart?: any[];
@@ -31,20 +30,19 @@ export class ComputationalAssetModel extends AssetModel {
 
     constructor(data: any) {
       super(data, AssetCategory.ComputationalAsset);
-      // this.aiodEntry = {
-      //   // platform: data.aiod_entry.platform,
-      //   // platformIdentifier: data.aiod_entry.platform_identifier,
-      //   dateModified: data.aiod_entry.date_modified,
-      //   dateCreated: data.aiod_entry.date_created,
-      //   editor: data.aiod_entry.editor,
-      //   status: data.aiod_entry.status,
-      // };
+      this.aiodEntry = {
+        platform: data.aiod_entry?.platform??'',
+        platformIdentifier: data.aiod_entry?.platform_identifier??'',
+        dateModified: data.aiod_entry?.date_modified??'',
+        dateCreated: data.aiod_entry?.date_created??'',
+        editor: data.aiod_entry?.editor??[],
+        status: data.aiod_entry?.status??'',
+      };
 
       // ToDo: move this to parent class constructor
       this.aiResourceIdentifier = data.ai_resource_identifier;
       this.applicationArea = data.application_area;
       this.contact = data.contact;
-      // this.location = data.location;
       // this.creator = data.creator;
       // this.hasPart = data.has_part;
       // this.isPartOf = data.is_part_of;

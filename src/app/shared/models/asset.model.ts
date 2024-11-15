@@ -1,5 +1,7 @@
 import { AssetCategory } from "./asset-category.model"
+import { LocationModel } from "./location.model";
 import { Media } from "./media.model";
+
 export class AssetModel {
     identifier: number
     category: AssetCategory;
@@ -10,6 +12,7 @@ export class AssetModel {
     keywords: string[];
     sameAs: string;
     license?: string;
+    location?: LocationModel[];
     research_area?: string[];
     scientific_domain?: string[];
     date_published?: Date;
@@ -31,6 +34,7 @@ export class AssetModel {
         this.identifier = data.identifier??0;
         this.keywords = data.keyword??[];
         this.license = data.license;
+        this.location = data.location?.map((dataLocation: any) => new LocationModel(dataLocation));
         this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
         this.name = data.name??'';
         this.platform = data.platform??'';
