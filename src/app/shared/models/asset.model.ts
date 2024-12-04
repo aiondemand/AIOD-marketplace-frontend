@@ -1,5 +1,7 @@
 import { AssetCategory } from "./asset-category.model"
+import { LocationModel } from "./location.model";
 import { Media } from "./media.model";
+
 export class AssetModel {
     identifier: number
     category: AssetCategory;
@@ -10,10 +12,11 @@ export class AssetModel {
     keywords: string[];
     sameAs: string;
     license?: string;
+    location?: LocationModel[];
     research_area?: string[];
     scientific_domain?: string[];
     date_published?: Date;
-    distributions?: any[];
+    distribution?: any[];
     alternateName?: string[];
     media?: Media[]
     version?: string;
@@ -21,23 +24,24 @@ export class AssetModel {
     dateCreated?: Date | undefined;
 
     constructor(data: any, category: AssetCategory) {
-        this.identifier = data.identifier??0;
-        this.category = category;
-        this.name = data.name??'';
-        this.description = data.description?.plain ?? '';
-        this.platform = data.platform??'';
-        this.platform_resource_identifier = data.platform_resource_identifier??0;
-        this.keywords = data.keyword??[];
-        this.sameAs = data.same_as;
-        this.license = data.license;
-        this.scientific_domain = data.scientific_domain;
-        this.research_area = data.research_area;
-        this.date_published = data.date_published;
-        this.distributions = data.distributions;
         this.alternateName = data.alternateName;
-        this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
-        this.version = data.version;
+        this.category = category;
         this.citation = data.citation;
         this.dateCreated = data.aiod_entry?.date_created? new Date(data.aiod_entry?.date_created): undefined;
+        this.date_published = data.date_published;
+        this.description = data.description?.plain ?? '';
+        this.distribution = data.distribution;
+        this.identifier = data.identifier??0;
+        this.keywords = data.keyword??[];
+        this.license = data.license;
+        this.location = data.location?.map((dataLocation: any) => new LocationModel(dataLocation));
+        this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
+        this.name = data.name??'';
+        this.platform = data.platform??'';
+        this.platform_resource_identifier = data.platform_resource_identifier??0;
+        this.research_area = data.research_area;
+        this.sameAs = data.same_as;
+        this.scientific_domain = data.scientific_domain;
+        this.version = data.version;
     }
 }

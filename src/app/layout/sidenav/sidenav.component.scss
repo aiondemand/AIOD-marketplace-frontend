@@ -19,7 +19,10 @@
 }
 
 ::ng-deep .sidenav .mat-drawer-inner-container {
-    overflow: hidden !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -68,7 +71,8 @@
 }
 
 .sidenav-footer {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
     bottom: 1rem;
 }
 
@@ -80,7 +84,7 @@
     flex-direction: row;
     align-items: center;
     white-space: nowrap;
-    height: 60px;
+    height: 80px;
     margin-left: 0.6rem;
 
     & img {
@@ -129,3 +133,25 @@
   .buttons-container {
     margin-left: 60%;
   }
+
+.container-filters {
+    display: flex;
+    flex-direction: column;
+}
+
+.external-link {
+    margin-left: 25px;
+    margin-right: 25px;
+    width: inherit;
+    padding: 0px;
+}
+
+.external-link:hover {
+    background-color: var(--accent) !important;
+    color: var(--white)  !important;
+}
+
+.nav#sidebarMenu {
+    display: flex;
+    flex-direction: column;
+}

@@ -19,7 +19,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
     private appConfig: AppConfigService,
     private route: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
-    private generalAssetSerice: GeneralAssetService,
+    private generalAssetService: GeneralAssetService,
     private shoppingCartService: ShoppingCartService,
   ) {}
   
@@ -33,9 +33,8 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
 
   private getAsset(id: number, category: AssetCategory): void {
     this.isLoading = true;
-    this.generalAssetSerice.setAssetCategory(category);
-    
-    const subscribe = this.generalAssetSerice.getAsset(id).subscribe( {
+    this.generalAssetService.setAssetCategory(category);
+    const subscribe = this.generalAssetService.getAsset(id).subscribe( {
       next: (asset: AssetModel) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name)

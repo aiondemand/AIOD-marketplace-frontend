@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mylibrary-nginx-frontend:
     container_name: mylibrary-nginx-frontend
