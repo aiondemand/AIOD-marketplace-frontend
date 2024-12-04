@@ -34,7 +34,7 @@ export class PaymentService {
         identifier: item.identifier,
         name: item.name,
         category: item.category,
-        url_metadata: item.urlMetadata,
+        url_metadata: item.urlMetadata || 'none',
         price: item.price,
         added_at: item.addedAt
       }
