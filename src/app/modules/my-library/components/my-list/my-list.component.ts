@@ -64,6 +64,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
     
     this.myLibraryService.deleteAssetMyLibrary({id: this.userProfile.identifier, email: this.userProfile.email}, body).subscribe({
       next: () => {
+        console.log('Deleted successfully');
         this.getAssetsPurchases();
       },
       error: (error: any) => console.error('Error to delete asset of my libreary', error)

@@ -135,19 +135,6 @@
             "URL": "URL",
             "CHECKSUM": "Checksum"
         },
-        "LOCATION": {
-            "ADDRESS": "Address",
-            "COUNTRY": "Country",
-            "GEO": "Geolocation",
-            "ELEVATION": "Elevation (in millimeteres)",
-            "LATITUDE": "Latitude",
-            "LOCALITY": "Locality",
-            "LONGITUDE": "Longitude",
-            "POSTAL_CODE": "Postal Code",
-            "REGION": "Region",
-            "STREET": "Street",
-            "TITLE": "Geographic location"
-        },
         "MEDIA": {
             "TITLE": "Media",
             "CHECKSUM": "Checksum",
@@ -168,7 +155,6 @@
             "DESCRIPTION": "Description",
             "KEYWORDS": "Keywords",
             "LICENSE": "License",
-            "LOCATION": "Location",
             "RESEARCH_AREA": "Research Area",
             "SCIENTIFIC_DOMAIN": "Scientific Domain",
             "DATE_PUBLISHED" : "Date Published",
@@ -206,29 +192,6 @@
         "EXEMPLARY_EXECUTION_SETTINGS" : "Exemplary execution settings",
         "REPRODUCIBILITY_EXPLANATION" : "Reproducibility explanation",
         "BADGE" : "Badge"
-    },
-
-    "COMPUTATIONAL_ASSET" : {
-        "ACCELERATOR" : "Accelerators",
-        "ARCHITECTURE" : "Architecture",
-        "CLOCK_SPEED_GHZ" : "Clock speed (in GHz)",
-        "CPU" : "CPUs",
-        "FAMILY" : "Family",
-        "KERNEL" : "Kernel",
-        "LOCATION" : "Geographical Location",
-        "MEMORY" : "Memory",
-        "MEMORY_SIZE_GB" : "Memory size (in GB)",
-        "MODEL" : "Model",
-        "NAME" : "Name",
-        "NUM_CORES": "Number of cores",
-        "OS" : "Operating system",
-        "READ_BANDWIDTH" : "Read bandwidth (in MBps)",
-        "RDMA" : "RDMA",
-        "SIZE_GB" : "Size (in GB)",
-        "STORAGE" : "Storage",
-        "TYPE" : "Type",
-        "VENDOR" : "Vendor",
-        "WRITE_BANDWIDTH" : "Write bandwidth (in MBps)"
     },
 
     "MY-LIBRARY": {

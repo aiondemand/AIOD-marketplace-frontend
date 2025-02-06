@@ -16,6 +16,7 @@ export class EducationalResourceModel extends AssetModel {
   inLanguage: string[];
   industrialSector: string[];
   isPartOf: any[];
+  location: any[];
   note: any[];
   pace: string;
   prerequisite: string[];
@@ -47,6 +48,7 @@ export class EducationalResourceModel extends AssetModel {
     this.inLanguage = data.in_language;
     this.industrialSector = data.industrial_sector;
     this.isPartOf = data.is_part_of;
+    this.location = data.location;
     this.note = data.note;
     this.pace = data.pace;
     this.prerequisite = data.prerequisite;

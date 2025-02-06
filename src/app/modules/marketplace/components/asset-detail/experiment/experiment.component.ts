@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ExperimentComponent implements OnInit, OnDestroy {
   constructor(
-    private experimentService: ExperimentService,
+    private expetimentService: ExperimentService ,
   ) {}
  
   private subscriptions: Subscription = new Subscription();
@@ -18,7 +18,7 @@ export class ExperimentComponent implements OnInit, OnDestroy {
   @Input() identifier!: number;
 
   private getExperiment() {
-    const subscribe = this.experimentService
+    const subscribe = this.expetimentService
       .getAsset(this.identifier).subscribe((experiment: ExperimentModel) => {
         this.experiment = experiment;
       });

@@ -37,11 +37,7 @@
         },
         "educational resource": {
             "icon":"book",
-            "color":"#FAD098"
-        },
-        "computationalasset": {
-            "icon":"dataset",
-            "color":"#A7C7E9"
+            "color":"#FCDFDC"
         }
     }
 }
