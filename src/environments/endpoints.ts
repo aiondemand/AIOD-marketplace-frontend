@@ -20,6 +20,9 @@ export const endpoints = {
     libraries: '/libraries/:userId',
     librariesAssets: '/libraries/:userId/assets',
 
+    //Platforms
+    platforms: '/platforms/v1',
+
     //Search
     search : '/search',
 };
