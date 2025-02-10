@@ -1,5 +1,4 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Location } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -7,7 +6,7 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
@@ -16,8 +15,9 @@ import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.inte
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PlatformService } from '@app/modules/marketplace/services/common-services/platform.service';
 
 @Component({
     selector: 'app-sidenav',
@@ -37,6 +37,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         private fb: FormBuilder,
         private router: Router,
         private filtersService: FiltersStateService,
+        private platformService: PlatformService,
     ) {
         this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -80,7 +81,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     projectUrl = '';
 
 
-    platforms: any;
+    platforms: any = [];
     assetCategories !: any;
     selectedCategory: AssetCategory = AssetCategory.Dataset;
     selectedPlatform!: string;
@@ -122,6 +123,14 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         );
     }
 
+    getPlatforms() {
+        this.platformService.getPlatforms().pipe(take(1)).subscribe(
+            (platforms: any) => {
+                this.platforms = platforms;
+            }
+        );
+    }
+
     ngOnInit(): void {
         this.initializeForm();
         this.acknowledgments = this.appConfigService.acknowledgments;
@@ -129,38 +138,9 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         this.projectUrl = this.appConfigService.projectUrl;
 
         this.assetCategories = Object.values(AssetCategory);
-        this.platforms = [
-            {
-                "name": "aiod",
-                "identifier": 1
-            },
-            {
-                "name": "openml",
-                "identifier": 3
-            },
-            {
-                "name": "huggingface",
-                "identifier": 4
-            },
-            {
-                "name": "zenodo",
-                "identifier": 5
-            },
-            {
-                "name": "stairwai",
-                "identifier": 7
-            },
-            {
-                "name": "bonseyes",
-                "identifier": 8
-            },
-            {
-                "name": "aida_cms",
-                "identifier": 9
-            }
-        ];
+        this.getPlatforms();
         this.toggleFilterPanel();
-        this.subscription = this.subscriptionAssetCategory();
+        this.subscription?.add(this.subscriptionAssetCategory());
     }
     onRadioTypeChange() {
         this.filtersService.setAssetCategorySelected(this.selectedCategory);
