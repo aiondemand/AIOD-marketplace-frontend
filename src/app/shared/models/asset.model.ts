@@ -24,7 +24,8 @@ export class AssetModel {
         this.identifier = data.identifier??0;
         this.category = category;
         this.name = data.name??'';
-        this.description = data.description?.plain ?? '';
+        this.description = data.description?.html 
+            ?? (data.description.plain ?? '');
         this.platform = data.platform??'';
         this.platform_resource_identifier = data.platform_resource_identifier??0;
         this.keywords = data.keyword??[];
