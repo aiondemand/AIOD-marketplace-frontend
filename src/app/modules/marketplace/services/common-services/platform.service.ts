@@ -14,12 +14,12 @@ export class PlatformService {
 
   private buildHttpParams(params: any): HttpParams {
       return new HttpParams()
-          .set('offset', params?.offset)
-          .set('limit', params?.limit);
+          .set('offset', params?.offset || 0)
+          .set('limit', params?.limit || 1000);
   }
 
-  public getPlatforms(params?: any): Observable<any[]> {
-      let httpParams = this.buildHttpParams(params);
-      return this.http.get<any[]>(`${base}${endpoints.prefixApiAssets}${endpoints.platforms}`, {...httpParams});
+  public getPlatforms(paramsPlatform?: any): Observable<any[]> {
+      let params = this.buildHttpParams(paramsPlatform);
+      return this.http.get<any[]>(`${base}${endpoints.prefixApiAssets}${endpoints.platforms}`, {params});
   }
 }
