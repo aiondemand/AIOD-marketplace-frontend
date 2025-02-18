@@ -15,5 +15,8 @@ export const environment = {
         realm: '',
         clientId: '',
         showDebugInformation: true
+    },
+    enhancedApi: {
+        baseEnhanced: '',
     }
 };

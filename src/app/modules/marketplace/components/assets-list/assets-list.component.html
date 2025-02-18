@@ -6,7 +6,7 @@
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
 </div>
-<mat-paginator (page)="handlePageEvent($event)" [length]="assetsSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+<mat-paginator (page)="handlePageEvent($event)" [length]="assetsSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page" [disabled]="isPaginationDisabled()">
 </mat-paginator>
 
 <ng-template #assetList>

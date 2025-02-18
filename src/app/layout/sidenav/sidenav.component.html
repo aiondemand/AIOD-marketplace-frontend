@@ -62,7 +62,10 @@
                         <input matInput type="search" formControlName="search" placeholder="Enter text to search" (input)="onInputChange()" />
                     </mat-form-field>
                     <div class="buttons-container">
-                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99">
+                        <mat-checkbox formControlName="enhancedSearch" class="search-type" (change)="onEnhancedSearchChange($event)">
+                            Enhanced Search
+                        </mat-checkbox>
+                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99" [disabled]="isSearchButtonDisabled()">
                             <mat-icon>search</mat-icon>
                         </button>
                     </div>
@@ -97,3 +100,7 @@
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
+<app-spinner 
+    [isVisible]="(spinnerService.visibility$ | async) ?? false" 
+    [message]="(spinnerService.message$ | async) ?? ''"> spinner
+</app-spinner>

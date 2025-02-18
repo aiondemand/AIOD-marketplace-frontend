@@ -9,6 +9,7 @@ export class FiltersStateService {
     private assetCategory = new BehaviorSubject<AssetCategory>(AssetCategory.Dataset);
     private platform = new BehaviorSubject<string>('');
     private query = new BehaviorSubject<string>('');
+    private isEnhancedSearch = new BehaviorSubject<boolean>(false);
 
     get assetCategorySelected(): AssetCategory {
         return this.assetCategory.getValue();
@@ -33,6 +34,14 @@ export class FiltersStateService {
         return this.query.asObservable();
     }
 
+    get isEnhancedSerach(): boolean {
+        return this.isEnhancedSearch.getValue();
+    }
+
+    get isEnhancedSerach$(): Observable<boolean> {
+        return this.isEnhancedSearch.asObservable();
+    }
+
     public setSearchQuery(query : string) : void {
         this.query.next(query);
     }
@@ -43,6 +52,10 @@ export class FiltersStateService {
 
     public setPlatformSelected(platform: string): void {
         this.platform.next(platform);
+    }
+
+    public setEnhancedSearch(value: boolean): void {
+        this.isEnhancedSearch.next(value);
     }
 
 }
