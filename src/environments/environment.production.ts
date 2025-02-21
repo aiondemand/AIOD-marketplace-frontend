@@ -19,4 +19,7 @@ export const environment = {
         clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
         showDebugInformation: true,
     },
+    enhancedApi: {
+        baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'],
+    }
 };

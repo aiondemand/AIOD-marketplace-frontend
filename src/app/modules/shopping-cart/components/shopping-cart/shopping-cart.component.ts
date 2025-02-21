@@ -54,11 +54,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
       this.paymentService.processOrderPayment(user, items).subscribe({
         next: (_userPurchases: any) => {
-          console.log('se ha comprado exitosamente');
           this.shoppingCartService.deleteCart();
           this.router.navigate(['/my-library']);
         },
-        error: (error: any) => console.log('Error payment', error)
+        error: (error: any) => console.error('Error payment', error)
       });
     }    
   }

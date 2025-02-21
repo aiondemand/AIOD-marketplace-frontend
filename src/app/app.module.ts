@@ -22,6 +22,7 @@ import { environment } from '@environments/environment';
 import { MatIconRegistry } from '@angular/material/icon';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { AppConfigService } from './core/services/app-config/app-config.service';
+import { SpinnerModule } from './shared/components/spinner/spinner.module';
 
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -66,6 +67,7 @@ renderer.link = (href, title, text) => {
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
+        SpinnerModule,
         OAuthModule.forRoot({
             resourceServer: {
                 allowedUrls: [base],
