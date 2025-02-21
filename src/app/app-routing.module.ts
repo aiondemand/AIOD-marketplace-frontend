@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { environment } from '@environments/environment';
 
 const routes: Routes = [
     {
