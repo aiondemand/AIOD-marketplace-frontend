@@ -17,6 +17,7 @@ export const environment = {
         baseUrl: browserwindow.env?.['KEYCLOAK_URL'],
         realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
         clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
+        redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
         showDebugInformation: true,
     },
 };
