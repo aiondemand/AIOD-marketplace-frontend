@@ -168,11 +168,6 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
         var query = this.searchFormGroup.get('search')?.value;
         this.filtersService.setSearchQuery(query);
-
-        if (isEnhancedSearch) {
-            const searchType = this.selectedCategory || 'assets';
-            this.spinnerService.show(`Searching ${searchType}...`);
-        }
     }
 
     onInputChange() {
@@ -189,11 +184,11 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     }
 
     isSearchButtonDisabled() {
-        if (this.searchFormGroup.get('search')?.value) {
-            return false;
+        if (!this.searchFormGroup.get('search')?.value && this.filtersService.isEnhancedSerach) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     ngOnDestroy(): void {

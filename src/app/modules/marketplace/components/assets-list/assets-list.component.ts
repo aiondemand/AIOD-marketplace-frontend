@@ -11,7 +11,7 @@ import { ElasticSearchService } from '../../services/elastic-search/elastic-sear
 import { SearchModel } from '@app/shared/models/search.model';
 import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 
-const MAX_ATTEMPTS = 10;
+const MAX_ATTEMPTS = 15;
 
 @Component({
 	selector: 'app-assets-list',
@@ -184,15 +184,19 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 		return false;
 	}
 
-	private enhancedSearch(query: string): void {
+	initSpinner() {
 		this.spinnerService.show('Initializing enhanced search...');
+	}
+
+	private enhancedSearch(query: string): void {
+		const categorySelected = this.sanitizeAssetCategory(this.categorySelected);
 		
 		if (this.enhancedSearchSubscription) {
-				this.enhancedSearchSubscription.unsubscribe();
+			this.enhancedSearchSubscription.unsubscribe();
 		}
 
 		this.generalAssetService.setAssetCategory(this.categorySelected);
-		this.enhancedSearchSubscription = this.generalAssetService.getAssetsByEnhancedSearch(query, this.sanitizeAssetCategory(this.categorySelected), this.pageSize)
+		this.enhancedSearchSubscription = this.generalAssetService.getAssetsByEnhancedSearch(query, categorySelected, this.pageSize)
 			.pipe(
 				switchMap(locationHeader => {
 					return interval(2000).pipe(
@@ -237,6 +241,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 					if (response.result_doc_ids && response.result_doc_ids.length > 0) {
 						return this.generalAssetService.getMultipleAssets(response.result_doc_ids);
 					}
+
 					return of([]);
 				}),
 				finalize(() => {
@@ -246,9 +251,11 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 				next: (assets: any[]) => {
 					this.assets = assets;
 					this.assetsSize = assets.length;
+					this.spinnerService.hide();
 				},
 				error: (error: any) => {
 					this.assets = [];
+					this.spinnerService.hide();
 					throwError(() => new Error(error));
 				}
 			});
@@ -257,17 +264,21 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 	}
 
 	sanitizeAssetCategory(category: AssetCategory): string {
+		this.initSpinner();
     switch (category) {
         case AssetCategory.AIModel:
-            return 'ml_models';
+					return 'ml_models';
         case AssetCategory.Dataset:
-            return 'datasets';
+					return 'datasets';
         case AssetCategory.Experiment:
-            return 'experiments';
+					return 'experiments';
         case AssetCategory['Educational resource']:
-            return 'educational_resources';
+					return 'educational_resources';
+				case AssetCategory['Service']:
+					return 'services';
         default:
-            throw new Error(`Unhandled category case: ${category}`);
+					this.spinnerService.hide();
+					return '';
     }
 	}
 

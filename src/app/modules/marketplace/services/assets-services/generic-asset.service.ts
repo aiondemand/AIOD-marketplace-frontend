@@ -56,7 +56,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
 
     public getAssetsByEnhancedSearch(searchQuery: string, assetType: string, topk: number = 15): Observable<any> {
         let params = new HttpParams()
-            .set('query', searchQuery)
+            .set('search_query', searchQuery)
             .set('asset_type', assetType)
             .set('topk', topk)
 
