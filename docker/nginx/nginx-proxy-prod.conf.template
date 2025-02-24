@@ -23,12 +23,18 @@ server {
         proxy_hide_header 'access-control-allow-origin';
         proxy_hide_header 'access-control-allow-Methods';
     }
-    location / {
+
+    location /${ML_REDIRECT_URI} {
         proxy_pass ${MY_PATH_MARKETPLACE};
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto http;
         proxy_buffer_size   12k;
+        sub_filter '<base href="/">' '<base href="/${ML_REDIRECT_URI}">';
+        sub_filter '/assets/config.json' '/${ML_REDIRECT_URI}assets/config.json';
+        sub_filter '../../../assets/images/' 'assets/images/';
+        sub_filter_types *;
+        sub_filter_once off;
     }
 }
