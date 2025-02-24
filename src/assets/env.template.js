@@ -4,4 +4,5 @@
   window['env']['KEYCLOAK_REALM'] = '${KEYCLOAK_REALM}';
   window['env']['KEYCLOAK_CLIENT_ID'] = '${KEYCLOAK_CLIENT_ID}';
   window['env']['API_URL'] = '${API_URL}'
+  window['env']['ML_REDIRECT_URI'] = '${ML_REDIRECT_URI}'
 })(this);
