@@ -11,7 +11,7 @@ services:
       MY_PATH_MARKETPLACE: ${MY_PATH_MARKETPLACE}
     volumes:
       - ./docker/marketplace/script.sh:/etc/nginx/script.sh
-      - ./docker/nginx/nginx-proxy-prod.conf.template:/etc/nginx/templates/default.conf.template
+      - ./docker/nginx/nginx-redirect-prod.conf.template:/etc/nginx/templates/default.conf.template
     ports:
       - ${NGINX_PORT}:80
 
