@@ -14,6 +14,7 @@ export const environment = {
         baseUrl: '',
         realm: '',
         clientId: '',
+        redirectUri: '',
         showDebugInformation: true
     },
     enhancedApi: {

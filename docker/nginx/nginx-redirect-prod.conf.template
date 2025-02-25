@@ -1,0 +1,40 @@
+server {
+    listen 80;
+    server_name "";
+    location /api-library/ {
+        rewrite ^/api-library/(.*) /$1 break;
+        proxy_pass ${MY_PATH_API_MY_LIB};
+        proxy_redirect      off;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_ssl_server_name   on;
+        proxy_hide_header 'access-control-allow-origin';
+        proxy_hide_header 'access-control-allow-Methods';
+    }
+    location /api-metadata/ {
+        rewrite ^/api-metadata/(.*) /$1 break;
+        proxy_pass ${MY_PATH_API_AIOD_CATALOGUE};
+        proxy_redirect      off;
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_ssl_server_name   on;
+        proxy_hide_header 'access-control-allow-origin';
+        proxy_hide_header 'access-control-allow-Methods';
+    }
+
+    location /${ML_REDIRECT_URI} {
+        proxy_pass "http://mylibrary-nginx-frontend:80/";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto http;
+        proxy_buffer_size   12k;
+        sub_filter '<base href="/">' '<base href="/${ML_REDIRECT_URI}">';
+        sub_filter '/assets/config.json' '/${ML_REDIRECT_URI}assets/config.json';
+        sub_filter '../../../assets/images/' 'assets/images/';
+        sub_filter_types *;
+        sub_filter_once off;
+    }
+}
