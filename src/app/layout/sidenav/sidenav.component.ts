@@ -18,6 +18,7 @@ import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
 import { Subscription, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PlatformService } from '@app/modules/marketplace/services/common-services/platform.service';
+import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 
 @Component({
     selector: 'app-sidenav',
@@ -38,6 +39,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         private router: Router,
         private filtersService: FiltersStateService,
         private platformService: PlatformService,
+        public spinnerService: SpinnerService
     ) {
         this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -95,6 +97,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     initializeForm() {
         this.searchFormGroup = this.fb.group({
             search: '',
+            enhancedSearch: [false]
         });
     }
 
@@ -142,6 +145,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         this.toggleFilterPanel();
         this.subscription?.add(this.subscriptionAssetCategory());
     }
+
     onRadioTypeChange() {
         this.filtersService.setAssetCategorySelected(this.selectedCategory);
     }
@@ -159,6 +163,9 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     }
 
     searchAssets() {
+        const isEnhancedSearch = this.searchFormGroup.get('enhancedSearch')?.value;
+        this.filtersService.setEnhancedSearch(isEnhancedSearch);
+
         var query = this.searchFormGroup.get('search')?.value;
         this.filtersService.setSearchQuery(query);
     }
@@ -169,6 +176,15 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         if (!searchValue.trim()) {
             this.filtersService.setSearchQuery('');
         }
+    }
+
+    onEnhancedSearchChange(event: any) {
+        const isEnhanced = event.checked || event.target?.checked;
+        this.filtersService.setEnhancedSearch(isEnhanced);
+    }
+
+    isEnhancedSearch() {
+        return !this.searchFormGroup.get('search')?.value && this.filtersService.isEnhancedSerach;
     }
 
     ngOnDestroy(): void {

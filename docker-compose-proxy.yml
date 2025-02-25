@@ -11,6 +11,7 @@ services:
       MY_PATH_API_AIOD_CATALOGUE: ${MY_PATH_API_AIOD_CATALOGUE}
       MY_PATH_API_MY_LIB: ${MY_PATH_API_MY_LIB}
       MY_PATH_MARKETPLACE: ${MY_PATH_MARKETPLACE}
+      AIOD_ENHANCED_API: ${AIOD_ENHANCED_API}
     volumes:
       - ./docker/marketplace/script.sh:/etc/nginx/script.sh
       - ./docker/nginx/nginx-proxy-prod.conf.template:/etc/nginx/templates/default.conf.template
@@ -30,5 +31,6 @@ services:
       KEYCLOAK_URL: ${KEYCLOAK_URL}
       KEYCLOAK_REALM: ${KEYCLOAK_REALM}
       KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+      AIOD_ENHANCED_API: ${AIOD_ENHANCED_API}
     ports:
       - 9094:80
