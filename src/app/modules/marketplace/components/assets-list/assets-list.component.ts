@@ -210,7 +210,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 					return interval(2000).pipe(
 						switchMap(() => this.generalAssetService.checkEnhancedSearchStatus(locationHeader)),
 						scan((attempts: any, response: any) => {
-							this.spinnerService.updateMessage(`Searching in progress...`);
+							this.spinnerService.updateMessage(`Search in progress...`);
 
 							return {
 								attempts: attempts.attempts + 1,
