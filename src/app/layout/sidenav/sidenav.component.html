@@ -65,7 +65,7 @@
                         <mat-checkbox formControlName="enhancedSearch" class="search-type" (change)="onEnhancedSearchChange($event)">
                             Enhanced Search
                         </mat-checkbox>
-                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99" [disabled]="isSearchButtonDisabled()">
+                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99" [disabled]="isEnhancedSearch()">
                             <mat-icon>search</mat-icon>
                         </button>
                     </div>

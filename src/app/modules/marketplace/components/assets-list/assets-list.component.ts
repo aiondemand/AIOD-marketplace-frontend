@@ -13,6 +13,14 @@ import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 
 const MAX_ATTEMPTS = 15;
 
+const assetCategoryMapping = {
+	[AssetCategory.AIModel]: 'ml_models',
+	[AssetCategory.Dataset]: 'datasets',
+	[AssetCategory.Experiment]: 'experiments',
+	[AssetCategory['Educational resource']]: 'educational_resources',
+	[AssetCategory['Service']]: 'services',
+}
+
 @Component({
 	selector: 'app-assets-list',
 	templateUrl: './assets-list.component.html',
@@ -265,21 +273,13 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
 	sanitizeAssetCategory(category: AssetCategory): string {
 		this.initSpinner();
-    switch (category) {
-        case AssetCategory.AIModel:
-					return 'ml_models';
-        case AssetCategory.Dataset:
-					return 'datasets';
-        case AssetCategory.Experiment:
-					return 'experiments';
-        case AssetCategory['Educational resource']:
-					return 'educational_resources';
-				case AssetCategory['Service']:
-					return 'services';
-        default:
-					this.spinnerService.hide();
-					return '';
-    }
+
+		if (category in assetCategoryMapping) {
+			return assetCategoryMapping[category];
+		}
+
+		this.spinnerService.hide();
+		return '';
 	}
 
 	ngOnDestroy(): void {

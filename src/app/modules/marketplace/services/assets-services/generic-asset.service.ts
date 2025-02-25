@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { AssetService, ParamsReqAsset } from "@app/shared/interfaces/asset-service.interface";
 import { environment } from "@environments/environment";
-import { Observable, concat, forkJoin, map, reduce } from "rxjs";
+import { Observable, catchError, concat, forkJoin, map, of, reduce } from "rxjs";
 import { chunkArray, removeTrailingSlash } from '../../utils/common.utils'
 
 const { base, endpoints, schemas } = environment.api;
@@ -87,7 +87,18 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
         const chunks = chunkArray(ids, chunkSize);
         
         return concat(...chunks.map(chunk => 
-            forkJoin(chunk.map(id => this.getAsset(id)))
+            forkJoin(
+                chunk.map(id => 
+                    this.getAsset(id).pipe(
+                        catchError(error => {
+                            console.error(`Error fetching asset with ID ${id}:`, error);
+                            return of(null);
+                        })
+                    )
+                )
+            ).pipe(
+                map(results => results.filter(result => result !== null) as T[])
+            )
         )).pipe(
             reduce((acc: T[], curr: T[]) => [...acc, ...curr], [])
         );

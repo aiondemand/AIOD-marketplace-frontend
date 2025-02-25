@@ -183,12 +183,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         this.filtersService.setEnhancedSearch(isEnhanced);
     }
 
-    isSearchButtonDisabled() {
-        if (!this.searchFormGroup.get('search')?.value && this.filtersService.isEnhancedSerach) {
-            return true;
-        }
-
-        return false;
+    isEnhancedSearch() {
+        return !this.searchFormGroup.get('search')?.value && this.filtersService.isEnhancedSerach;
     }
 
     ngOnDestroy(): void {
