@@ -10,6 +10,7 @@ import { GeneralAssetService } from '../../services/assets-services/general-asse
 import { ElasticSearchService } from '../../services/elastic-search/elastic-search.service';
 import { SearchModel } from '@app/shared/models/search.model';
 import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
+import { hasQuotes } from '../../utils/common.utils';
 
 const MAX_ATTEMPTS = 15;
 
@@ -81,6 +82,11 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 			page: this.currentPage,
 			platforms: platformsSelected
 		}
+  
+		if (hasQuotes(query)) {
+			params.exact_match = true
+		}
+
 		const subscribe = this.searchService.getAssetBySearch(params, this.categorySelected).subscribe({
 
 			next: (resp: SearchModel) => {

@@ -9,3 +9,7 @@ export function chunkArray<R>(array: R[], size: number): R[][] {
 export function removeTrailingSlash(str: string): string {
   return str.endsWith('/') ? str.slice(0, -1) : str;
 }
+
+export function hasQuotes(query: string): boolean {
+  return query.startsWith('"') && query.endsWith('"') && query.length >= 2;
+} 
