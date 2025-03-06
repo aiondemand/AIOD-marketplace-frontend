@@ -20,6 +20,11 @@ export class ElasticSearchService {
       .set('page', paramsSearch.page)
       .set('limit', paramsSearch.limit)
       .set('search_query',paramsSearch.searchQuery);
+
+      if (paramsSearch.exact_match) {
+        params = params.set('exact_match', 'true');
+      }
+
       if(paramsSearch.platforms && paramsSearch.platforms.length > 0) {
         paramsSearch.platforms.forEach(platform => params = params.append('platforms', platform));
       }

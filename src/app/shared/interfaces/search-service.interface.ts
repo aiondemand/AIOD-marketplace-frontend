@@ -3,5 +3,6 @@ export interface ParamsReqSearchAsset {
     searchQuery: string, 
     searchFields?: string[], 
     limit: number,
-    page: number;
+    page: number,
+    exact_match?: boolean,
 }
