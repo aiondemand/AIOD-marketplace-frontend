@@ -20,4 +20,7 @@ export const environment = {
         redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
         showDebugInformation: true,
     },
+    enhancedApi: {
+        baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'],
+    }
 };

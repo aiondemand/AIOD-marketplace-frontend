@@ -127,5 +127,8 @@
   }
 
   .buttons-container {
-    margin-left: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
   }

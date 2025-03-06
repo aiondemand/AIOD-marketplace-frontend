@@ -16,5 +16,8 @@ export const environment = {
         clientId: '',
         redirectUri: '',
         showDebugInformation: true
+    },
+    enhancedApi: {
+        baseEnhanced: '',
     }
 };
