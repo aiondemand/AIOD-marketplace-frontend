@@ -16,6 +16,7 @@ const MAX_ATTEMPTS = 15;
 
 const assetCategoryMapping = {
 	[AssetCategory.AIModel]: 'ml_models',
+	[AssetCategory.ComputationalAsset]: '',
 	[AssetCategory.Dataset]: 'datasets',
 	[AssetCategory.Experiment]: 'experiments',
 	[AssetCategory['Educational resource']]: 'educational_resources',
@@ -279,13 +280,16 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
 	sanitizeAssetCategory(category: AssetCategory): string {
 		this.initSpinner();
+		let mappedCategory = '';
 
 		if (category in assetCategoryMapping) {
-			return assetCategoryMapping[category];
+			mappedCategory = assetCategoryMapping[category];
 		}
 
-		this.spinnerService.hide();
-		return '';
+		if (mappedCategory === '')
+			this.spinnerService.hide();
+		
+		return mappedCategory;
 	}
 
 	ngOnDestroy(): void {
