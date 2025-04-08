@@ -122,7 +122,7 @@ jobs:
       - name: Download built Docker image Dev
         uses: actions/download-artifact@v4
         with:
-          name: aiod_my_library_dev.tar
+          name: aiod_my_library_dev
           path: /tmp/aiod_my_library_dev.tar
       
       - name: Load image Dev
@@ -135,7 +135,7 @@ jobs:
       - name: Download built Docker image Prod
         uses: actions/download-artifact@v4
         with:
-          name: aiod_my_library_prod.tar
+          name: aiod_my_library_prod
           path: /tmp/aiod_my_library_prod.tar
 
       - name: Load image Prod
