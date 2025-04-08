@@ -85,13 +85,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: aiod_my_library_dev
-          path: /tmp/aiod_my_library_dev
+          path: /tmp/aiod_my_library_dev.tar
       
       - name: Store Image prod
         uses: actions/upload-artifact@v4
         with:
           name: aiod_my_library_prod
-          path: /tmp/aiod_my_library_prod
+          path: /tmp/aiod_my_library_prod.tar
 
   unit-test:
     runs-on: ubuntu-latest
@@ -122,7 +122,7 @@ jobs:
       - name: Download built Docker image Dev
         uses: actions/download-artifact@v4
         with:
-          name: aiod_my_library_dev
+          name: aiod_my_library_dev.tar
           path: /tmp
       
       - name: Load image Dev
@@ -135,7 +135,7 @@ jobs:
       - name: Download built Docker image Prod
         uses: actions/download-artifact@v4
         with:
-          name: aiod_my_library_prod
+          name: aiod_my_library_prod.tar
           path: /tmp
 
       - name: Load image Prod

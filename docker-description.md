@@ -1,6 +1,6 @@
 # AIOD MyLibrary FrontEnd
 
-Image for AI on Demand's (AIOD) metadata catalogue REST API, developed on [Github](https://github.com/aiondemand/AIOD-marketplace-frontend/).
+Image for AI on Demand's (AIOD) MyLibrary FrontEnd, developed on [Github](https://github.com/aiondemand/AIOD-marketplace-frontend/).
 This image requires a properly configured authentication (via Keycloak). Please refer to the documentation available in the "README"⁠ of the repository. ["AIOD-rest-api"](https://github.com/aiondemand/AIOD-marketplace-frontend) repository.
 
 The following tags are available:
