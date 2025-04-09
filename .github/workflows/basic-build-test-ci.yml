@@ -126,7 +126,7 @@ jobs:
           path: /tmp/aiod_my_library_dev.tar
       
       - name: Load image Dev
-        run: docker load --input aiod_my_library_dev.tar
+        run: docker load --input /tmp/aiod_my_library_dev.tar
 
       - name: Run tests inside Docker container
         run: |
@@ -139,7 +139,7 @@ jobs:
           path: /tmp/aiod_my_library_prod.tar
 
       - name: Load image Prod
-        run: docker load --input aiod_my_library_prod.tar
+        run: docker load --input /tmp/aiod_my_library_prod.tar
 
       - name: Run tests inside Docker container
         run: |
