@@ -123,7 +123,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: aiod_my_library_dev
-          path: /tmp/aiod_my_library_dev.tar
+          path: /tmp
       
       - name: Load image Dev
         run: docker load --input /tmp/aiod_my_library_dev.tar
@@ -136,7 +136,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: aiod_my_library_prod
-          path: /tmp/aiod_my_library_prod.tar
+          path: /tmp
 
       - name: Load image Prod
         run: docker load --input /tmp/aiod_my_library_prod.tar
