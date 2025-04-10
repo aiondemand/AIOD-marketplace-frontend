@@ -1,6 +1,6 @@
 name: CI/CD MyLibrary Marketplace Frontend Unit Testing
 
-# This workflow will run unit test using node
+# This workflow will run unit tests using node
 
 on:
   pull_request:
