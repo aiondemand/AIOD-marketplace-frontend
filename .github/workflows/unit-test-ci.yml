@@ -1,0 +1,39 @@
+name: CI/CD MyLibrary Marketplace Frontend build and test
+
+# This workflow will build docker image and run tests inside the container.
+# This workflow is only executed if there is pull request with change in pyproject.toml dependencies,
+# or in Dockerfile, or in docker workflow.
+
+on:
+  pull_request:
+    branches:
+      - main # executed on every pull request to main
+    paths:
+      - 'src/**'
+  push:
+    branches:
+      - main
+
+  release:
+    types: [published]
+
+
+jobs:
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 10
+
+      - name: Install dependenes
+        run: npm install
+
+      - name: Run test
+        run: npm test
+  
