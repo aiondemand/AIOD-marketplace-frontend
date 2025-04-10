@@ -1,8 +1,8 @@
-name: CI/CD MyLibrary Marketplace Frontend build and test
+name: CI/CD MyLibrary Marketplace Frontend build and test Docker
 
 # This workflow will build docker image and run tests inside the container.
-# This workflow is only executed if there is pull request with change in pyproject.toml dependencies,
-# or in Dockerfile, or in docker workflow.
+# This workflow is only executed if there is pull request with changes in the packages,
+# or in Dockerfile, or in workflow folder.
 
 on:
   pull_request:
