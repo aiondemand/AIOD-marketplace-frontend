@@ -1,29 +1,47 @@
-<mat-card class="asset-card" routerLink="{{ asset.identifier }}" [queryParams]="{category: categoryKey}">
-    <mat-card-header class="asset-card-header">
-        <mat-card-title>
-            <mat-icon
-                matTooltip="{{asset.category}}"
-                color="primary"
-                >{{assetIcon}}</mat-icon
-            >
-            <span>{{ asset.name }}</span>
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <mat-divider></mat-divider>
 
-        <div class="asset-card-content">
-            <markdown>
-                {{ asset.description }}
-            </markdown>
+<!--  card-horizontal 
+product-list-developer-card  
+-->
+<div
+  class="card-news card-numbers card-position asset-card "
+  routerLink="{{ asset.identifier }}"
+  [queryParams]="{ category: categoryKey }"
+>
+  <div class="card-news-container">
+    <div class="card-news-content mt-0">
+      <div>
+        <h3>{{ asset.name }}</h3>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex">
+            <div class="btn-icon">
+              <span>Type</span>
+              <span
+                ><strong>{{ asset.category }}</strong></span
+              >
+            </div>
+
+            <div class="btn-icon">
+              <span>Platform 🤗</span>
+              <span
+                ><strong>{{ asset.platform }}</strong></span
+              >
+            </div>
+
+            <div class="btn-icon">
+              <i class="icon-clock"></i>
+              <span>{{ asset.date_published }}</span>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="btn btn-circle btn-circle--blue ml-2">
+              <i class="icon-resources-saved"></i>
+            </div>
+            <a href="#" class="btn btn-circle btn-circle--yellow ml-2">
+              <i class="icon-arrow-back"></i>
+            </a>
+          </div>
         </div>
-    </mat-card-content>
-    <mat-card-actions align="start">
-        <mat-card-subtitle class="mt-2 mb-2 keywords-container">
-            <mat-chip-listbox aria-label="Keywords">
-                <mat-chip [style.background]="categoryColor">{{ asset.category | lowercase}}  </mat-chip>
-                <mat-chip *ngIf="asset.platform">{{ asset.platform }} </mat-chip>
-            </mat-chip-listbox>
-        </mat-card-subtitle>
-    </mat-card-actions>
-</mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,221 @@
+.grid-stylesheet {
+	display: grid;
+	grid: repeat(5, fit-content(300px)) / repeat(4, 1fr);
+	grid-template-areas:
+		"colors typography typography typography"
+		"colors buttons buttons links"
+		"inputs inputs inputs inputs"
+		"badges badges alerts alerts"
+		"badges badges favicons favicons"
+		"grid grid grid grid";
+	border: 1px solid $color-default3;
+
+	& > section:not(.typography) {
+		padding: 30px;
+	}
+
+	& > section {
+		position: relative;
+
+		> h6 {
+			font-weight: bold;
+			color: $color-primary;
+			background: white;
+			position: absolute;
+			top: -18px;
+			left: 20px;
+			padding: 0 10px;
+		}
+		h6.subheader {
+			color: #999;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			width: 100%;
+		}
+	}
+
+	.colors {
+		grid-area: colors;
+		border-right: 1px solid $color-default3;
+	}
+	
+	.typography {
+		grid-area: typography;
+		border-bottom: 1px solid $color-default3;
+	}
+
+	.font-family {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.font-family > div {
+		flex: 1 1 30%;
+		padding: 30px 30px 0;
+		min-width: 10em;
+	}
+
+	.font-family-bold > * {
+		font-weight: 900;
+	}
+	  
+	.font-family-medium > * {
+		font-weight: 500;
+	}
+	  
+	.font-family-light > * {
+		font-weight: 300;
+	}
+
+	.font-example__headline {
+		font-weight: 900;
+	}
+	
+	.buttons-wrapper {
+		grid-area: buttons;
+		border-right: 1px solid $color-default3;
+	}
+	
+	.links {
+		grid-area: links;
+	}
+	
+	.inputs-selects {
+		grid-area: inputs;
+		display: grid;
+		border-top: 1px solid $color-default3;
+		border-bottom: 1px solid $color-default3;
+	}
+
+	.badges {
+		grid-area: badges;
+		border-right: 1px solid $color-default3;
+	}
+	
+	.alerts {
+		grid-area: alerts;
+	}
+	
+	.tooltips {
+		grid-area: tooltips;
+		border-right: 1px solid $color-default3;
+	}
+
+	.favicons {
+		grid-area: favicons;
+		border-top: 1px solid $color-default3;
+	}
+
+	.grid-layout {
+		grid-area: grid;
+		border-top: 1px solid $color-default3;
+	}
+
+	.font-family {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		> div {
+			flex: 1 1 30%;
+			padding: 30px 30px 0;
+			min-width: 10em;
+		}
+	}
+
+	.font-example {
+		display: flex;
+		flex-wrap: wrap;
+		> div {
+			flex: 1 1 45%;
+			padding: 30px;
+			min-width: 16em;
+		}
+		p {
+			margin-bottom: 15px;
+		}
+	}
+
+	/*colors*/
+	.palette {
+		display: grid;
+		grid: 80px 45px min-content/repeat(5, minmax(50px, 1fr));
+		margin-bottom: 1em;
+	}
+	.palette__main {
+		grid-column: span 5;
+	}
+	.palette h5 {
+		grid-column: span 5;
+		text-align: left;
+		padding: 10px 0;
+	}
+	.palette.main div:nth-child(1) {
+		background: $color-primary;
+	}
+	.palette.main div:nth-child(2) {
+		background: $color-primary2;
+	}
+	.palette.main div:nth-child(3) {
+		background: $color-primary3;
+	}
+	.palette.main div:nth-child(4) {
+		background: $color-primary4;
+	}
+	.palette.main div:nth-child(5) {
+		background: $color-primary5;
+	}
+	.palette.main div:nth-child(6) {
+		background: $color-primary6;
+	}
+	.palette.secondary div:nth-child(1) {
+		background: $color-accent;
+	}
+	.palette.secondary div:nth-child(2) {
+		background: $color-accent2;
+	}
+	.palette.secondary div:nth-child(3) {
+		background: $color-accent3;
+	}
+	.palette.secondary div:nth-child(4) {
+		background: $color-accent4;
+	}
+	.palette.secondary div:nth-child(5) {
+		background: $color-accent5;
+	}
+	.palette.secondary div:nth-child(6) {
+		background: $color-accent6;
+	}
+	.palette.neutrals {
+		grid-template-rows: repeat(2, 50px) min-content;
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.palette.neutrals div:nth-child(1) {
+		background: $color-default;
+	}
+	.palette.neutrals div:nth-child(2) {
+		background: $color-default2;
+	}
+	.palette.neutrals div:nth-child(3) {
+		background: $color-default3;
+	}
+	.palette.neutrals div:nth-child(4) {
+		background: $color-default4;
+	}
+	.palette.neutrals div:nth-child(5) {
+		background: $color-default5;
+		grid-row: 2;
+	}
+	.palette.neutrals div:nth-child(6) {
+		background: $color-default6;
+		grid-row: 2;
+	}
+	.palette.neutrals div:nth-child(7) {
+		background: $color-default7;
+		grid-row: 2;
+	}
+	.palette.neutrals div:nth-child(8) {
+		background: $color-default8;
+		grid-row: 2;
+	}
+}

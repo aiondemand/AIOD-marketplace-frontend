@@ -19,10 +19,6 @@ export class AssetCardComponent implements OnInit{
   ngOnInit(): void {
     if(this.asset) {
       this.categoryKey = getKeyCategoryByValue(AssetCategory, this.asset.category)
-      if (this.categoryKey) {
-        this.categoryColor = this.appConfig.assets[this.categoryKey.toLocaleLowerCase()]?.color;
-        this.assetIcon = this.appConfig.assets[this.categoryKey.toLocaleLowerCase()]?.icon;
-      }
     }
   }
 }

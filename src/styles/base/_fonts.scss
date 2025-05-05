@@ -1,0 +1,17 @@
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	color: $font-heading-color;
+	font-family: $font-variant;
+}
+
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("../fonts/Montserrat-Regular.ttf");
+	font-weight: 400;
+ }

@@ -1,17 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
 
-@use 'src/theme/partials/spaces';
+
+// ===== OVERIDE VARIABLES BOOTSTRAP ===== /
+
+
+@import "src/styles/main";
+
+//@import 'src/theme/partials/spaces';
 
 html,
 body {
     height: 100%;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
-    color: var(--primary-text);
-}
 
 .grid-2-columns {
     display: grid;
@@ -48,11 +48,11 @@ body {
 }
 
 .mat-toolbar {
-    background-color: var(--white);
+    background-color: var($color-primary);
 }
 
 .mat-mdc-card {
-    border: 1px solid var(--border-gray) !important;
+    border: 1px solid var($color-accent) !important;
 }
 
 @mixin delete-button-style {
@@ -68,7 +68,7 @@ body {
     }
     
     .delete-button:hover {
-        background-color: var(--accent);
+        background-color: var($color-accent);
         color: whitesmoke;
     }
     

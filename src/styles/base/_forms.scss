@@ -1,0 +1,153 @@
+input[type="text"]:disabled,
+input[type="number"]:disabled,
+input[type="email"]:disabled,
+input[type="phone"]:disabled,
+input[type="radio"]:disabled,
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.validate-form {
+	position: relative;
+}
+
+.form-group {
+	position: relative;
+	margin-bottom: $formGroupMarginBottom;
+
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		clear: both;
+	}
+   &--search{
+      button{
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         right: 0;
+         background: transparent;
+         border: none;
+         color: #FFED00;
+      }
+   }
+}
+
+label {
+	display: inline-block;
+	max-width: 100%;
+   color: $white;
+   font-weight: 400;
+   font-size: 14px;
+	@if $formGroupLabelMarginBottom != 0 {
+		margin-bottom: $formGroupLabelMarginBottom;
+	}
+}
+
+label.error {
+	margin: $formErrorMarginTop 0 0 0;
+	color: $color-danger;
+	font-size: $formErrorFontSize;
+
+	& + label {
+		margin-bottom: $inputMarginBottom;
+	}
+}
+
+input[type="checkbox"].valid,
+input[type="radio"].valid {
+	& + label.error {
+		& + label {
+			margin-bottom: 0;
+		}
+	}
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	
+	& + label {
+		&.error {
+			position: absolute;
+			bottom: 0;
+			left: $inputWidth + $inputMarginRight;
+			margin: 0;
+			font-size: $formErrorFontSize;
+		}
+	}
+}
+
+
+.open-rgpd {
+	
+	&.loading {
+		position: relative;
+		color: transparent !important;
+		
+		&:after {
+			content: '';
+			display: block;
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 50%;
+			border: 2px solid transparent;
+			border-top-color: white;
+			border-right-color: white;
+			animation: linear centeredRotation 0.8s infinite;
+		}
+	}
+}
+
+
+// RGPD Box
+
+.rgpd {
+	display: none;
+	max-width: 300px;
+	padding: 30px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	box-shadow: 0 5px 20px rgba($color-default, 0.7);
+	border-radius: 15px;
+	background-color: white;
+	color: $color-default;
+	font-size: 12px;
+	line-height: 20px;
+
+	&.rgpd--open {
+		display: block;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		clear: both;
+	}
+
+	button {
+		min-width: 0;
+		width: calc(50% - $grid-gutter-width);
+		float: left;
+
+		&:last-child {
+			float: right;
+		}
+	}
+}
+
+.rgpd__title {
+	margin-top: 0;
+	color: $color-primary;
+	font-size: 16px;
+	font-weight: 900;
+	line-height: 20px;
+}
+
+

@@ -31,7 +31,9 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/theme/exports"
+                "src/theme/exports",
+                "src/styles"
+                
               ]
             },
             "scripts": []
@@ -41,13 +43,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "5000kb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "400kb"
                 }
               ],
               "outputHashing": "all",
@@ -59,6 +61,7 @@
               ],
               "styles": [
                 "src/theme/ai4eosc/variables.scss",
+                "src/theme/css/main.scss",
                 "src/styles.scss"
               ],
               "assets": [

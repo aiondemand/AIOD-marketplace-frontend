@@ -1,24 +1,111 @@
-<mat-toolbar class="mb-3 marketplace-toolbar">
-    <span>Assets Catalogue <mat-icon>library_books</mat-icon></span>
-</mat-toolbar>
+
+ <div class="row">  <div *ngIf="isFiltersVisible">
+    <div class="filters" *ngIf="!isFilterLibraryVisible">
+        <mat-form-field>
+            <mat-label>{{'SIDENAV.SELECT-PLATFORM' | translate}}</mat-label>
+            <mat-select [(value)]="selectedPlatform" (selectionChange)="onSelectPlatformChange()">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let platform of platforms" [value]="platform.name">
+                    {{platform.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="filters">
+        <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" 
+            (change)="onRadioTypeChange()">
+            <mat-radio-button *ngIf="isFilterLibraryVisible" class="radio-button" [value]="'any'">{{
+                'MY-LIBRARY.SIDENAV-FILTER' | translate }}</mat-radio-button>
+            <mat-radio-button class="radio-button" *ngFor="let category of assetCategories" [value]="category">
+                {{category}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div class="filters" *ngIf="!isFilterLibraryVisible">
+        <form [formGroup]="searchFormGroup" class="example-form">
+            <mat-form-field class="">
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-label>Search assets</mat-label>
+                <input matInput type="search" formControlName="search" placeholder="Enter text to search" (input)="onInputChange()" />
+            </mat-form-field>
+            <div class="buttons-container">
+                <mat-checkbox formControlName="enhancedSearch" class="search-type" (change)="onEnhancedSearchChange($event)">
+                    Enhanced Search
+                </mat-checkbox>
+                <button mat-icon-button (click)="searchAssets()" style="z-index: 99" [disabled]="isEnhancedSearchF()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div></div>
+
+
+
+
+
+<div class="row flex-row-reverse ">
+
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="viewModeCheckbox">
+          <input type="checkbox" id="viewModeCheckbox" />
+          <div class="slider round">
+            <div class="theme-switch-icons">
+              <!-- Ícono de cuadrícula -->
+              <svg
+                class="grid-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="3" y="3" width="5" height="5" fill="#fff" />
+                <rect x="12" y="3" width="5" height="5" fill="#fff" />
+                <rect x="3" y="12" width="5" height="5" fill="#fff" />
+                <rect x="12" y="12" width="5" height="5" fill="#fff" />
+              </svg>
+      
+              <!-- Ícono de lista -->
+              <svg
+                class="list-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="3" y="4" width="14" height="2" fill="#fff" />
+                <rect x="3" y="9" width="14" height="2" fill="#fff" />
+                <rect x="3" y="14" width="14" height="2" fill="#fff" />
+              </svg>
+            </div>
+          </div>
+        </label>
+      </div>
+
+</div>
+
 
 <div *ngIf="isLoading; else assetList" class="spinner">
-    <mat-progress-spinner color="primary" mode="indeterminate">
-    </mat-progress-spinner>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
 </div>
-<mat-paginator (page)="handlePageEvent($event)" [length]="assetsSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page" [disabled]="isPaginationDisabled()">
+<mat-paginator
+  class="paginator"
+  (page)="handlePageEvent($event)"
+  [length]="assetsSize"
+  [pageSizeOptions]="pageSizeOptions"
+  aria-label="Select page"
+  [disabled]="isPaginationDisabled()"
+>
 </mat-paginator>
 
 <ng-template #assetList>
-    <div class="asset-cards-container">
-        <div
-            fxFlex
-            *ngFor="
-                let asset of assets 
-            "
-            class="m-2"
-        >
-            <app-asset-card [asset]="asset"></app-asset-card>
-        </div>
+  <div class="asset-cards-container">
+    <div fxFlex="1 1 auto" *ngFor="let asset of assets" class="m-2">
+      <app-asset-card [asset]="asset"></app-asset-card>
     </div>
+  </div>
 </ng-template>
