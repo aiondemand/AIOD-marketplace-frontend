@@ -10,17 +10,6 @@
   >
     
 
-    <div class="dashboard-logo-container">
-      <button
-        *ngIf="mobileQuery.matches"
-        mat-icon-button
-        (click)="toggleSidenav()"
-        style="z-index: 99"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-
     <nav id="sidebarMenu" class="">
       <mat-nav-list>
         <ng-container *ngFor="let link of mainLinks">

@@ -1,7 +1,7 @@
-<div
-  class="card-news card-numbers card-position card-horizontal pt-3 pb-3"
-  *ngIf="isFiltersVisible"
->
+<div class="pt-3 pb-3"></div>
+<p class="pt-3">> Resources > Catalogue</p>
+
+<div class="card-news card-numbers card-position card-horizontal pt-3 pb-3">
   <div class="card-news-container">
     <div
       class="card-news-content mt-0 d-flex align-items-center justify-content-between"
@@ -18,8 +18,12 @@
   </div>
 </div>
 
-<div class="featured-products-item pt-3 pb-3 align-items-center justify-content-between" >
-  <div class="featured-products-item-title">Explore our AI Catalogue</div>
+<div
+  class="featured-products-item pt-3 pb-3 align-items-center justify-content-between"
+>
+  <div class="featured-products-item-title">
+    Explore our extensive AI Catalogue
+  </div>
 
   <div class="search-row d-flex">
     <form id="customForm" class="search-input">
@@ -28,7 +32,7 @@
         <input
           type="text"
           name="name"
-          placeholder="Search..."
+          placeholder="Find AI resources in your Language"
           id="name"
           class="form-control"
           required=""
@@ -61,8 +65,26 @@
     </div>
   </div>
 
-  <div class="filters-row d-flex">
-    <mat-form-field class="platform-select">
+  <div class="filters-row d-flex align-items-center pb-3">
+    >
+
+    <ng-template *ngFor="let platform of platforms; index as i">
+      <a id="platform{{ i }}" class="btn btn-secondary m-2">
+        {{ platform.name }} <i class="icon-undefined"></i
+      ></a>
+    </ng-template>
+  </div>
+
+  <div class="filters-row d-flex pb-3">
+    <div *ngFor="let category of assetCategories; index as i">
+      <a id="category{{ i }}" class="btn btn-secondary m-2"> {{ category }}</a>
+    </div>
+  </div>
+</div>
+
+<div class="row pl-3 pt-3">
+  <div class="filters" *ngIf="isFilterLibraryVisible">
+    <mat-form-field>
       <mat-label>{{ "SIDENAV.SELECT-PLATFORM" | translate }}</mat-label>
       <mat-select
         [(value)]="selectedPlatform"
@@ -74,120 +96,98 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
   </div>
-</div>
-
-<div class="row pl-3 pt-3">
-  <div *ngIf="isFiltersVisible">
-    <div class="filters" *ngIf="!isFilterLibraryVisible">
-      <mat-form-field>
-        <mat-label>{{ "SIDENAV.SELECT-PLATFORM" | translate }}</mat-label>
-        <mat-select
-          [(value)]="selectedPlatform"
-          (selectionChange)="onSelectPlatformChange()"
-        >
-          <mat-option>--</mat-option>
-          <mat-option
-            *ngFor="let platform of platforms"
-            [value]="platform.name"
-          >
-            {{ platform.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="filters">
-      <mat-radio-group
-        aria-labelledby="radio-group-label"
-        class="radio-group"
-        (change)="onRadioTypeChange()"
+  <div class="filters" *ngIf="isFilterLibraryVisible">
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      class="radio-group"
+      (change)="onRadioTypeChange()"
+    >
+      <mat-radio-button class="radio-button" [value]="'any'">{{
+        "MY-LIBRARY.SIDENAV-FILTER" | translate
+      }}</mat-radio-button>
+      <mat-radio-button
+        class="radio-button"
+        *ngFor="let category of assetCategories"
+        [value]="category"
       >
-        <mat-radio-button
-          *ngIf="isFilterLibraryVisible"
-          class="radio-button"
-          [value]="'any'"
-          >{{ "MY-LIBRARY.SIDENAV-FILTER" | translate }}</mat-radio-button
-        >
-        <mat-radio-button
-          class="radio-button"
-          *ngFor="let category of assetCategories"
-          [value]="category"
-        >
-          {{ category }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
+        {{ category }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-    <div class="filters" *ngIf="!isFilterLibraryVisible">
-      <form [formGroup]="searchFormGroup" class="example-form">
-        <mat-form-field class="">
-          <mat-icon matPrefix>search</mat-icon>
-          <mat-label>Search assets</mat-label>
-          <input
-            matInput
-            type="search"
-            formControlName="search"
-            placeholder="Enter text to search"
-            (input)="onInputChange()"
-          />
-        </mat-form-field>
-        <div class="buttons-container">
-          <mat-checkbox
-            formControlName="enhancedSearch"
-            class="search-type"
-            (change)="onEnhancedSearchChange($event)"
-          >
-            Enhanced Search
-          </mat-checkbox>
-          <button
-            mat-icon-button
-            (click)="searchAssets()"
-            style="z-index: 99"
-            [disabled]="isEnhancedSearchF()"
-          >
-            <mat-icon>search</mat-icon>
-          </button>
-        </div>
-      </form>
-    </div>
+  <div class="filters" *ngIf="isFilterLibraryVisible">
+    <form [formGroup]="searchFormGroup" class="example-form">
+      <mat-form-field class="">
+        <mat-icon matPrefix>search</mat-icon>
+        <mat-label>Search assets</mat-label>
+        <input
+          matInput
+          type="search"
+          formControlName="search"
+          placeholder="Enter text to search"
+          (input)="onInputChange()"
+        />
+      </mat-form-field>
+      <div class="buttons-container">
+        <mat-checkbox
+          formControlName="enhancedSearch"
+          class="search-type"
+          (change)="onEnhancedSearchChange($event)"
+        >
+          Enhanced Search
+        </mat-checkbox>
+        <button
+          mat-icon-button
+          (click)="searchAssets()"
+          style="z-index: 99"
+          [disabled]="isEnhancedSearchF()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </form>
   </div>
 </div>
 
-<div class="row flex-row-reverse pr-3">
+<div class="row flex-row-reverse pr-3 pt-3 pb-3">
   <div class="theme-switch-wrapper">
     <label class="theme-switch" for="viewModeCheckbox">
       <input type="checkbox" id="viewModeCheckbox" />
       <div class="slider round">
         <div class="theme-switch-icons">
           <!-- multiple items -->
-          <svg
-            class="grid-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect x="3" y="3" width="5" height="5" fill="#fff" />
-            <rect x="12" y="3" width="5" height="5" fill="#fff" />
-            <rect x="3" y="12" width="5" height="5" fill="#fff" />
-            <rect x="12" y="12" width="5" height="5" fill="#fff" />
-          </svg>
+          <div (click)="displayMode(1)" class="active">
+            <svg
+              class="grid-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="3" y="3" width="5" height="5" fill="#fff" />
+              <rect x="12" y="3" width="5" height="5" fill="#fff" />
+              <rect x="3" y="12" width="5" height="5" fill="#fff" />
+              <rect x="12" y="12" width="5" height="5" fill="#fff" />
+            </svg>
+          </div>
 
           <!--  list items -->
-          <svg
-            class="list-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect x="3" y="4" width="14" height="2" fill="#fff" />
-            <rect x="3" y="9" width="14" height="2" fill="#fff" />
-            <rect x="3" y="14" width="14" height="2" fill="#fff" />
-          </svg>
+          <div (click)="displayMode(2)">
+            <svg
+              class="list-icon "
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="3" y="4" width="14" height="2" fill="#fff" />
+              <rect x="3" y="9" width="14" height="2" fill="#fff" />
+              <rect x="3" y="14" width="14" height="2" fill="#fff" />
+            </svg>
+          </div>
         </div>
       </div>
     </label>
@@ -209,9 +209,9 @@
 </mat-paginator>
 
 <ng-template #assetList>
-  <div class="asset-cards-container">
-    <div  *ngFor="let asset of assets" class="m-2  col-lg-12 ">
-      <app-asset-card class=""  [asset]="asset"></app-asset-card>
+  <div class="asset-cards-container row">
+    <div id='grid-layout' *ngFor="let asset of assets"  [ngClass]="displayModeValue === 1 ? 'col-lg-4 col-md-6 col-sm-12' : 'col-lg-12 col-md-12 col-sm-12' "  class="col-lg-4 col-md-6 col-sm-12">
+      <app-asset-card class="" [asset]="asset"></app-asset-card>
     </div>
   </div>
 </ng-template>

@@ -25,12 +25,22 @@
     width: 100%;
 }
 
+.featured-products-item-title{
+    font-size: 50px;
+    margin-bottom: 55px;
+    color:(#FFFFFF)
+    
+}
+
 ::ng-deep {
   .mat-mdc-select-value-text {
     color: #ffffffb2; /* Add your styles here */
   }
   .mat-mdc-paginator-icon {
     color: #ffed00;
+  }
+  .mdc-checkbox__background{
+    border-color: #ffed00 !important;
   }
 
 

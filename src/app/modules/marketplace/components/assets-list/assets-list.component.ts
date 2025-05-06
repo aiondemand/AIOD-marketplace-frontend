@@ -50,6 +50,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 	public pageSizeOptions = [15, 20, 50, 100];
 	public currentPage = 1;
 
+	protected displayModeValue: number = 1; //normally on several labels per line
+
 	destroy$ = new Subject<any>();
   
 
@@ -99,7 +101,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 		this.initializeForm();
 		this.assetCategories = Object.values(AssetCategory);
         this.getPlatforms();
-        this.toggleFilterPanel();
         this.subscription?.add(this.subscriptionAssetCategory());
 
 
@@ -903,6 +904,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 		this.spinnerService.hide();
 		return '';
 	}
+
+	 protected displayMode(mode:number):void{
+      
+		this.displayModeValue=mode;
+    
+	 }
 
 	ngOnDestroy(): void {
 		this.spinnerService.hide();
