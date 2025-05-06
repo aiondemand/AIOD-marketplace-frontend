@@ -1,34 +1,37 @@
-.asset-cards-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-}
+
 
 .marketplace-toolbar {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
-.paginator{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 8px;
-    /* flex-wrap: wrap-reverse; */
-    width: 100%;
-    font-size: inherit;
-    color: #FFFFFFB2;
-    background: inherit;
-    font-family: inherit;
-    font-size: inherit;
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  color: #ffffffb2;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
 }
-   
+
+.search-row{
+    width: 70%;
+}
+.search-input{
+    width: 100%;
+}
 
 ::ng-deep {
-     .mat-mdc-select-value-text {
-        color: #FFFFFFB2;     /* Add your styles here */
-    }
-    .mat-mdc-paginator-icon {
-        color: #FFED00;
-        
-    }
+  .mat-mdc-select-value-text {
+    color: #ffffffb2; /* Add your styles here */
+  }
+  .mat-mdc-paginator-icon {
+    color: #ffed00;
+  }
+
+
 }

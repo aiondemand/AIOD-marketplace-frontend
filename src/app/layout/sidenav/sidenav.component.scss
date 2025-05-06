@@ -2,14 +2,15 @@
 
 @import "../../styles/variables";
 
-.container {
+.mat-primary {
 
     top: 0px;
     bottom: 0px;
     left: 0;
     right: 0;
-    max-width: 100%;
+    overflow: hidden;
     background-color: transparent;
+
 }
 
 .sidenav {
@@ -20,6 +21,7 @@
     min-height: 655px;
     background: transparent;
     padding-top: 1.5em;
+    border-right: 1px solid #1B2336;
 }
 
 ::ng-deep .sidenav .mat-drawer-inner-container {
