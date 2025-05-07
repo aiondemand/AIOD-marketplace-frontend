@@ -46,7 +46,7 @@ export class FiltersStateService {
         this.query.next(query);
     }
 
-    public setAssetCategorySelected(category: AssetCategory): void {
+    public setAssetCategorySelected(category: AssetCategory  ): void {
         this.assetCategory.next(category);
     }
 
