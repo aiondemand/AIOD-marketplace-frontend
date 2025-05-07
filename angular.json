@@ -60,8 +60,8 @@
                 }
               ],
               "styles": [
-                "src/theme/ai4eosc/variables.scss",
-                "src/theme/css/main.scss",
+                "src/styles/_variables.scss",
+                "src/styles/main.scss",
                 "src/styles.scss"
               ],
               "assets": [

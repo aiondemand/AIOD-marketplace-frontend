@@ -16,12 +16,12 @@ const routes: Routes = [
                 redirectTo: 'marketplace',
                 pathMatch: 'full',
             },
-          //  {
-                // This is the redirect from the keycloak login
-              //  path: environment.keycloakConfig.redirectUri + 'marketplace',
-                //redirectTo: 'marketplace',
-               // pathMatch: 'full',
-       //  },
+           {
+               //  This is the redirect from the keycloak login
+                path: environment.keycloakConfig.redirectUri + 'marketplace',
+                redirectTo: 'marketplace',
+                pathMatch: 'full',
+         },
             {
                 path: 'marketplace',
                 loadChildren: () =>
