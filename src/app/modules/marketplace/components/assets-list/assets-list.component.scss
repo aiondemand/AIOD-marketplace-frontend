@@ -1,10 +1,8 @@
-
-
 .marketplace-toolbar {
   justify-content: space-between;
 }
 
-.viewer{
+.viewer {
   width: 100%;
 }
 
@@ -22,18 +20,22 @@
   font-size: inherit;
 }
 
-.search-row{
-    width: 70%;
+.search-row {
+  width: 70%;
 }
-.search-input{
-    width: 100%;
+.search-input {
+  width: 100%;
+  position: relative;
+  .btn {
+  position: absolute;
+  top: 2px;
+  right: -10px;}
 }
 
-.featured-products-item-title{
-    font-size: 50px;
-    margin-bottom: 55px;
-    color:(#FFFFFF)
-    
+.featured-products-item-title {
+  font-size: 50px;
+  margin-bottom: 55px;
+  color: (#ffffff);
 }
 
 ::ng-deep {
@@ -43,9 +45,7 @@
   .mat-mdc-paginator-icon {
     color: #ffed00;
   }
-  .mdc-checkbox__background{
+  .mdc-checkbox__background {
     border-color: #ffed00 !important;
   }
-
-
 }

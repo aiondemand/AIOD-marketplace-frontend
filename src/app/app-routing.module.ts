@@ -16,10 +16,10 @@ const routes: Routes = [
                 redirectTo: 'resources',
                 pathMatch: 'full',
             },
-           {
-                //This is the redirect from the keycloak login
-               path: environment.keycloakConfig.redirectUri + 'resources',
-               redirectTo: 'resources',
+ {
+        //This is the redirect from the keycloak login
+           path: environment.keycloakConfig.redirectUri + 'resources',
+             redirectTo: 'resources',
                pathMatch: 'full',
         },
             {

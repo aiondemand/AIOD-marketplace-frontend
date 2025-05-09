@@ -27,27 +27,26 @@
   </div>
 
   <div class="search-row d-flex">
-    <form id="customForm" class="search-input">
-      <input type="hidden" name="action" value="" />
+    <form id="customForm" [formGroup]="searchFormGroup" class="search-input">
+
       <div class="form-group">
         <input
           type="text"
-          name="name"
+          formControlName="search"
           placeholder="Find AI resources in your Language"
           id="name"
           class="form-control"
-          required=""
           (input)="onInputChange()"
         />
       </div>
-    </form>
-
+   
+    
     <a
       (click)="searchAssets()"
       class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-none d-lg-flex"
       ><i class="icon-lupa"></i
     ></a>
-
+  </form>
     <div class="buttons-container">
       <mat-checkbox
         formControlName="enhancedSearch"
@@ -70,6 +69,14 @@
   <!-- Filters  -->
   <div class="filters-row d-flex align-items-center pb-3">
     >
+    <a
+    id="allPlat"
+    class="btn btn-success btn-success--blue m-2"
+    (click)="selectAllPlat()"
+    title="Click to select all platforms"
+  >
+    All
+  </a>
 
     <div *ngFor="let platform of platforms; index as i">
       <a id="{{platform.name}}" class="btn  m-1"
@@ -79,17 +86,18 @@
       >
         {{ platform.name }} </a>
     </div>
-    <a
-    id="allPlat"
-    class="btn btn-success btn-success--blue m-2"
-    (click)="selectAllPlat()"
-    title="Click to select all platforms"
-  >
-    All
-  </a>
+
   </div>
 
   <div class="filters-row d-flex pb-3" >
+    <a
+    id="allCat"
+    class="btn btn-success btn-success--blue m-2"
+    (click)="selectAllCat()"
+    title="Click to select all categories, "
+  >
+    All
+  </a>
     <div *ngFor="let category of assetCategories; index as i">
       <a
         id="{{category}}"
@@ -101,55 +109,17 @@
         {{ category }} </a
       >
     </div>
-    <a
-      id="allCat"
-      class="btn btn-success btn-success--blue m-2"
-      (click)="selectAllCat()"
-      title="Click to select all categories, "
-    >
-      All
-    </a>
+  
   </div>
 
+
+
+
   <div class="row pl-3 pt-3">
-    <div class="filters" *ngIf="isFilterLibraryVisible">
-      <mat-form-field>
-        <mat-label>{{ "SIDENAV.SELECT-PLATFORM" | translate }}</mat-label>
-        <mat-select
-          [(value)]="selectedPlatform"
-          (selectionChange)="onSelectPlatformChange()"
-        >
-          <mat-option>--</mat-option>
-          <mat-option
-            *ngFor="let platform of platforms"
-            [value]="platform.name"
-          >
-            {{ platform.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="filters" *ngIf="isFilterLibraryVisible">
-      <mat-radio-group
-        aria-labelledby="radio-group-label"
-        class="radio-group"
-        (change)="onCategoryTypeChange()"
-      >
-        <mat-radio-button class="radio-button" [value]="'any'">{{
-          "MY-LIBRARY.SIDENAV-FILTER" | translate
-        }}</mat-radio-button>
-        <mat-radio-button
-          class="radio-button"
-          *ngFor="let category of assetCategories"
-          [value]="category"
-        >
-          {{ category }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
+
 
     <div class="filters" *ngIf="isFilterLibraryVisible">
-      <form [formGroup]="searchFormGroup" class="example-form">
+      <form  class="example-form">
         <mat-form-field class="">
           <mat-icon matPrefix>search</mat-icon>
           <mat-label>Search assets</mat-label>

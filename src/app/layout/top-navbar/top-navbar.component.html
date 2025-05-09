@@ -33,7 +33,7 @@
            
 
                   
-                   <div *ngIf="!isLoggedIn()" id="header-items">
+                   <div *ngIf="!isLoggedIn()" >
                       <ul   class="main-menu">   
                          <li class="menu">
                             <div class="menu-link-mobile">
@@ -84,39 +84,37 @@
                    
                    </div>
 
-                  <div  *ngIf="!isLoggedIn() ; else logged" class="d-flex flex-lg-row menu-right">
-                      
-
-                     
+                  <div  *ngIf="!isLoggedIn() ; else logged" class="d-flex flex-lg-row menu-right">     
                       <a href="" class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"><i class="icon-lupa"></i></a>
                       <a href="https://aiod.eu/tools/getting-started" class="btn btn-default btn-user d-lg-flex">Get Started</a>
                      <a class="btn btn-success btn-success--white mr-5  d-lg-flex" (click)="login()">Log In</a>
-                    
-                  
                      <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
                     
                    </div>
 
-                   <ng-template #logged class="d-flex flex-lg-row menu-right">
-                     
-                     <form id="customForm" class="search-input d-lg-none d-xl-none d-xs-none">
-                        <input type="hidden" name="action" value="">
-                        <div class="form-group">
-                           <input type="text" name="name" placeholder="Search..." id="name" class="form-control" required="">
+                   <ng-template #logged >
+                     <div class="d-flex flex-lg-row menu-right" >
+                        <form id="customForm" class="search-input d-lg-none d-xl-none d-xs-none">
+                           <input type="hidden" name="action" value="">
+                           <div class="form-group">
+                              <input type="text" name="name" placeholder="Search..." id="name" class="form-control" required="">
+                           </div>
+                        </form>
+                        <a href="" class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"><i class="icon-lupa"></i></a>
+                        <a href="https://aiod.eu/tools/getting-started" class="btn btn-default btn-user d-none d-lg-flex">Get Started</a>
+                      
+                        <div class="user-avatar-button user-avatar d-none d-lg-flex">
+                           <div class="btn btn btn-circle btn-user ml-2">
+                              <img src="../assets/img/user-image.jpeg" alt="">
+                              <span class="notifications">1</span>
+                           </div>
+                           <span>{{userProfile?.name}}</span>
                         </div>
-                     </form>
-                     <a href="" class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"><i class="icon-lupa"></i></a>
-                     <a href="https://aiod.eu/tools/getting-started" class="btn btn-default btn-user d-none d-lg-flex">Get Started</a>
-                   
-                     <div class="user-avatar-button user-avatar d-none d-lg-flex">
-                        <div class="btn btn btn-circle btn-user ml-2">
-                           <img src="../assets/img/user-image.jpeg" alt="">
-                           <span class="notifications">1</span>
-                        </div>
-                        <span>{{userProfile?.name}}</span>
+                        <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
                      </div>
+                 
                      
-                     <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
+                   
 
                   </ng-template>
              
