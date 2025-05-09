@@ -126,7 +126,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   protected selectAllPlat() {
-    throw new Error("Method not implemented.");
+    this.selectedPlatform = '';
+
   }
 
 

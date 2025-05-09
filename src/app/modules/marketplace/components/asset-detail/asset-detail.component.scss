@@ -1,6 +1,11 @@
+//@import "../../../../styles/_variables.scss";
+
 $borderColor: rgb(212, 212, 212);
 $urlColor: #31488b;
 $ligthTextColor: #8b8b8b;
+
+
+
 
 .asset-header {
     display: flex;
@@ -31,7 +36,6 @@ $ligthTextColor: #8b8b8b;
         margin-right: 10px;
     }
     .title-alternames {
-        color: $ligthTextColor; 
     }
 }
 .asset-body {
@@ -64,20 +68,18 @@ $ligthTextColor: #8b8b8b;
 }
 
 h1{
-    color: var(--primary);
+  
 }
 
 h2,h3,h4{
-    color: var(--accent);
+   
 }
 
 a {
     text-decoration: none;
-    color: $urlColor;
 }
 a:hover {
     text-decoration: none;
-    color: var(--primary);
 }
 
 .distribution-title {

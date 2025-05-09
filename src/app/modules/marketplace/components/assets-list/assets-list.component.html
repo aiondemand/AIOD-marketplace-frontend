@@ -1,5 +1,6 @@
 <div class="pt-3 pb-3"></div>
-<p class="pt-3">> Resources > Catalogue</p>
+<div class="paths"><xng-breadcrumb separator=">" class="pt-3 pt-3"></xng-breadcrumb></div>
+
 
 <div class="card-news card-numbers card-position card-horizontal pt-3 pb-3">
   <div class="card-news-container">
@@ -10,7 +11,7 @@
         <h2>Check the SDKs and APIs</h2>
       </div>
       <div class="d-flex align-items-center">
-        <a href="undefined" class="btn btn-default"
+        <a href="https://api.aiod.eu/redoc" class="btn btn-default"
           >Check now <i class="icon-arrow"></i>
         </a>
       </div>
@@ -71,22 +72,28 @@
   <div class="filters-row d-flex align-items-center pb-3">
     >
 
-    <ng-template *ngFor="let platform of platforms; index as i">
-      <a id="{{platform.name}}" class="btn  m-2"
+    <div *ngFor="let platform of platforms; index as i">
+      <a id="{{platform.name}}" class="btn  m-1"
       [ngClass]="selectedPlatform==platform.name? 'btn-secondary' : 'btn-success btn-success--blue'"
       (click)="selectPlat(platform.name)"
       (dblclick)="unSelectPlat(platform.name)"
-      
       >
-        {{ platform.name }} <i class="icon-undefined"></i
-      ></a>
-    </ng-template>
+        {{ platform.name }} </a>
+    </div>
+    <a
+    id="allPlat"
+    class="btn btn-success btn-success--blue m-2"
+    (click)="selectAllPlat()"
+    title="Click to select all platforms"
+  >
+    All
+  </a>
   </div>
 
   <div class="filters-row d-flex pb-3" >
     <div *ngFor="let category of assetCategories; index as i">
       <a
-        id="{{category }}"
+        id="{{category}}"
         class="btn m-2"
         [ngClass]="selectedCategory==category? 'btn-secondary' : 'btn-success btn-success--blue'"
         (click)="selectCat(category)"
@@ -185,7 +192,7 @@
         <div class="slider round">
           <div class="theme-switch-icons">
             <!-- multiple items -->
-            <div (click)="displayMode(1)" class="active">
+            <div (click)="displayMode(1)" [ngClass]="displayModeValue === 1 ? 'active' : ''">
               <svg
                 class="grid-icon"
                 width="20"
@@ -202,7 +209,7 @@
             </div>
 
             <!--  list items -->
-            <div (click)="displayMode(2)">
+            <div (click)="displayMode(2) " [ngClass]="displayModeValue === 2 ? 'active' : ''">
               <svg
                 class="list-icon"
                 width="20"

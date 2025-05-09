@@ -8,62 +8,42 @@
     [fixedTopGap]="options.value.top"
     [fixedBottomGap]="options.value.bottom"
   >
-    
-
-    <nav id="sidebarMenu" class="">
-      <mat-nav-list>
-        <ng-container *ngFor="let link of mainLinks">
-          <mat-list-item
-            *ngIf="!link.isRestricted || (link.isRestricted && isLoggedIn())"
-            class="sidenav-item"
-            [disabled]="link.isDisabled"
-          >
-            <a
-              mat-list-item
-              [routerLink]="!link.isDisabled ? link.url : null"
-              routerLinkActive="active"
-              class="sidenav-link"
-              [routerLinkActiveOptions]="
-                link.url === '/' ? { exact: true } : { exact: false }
-              "
-              >{{ link.name | translate }}</a
-            >
-          </mat-list-item>
-        </ng-container>
-        <mat-list-item
-          ><a
-            mat-list-item
-            href="https://docs.google.com/forms/d/e/1FAIpQLSekGmIn525fK70wEs0WugxoqJScKzIF5S8T5jLRujv5FdIzeQ/viewform?embedded=true"
-            target="_blank"
-            class="sidenav-link"
-            >Contact</a
-          ></mat-list-item
-        >
-        <mat-divider class="mt-3 mb-3"></mat-divider>
-      </mat-nav-list>
-    </nav>
-
     <main class="d-flex">
-      <div class="sidebar scrollable" id="sidebar">
+      <div
+        class="sidebar scrollable"
+        [ngClass]="isMenuCollapsed ? 'collapsed' : ''"
+        id="sidebar"
+      >
         <div class="sidebar-container">
           <div class="menu">
             <ul>
+
+              <li *ngIf="true" class="sidebar-link">
+                <a href="/my-library">
+                  <i class="icon-dashboard"></i>
+                  <span>My Bookmarks</span>
+                </a>
+              </li>
               <li class="sidebar-link sidebar-link--active">
-                <a href="#">
+                <a href="https://aiod.eu">
                   <i class="icon-dashboard"></i>
                   <span>Home</span>
                 </a>
               </li>
-              <li class="has-submenu">
-                <span
+              <li
+               
+                class="has-submenu"
+                [ngClass]="isResourcesOpened ? 'open' : ''"
+              >
+                <span  (click)="isResourcesOpened = !isResourcesOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-ai"></i> <span>Resources</span></div>
+                  <div ><i class="icon-ai"></i> <span>Resources</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
                 </span>
-                <ul class="submenu">
+                <ul class="submenu" [ngClass]="isResourcesOpened ? 'open' : ''">
                   <li>
                     <a href="">
                       <i class="icon-catalogue"></i>
@@ -71,13 +51,15 @@
                     </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-about"></i>About </a>
+                    <a href="https://mylibrary.aiod.eu/about"> <i class="icon-about"></i>About </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-feedback"></i>Feedback </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSekGmIn525fK70wEs0WugxoqJScKzIF5S8T5jLRujv5FdIzeQ/viewform?embedded=true"> <i class="icon-feedback"></i>Feedback </a>
                   </li>
                   <li>
-                    <a href=""><i class="icon-catalogue"></i>SDKs and APIs</a>
+                    <a href="https://api.aiod.eu/redoc"
+                      ><i class="icon-catalogue"></i>SDKs and APIs</a
+                    >
                   </li>
                   <li>
                     <a href=""
@@ -86,8 +68,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="has-submenu">
-                <span
+              <li class="has-submenu"   [ngClass]="isToolsOpened ? 'open' : ''">
+                <span  (click)="isToolsOpened = !isToolsOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
                   <div><i class="icon-forum"></i> <span>Tools</span></div>
@@ -95,23 +77,27 @@
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
                 </span>
-                <ul class="submenu">
+                <ul class="submenu"  [ngClass]="isToolsOpened ? 'open' : ''">
                   <li>
-                    <a href="">
+                    <a href="https://api.aiod.eu/redoc">
                       <i class="icon-getting-started"></i>
                       Getting started
                     </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-file-text"></i>Documentation </a>
+                    <a href="https://aiod.eu/technical-support"> <i class="icon-file-text"></i>Documentation </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-about"></i>Support </a>
+                    <a href="https://aiod.eu/technical-support"> <i class="icon-about"></i>Support </a>
                   </li>
                 </ul>
               </li>
-              <li class="has-submenu">
-                <span
+              <li
+                (click)="isCommunityOpened = !isCommunityOpened"
+                [ngClass]="isCommunityOpened ? 'open' : ''"
+                class="has-submenu"
+              >
+                <span (click)="isCommunityOpened = !isCommunityOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
                   <div><i class="icon-users"></i> <span>Community</span></div>
@@ -119,7 +105,7 @@
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
                 </span>
-                <ul class="submenu">
+                <ul class="submenu"   [ngClass]="isCommunityOpened ? 'open' : ''">
                   <li>
                     <a href="">
                       <i class="icon-file-text"></i>
@@ -146,7 +132,7 @@
                     </a>
                     <ul class="submenu">
                       <li>
-                        <a href="">
+                        <a href="https://success-stories.aiod.eu/">
                           <span class="corner"></span>Success Stories
                         </a>
                       </li>
@@ -164,10 +150,10 @@
                     </ul>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-forum"></i>Forum </a>
+                    <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-catalogue"></i> AI Experts </a>
+                    <a href="https://aiod.eu/ai-experts"> <i class="icon-catalogue"></i> AI Experts </a>
                   </li>
                 </ul>
               </li>
@@ -178,7 +164,7 @@
             <div class="menu p-0">
               <ul>
                 <li class="sidebar-link sidebar-link--active">
-                  <a href="#">
+                  <a href="https://aiod.eu/dashboard">
                     <i class="icon-grid"></i>
                     <span>Dashboard</span>
                   </a>
@@ -186,7 +172,10 @@
               </ul>
             </div>
 
-            <div id="collapseButton">
+            <div
+              (click)="isMenuCollapsed = !isMenuCollapsed"
+              id="collapseButton"
+            >
               <i class="icon-colapse"></i>
               <span>collapse</span>
             </div>

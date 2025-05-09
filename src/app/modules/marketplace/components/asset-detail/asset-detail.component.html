@@ -1,25 +1,11 @@
 <div *ngIf="asset">
-    <mat-toolbar class="mb-3 marketplace-toolbar">
-        <span>{{ asset.category| titlecase }}
-            <mat-icon>{{icon}}</mat-icon></span>
-    </mat-toolbar>
 
-    <div class="asset-header">
-        <div class="paths"><xng-breadcrumb class="mb-3"></xng-breadcrumb></div>
-        <div>
-            <button mat-fab color="accent" aria-label="Add stash" matTooltip="Add stash"
-                (click)="addItemCart()">
-                <mat-icon>add_to_photos</mat-icon>
-            </button>
-        </div>
-
+    <div class="m-3 asset-header">
+        <div class="paths"><xng-breadcrumb separator=">" ></xng-breadcrumb></div>
     </div>
     <div class="asset-content">
-        <mat-divider></mat-divider>
         <ng-container *ngTemplateOutlet="assetTitle"></ng-container>
-        <mat-divider></mat-divider>
         <ng-container *ngTemplateOutlet="assetBody"></ng-container>
-        <mat-divider></mat-divider>
 
     </div>
 </div>
@@ -100,7 +86,7 @@
             <div>
                 <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
                 <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip *ngFor="let keyword of asset.keywords">{{'#'+ keyword }}</mat-chip>
+                    <mat-chip class="btn btn-secondary"*ngFor="let keyword of asset.keywords">{{'#'+ keyword }}</mat-chip>
                 </mat-chip-listbox>
             </div>
 
@@ -125,7 +111,12 @@
     <div class="asset-tittle">
         <div style="flex-grow: 3;">
             <h1>{{ asset.name | titlecase }}</h1>
-
+            <button  title="Add to bookmarks" class="btn btn-circle btn-circle--blue ml-2"
+            (click)="addItemCart()">
+    
+                <i class="icon-resources-saved"></i>
+              
+        </button>
             <div class="title-dates"> 
                 <span>
                     {{'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} : {{asset.date_published | date: 'mediumDate'}} 
@@ -140,15 +131,15 @@
         </div>
         <div *ngif="asset.version">
             <p>{{ 'ASSETS.ASSET-DETAIL.VERSION' | translate }}</p>
-            <mat-chip class="chip" >{{ asset.version }} </mat-chip>
+            <mat-chip class="btn btn-secondary" >{{ asset.version }} </mat-chip>
         </div>
         <div>
             <p>{{ 'ASSETS.ASSET-DETAIL.CATEGORY' | translate }}</p>
-            <mat-chip class="chip" >{{ asset.category | lowercase}} </mat-chip>
+            <mat-chip class="btn btn-secondary" >{{ asset.category | lowercase}} </mat-chip>
         </div>
         <div *ngIf="asset.platform">
             <p>{{ 'ASSETS.ASSET-DETAIL.PLATFORM' | translate }}</p>
-            <mat-chip class="chip">{{ asset.platform }} </mat-chip>
+            <mat-chip class="btn btn-secondary">{{ asset.platform }} </mat-chip>
         </div>
     </div>
 </ng-template>
