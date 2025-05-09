@@ -16,12 +16,12 @@ const routes: Routes = [
                 redirectTo: 'resources',
                 pathMatch: 'full',
             },
-          // {
+           {
                 //This is the redirect from the keycloak login
-               //path: environment.keycloakConfig.redirectUri + 'resources',
-               //redirectTo: 'resources',
-               //pathMatch: 'full',
-         //},
+               path: environment.keycloakConfig.redirectUri + 'resources',
+               redirectTo: 'resources',
+               pathMatch: 'full',
+        },
             {
                 path: 'resources',
                 loadChildren: () =>
@@ -30,7 +30,7 @@ const routes: Routes = [
                     ),
             },
             {
-                path: 'my-library',
+                path: 'Bookmarks',
                 loadChildren: () =>
                     import('@modules/my-library/my-library.module').then(
                         (m) => m.MyLibraryModule

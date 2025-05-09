@@ -18,16 +18,17 @@
           <div class="menu">
             <ul>
 
-              <li *ngIf="true" class="sidebar-link">
-                <a href="/my-library">
-                  <i class="icon-dashboard"></i>
-                  <span>My Bookmarks</span>
-                </a>
-              </li>
+        
               <li class="sidebar-link sidebar-link--active">
                 <a href="https://aiod.eu">
                   <i class="icon-dashboard"></i>
                   <span>Home</span>
+                </a>
+              </li>
+              <li *ngIf="isLoggedIn()" class="sidebar-link">
+                <a href="/Bookmarks">
+                  <i class="icon-resources-saved"></i>
+                  <span>Bookmarks</span>
                 </a>
               </li>
               <li
@@ -51,7 +52,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="https://mylibrary.aiod.eu/about"> <i class="icon-about"></i>About </a>
+                    <a href="/about"> <i class="icon-about"></i>About </a>
                   </li>
                   <li>
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSekGmIn525fK70wEs0WugxoqJScKzIF5S8T5jLRujv5FdIzeQ/viewform?embedded=true"> <i class="icon-feedback"></i>Feedback </a>
@@ -93,7 +94,7 @@
                 </ul>
               </li>
               <li
-                (click)="isCommunityOpened = !isCommunityOpened"
+               
                 [ngClass]="isCommunityOpened ? 'open' : ''"
                 class="has-submenu"
               >
