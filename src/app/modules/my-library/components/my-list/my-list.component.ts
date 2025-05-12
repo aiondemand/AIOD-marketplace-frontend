@@ -26,7 +26,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private subscriptions: Subscription = new Subscription();
-  public displayedColumns: string[] = ['name', 'category', 'price', 'urlMetadata', 'delete' ];
+  public displayedColumns: string[] = ['name', 'category', 'urlMetadata', 'delete' ];
   public assetsPurchase: AssetsPurchase[] = [];
   public dataSource = new MatTableDataSource(this.assetsPurchase);
   public isLoading = false;

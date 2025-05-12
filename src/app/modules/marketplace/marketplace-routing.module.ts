@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: '',
         component: AssetsListComponent,
-        data: { breadcrumb: '' },
+        data: { breadcrumb: '> Resources > Catalogue' },
     },
     {
         path: ':id',

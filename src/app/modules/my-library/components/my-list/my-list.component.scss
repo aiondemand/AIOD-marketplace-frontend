@@ -1,11 +1,15 @@
 table {
-  padding-right: 2em
+  padding-right: 2em;
 }
 // .mat-mdc-row .mat-mdc-cell {
 //   cursor: pointer;
 // }
 tr.element-row:hover {
   background: whitesmoke;
+}
+
+.mat-mdc-table {
+  background: transparent;
 }
 
 .mat-column-name {
@@ -33,7 +37,7 @@ tr.element-row:hover {
 }
 
 .disabled-link {
-    opacity: 0.5; /* Puedes ajustar la opacidad según tus preferencias */
+  opacity: 0.5; /* Puedes ajustar la opacidad según tus preferencias */
 }
 
 a {
@@ -49,22 +53,59 @@ a:hover {
 
 .delete-button-style {
   .delete-button {
-      color: grey;
-      border: none;
-      border-radius: 50%;
-      padding: 8px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      font-size: 10px;
-      line-height: 1;
+    color: grey;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 10px;
+    line-height: 1;
   }
-  
+
   .delete-button:hover {
-      background-color: var(--accent);
-      color: whitesmoke;
+    background-color: var(--accent);
+    color: whitesmoke;
   }
-  
+
   .delete-button:focus {
-      outline: none;
+    outline: none;
+  }
+
+ 
+
+
+
+}
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  color: #ffffffb2;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+::ng-deep {
+    
+  
+  .mat-mdc-paginator-icon {
+    color: #ffed00;
+  }
+  .mdc-checkbox__background {
+    border-color: #ffed00 !important;
+  }
+  .mat-mdc-table .mat-mdc-header-cell {
+    color: #ffffff;
+    font-family: "Jura", sans-serif !important;
+
   }
 }
+
+

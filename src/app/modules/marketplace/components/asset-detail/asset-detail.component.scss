@@ -1,6 +1,31 @@
+//@import "../../../../styles/_variables.scss";
+
 $borderColor: rgb(212, 212, 212);
 $urlColor: #31488b;
 $ligthTextColor: #8b8b8b;
+$white: #fff;
+
+
+.card-news-container {
+
+    h2,h3,h4{
+        font-family: "Jura", sans-serif;
+        padding:24px;
+        margin:0;
+        padding-bottom: 0;
+    }
+}
+
+.asset-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn.btn-secondary  {
+   cursor: default;
+  }
+  .btn-success .btn-success--blue{ cursor: default;}
 
 .asset-header {
     display: flex;
@@ -22,7 +47,8 @@ $ligthTextColor: #8b8b8b;
     flex-direction: row;
     gap: 1em;
     margin: 1em 1em 1em 0;
-    color: var(--accent);
+    color: $white;
+    justify-content: space-between;
     p {
         font-weight: bolder;
         font-size: small;
@@ -31,7 +57,6 @@ $ligthTextColor: #8b8b8b;
         margin-right: 10px;
     }
     .title-alternames {
-        color: $ligthTextColor; 
     }
 }
 .asset-body {
@@ -53,7 +78,6 @@ $ligthTextColor: #8b8b8b;
 .asset-body-container {
     flex-grow: 3;
     flex-basis: 1em;
-    border-right: 1px solid $borderColor ;
      margin-right: 1em;
 }
 
@@ -63,21 +87,15 @@ $ligthTextColor: #8b8b8b;
     margin-bottom: 1em;
 }
 
-h1{
-    color: var(--primary);
-}
 
-h2,h3,h4{
-    color: var(--accent);
-}
+
+
 
 a {
     text-decoration: none;
-    color: $urlColor;
 }
 a:hover {
     text-decoration: none;
-    color: var(--primary);
 }
 
 .distribution-title {

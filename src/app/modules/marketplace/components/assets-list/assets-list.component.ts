@@ -76,6 +76,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   isFiltersVisible = false;
   isFilterLibraryVisible = false;
+  inputTooShort:boolean = true;
 
   private subscription: Subscription | undefined;
 
@@ -100,6 +101,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.getPlatforms();
     this.subscription?.add(this.subscriptionAssetCategory());
     this.getFilters();
+
     this.filtersStateService.isEnhancedSerach$
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -126,7 +128,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   protected selectAllPlat() {
-    throw new Error("Method not implemented.");
+    this.selectedPlatform = '';
+    this.searchAssets()
+
   }
 
 
@@ -143,16 +147,17 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
   
   
+  
   initializeSearchForm() {
     this.searchFormGroup = this.fb.group({
       search: "",
-      enhancedSearch: [false],
+      enhancedSearch: {value: false, disabled:true }
     });
   }
 
   searchAssets() {
-    const isEnhancedSearch2 = this.searchFormGroup.get("enhancedSearch")?.value;
-    this.filtersService.setEnhancedSearch(isEnhancedSearch2);
+    const isEnhancedSearch = this.searchFormGroup.get("enhancedSearch")?.value;
+    this.filtersService.setEnhancedSearch(isEnhancedSearch);
 
     var query = this.searchFormGroup.get("search")?.value;
     this.filtersService.setSearchQuery(query);
@@ -160,10 +165,19 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   onInputChange() {
     const searchValue = this.searchFormGroup.get("search")?.value;
+    this.inputTooShort = searchValue.trim().length < 3;
+
+    if (this.inputTooShort){ 
+      this.searchFormGroup.get("enhancedSearch")?.disable();
+      this.searchFormGroup.get("enhancedSearch")?.setValue(false);
+                  
+    }
+    else {this.searchFormGroup.get("enhancedSearch")?.enable()}
+     
 
     if (!searchValue.trim()) {
-      this.filtersService.setSearchQuery("");
-    }
+            this.filtersService.setSearchQuery('');
+        }
   }
 
   onEnhancedSearchChange(event: any) {
@@ -178,13 +192,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCategoryTypeChange() {
-    this.filtersService.setAssetCategorySelected(this.selectedCategory);
-  }
-
-  onSelectPlatformChange() {
-    this.filtersService.setPlatformSelected(this.selectedPlatform);
-  }
 
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
