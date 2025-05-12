@@ -71,11 +71,11 @@
     >
     <a
       id="allPlat"
-      class="btn btn-success btn-success--blue m-2"
+      class="btn  m-2"
       (click)="selectPlat('')"
       [ngClass]="
       selectedPlatform == ''
-        ? 'btn-secondary'
+        ? ' btn-secondary'
         : 'btn-success btn-success--blue'
     "
       title="Click to select all platforms"
@@ -104,7 +104,7 @@
   <div class="filters-row d-flex pb-3">
     <a
       id="allCat"
-      class="btn btn-success btn-success--blue m-2"
+      class="btn d-none m-2"
       (click)="selectAllCat()"
       title="Click to select all categories, "
       [ngClass]="
