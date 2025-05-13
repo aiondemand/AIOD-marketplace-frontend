@@ -1,10 +1,58 @@
 
 
-
 .asset-card {
-    //max-width: 510px;
-    //height: 300px;
-    width: 100%;
-
+  position: relative;
+  width: 100%;
+  
 }
 
+.bookmark-btn-column{
+  position: absolute;
+  bottom: 1rem; 
+  right: 1rem;
+  z-index: 2;
+  margin: 0;
+ 
+}
+
+.bookmark-btn-row{
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 2;
+  margin: 0;
+ 
+}
+
+.min-height{
+  min-height: 280px;
+}
+
+h3{
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.colum-flexed{
+
+    margin-top: 2px;
+    flex-direction: column;
+    gap: 1em;
+    display: flex !important;
+    justify-content: space-between;
+    
+  }
+
+  .row-flexed{
+    margin-top: 2px;
+    flex-direction: row;
+    gap: 1em;
+    display: flex !important;
+    
+  }
+
+  .btn-icon {
+
+    margin-left: 0;
+
+  }

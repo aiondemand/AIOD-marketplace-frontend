@@ -1,44 +1,50 @@
-
 <!--  card-horizontal 
 product-list-developer-card  
 -->
 <div
-  class="card-news card-numbers card-position asset-card "
+  class="card-news card-numbers card-position asset-card"
   routerLink="{{ asset.identifier }}"
   [queryParams]="{ category: categoryKey }"
 >
-  <div class="card-news-container">
+  <div class="card-news-container" [ngClass]="mode==1 ? 'min-height' : ''">
     <div class="card-news-content mt-0">
+      
       <div>
-        <h3>{{ asset.name }}</h3>
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex">
-            <div class="btn-icon">
-              <span>Type</span>
-              <span
-                ><strong>{{ asset.category }}</strong></span
-              >
-            </div>
+        <h3 style="word-wrap: break-word;">
+          {{ asset.name }}
+        </h3>
+      </div>
 
-            <div class="btn-icon">
-              <span>Platform 🤗</span>
-              <span
-                ><strong>{{ asset.platform }}</strong></span
-              >
-            </div>
-
-            <div class="btn-icon">
-              <i class="icon-clock"></i>
-              <span>{{ asset.date_published }}</span>
-            </div>
-          </div>
-          <div class="d-flex">
-            <div (click)=" '' ;$event.stopPropagation()" class="btn btn-circle btn-circle--blue ml-2">
-              <i class="icon-resources-saved"></i>
-            </div>
-           
-          </div>
+      <div  [ngClass]="mode==1 ? 'colum-flexed' : ' row-flexed'">
+        <div class="btn-icon">
+          <span>Type</span>
+          <span
+        ><strong>{{ asset.category }}</strong></span
+          >
         </div>
+
+        <div class="btn-icon">
+          <span>Platform 🤗</span>
+          <span
+        ><strong>{{ asset.platform }}</strong></span
+          >
+        </div>
+
+        <div class="btn-icon">
+          <i class="icon-clock"></i>
+          <span>{{ asset.date_published }}</span>
+        </div>
+
+      
+      </div>
+
+      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'">
+          <div
+        (click)="(''); $event.stopPropagation()"
+        class="btn btn-circle btn-circle--blue ml-2"
+          >
+        <i class="icon-resources-saved"></i>
+          </div>
       </div>
     </div>
   </div>

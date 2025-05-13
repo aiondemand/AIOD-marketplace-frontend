@@ -62,11 +62,14 @@
                       ><i class="icon-catalogue"></i>SDKs and APIs</a
                     >
                   </li>
-                  <li>
-                    <a href=""
-                      ><i class="icon-catalogue"></i>Educational Resources</a
+                    <li>
+                    <a
+                      [routerLink]="['/resources']"
+                      [queryParams]="{ category: 'educational_resources' }"
                     >
-                  </li>
+                      <i class="icon-catalogue"></i>Educational Resources
+                    </a>
+                    </li>
                 </ul>
               </li>
               <li class="has-submenu"   [ngClass]="isToolsOpened ? 'open' : ''">

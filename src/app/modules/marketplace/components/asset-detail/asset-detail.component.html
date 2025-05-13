@@ -9,14 +9,14 @@
 </div>
 
 <ng-template #assetBody>
-  <div class="asset-body">
-    <div class="asset-body-container">
+<div class="asset-body">
+      <div class="asset-body-container">
 
 
       <div class="asset-body-description card-news-container " class="card-news-container m-3">
         <h3 >{{ "ASSETS.ASSET-DETAIL.DESCRIPTION" | translate }}</h3>
         <div class="card-news-content">
-            <markdown>
+            <markdown class="markdown-white">
               {{ asset.description }}
             </markdown>
         </div>
@@ -25,14 +25,16 @@
 
       <div *ngIf="asset.media && asset.media.length > 0" class="card-news-container m-3">
         <h3>{{ "ASSETS.MEDIA.TITLE" | translate }}</h3>
-        <div class="media-container">
+        <div class="media-container card-news-content"></div>">
           <div *ngFor="let media of asset.media">
             <app-media [media]="media"></app-media>
           </div>
         </div>
-      </div>
+     
 
-      <div class="asset-body-category  card-news-container m-3" [ngSwitch]="asset.category">
+      <div  *ngIf="!!AssetCategory" class="asset-body-category  card-news-container m-3" [ngSwitch]="asset.category">
+      
+        <div class="card-news-content">
         <div *ngSwitchCase="AssetCategory.Dataset">
           <app-dataset [identifier]="asset.identifier"></app-dataset>
         </div>
@@ -47,45 +49,48 @@
         <div *ngSwitchCase="AssetCategory.AIModel">
           <app-aimodel [identifier]="asset.identifier"></app-aimodel>
         </div>
+        </div>
       </div>
 
       <div *ngIf="!!asset.license" class=" card-news-container m-3"> 
         <h3>{{ "ASSETS.ASSET-DETAIL.LICENSE" | translate }}</h3>
-        <div class="field-container">
+        <div class="field-container card-news-content">
           <a
             *ngIf="isURL(asset.license)"
             [href]="asset.license"
             target="_blank"
           >
-            {{ asset.license }} <mat-icon>open_in_new</mat-icon>
+            {{ asset.license }} 
           </a>
-          <span *ngIf="!isURL(asset.license)"> {{ asset.license }}</span>
+          <span class="" *ngIf="!isURL(asset.license)"> {{ asset.license }}</span>
         </div>
-      </div>
+        </div>
+      
 
       <div *ngIf="!!asset.sameAs" class=" card-news-container m-3" >
         <h3>{{ "ASSETS.ASSET-DETAIL.SAMEAS" | translate }}</h3>
-        <div class="field-container">
+        <div class="field-container card-news-content ">
           <a [href]="asset.sameAs" target="_blank">
-            {{ asset.sameAs }} <mat-icon>open_in_new</mat-icon>
+            {{ asset.sameAs }} 
           </a>
         </div>
+      
       </div>
 
-      <div *ngIf="asset.citation && asset.citation.length > 0">
+      <div *ngIf="asset.citation && asset.citation.length > 0" class=" card-news-container m-3">
         <h3>{{ "ASSETS.ASSET-DETAIL.CITATION" | translate }}</h3>
-        <div class="field-container">
+        <div class="field-container card-news-content">
           <p *ngFor="let url of asset.citation">
             <a href="#" target="_blank" rel="noopener noreferrer">
-              {{ url }} <mat-icon>open_in_new</mat-icon>
+              {{ url }} 
             </a>
           </p>
         </div>
       </div>
 
-      <div *ngIf="!!asset.distributions && asset.distributions.length > 0">
+      <div *ngIf="!!asset.distributions && asset.distributions.length > 0"  class=" card-news-container m-3">
         <h3>{{ "ASSETS.DISTRIBUTION.TITLE" | translate }}</h3>
-        <div class="distribution-container">
+        <div class="distribution-container card-news-content">
           <ng-container *ngFor="let distribution of asset.distributions">
             <ng-container
               [ngTemplateOutlet]="distributionDetail"
@@ -95,6 +100,7 @@
           </ng-container>
         </div>
       </div>
+    
     </div>
 
     <div class="asset-body-keywords">
@@ -133,8 +139,12 @@
             </div>
           </div>
         </div>
-      </div>
-  </div>
+    </div>
+    
+
+
+ </div>
+ 
 </ng-template>
 
 <ng-template #assetTitle>
@@ -174,13 +184,13 @@
     
     <div class="col-lg-3">
         <div class="row">
-            <div *ngIf="asset.version" class="btn btn-secondary mr-2">
+            <div *ngIf="asset.version" class="btn btn-default mr-2">
                 {{ asset.version }}
             </div>
-            <div class="btn btn-secondary mr-2">
+            <div class="btn btn-default mr-2">
                 {{ asset.category | lowercase }}
             </div>
-            <div *ngIf="asset.platform" class="btn btn-secondary">
+            <div *ngIf="asset.platform" class="btn btn-default">
                 {{ asset.platform }}
             </div>
         </div>

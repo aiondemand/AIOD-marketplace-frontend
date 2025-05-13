@@ -1,3 +1,6 @@
+
+@import "src/styles/variables.scss";
+
 table {
   padding-right: 2em;
 }
@@ -37,46 +40,11 @@ tr.element-row:hover {
 }
 
 .disabled-link {
-  opacity: 0.5; /* Puedes ajustar la opacidad según tus preferencias */
+  opacity: 0.5; 
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-a:hover {
-  color: var(--accent);
-}
-
-.delete-button-style {
-  .delete-button {
-    color: grey;
-    border: none;
-    border-radius: 50%;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-size: 10px;
-    line-height: 1;
-  }
-
-  .delete-button:hover {
-    background-color: var(--accent);
-    color: whitesmoke;
-  }
-
-  .delete-button:focus {
-    outline: none;
-  }
-
- 
 
 
-
-}
 .paginator {
   display: flex;
   align-items: center;
@@ -96,10 +64,10 @@ a:hover {
     
   
   .mat-mdc-paginator-icon {
-    color: #ffed00;
+    color:$color-primary4;
   }
   .mdc-checkbox__background {
-    border-color: #ffed00 !important;
+    border-color: $color-primary4 !important;
   }
   .mat-mdc-table .mat-mdc-header-cell {
     color: #ffffff;

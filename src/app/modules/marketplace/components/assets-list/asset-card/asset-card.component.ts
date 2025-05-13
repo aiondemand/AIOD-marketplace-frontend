@@ -10,7 +10,7 @@ import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-catego
 })
 export class AssetCardComponent implements OnInit{
   constructor(private appConfig: AppConfigService) {}
-
+  @Input() mode: number= 1
   @Input() asset!: AssetModel;
   categoryColor: string = '';
   categoryKey!: string | undefined;
