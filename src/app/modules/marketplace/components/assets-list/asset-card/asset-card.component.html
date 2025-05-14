@@ -18,9 +18,7 @@ product-list-developer-card
       <div  [ngClass]="mode==1 ? 'colum-flexed' : ' row-flexed'">
         <div class="btn-icon">
           <span>Type</span>
-          <span
-        ><strong>{{ asset.category }}</strong></span
-          >
+          <span><strong>{{ asset.category }}</strong></span>
         </div>
 
         <div class="btn-icon">
@@ -39,9 +37,9 @@ product-list-developer-card
       </div>
 
       <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'">
-          <div
-        (click)="(''); $event.stopPropagation()"
-        class="btn btn-circle btn-circle--blue ml-2"
+        <div
+          (click)="onClickBookmark(); $event.stopPropagation();"
+          class="btn btn-circle btn-circle--blue ml-2"
           >
         <i class="icon-resources-saved"></i>
           </div>
