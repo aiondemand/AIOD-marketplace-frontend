@@ -11,18 +11,6 @@
   background-color: transparent;
 }
 
-.sidenav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  min-height: 655px;
-  background: transparent;
-  padding-top: 1.5em;
-  border-right: 1px solid #1b2336;
-  overflow: visible;
-  padding-top: 0px;
-}
 
 ::ng-deep {
   .sidenav .mat-drawer-inner-container {

@@ -82,6 +82,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   platforms: any = [];
 
   protected lonelyCategory:boolean = false;
+  isLightTheme: string | null ='dark';
 
   constructor(
     private fb: FormBuilder,
@@ -129,6 +130,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.isLightTheme = document.documentElement.getAttribute('data-theme');
+      
   }
 
   protected selectPlat(platform: string) {

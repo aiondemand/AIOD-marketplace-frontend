@@ -24,6 +24,7 @@ export class TopNavbarComponent {
         protected appConfigService: AppConfigService,
         private shoppingCartService: ShoppingCartService,
         private router: Router,
+        
     ) {
         this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -33,6 +34,7 @@ export class TopNavbarComponent {
         });
         this.getCartItemCount();
     }
+    protected sideBarUser: boolean= false;
     private _mobileQueryListener: () => void;
     protected environment = environment;
     mobileQuery: MediaQueryList;
@@ -143,4 +145,11 @@ export class TopNavbarComponent {
     goToShoppingCart() {
         this.router.navigate(['/shopping-cart']);
     }
+
+
+    toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+      }
 }

@@ -2,26 +2,7 @@
   justify-content: space-between;
 }
 
-.paths {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-direction: row;
-}
-.paths-title {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
 
-  span {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #ffffff;
-    text-transform: capitalize;
-  }
-}
 
 .viewer {
   width: 100%;
@@ -39,7 +20,7 @@
   /* flex-wrap: wrap-reverse; */
   width: 100%;
   font-size: inherit;
-  color: #ffffffb2;
+  //color: #ffffffb2;
   background: inherit;
   font-family: inherit;
   font-size: inherit;
@@ -58,14 +39,29 @@
   }
 }
 
-.featured-products-item{
-
+.featured-products-item {
   padding: 10px 20px;
 }
 .featured-products-item-title {
-  font-size: 50px;
+  font-size: 60px;
   margin-bottom: 55px;
-  color: (#ffffff);
+}
+
+.slider:before {
+   background-color: transparent; 
+
+}
+
+.active{
+  background: #0047BB;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  display: flex
+;
+  
+  align-items: center;
 }
 
 ::ng-deep {
@@ -80,7 +76,24 @@
   }
 
   .mdc-checkbox--disabled .mdc-checkbox__background {
-    border-color: #27261e !important;
+    border-color: #27261e;
+  }
+
+  .mat-mdc-checkbox label {
+    font-family: "Jura", sans-serif;
+  }
+
+  .mat-mdc-checkbox-disabled label {
+    color: rgb(243 235 235 / 38%);
+  }
+
+  [data-theme="light"] {
+      .mat-mdc-checkbox-disabled label {
+        color:#757a7b;
+      }
+      .mdc-checkbox--disabled .mdc-checkbox__background {
+        border-color:#757a7b;
+      }
   }
 
   .mat-mdc-checkbox
@@ -89,4 +102,7 @@
     ~ .mdc-checkbox__background {
     background-color: #000000;
   }
+
+
+ 
 }

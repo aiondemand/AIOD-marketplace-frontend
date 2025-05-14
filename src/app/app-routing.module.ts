@@ -21,7 +21,7 @@ const routes: Routes = [
         path: environment.keycloakConfig.redirectUri + "resources",
         redirectTo: "resources",
         pathMatch: "full",
-      },
+     },
       {
         path: "resources",
         loadChildren: () =>

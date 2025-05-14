@@ -51,6 +51,16 @@ body {
   border: 1px solid var($color-accent) !important;
 }
 
+.mat-drawer-side{
+  border: none;
+
+}
+
+.mat-drawer {
+  background-color: transparent !important;
+  
+}
+
 .paginator {
   display: flex;
   align-items: center;
@@ -64,6 +74,10 @@ body {
   font-family: inherit;
   font-size: inherit;
 }
+
+[data-theme=light] .paginator {
+  color: inherit;}
+
 
 @mixin delete-button-style {
   .delete-button {
@@ -85,6 +99,9 @@ body {
   .delete-button:focus {
     outline: none;
   }
+
+
+
 }
 
 
@@ -98,15 +115,8 @@ body {
     stroke: #ffed00;
   }
 
-  .xng-breadcrumb-root {
-    color: #FFFFFF;
-  }
 
-  .xng-breadcrumb-trail {
-    color: inherit;
-    margin-bottom: 0px;
-    font-size: inherit;
-  }
+
 }
 
 

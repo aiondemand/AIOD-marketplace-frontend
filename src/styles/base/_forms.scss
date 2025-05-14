@@ -37,7 +37,7 @@ input[type="checkbox"]:disabled {
 label {
 	display: inline-block;
 	max-width: 100%;
-   color: $white !important;
+   color: $white;
    font-weight: 400;
    font-size: 14px;
 	@if $formGroupLabelMarginBottom != 0 {
