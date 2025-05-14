@@ -143,4 +143,11 @@ export class TopNavbarComponent {
     goToShoppingCart() {
         this.router.navigate(['/shopping-cart']);
     }
+
+
+    toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+      }
 }

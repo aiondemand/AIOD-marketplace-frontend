@@ -71,7 +71,7 @@
 
   <!-- Filters  -->
   <div class="filters-row d-flex align-items-center pb-3">
-    >
+  
     <a
       id="allPlat"
       class="btn  m-2"
@@ -116,7 +116,7 @@
         : 'btn-success btn-success--blue'
     "
     >
-      All
+      All categories
     </a>
     <div *ngFor="let category of assetCategories; index as i">
       <a
@@ -156,33 +156,75 @@
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="3" y="3" width="5" height="5" fill="#fff" />
-              <rect x="12" y="3" width="5" height="5" fill="#fff" />
-              <rect x="3" y="12" width="5" height="5" fill="#fff" />
-              <rect x="12" y="12" width="5" height="5" fill="#fff" />
-            </svg>
-          </div>
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                x="3"
+                y="3"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="12"
+                y="3"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="12"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="12"
+                y="12"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+              </svg>
+              </div>
 
-          <!--  list items -->
-          <div
-            (click)="displayMode(2)"
-            [ngClass]="displayModeValue === 2 ? 'active' : ''"
-          >
-            <svg
-              class="list-icon"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="3" y="4" width="14" height="2" fill="#fff" />
-              <rect x="3" y="9" width="14" height="2" fill="#fff" />
-              <rect x="3" y="14" width="14" height="2" fill="#fff" />
-            </svg>
-          </div>
+              <!--  list items -->
+              <div
+              (click)="displayMode(2)"
+              [ngClass]="displayModeValue === 2 ? 'active' : ''"
+              >
+              <svg
+                class="list-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                x="3"
+                y="4"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="9"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="14"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+              </svg>
+              </div>
         </div>
       </div>
     </label>

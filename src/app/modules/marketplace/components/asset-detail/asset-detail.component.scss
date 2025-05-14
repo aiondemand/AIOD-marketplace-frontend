@@ -69,6 +69,10 @@ color: $white;
     }
 
 }
+
+[data-theme="light"] .asset-tittle {
+    color: $black;
+}
 .asset-body {
     display: flex;
     flex-direction: row;
@@ -137,5 +141,5 @@ a:hover {
 
 ::ng-deep .markdown-white, 
 ::ng-deep .markdown-white * {
-  color: $white !important;
+  
 }
