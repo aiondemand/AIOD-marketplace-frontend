@@ -18,6 +18,7 @@ import { state } from '@angular/animations';
   styleUrls: ['./asset-card.component.scss']
 })
 export class AssetCardComponent implements OnInit{
+
   public userProfile!: UserProfile;
   private isBookmark: boolean;
   protected environment = environment;
@@ -34,6 +35,7 @@ export class AssetCardComponent implements OnInit{
     this.isBookmark = false // ToDo: this needs to be checked w.r.t user's library.
   }
 
+  @Input() mode: number= 1
   @Input() asset!: AssetModel;
   categoryColor: string = '';
   categoryKey!: string | undefined;

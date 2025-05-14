@@ -1,8 +1,11 @@
-<div class="paths">
-  <xng-breadcrumb separator=">" class="pt-3 pt-3"></xng-breadcrumb>
+<div class="paths ">
+  <xng-breadcrumb separator=">" class="pt-3 "> </xng-breadcrumb> 
+  <div  *ngIf="lonelyCategory" class=" pt-3 paths-title">
+    <span class="pt-3"> > {{categorySelected}}</span>
+  </div>
 </div>
 
-<div class="card-news card-numbers card-position card-horizontal pt-3 pb-3">
+<div  *ngIf="!lonelyCategory" class=" card-news card-numbers card-position card-horizontal pt-3 pb-3">
   <div class="card-news-container">
     <div
       class="card-news-content mt-0 d-flex align-items-center justify-content-between"
@@ -21,10 +24,10 @@
 
 <!--Search and filter component -->
 <div
-  class="featured-products-item pt-3 pb-3 align-items-center justify-content-between"
+  class="featured-products-item mt-3 pt-3 pb-3 align-items-center justify-content-between"
 >
   <div class="featured-products-item-title">
-    Explore our extensive AI Catalogue
+    Explore AI Catalogue
   </div>
 
   
@@ -74,13 +77,13 @@
       class="btn  m-2"
       (click)="selectPlat('')"
       [ngClass]="
-      selectedPlatform == ''
-        ? ' btn-secondary'
+      platformSelected == ''
+        ? ' btn-default'
         : 'btn-success btn-success--blue'
     "
       title="Click to select all platforms"
     >
-      All
+      All Platforms
     </a>
 
     <div *ngFor="let platform of platforms; index as i">
@@ -88,8 +91,8 @@
         id="{{ platform.name }}"
         class="btn m-1 "
         [ngClass]="
-          selectedPlatform == platform.name
-            ? 'btn-secondary'
+           platformSelected == platform.name
+            ? 'btn-default'
             : 'btn-success btn-success--blue'
         "
 
@@ -101,15 +104,15 @@
     </div>
   </div>
 
-  <div class="filters-row d-flex pb-3">
+  <div   *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
     <a
       id="allCat"
       class="btn d-none m-2"
       (click)="selectAllCat()"
       title="Click to select all categories, "
       [ngClass]="
-      selectedPlatform == ''
-        ? 'btn-secondary'
+      platformSelected== ''
+        ? 'btn-default'
         : 'btn-success btn-success--blue'
     "
     >
@@ -120,8 +123,8 @@
         id="{{ category }}"
         class="btn m-2"
         [ngClass]="
-          selectedCategory == category
-            ? 'btn-secondary'
+          categorySelected == category
+            ? 'btn-default'
             : 'btn-success btn-success--blue'
         "
         (click)="selectCat(category)"
@@ -208,14 +211,15 @@
     <div
       id="grid-layout"
       *ngFor="let asset of assets"
+      class=""
       [ngClass]="
         displayModeValue === 1
-          ? 'col-lg-4 col-md-6 col-sm-12'
-          : 'col-lg-12 col-md-12 col-sm-12'
+          ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
+          : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
       "
       class="col-lg-4 col-md-6 col-sm-12"
     >
-      <app-asset-card class="" [asset]="asset"></app-asset-card>
+      <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
     </div>
   </div>
 </ng-template>
