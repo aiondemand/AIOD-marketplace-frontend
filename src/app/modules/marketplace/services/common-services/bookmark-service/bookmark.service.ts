@@ -15,17 +15,6 @@ export interface BookmarkBodyRemove {
   category: AssetCategory
 }
 
-export const BookmarkURLParams = {
-  OP_NAME: 'bookmarkOp',
-  ASSET_ID: 'id',
-  ASSET_CATEGORY: 'category'
-};
-
-export enum BookmarkOperation {
-  delete = 0,
-  add = 1,
-}
-
 @Injectable({
   providedIn: 'root'
 })
