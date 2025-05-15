@@ -2,11 +2,13 @@
   <div class="m-3 asset-header">
     <div class="paths"><xng-breadcrumb separator=">"></xng-breadcrumb></div>
   </div>
+  
   <div class="asset-content">
     <ng-container *ngTemplateOutlet="assetTitle"></ng-container>
     <ng-container *ngTemplateOutlet="assetBody"></ng-container>
   </div>
 </div>
+
 
 <ng-template #assetBody>
 <div class="asset-body">
@@ -32,8 +34,7 @@
         </div>
      
 
-      <div  *ngIf="!!AssetCategory" class="asset-body-category  card-news-container m-3" [ngSwitch]="asset.category">
-      
+      <div *ngIf="!!asset.identifier" class="asset-body-category  card-news-container m-3" [ngSwitch]="asset.category">
         <div class="card-news-content">
         <div *ngSwitchCase="AssetCategory.Dataset">
           <app-dataset [identifier]="asset.identifier"></app-dataset>
