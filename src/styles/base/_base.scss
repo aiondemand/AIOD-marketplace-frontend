@@ -494,6 +494,13 @@ h4 {
   
  }
 
+ [data-theme=light] .asset-tittle  {
+   color: black;
+}
+[data-theme=dark] .asset-tittle {
+   color: $white;
+}
+
  [data-theme=dark] .xng-breadcrumb-trail {
    color: white;
  }
@@ -661,7 +668,7 @@ body {
    }
 
    h3 {
-      color: rgba(0, 0, 0, 0.50);
+      color:  $color-primary2;
    }
 
    .about-benefits {
