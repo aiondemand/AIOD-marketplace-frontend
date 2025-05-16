@@ -1,0 +1,32 @@
+.custom-file {
+	position: relative;
+	
+	input {
+		width: 1px;
+		height: 1px;
+		position: absolute;
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.custom-file__mask {
+	display: block;
+	height: $inputFileHeight;
+	padding: 0 $grid-gutter-width / 2;
+	border-radius: $inputFileBorderRadius;
+	border: $inputFileBorder;
+	background-color: $inputFileBackground;
+	color: $inputFileColor;
+	cursor: pointer;
+	font-size: $inputFileFontSize;
+	font-weight: $inputFileFontWeight;
+	line-height: $inputFileHeight;
+	transition: $inputFileTransition;
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: $inputFileBackgroundHover;
+	}
+}

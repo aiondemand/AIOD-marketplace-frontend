@@ -1,11 +1,18 @@
+
+@import "src/styles/variables.scss";
+
 table {
-  padding-right: 2em
+  padding-right: 2em;
 }
 // .mat-mdc-row .mat-mdc-cell {
 //   cursor: pointer;
 // }
 tr.element-row:hover {
   background: whitesmoke;
+}
+
+.mat-mdc-table {
+  background: transparent;
 }
 
 .mat-column-name {
@@ -33,38 +40,40 @@ tr.element-row:hover {
 }
 
 .disabled-link {
-    opacity: 0.5; /* Puedes ajustar la opacidad según tus preferencias */
+  opacity: 0.5; 
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-  transition: color 0.2s;
+
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  color: #ffffffb2;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
 }
 
-a:hover {
-  color: var(--accent);
-}
 
-.delete-button-style {
-  .delete-button {
-      color: grey;
-      border: none;
-      border-radius: 50%;
-      padding: 8px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      font-size: 10px;
-      line-height: 1;
-  }
+::ng-deep {
+    
   
-  .delete-button:hover {
-      background-color: var(--accent);
-      color: whitesmoke;
+  .mat-mdc-paginator-icon {
+    color:$color-primary4;
   }
-  
-  .delete-button:focus {
-      outline: none;
+  .mdc-checkbox__background {
+    border-color: $color-primary4 !important;
+  }
+  .mat-mdc-table .mat-mdc-header-cell {
+    color: #ffffff;
+    font-family: "Jura", sans-serif !important;
+
   }
 }
+
+

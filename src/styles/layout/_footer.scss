@@ -1,0 +1,508 @@
+.footer {
+   position: relative;
+   overflow: hidden;
+   z-index: 101;
+   padding: 0 10%;
+   background: linear-gradient(0deg, rgba(0, 71, 187, 0.4) 0.11%, rgba(65, 182, 230, 0) 100%);
+
+   @media screen and (max-width: 1500px) {
+      margin: 0 2%;
+   }
+
+   @include max-md {
+      margin: 0;
+      padding: 0;
+   }
+
+   .footer-container-item {
+      display: flex;
+      flex-direction: row;
+
+      @include max-sm {
+         flex-direction: column;
+         margin-top: 70px;
+      }
+   }
+
+   .logotipo-branco {
+      width: 150px;
+   }
+
+   &-title {
+      font-size: 14px;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      color: $white;
+      margin-bottom: 5px;
+   }
+
+   &-subtitle {
+      color: rgba($white, 0.5);
+      margin: 0;
+   }
+
+   .newsletter-title{
+      color: $color-primary4
+   }
+
+   .footer-top {
+      padding: 60px 0;
+      overflow: hidden;
+      position: relative;
+
+      @include max-md {
+         padding: 40px 5px;
+         border-radius: 0;
+      }
+
+      &-social {
+         a {
+            margin-right: 25px;
+
+            &:hover {
+               text-decoration: none;
+
+               i {
+                  color: $color-primary5;
+               }
+            }
+
+            i {
+               font-size: 14px;
+               color: rgba(255, 255, 255, 0.5);
+               transition: all 300ms ease;
+            }
+         }
+
+      }
+
+      .flag {
+         width: auto;
+
+         &-container {
+            display: flex;
+
+            @include max-md {
+               margin-top: 40px;
+            }
+
+            span {
+               font-weight: $font-weight-light;
+               font-size: 8px;
+               line-height: 10px;
+               color: $color-primary5;
+               display: block;
+               margin-left: 15px;
+            }
+         }
+      }
+
+      .newsletter {
+         &-input {
+            display: flex;
+            width: 100%;
+            margin-top: 15px;
+
+            .form-group {
+               margin-bottom: 0;
+               margin-right: 20px;
+               width: 100%;
+            }
+
+            button {
+               display: flex;
+
+               @include min-lg {
+                  height: 100%;
+               }
+
+               @include max-md {
+                  position: absolute;
+                  right: 0;
+               }
+
+               i {
+                  margin-left: 9px;
+               }
+            }
+         }
+
+         &-form {
+            width: 100%;
+
+            @include max-md {
+               margin-bottom: 40px;
+            }
+         }
+      }
+
+      .contact-us {
+         margin-bottom: 40px;
+
+         .footer-subtitle {
+            margin-bottom: 5px;
+
+            span {
+               color: rgba(227, 229, 232, 0.52);
+               width: 15%;
+               display: inline-block;
+            }
+
+            a {
+               color: #E3E5E8;
+            }
+         }
+         &-mail{
+            a{
+               color: $white;
+               text-decoration: underline;
+            }
+         }
+        
+      }
+
+      .integrate {
+         margin-bottom: 40px;
+      }
+   }
+
+   .menu-footer{
+      padding-top: 10px;
+      margin-left: -36px;
+      @include max-md{
+         margin-top: 30px;
+         margin-bottom: 30px;
+      }
+      &-links{
+         color: $white;
+         font-size: 13px;
+         font-weight: 600;
+         text-transform: uppercase;
+         font-family: $font-variant;
+         padding: 15px 18px;
+         display: inline-block;
+         border-radius: 100px;
+         position: relative;
+         transition: all 250ms ease;
+         @include min-lg{
+            &:hover{
+               background-color: $color-primary2;
+               color:  $color-primary4;
+               text-decoration: none;
+               &:before {
+                  content: "";
+                  position: absolute;
+                  inset: 0;
+                  border-radius: 100px;
+                  padding: 2px;
+                  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.125) 53.65%, rgba(255, 255, 255, 0) 100%);
+                  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                  -webkit-mask-composite: xor;
+                  mask-composite: exclude;
+               } 
+            }
+         }
+
+      }
+   }
+}
+.footer-bottom {
+   margin: 24px 0;
+   padding: 0 10%;
+
+
+   @include max-sm {
+      margin: 24px 0;
+     padding: 0;
+   }
+
+   &-title {
+      font-size: 14px;
+      line-height: 24px;
+      margin-bottom: 0;
+      color: $color-primary5;
+      font-weight: $font-weight-normal;
+   }
+
+   &-list {
+      display: flex;
+      margin-bottom: 10px;
+      padding: 0;
+
+      li {
+         list-style: none;
+
+         a {
+            color: $color-primary5;
+            font-size: 14px;
+            line-height: 24px;
+            transition: color 300ms ease;
+
+            &:hover {
+               color: $color-accent;
+               text-decoration: none;
+            }
+         }
+
+         span {
+            margin: 0 8px;
+            color: $color-accent;
+            font-size: 14px;
+            line-height: 24px;
+         }
+      }
+   }
+
+   .loba-logo {
+      max-width: 45px;
+      width: 100%;
+      height: auto;
+      opacity: 0.5;
+      transition: opacity 300ms ease;
+
+      &:hover {
+         opacity: 1;
+      }
+
+      @include max-md {
+         max-width: 50px;
+         margin-left: 0;
+         margin-top: 40px;
+      }
+
+   }
+
+   .mobile-margin {
+      @include max-sm {
+         margin-bottom: 25px;
+      }
+
+   }
+
+   .flag-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      @include max-sm {
+         margin-top: 50px;
+         margin-bottom: 30px;
+         flex-direction: column;
+         align-items: flex-start;
+      }
+
+
+      p {
+         margin-bottom: 0;
+         font-size: 10px;
+         line-height: 14px;
+         font-weight: $font-weight-light;
+         color: #FFF;
+         margin-left: 40px;
+
+         @include max-sm {
+            margin-left: 0;
+            margin-top: 20px;
+         }
+      }
+   }
+
+   .flag-container-note {
+      font-size: 10px;
+      line-height: 14px;
+      font-weight: 300;
+      color: #FFF;
+      margin-top: 15px;
+      margin-bottom: 0;
+   }
+}
+.footer-button {
+   border: 1px solid #FFFFFF33;
+   border-radius: 30px;
+   padding: 60px;
+
+   h2{
+      color: $white;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-size: 38px;
+      font-weight: 300;
+
+   }
+}
+
+.footer-item {
+   .footer-widget-title {
+      font-family: $font-variant;
+      font-size: 30px;
+      line-height: 26px;
+      font-style: normal;
+      color: $color-primary3;
+      font-weight: $font-weight-bold;
+      margin-bottom: 15px;
+      margin-top: 0;
+
+      @include max-sm {
+         font-size: 24px;
+      }
+
+   }
+
+   ul {
+      padding-left: 0;
+      margin: 0;
+
+      @include max-sm {
+         margin-bottom: 30px;
+      }
+
+      li {
+         list-style: none;
+         margin-bottom: 12px;
+         line-height: 18px;
+         font-size: 15px;
+         line-height: 20px;
+         color: #FFF;
+         font-weight: $font-weight-normal;
+
+         a {
+            font-size: 15px;
+            line-height: 20px;
+            color: #FFF;
+            font-weight: $font-weight-normal;
+            transition: all 350ms ease;
+            text-decoration: none;
+
+            &:hover {
+               color: $color-primary2;
+
+               i {
+                  &:after {
+                     background-color: rgba(255, 255, 255, 0.1);
+                  }
+               }
+            }
+         }
+
+         i {
+            position: relative;
+
+            &:after {
+               content: '';
+               position: absolute;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               border-radius: 50%;
+               background-color: transparent;
+               width: 30px;
+               height: 30px;
+               transition: background-color 300ms ease;
+            }
+
+            &.icon-mail {
+               font-size: 12px;
+            }
+
+            font-size: 15px;
+            margin-right: 10px;
+            color: $color-primary3;
+         }
+      }
+   }
+}
+
+.wpcf7 {
+   width: 100%;
+
+   form {
+      .wpcf7-response-output {
+         border-radius: 20px;
+         color: white;
+         font-size: 14px;
+         padding: .5em 1em;
+      }
+   }
+}
+
+[data-theme="light"] {
+   .footer {
+      background: linear-gradient(0deg, #E0E0E0 0.11%, rgba(255, 255, 255, 0) 100%);
+      color: $black;
+      .logotipo-branco{
+         display: none !important;
+      }
+      .logotipo-cinza{
+         display: block !important;
+      }
+
+      .menu-footer-links{
+         color: $black;
+         &:hover{
+            color: $color-primary4;
+         }
+      }
+      .newsletter-title{
+         color: $color-primary2;
+      }
+      .footer-subtitle{
+         color: #00000085;
+      }
+      .footer-top-social a i{
+         color: #00000085;
+      }
+    
+      .btn-link{
+         color: $color-primary2;
+      }
+      .btn-success{
+         border-color: $color-primary2;
+         color: $color-primary2;
+         &:hover{
+            color: $black;
+            border-color: $black;
+         }
+         &--blue{
+            border-color: #0092CE;
+            color: #0092CE;
+           
+         }
+      }
+      .flag{
+         display: none !important;
+         &-black{
+            display: block !important;
+         }
+      }
+
+      input[type="email"]{
+         border-color: #0000004D;
+         color: $black;
+         &::placeholder{
+            color: $black;
+         }
+      }
+      .contact-us-mail a{
+         color: #00000085;
+      }
+   }
+   .footer-bottom {
+      .loba-logo {
+         filter: invert(1);
+         opacity: 0.6;
+         &:hover{
+            opacity: 1;
+         }
+      }
+      &-list{
+         li{
+            a{
+               color: $black;
+               &:hover{
+                  opacity: 0.6;
+               }
+            }
+         }
+      }
+   }
+}

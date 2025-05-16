@@ -1,24 +1,267 @@
-<mat-toolbar class="mb-3 marketplace-toolbar">
-    <span>Assets Catalogue <mat-icon>library_books</mat-icon></span>
-</mat-toolbar>
-
-<div *ngIf="isLoading; else assetList" class="spinner">
-    <mat-progress-spinner color="primary" mode="indeterminate">
-    </mat-progress-spinner>
+<div class="paths ">
+  <xng-breadcrumb separator=">" class="pt-3 "> </xng-breadcrumb> 
+  <div  *ngIf="lonelyCategory" class=" pt-3 paths-title">
+    <span class="pt-3"> > {{categorySelected}}</span>
+  </div>
 </div>
-<mat-paginator (page)="handlePageEvent($event)" [length]="assetsSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page" [disabled]="isPaginationDisabled()">
+
+<div  *ngIf="!lonelyCategory" class=" card-news card-numbers card-position card-horizontal pt-3 pb-3">
+  <div class="card-news-container">
+    <div
+      class="card-news-content mt-0 d-flex align-items-center justify-content-between"
+    >
+      <div>
+        <h2>Check the SDKs and APIs</h2>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="https://api.aiod.eu/redoc" class="btn btn-default"
+          >Check now <i class="icon-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Search and filter component -->
+<div
+  class="featured-products-item mt-3 pt-3 pb-3 align-items-center justify-content-between"
+>
+  <div class="featured-products-item-title">
+    Explore AI Catalogue
+  </div>
+
+  
+    <form [formGroup]="searchFormGroup"  class="search-row d-flex">
+      <div class="search-input">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="search"
+            placeholder="Find AI resources in your Language"
+            id="name"
+            class="form-control"
+            (input)="onInputChange()"
+            (keyup.enter)="searchAssets()"
+          />
+        </div>
+
+        <a
+          (click)="searchAssets()"
+          class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-none d-lg-flex"
+          ><i class="icon-lupa"></i
+        ></a>
+      </div>
+      <div class="buttons-container" [title]="inputTooShort ? ' Type at least 3 characters to enable enhanced search' : ''">
+        <mat-checkbox
+          formControlName="enhancedSearch"
+          class="search-type"
+          (change)="onEnhancedSearchChange($event)"
+          [title]="
+            inputTooShort
+              ? ' Type at least 3 characters to enable enhanced search'
+              : 'Click to enable enhanced search'
+          "
+        
+        >
+          Enhanced Search
+        </mat-checkbox>
+      </div>
+    </form>
+  
+
+  <!-- Filters  -->
+  <div class="filters-row d-flex align-items-center pb-3">
+  
+    <a
+      id="allPlat"
+      class="btn  m-2"
+      (click)="selectPlat('')"
+      [ngClass]="
+      platformSelected == ''
+        ? ' btn-default'
+        : 'btn-success btn-success--blue'
+    "
+      title="Click to select all platforms"
+    >
+      All Platforms
+    </a>
+
+    <div *ngFor="let platform of platforms; index as i">
+      <a
+        id="{{ platform.name }}"
+        class="btn m-1 "
+        [ngClass]="
+           platformSelected == platform.name
+            ? 'btn-default'
+            : 'btn-success btn-success--blue'
+        "
+
+        (click)="selectPlat(platform.name)"
+        (dblclick)="unSelectPlat(platform.name)"
+      >
+        {{ platform.name }}
+      </a>
+    </div>
+  </div>
+
+  <div   *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
+    <a
+      id="allCat"
+      class="btn d-none m-2"
+      (click)="selectAllCat()"
+      title="Click to select all categories, "
+      [ngClass]="
+      platformSelected== ''
+        ? 'btn-default'
+        : 'btn-success btn-success--blue'
+    "
+    >
+      All categories
+    </a>
+    <div *ngFor="let category of assetCategories; index as i">
+      <a
+        id="{{ category }}"
+        class="btn m-2"
+        [ngClass]="
+          categorySelected == category
+            ? 'btn-default'
+            : 'btn-success btn-success--blue'
+        "
+        (click)="selectCat(category)"
+        (dblclick)="unSelectCat(category)"
+        tittle="Click to select category, double-click to deselect"
+      >
+        {{ category }}
+      </a>
+    </div>
+  </div>
+
+  
+</div>
+<!--Viewer Selector-->
+<div class="viewer row flex-row-reverse pr-3 pt-3 pb-3">
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="viewModeCheckbox">
+      <input type="checkbox" id="viewModeCheckbox" />
+      <div class="slider round">
+        <div class="theme-switch-icons">
+          <!-- multiple items -->
+          <div
+            (click)="displayMode(1)"
+            [ngClass]="displayModeValue === 1 ? 'active' : ''"
+          >
+            <svg
+              class="grid-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                x="3"
+                y="3"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="12"
+                y="3"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="12"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="12"
+                y="12"
+                width="5"
+                height="5"
+                [attr.fill]="displayModeValue === 1 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+              </svg>
+              </div>
+
+              <!--  list items -->
+              <div
+              (click)="displayMode(2)"
+              [ngClass]="displayModeValue === 2 ? 'active' : ''"
+              >
+              <svg
+                class="list-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                x="3"
+                y="4"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="9"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+                <rect
+                x="3"
+                y="14"
+                width="14"
+                height="2"
+                [attr.fill]="displayModeValue === 2 ? '#fff' : (isLightTheme ? '#000' : '#fff')"
+                />
+              </svg>
+              </div>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
+
+<!--spinner-->
+<div *ngIf="isLoading; else assetList" class="spinner">
+  <mat-progress-spinner class="custom-spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<!-- paginator-->
+<mat-paginator
+  class="paginator"
+  (page)="handlePageEvent($event)"
+  [length]="assetsSize"
+  [pageSizeOptions]="pageSizeOptions"
+  aria-label="Select page"
+  [disabled]="isPaginationDisabled()"
+>
 </mat-paginator>
 
 <ng-template #assetList>
-    <div class="asset-cards-container">
-        <div
-            fxFlex
-            *ngFor="
-                let asset of assets 
-            "
-            class="m-2"
-        >
-            <app-asset-card [asset]="asset"></app-asset-card>
-        </div>
+  <div class="asset-cards-container row">
+    <div
+      id="grid-layout"
+      *ngFor="let asset of assets"
+      class=""
+      [ngClass]="
+        displayModeValue === 1
+          ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
+          : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
+      "
+      class="col-lg-4 col-md-6 col-sm-12"
+    >
+      <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
     </div>
+  </div>
 </ng-template>

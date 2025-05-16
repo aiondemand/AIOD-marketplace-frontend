@@ -1,10 +1,108 @@
-.asset-cards-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 1rem;
+.marketplace-toolbar {
+  justify-content: space-between;
 }
 
-.marketplace-toolbar {
-    background-color: var(--white);
-    justify-content: space-between;
+
+
+.viewer {
+  width: 100%;
+}
+
+.btn-default {
+  padding: 11px 20px;
+}
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  //color: #ffffffb2;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.search-row {
+  width: 70%;
+}
+.search-input {
+  width: 100%;
+  position: relative;
+  .btn {
+    position: absolute;
+    top: 2px;
+    right: -10px;
+  }
+}
+
+.featured-products-item {
+  padding: 10px 20px;
+}
+.featured-products-item-title {
+  font-size: 60px;
+  margin-bottom: 55px;
+}
+
+.slider:before {
+   background-color: transparent; 
+
+}
+
+.active{
+  background: #0047BB;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  display: flex
+;
+  
+  align-items: center;
+}
+
+::ng-deep {
+  .mat-mdc-select-value-text {
+    color: #ffffffb2; /* Add your styles here */
+  }
+  .mat-mdc-paginator-icon {
+    color: #ffed00;
+  }
+  .mdc-checkbox__background {
+    border-color: #ffed00 !important;
+  }
+
+  .mdc-checkbox--disabled .mdc-checkbox__background {
+    border-color: #27261e;
+  }
+
+  .mat-mdc-checkbox label {
+    font-family: "Jura", sans-serif;
+  }
+
+  .mat-mdc-checkbox-disabled label {
+    color: rgb(243 235 235 / 38%);
+  }
+
+  [data-theme="light"] {
+      .mat-mdc-checkbox-disabled label {
+        color:#757a7b;
+      }
+      .mdc-checkbox--disabled .mdc-checkbox__background {
+        border-color:#757a7b;
+      }
+  }
+
+  .mat-mdc-checkbox
+    .mdc-checkbox
+    .mdc-checkbox__native-control:enabled:checked
+    ~ .mdc-checkbox__background {
+    background-color: #000000;
+  }
+
+
+ 
 }

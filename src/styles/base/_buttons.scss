@@ -1,0 +1,548 @@
+// ===== BUTTONS ===== //
+
+
+.btn {
+   display: inline-block;
+   padding: $buttonPadding;
+   width: fit-content;
+
+   @if $buttonShadow !=0 {
+      box-shadow: $buttonShadow;
+   }
+
+   @if $buttonBorderRadius !=0 {
+      border-radius: $buttonBorderRadius;
+   }
+
+   border: none;
+   cursor: pointer;
+   font-size: $buttonFontSize;
+   line-height: 24px;
+   transition: $buttonTransition;
+   font-weight: $font-weight-semibold;
+
+   &:hover {
+      @if $buttonShadowHover !=0 {
+         box-shadow: $buttonShadowHover;
+      }
+
+      text-decoration: none;
+   }
+
+   &:focus,
+   &:active {
+      text-decoration: none;
+   }
+}
+
+.btn-grey {
+   background-color: #C5C6C8;
+   border: 1px solid transparent;
+   color: $color-primary;
+   font-weight: $font-weight-medium;
+   transition: all 300ms ease;
+
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+         border-color: #C5C6C8;
+         background-color: transparent;
+      }
+   }
+
+}
+
+.btn-default {
+   @if $buttonDefaultBorder !=0 {
+      border: $buttonDefaultBorder;
+   }
+
+   // background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, $color-primary3 0%, #0047BB 55%, #003399 100%);
+   background: #0047BB;
+   padding: 15px 30px;
+   color: $buttonDefaultColor;
+   position: relative;
+
+   @media screen and (max-width: 320px) {
+      padding: 10px 26px;      
+   }
+
+   i {
+      font-size: 10px;
+      color: $color-primary4;
+      margin-left: 5px;
+   }
+
+   &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.125) 53.65%, rgba(255, 255, 255, 0) 100%);
+      -webkit-mask:
+         linear-gradient(#fff, #fff) content-box,
+         linear-gradient(#fff, #fff);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+   }
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+
+         @if $buttonDefaultBorder !=0 {
+            border: $buttonDefaultBorderHover;
+         }
+
+         // background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, #FFFAB8 0%, #FFED00 55%, #E6D502 100%);
+         background: #FFED00;
+         color: $color-primary2;
+
+         i {
+            color: $color-primary2;
+         }
+      }
+   }
+   &--yellow {
+      background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, #FFFAB8 0%, #FFED00 55%, #E6D502 100%);
+      color: $color-primary2;
+
+      i {
+         color: $color-primary2;
+      }
+      &:hover{
+         background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, $color-primary3 0%, #0047BB 55%, #003399 100%);
+         color: $buttonDefaultColor;
+         i {
+            color: $color-primary4;
+         }
+      }
+   }
+}
+
+.btn-blue {
+   @if $buttonDefaultBorder !=0 {
+      border: $buttonDefaultBorder;
+   }
+
+   background-color: $buttonDefaultBackground;
+   color: $buttonDefaultColor;
+   position: relative;
+
+   i {
+      font-size: 10px;
+      color: $color-primary4;
+      margin-left: 5px;
+   }
+
+   &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.125) 53.65%, rgba(255, 255, 255, 0) 100%);
+      -webkit-mask:
+         linear-gradient(#fff, #fff) content-box,
+         linear-gradient(#fff, #fff);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+   }
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+
+         @if $buttonDefaultBorder !=0 {
+            border: $buttonDefaultBorderHover;
+         }
+
+         background-color: $buttonDefaultBackgroundHover;
+         color: $buttonDefaultColorHover;
+
+         i {
+            color: $buttonDefaultColorHover;
+         }
+      }
+   }
+}
+
+.btn-primary {
+   @if $buttonPrimaryBorder !=0 {
+      border: $buttonPrimaryBorder;
+   }
+
+   background-color: $buttonPrimaryBackground;
+   color: $buttonPrimaryColor;
+   position: relative;
+
+   i {
+      font-size: 10px;
+      color: $buttonPrimaryColor;
+      margin-left: 5px;
+   }
+
+   &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(130, 120, 0, 0.25) 0%, rgba(130, 120, 0, 0.125) 53.65%, rgba(130, 120, 0, 0) 100%);
+      -webkit-mask:
+         linear-gradient(#fff, #fff) content-box,
+         linear-gradient(#fff, #fff);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+   }
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+         @if $buttonPrimaryBorder !=0 {
+            border: $buttonPrimaryBorderHover;
+         }
+
+         background-color: $buttonPrimaryBackgroundHover;
+         color: $buttonPrimaryColorHover;
+
+         i {
+            color: $buttonPrimaryColorHover;
+         }
+      }
+   }
+
+
+}
+
+.btn-secondary {
+   @if $buttonSecondaryBorder !=0 {
+      border: $buttonSecondaryBorder;
+   }
+
+   background-color: $buttonSecondaryBackground;
+   color: $buttonSecondaryColor;
+
+   position: relative;
+
+   &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.125) 53.65%, rgba(255, 255, 255, 0.00280899) 99.99%, rgba(130, 120, 0, 0) 100%);
+      -webkit-mask:
+         linear-gradient(#fff, #fff) content-box,
+         linear-gradient(#fff, #fff);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+   }
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+         @if $buttonSecondaryBorder !=0 {
+            border: $buttonSecondaryBorderHover;
+         }
+
+         background-color: $buttonSecondaryBackgroundHover;
+         color: $buttonSecondaryColorHover;
+      }
+   }
+
+   &--yellow {
+      background-color: $color-primary4;
+
+      &:before {
+         background: linear-gradient(180deg, rgba(130, 120, 0, 0.25) 0%, rgba(130, 120, 0, 0.125) 53.65%, rgba(130, 120, 0, 0) 100%);
+      }
+   }
+}
+
+.btn-success {
+   @if $buttonSuccessBorder !=0 {
+      border: $buttonSuccessBorder;
+   }
+
+   background-color: $buttonSuccessBackground;
+   color: $buttonSuccessColor;
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+         @if $buttonSuccessBorder !=0 {
+            border: $buttonSuccessBorderHover;
+         }
+
+         color: $white;
+         border-color: $white;
+         background-color: transparent;
+      }
+   }
+
+   &--grey {
+      border-color: $color-primary5;
+      color: $color-primary5;
+      opacity: 0.6;
+      transition: opacity 300ms ease;
+
+      i {
+         color: $color-primary5;
+         font-size: 10px;
+         display: inline-block;
+         transform: rotate(90deg);
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+         @include min-lg {
+            color: $color-primary5 !important;
+            opacity: 1 !important;
+            background-color: transparent !important;
+            border-color: $color-primary5 !important;
+         }
+      }
+   }
+   &--blue{
+      color: $color-primary3 !important;
+      border-color: $color-primary3;
+   }
+   &--white{
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+   }
+}
+
+.btn-xs {
+   padding: $buttonXSPadding;
+   font-size: $buttonXSFontSize;
+}
+
+.btn-sm {
+   padding: $buttonSMPadding;
+   font-size: $buttonSMFontSize;
+}
+
+.btn-lg {
+   padding: $buttonLGPadding;
+   font-size: $buttonLGFontSize;
+}
+
+.btn-xl {
+   padding: $buttonXLPadding;
+   font-size: $buttonXLFontSize;
+}
+
+.btn-block {
+   display: block;
+   width: 100%;
+}
+
+.hero-btn-scroll {
+   width: 30px;
+   height: 100px;
+   padding: 0;
+   transform: translateX(-56%);
+   background: none;
+   border: none;
+   overflow: hidden;
+   z-index: 16;
+   position: relative;
+   .icon-arrow {
+      position: absolute;
+      left: 50%;
+      top: 15px;
+      margin: 0;
+      transform: translate(-50%, -50%) rotate(90deg);
+      color: $color-primary2 !important;
+      transition: top .3s;
+   }
+
+   &::before {
+      background: linear-gradient(180deg, #0047BB 0%, $color-primary3 42.75%, #FFED00 83.75%);
+      -webkit-mask: unset;
+      padding: 0;
+      transform: translateY(calc(30px - 100%));
+      height: 100px;
+      transition: transform .3s;
+   }
+
+   &:hover,
+   &:focus,
+   &:active {
+      .icon-arrow {
+         top: calc(100% - 15px);
+      }
+
+      &::before {
+         transform: translateY(0);
+      }
+   }
+}
+
+.btn-with-text{
+   &.btn.btn-default {
+      background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, $color-primary3 0%, #0047BB 55%, #003399 100%);
+      width: 70px;
+      height: 70px;
+      max-width: 70px;
+      font-weight: $font-weight-bold;
+      transition: all 300ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 30px;
+      transform: translateX(-50%);
+      transition: max-width 1000ms ease;
+      
+
+      &:hover,
+      &:focus,
+      &:active {
+         @include min-lg {
+            background: radial-gradient(43.6% 43.6% at 49.98% 100.45%, #FFFAB8 0%, #FFED00 55%, #E6D502 100%);
+            color: $color-primary2;
+            width: fit-content;
+            max-width: 100%;
+
+            .btn-circle-title {
+               display: inline-block;
+               opacity: 1;
+            }
+
+            i {
+               color: $color-primary2;
+            }
+         }
+      }
+
+      i {
+         color: $color-primary4;
+         font-size: 14px;
+
+         @include max-md {
+            margin-left: 0;
+         }
+
+         &:before {
+            vertical-align: middle;
+         }
+      }
+
+      .btn-circle-title {
+         font-size: 16px;
+         opacity: 0;
+         display: none;
+         white-space: nowrap;
+         margin-right: 5px;
+
+      }
+   }
+}
+
+.btn-link{
+   color: $color-primary4;
+   font-weight: 700;
+}
+
+.btn-circle{
+   width: 40px;
+   height: 40px;
+   border-radius: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 11px;
+   transform: rotate(-45deg);
+   transition: transform 300ms ease;
+   &--yellow{
+      background-color: $color-primary4;
+      color: $color-primary2; 
+      &:hover{
+         background-color: $color-primary2;
+         color: $color-primary4; 
+      }
+   }
+   &--blue{
+      background-color: $color-primary2;
+      color: $color-primary4; 
+      &:hover{
+         background-color: $color-primary4;
+      color: $color-primary2; 
+      }
+   }
+
+}
+
+.btn-icon{
+   display: flex;
+   align-items: center;
+   margin-left: 24px;
+   &:first-child{
+      margin-left: 0;
+   }
+   i{
+      color: $color-primary4;
+      margin-right: 2px;
+   }
+   span{
+      font-size: 13px;
+      color: $white;
+   }
+   strong{
+      font-weight: 700;
+      margin-left: 4px;
+      display: inline-block;
+   }
+}
+
+.btn-light-gray {
+   color: #929292;
+   background-color: transparent;
+   border: 1px solid #929292;
+   
+   font-weight: $font-weight-medium;
+   transition: all 300ms ease;
+
+
+
+
+   &:hover,
+   &:focus,
+   &:active {
+      @include min-lg {
+         border-color: #929292;
+         background-color: #929292;
+         color: $color-primary;
+      }
+   }
+
+}
+
+[data-theme="light"] {
+   .btn-light-gray {
+      border: 1px solid transparent;
+      color:#000000B2;
+
+      &:hover, &.active {
+         background-color: #0047BB;
+         color: white;
+      }
+      &:focus {
+         box-shadow: none;
+      }
+   }
+}
+
