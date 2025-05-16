@@ -57,9 +57,51 @@ export class AssetCardComponent implements OnInit{
     }
   }
 
-  protected addTooBookmark() {
-    this.isBookmarked = !this.isBookmarked;
+  protected onClickBookmark(): void {
+    if (!this.isAuthenticated())
+      return;
+
+    if (!this.isBookmarked) {
+      this.addBookmark();
+    } 
+    else 
+      this.deleteBookmark();
+
+    this.isBookmarked = !this.isBookmarked; 
   }
 
+  isAuthenticated(): boolean {
+    return this.userProfile && Object.keys(this.userProfile).length > 0;
+  }
 
+  private addBookmark() {
+    if (!!this.userProfile){
+      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
+      const bookmarkedAsset = this.getBookmarkedAsset();
+
+      this.bookmarkService.addBookmark(user, [ bookmarkedAsset ]).subscribe({
+        next: (_bookmarkedAssets: any) => { 
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error bookmarking asset', error)
+      });
+    }    
+  }
+
+  private deleteBookmark() {
+    if (!!this.userProfile){
+      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
+      const deleteBody = {
+        identifier: this.asset.identifier.toString(),
+        category: this.asset.category
+      } as  BookmarkBodyRemove
+
+      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
+        next: () => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error deleting asset from bookmarks', error)
+      });
+    }    
+  }
 }

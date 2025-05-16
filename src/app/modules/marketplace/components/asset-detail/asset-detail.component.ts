@@ -17,7 +17,6 @@ import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 })
 
 export class AssetDetailComponent implements OnInit, OnDestroy{
-  private isBookmark: number;
   public userProfile!: UserProfile;
 
   constructor(
@@ -31,7 +30,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
     this.authService.userProfileSubject.subscribe((profile) => {
       this.userProfile = profile;
     });
-    this.isBookmark = 0 // ToDo: this needs to be checked w.r.t user's library.
   }
   
   private subscriptions: Subscription = new Subscription();
@@ -104,9 +102,17 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
       this.subscriptions.add(subscribe);
   }
 
-  protected addItemCart(): void {
-    this.isBookmarked = !this.isBookmarked;
-    this.shoppingCartService.addCartItems(this.asset);
+  protected onClickBookmark(): void {
+    if (!this.isAuthenticated())
+      return;
+
+    if (!this.isBookmarked) {
+      this.addBookmark();
+    } 
+    else 
+      this.deleteBookmark();
+
+    this.isBookmarked = !this.isBookmarked; 
   }
 
   public isURL(value: string): boolean {
@@ -124,14 +130,9 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-  private doBookmarkOperation() {
-    if (this.isBookmark == 0) {
-      this.addBookmark();
-      return;
-    } 
-    // ToDo: allow deletingBookmark here? If so, icon should change from + to trash,
-    //       and the other way around
-    // this.deleteBookmark();
+
+  isAuthenticated(): boolean {
+    return this.userProfile && Object.keys(this.userProfile).length > 0;
   }
 
   private addBookmark() {
@@ -141,7 +142,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
 
       this.bookmarkService.addBookmark(user, [ bookmarkedAsset ]).subscribe({
         next: (_bookmarkedAssets: any) => { 
-          this.isBookmark = 1;
           // ToDo: change bookmark icon style
         },
         error: (error: any) => console.error('Error bookmarking asset', error)
@@ -149,22 +149,22 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
     }    
   }
 
-  // private deleteBookmark() {
-  //   if (!!this.userProfile){
-  //     const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
-  //     const deleteBody = {
-  //       identifier: this.asset.identifier.toString(),
-  //       category: this.asset.category
-  //     } as  BookmarkBodyRemove
+  private deleteBookmark() {
+    if (!!this.userProfile){
+      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
+      const deleteBody = {
+        identifier: this.asset.identifier.toString(),
+        category: this.asset.category
+      } as  BookmarkBodyRemove
 
-  //     this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
-  //       next: () => {
-  //         this.isBookmark = 0
-  //       },
-  //       error: (error: any) => console.error('Error deleting asset from bookmarks', error)
-  //     });
-  //   }    
-  // }
+      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
+        next: () => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error deleting asset from bookmarks', error)
+      });
+    }    
+  }
 
   private getBookmarkedAsset(): AssetsPurchase {
     return {

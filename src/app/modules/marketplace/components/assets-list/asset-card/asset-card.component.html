@@ -36,9 +36,18 @@ product-list-developer-card
       
       </div>
 
-      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'">
+      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'" [class.disabled]="!isAuthenticated()"
+        [title]="!isAuthenticated()
+          ? !isBookmarked
+            ? 'Log in to bookmark'
+            : 'Log to delete bookmark'
+          : !isBookmarked
+            ? 'Add to bookmarks'
+            : 'Delete bookmark'
+          "
+      >
           <div
-        (click)="addTooBookmark(); $event.stopPropagation()"
+        (click)="onClickBookmark(); $event.stopPropagation()"
         class="btn btn-circle not-rotate ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
           >
         <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
