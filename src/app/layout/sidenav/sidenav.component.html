@@ -83,16 +83,22 @@
                 </span>
                 <ul class="submenu"  [ngClass]="isToolsOpened ? 'open' : ''">
                   <li>
-                    <a href="https://api.aiod.eu/redoc">
+                    <a href="https://aiod.eu/tools">
+                      <i class="icon-getting-started"></i>
+                      All Tools
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://aiod.eu/tools/getting-started">
                       <i class="icon-getting-started"></i>
                       Getting started
                     </a>
                   </li>
+                  <!-- <li>
+                    <a href=""> <i class="icon-file-text"></i>Documentation </a>
+                  </li> -->
                   <li>
-                    <a href="https://aiod.eu/technical-support"> <i class="icon-file-text"></i>Documentation </a>
-                  </li>
-                  <li>
-                    <a href="https://aiod.eu/technical-support"> <i class="icon-about"></i>Support </a>
+                    <a href="https://aiod.eu/technical-support"> <i class="icon-about"></i>Technical Support </a>
                   </li>
                 </ul>
               </li>
@@ -110,21 +116,53 @@
                   </span>
                 </span>
                 <ul class="submenu"   [ngClass]="isCommunityOpened ? 'open' : ''">
+                <!-- -->
+                  <li
+                  [ngClass]="isMediaOpened ? 'open' : ''"
+                  class="has-submenu"
+                >
+                  <span (click)="isMediaOpened = !isMediaOpened"
+                    class="d-flex align-items-center justify-content-between sidebar-link"
+                  >
+                    <div><i class="icon-users"></i> <span>Media</span></div>
+                    <span class="submenu-toggle">
+                      <i class="icon-arrow-breadcrumb"></i>
+                    </span>
+                  </span>
+                  <ul class="submenu"   [ngClass]="isMediaOpened ? 'open' : ''">
+                    <li>
+                      <a href="https://aiod.eu/press-corner-types/events">
+                        <i class="icon-file-text"></i>
+                        Events
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://aiod.eu/press-corner-types/news">
+                        <i class="icon-file-text"></i>
+                        News
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://aiod.eu/press-corner-types/newsletter">
+                        <i class="icon-file-text"></i>
+                        Newsletter
+                      </a>
+                    </li>                    
+                  </ul>
+                  </li>
+                <!-- -->
                   <li>
-                    <a href="">
-                      <i class="icon-file-text"></i>
-                      Press Corner
-                    </a>
+                    <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
                   </li>
                   <li>
-                    <a href=""> <i class="icon-map"></i>AI Ecosystem Map </a>
-                  </li>
+                    <a href="https://aiod.eu/ai-experts"> <i class="icon-catalogue"></i> AI Experts </a>
+                  </li>                  
                   <!-- <li>
                                 <a href="">
                                    <i class="icon-star"></i>Sucess Stories
                                 </a>
-                             </li> -->
-                  <!-- <li class="has-submenu sub-submenu">
+                             </li> 
+                   <li class="has-submenu sub-submenu">
                     <a
                       href="javascript:void(0)"
                       class="d-flex align-items-center justify-content-between sub-submenu-link"
@@ -153,14 +191,17 @@
                       </li>
                     </ul>
                   </li> -->
-                  <li>
-                    <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
-                  </li>
-                  <li>
-                    <a href="https://aiod.eu/ai-experts"> <i class="icon-catalogue"></i> AI Experts </a>
-                  </li>
+                  <!-- <li>
+                    <a href="https://ai-ecosystem-map.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
+                  </li> -->
                 </ul>
               </li>
+              <li class="sidebar-link sidebar-link--active">
+                <a href="https://aiod.eu/dashboard">
+                  <i class="icon-dashboard"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>  
             </ul>
           </div>
 
