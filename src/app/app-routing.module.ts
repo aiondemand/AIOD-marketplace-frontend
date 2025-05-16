@@ -18,8 +18,8 @@ const routes: Routes = [
       },
      {
         //This is the redirect from the keycloak login
-        path: environment.keycloakConfig.redirectUri + "resources",
-        redirectTo: "resources",
+       path: environment.keycloakConfig.redirectUri + "resources",
+       redirectTo: "resources",
         pathMatch: "full",
      },
       {

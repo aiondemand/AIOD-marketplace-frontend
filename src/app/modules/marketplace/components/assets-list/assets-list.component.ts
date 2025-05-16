@@ -142,14 +142,11 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   protected unSelectPlat(id: number) {
     //TODO MAKE THEM UNSElECTED
   }
-
   protected selectAllPlat() {
     this.platformSelected = '';
     this.searchAssets()
 
   }
-
-
   protected selectCat(category: AssetCategory) {
     this.categorySelected = category;
     this.filtersService.setAssetCategorySelected(this.categorySelected);
@@ -157,7 +154,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   protected unSelectCat(id: number) {
     //TODO MAKE THEM UNSElECTED
   }
-
   protected selectAllCat() {
     throw new Error("Method not implemented.");
   }
@@ -176,6 +172,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.filtersService.setEnhancedSearch(isEnhancedSearch);
 
     var query = this.searchFormGroup.get("search")?.value;
+    console.log("query cada vez que busco", query);
     this.filtersService.setSearchQuery(query);
   }
 
@@ -201,29 +198,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.filtersService.setEnhancedSearch(isEnhanced);
   }
 
-  isEnhancedSearchF() {
-    return (
-      !this.searchFormGroup.get("search")?.value &&
-      this.filtersService.isEnhancedSerach
-    );
-  }
-
-
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
   }
 
-  toggleFilterPanel() {
-    const posiblesEndings = ["marketplace", "my-library"];
-    this.router.events.subscribe((event: any) => {
-      if (!!event["routerEvent"]?.url) {
-        this.isFiltersVisible = posiblesEndings.some((ending) => {
-          this.isFilterLibraryVisible = ending == "my-library";
-          return this.router.url.endsWith(ending);
-        });
-      }
-    });
-  }
 
   subscriptionAssetCategory() {
     return this.filtersService.assetCategorySelected$.subscribe(
@@ -517,6 +495,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           if (searchQuery !== "") {
             if (isEnhanced) {
               this.enhancedSearch(searchQuery);
+              console.log("query con enhanced", searchQuery);
             } else {
               this.basicSearch();
             }
@@ -595,7 +574,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         filter(
           (response) =>
-            response.status === "Completed" && !!response.result_doc_ids
+            response.status === "Completed" && !!response.result_asset_ids
         ),
         switchMap((response) => {
           if (
@@ -612,12 +591,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             );
           }
 
-          if (response.status === "Completed" && !response.result_doc_ids) {
+          if (response.status === "Completed" && !response.result_asset_ids) {
             this.spinnerService.updateMessage("No results found.");
-            return of({ result_doc_ids: [] });
+            return of({ result_asset_ids: [] });
           }
 
-          if (response.status === "Completed" && response.result_doc_ids) {
+          if (response.status === "Completed" && response.result_asset_ids) {
             this.spinnerService.updateMessage("Loading results...");
             return of(response);
           }
@@ -626,9 +605,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         take(1),
         switchMap((response) => {
-          if (response.result_doc_ids && response.result_doc_ids.length > 0) {
+          if (response.result_asset_ids && response.result_asset_ids.length > 0) {
+            
             return this.generalAssetService.getMultipleAssets(
-              response.result_doc_ids
+              response.result_asset_ids
             );
           }
 

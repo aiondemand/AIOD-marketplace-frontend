@@ -50,7 +50,9 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let asset">
                 <button mat-icon-button class="delete-button" (click)="deleteAssetMyLibrary(asset)">
-                    <mat-icon>delete</mat-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5c-.1.8-.8 1.5-1.6 1.5H8.1c-.8 0-1.5-.7-1.6-1.5L5 9zm5 2v8h2v-8h-2zm4 0v8h2v-8h-2zM9 4h6v2H9V4z"/>
+                    </svg>
                 </button>
             </td>
         </ng-container>

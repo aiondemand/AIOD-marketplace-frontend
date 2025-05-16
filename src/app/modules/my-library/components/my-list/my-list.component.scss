@@ -77,6 +77,10 @@ tr.element-row:hover {
     background: transparent;
     font-family: "Jura", sans-serif !important;
   }
+  .mat-mdc-table tbody *{
+    background: transparent;
+    font-family: "Jura", sans-serif !important;
+  }
   
   .mat-mdc-paginator-icon {
     color:$color-primary4;
@@ -92,12 +96,23 @@ tr.element-row:hover {
   [data-theme="ligth"] {
     .mat-mdc-table .mat-mdc-header-cell {
       color:black !important;
-  }}
+  }
+  .mat-mdc-table tbody *{
+    color:black !important;
+  }
+
+
+}
   
   [data-theme="dark"] {
     .mat-mdc-table .mat-mdc-header-cell {
-      color:black !important;
-  }}
+      color:#ffffff !important;
+  }
+
+  .mat-mdc-table tbody *{
+    color:#ffffff !important;
+  }
+}
 
 }
 
