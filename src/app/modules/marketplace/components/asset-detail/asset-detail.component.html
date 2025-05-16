@@ -15,7 +15,7 @@
       <div class="asset-body-container">
 
 
-      <div class="asset-body-description card-news-container " class="card-news-container m-3">
+      <div *ngIf="asset.description && asset.description.length > 0" class="asset-body-description card-news-container " class="card-news-container m-3">
         <h3 >{{ "ASSETS.ASSET-DETAIL.DESCRIPTION" | translate }}</h3>
         <div class="card-news-content">
             <markdown class="markdown-white">
