@@ -25,6 +25,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   protected isResourcesOpened:boolean=true;
   protected isToolsOpened:boolean=false;
   protected isCommunityOpened:boolean=false;
+   protected isMediaOpened:boolean=false;
 
   constructor(
     private _formBuilder: FormBuilder,
