@@ -133,7 +133,10 @@
             "DESCRIPTION": "Description",
             "SIZE": "Size",
             "URL": "URL",
-            "CHECKSUM": "Checksum"
+            "CHECKSUM": "Checksum",
+            "CHECKSUM_ALGORITHM": "Checksum Algorithm",
+            "CONTENT_URL": "URL",
+            "ENCODING_FORMAT": "Encoding Format"
         },
         "MEDIA": {
             "TITLE": "Media",

@@ -230,13 +230,24 @@
           }}</span>
           <span>: {{ distribution.size }}</span>
         </p>
-        <p *ngIf="!!distribution.url">
+        <p *ngIf="!!distribution.content_url && distribution.content_url.length > 0">
           <span class="distribution-title">{{
-            "ASSETS.DISTRIBUTION.URL" | translate
+            "ASSETS.DISTRIBUTION.CONTENT_URL" | translate
           }}</span>
           <span
             >:
-            <a [href]="distribution.url" target="_blank">{{
+            <a [href]="distribution.content_url" target="_blank">{{
+              distribution.url
+            }}</a>
+          </span>
+        </p>
+        <p *ngIf="!!distribution.encoding_format && distribution.encoding_format.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.ENCODING_FORMAT" | translate
+          }}</span>
+          <span
+            >:
+            <a [href]="distribution.encoding_format" target="_blank">{{
               distribution.url
             }}</a>
           </span>
@@ -246,6 +257,12 @@
             "ASSETS.DISTRIBUTION.CHECKSUM" | translate
           }}</span>
           <span>: {{ distribution.checksum }} </span>
+        </p>
+        <p *ngIf="!!distribution.checksum_algorithm && distribution.checksum_algorithm.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.CHECKSUM_ALGORITHM" | translate
+          }}</span>
+          <span>: {{ distribution.checksum_algorithm }} </span>
         </p>
       </div>
     </mat-card-content>
