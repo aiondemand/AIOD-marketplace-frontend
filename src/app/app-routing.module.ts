@@ -42,7 +42,7 @@ const routes: Routes = [
           import("@modules/about/about.module").then((m) => m.AboutModule),
       },
       {
-        path: "my-bookmarks",
+        path: "shopping-cart",
         loadChildren: () =>
           import("@modules/shopping-cart/shopping-cart.module").then(
             (m) => m.ShoppingCartModule

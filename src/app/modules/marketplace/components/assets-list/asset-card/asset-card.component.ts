@@ -15,10 +15,17 @@ export class AssetCardComponent implements OnInit{
   categoryColor: string = '';
   categoryKey!: string | undefined;
   assetIcon: string = '';
+  isBookmarked: boolean = false;
 
   ngOnInit(): void {
     if(this.asset) {
       this.categoryKey = getKeyCategoryByValue(AssetCategory, this.asset.category)
     }
   }
+
+  protected addTooBookmark() {
+    this.isBookmarked = !this.isBookmarked;
+  }
+
+
 }

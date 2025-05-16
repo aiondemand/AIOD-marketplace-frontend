@@ -17,6 +17,14 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.titleService.setTitle(this.appConfigService.title);
-        document.documentElement.setAttribute('data-theme', 'dark');
+      
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }else{
+
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
     }
 }

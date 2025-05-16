@@ -60,6 +60,10 @@ body {
   background-color: transparent !important;
   
 }
+.not-rotate{
+  transform: rotate(0deg);
+}
+
 
 .paginator {
   display: flex;

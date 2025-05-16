@@ -30,6 +30,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
   public asset!: AssetModel;
   private category!: AssetCategory;
   public AssetCategory = AssetCategory;
+  protected isBookmarked: boolean = false;
 
   private getAsset(id: number, category: AssetCategory): void {
     this.isLoading = true;
@@ -93,6 +94,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
   }
 
   protected addItemCart(): void {
+    this.isBookmarked = !this.isBookmarked;
     this.shoppingCartService.addCartItems(this.asset);
   }
 
