@@ -17,11 +17,11 @@ const routes: Routes = [
         pathMatch: "full",
       },
      {
-        // This is the redirect from the keycloak login
-       path: environment.keycloakConfig.redirectUri + "resources",
-       redirectTo: "resources",
-       pathMatch: "full",
-      },
+        //This is the redirect from the keycloak login
+        path: environment.keycloakConfig.redirectUri + "resources",
+        redirectTo: "resources",
+        pathMatch: "full",
+     },
       {
         path: "resources",
         loadChildren: () =>
@@ -42,7 +42,7 @@ const routes: Routes = [
           import("@modules/about/about.module").then((m) => m.AboutModule),
       },
       {
-        path: "my-bookmarks",
+        path: "shopping-cart",
         loadChildren: () =>
           import("@modules/shopping-cart/shopping-cart.module").then(
             (m) => m.ShoppingCartModule

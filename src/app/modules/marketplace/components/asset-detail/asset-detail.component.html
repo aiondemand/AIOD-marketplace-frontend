@@ -157,11 +157,11 @@
                 <h2>{{ asset.name | titlecase }}</h2>
                 <button
                 title="Add to bookmarks"
-                class="btn btn-circle btn-circle--blue ml-2"
-                (click)="onClickBookmark()"
+                class="btn btn-circle not-rotate  ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
+                (click)="addItemCart()"
                 >
-                <i class="icon-resources-saved"></i>
-                </button>
+                <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
+              </button>
             </div>
         
             <div class=" title-dates">

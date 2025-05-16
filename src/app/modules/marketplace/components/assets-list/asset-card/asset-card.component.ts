@@ -38,6 +38,7 @@ export class AssetCardComponent implements OnInit{
   categoryColor: string = '';
   categoryKey!: string | undefined;
   assetIcon: string = '';
+  isBookmarked: boolean = false;
 
   private getBookmarkedAsset(): AssetsPurchase {
     return {
@@ -56,54 +57,9 @@ export class AssetCardComponent implements OnInit{
     }
   }
 
-  onClickBookmark(): void {
-    if (!this.isAuthenticated())
-      return;
-
-    this.doBookmarkOperation();
+  protected addTooBookmark() {
+    this.isBookmarked = !this.isBookmarked;
   }
 
-  private isAuthenticated(): boolean {
-    return this.userProfile && Object.keys(this.userProfile).length > 0;
-  }
 
-  private doBookmarkOperation() {
-    if (this.isBookmark == 0) {
-      this.addBookmark();
-      return;
-    } 
-    this.deleteBookmark();
-  }
-  
-  private addBookmark() {
-    if (!!this.userProfile){
-      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
-      const bookmarkedAsset = this.getBookmarkedAsset();
-
-      this.bookmarkService.addBookmark(user, [ bookmarkedAsset ]).subscribe({
-        next: (_bookmarkedAssets: any) => { 
-          this.isBookmark = 1;
-          // ToDo: change bookmark icon style
-        },
-        error: (error: any) => console.error('Error bookmarking asset', error)
-      });
-    }    
-  }
-
-  private deleteBookmark() {
-    if (!!this.userProfile){
-      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
-      const deleteBody = {
-        identifier: this.asset.identifier.toString(),
-        category: this.asset.category
-      } as  BookmarkBodyRemove
-
-      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
-        next: () => {
-          this.isBookmark = 0
-        },
-        error: (error: any) => console.error('Error deleting asset from bookmarks', error)
-      });
-    }    
-  }
 }
