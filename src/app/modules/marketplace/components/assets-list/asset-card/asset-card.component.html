@@ -18,9 +18,7 @@ product-list-developer-card
       <div  [ngClass]="mode==1 ? 'colum-flexed' : ' row-flexed'">
         <div class="btn-icon">
           <span>Type</span>
-          <span
-        ><strong>{{ asset.category }}</strong></span
-          >
+          <span><strong>{{ asset.category }}</strong></span>
         </div>
 
         <div class="btn-icon">
@@ -38,9 +36,18 @@ product-list-developer-card
       
       </div>
 
-      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'">
+      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'" [class.disabled]="!isAuthenticated()"
+        [title]="!isAuthenticated()
+          ? !isBookmarked
+            ? 'Log in to bookmark'
+            : 'Log to delete bookmark'
+          : !isBookmarked
+            ? 'Add to bookmarks'
+            : 'Delete bookmark'
+          "
+      >
           <div
-        (click)="addTooBookmark(); $event.stopPropagation()"
+        (click)="onClickBookmark(); $event.stopPropagation()"
         class="btn btn-circle not-rotate ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
           >
         <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>

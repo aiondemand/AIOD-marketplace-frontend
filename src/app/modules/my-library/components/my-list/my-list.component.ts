@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { Subscription } from 'rxjs';
-import { AssetBodyRemove, MyLibraryService } from '../../services/my-library.service';
+import { BookmarkBodyRemove, BookmarkService } from '../../../marketplace/services/common-services/bookmark-service/bookmark.service';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
@@ -19,7 +19,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private appConfig: AppConfigService,
     private filterState: FiltersStateService,
-    private myLibraryService: MyLibraryService,
+    private bookmarkService: BookmarkService,
     private authService: AuthService,
   ) {}
 
@@ -35,7 +35,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private getAssetsPurchases(): void {
     this.isLoading = true;
-    const subscribeLib = this.myLibraryService.getAssetsPurchased({id: this.userProfile.identifier, email: this.userProfile.email})
+    const subscribeLib = this.bookmarkService.getBookmarks({id: this.userProfile.identifier, email: this.userProfile.email})
       .subscribe({
         next: (assets: AssetsPurchase[]) => {
           this.dataSource.data = assets;
@@ -60,9 +60,9 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
     const body = {
       identifier: asset.identifier,
       category: asset.category
-    } as AssetBodyRemove
+    } as BookmarkBodyRemove
     
-    this.myLibraryService.deleteAssetMyLibrary({id: this.userProfile.identifier, email: this.userProfile.email}, body).subscribe({
+    this.bookmarkService.deleteBookmark({id: this.userProfile.identifier, email: this.userProfile.email}, body).subscribe({
       next: () => {
         this.getAssetsPurchases();
       },

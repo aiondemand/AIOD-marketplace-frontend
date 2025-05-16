@@ -158,7 +158,16 @@
                 <button
                 title="Add to bookmarks"
                 class="btn btn-circle not-rotate  ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
-                (click)="addItemCart()"
+                [class.disabled]="!isAuthenticated()"
+                (click)="onClickBookmark()"
+                [title]="!isAuthenticated()
+                  ? !isBookmarked
+                    ? 'Log in to bookmark'
+                    : 'Log to delete bookmark'
+                  : !isBookmarked
+                    ? 'Add to bookmarks'
+                    : 'Delete bookmark'
+                  "
                 >
                 <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
               </button>

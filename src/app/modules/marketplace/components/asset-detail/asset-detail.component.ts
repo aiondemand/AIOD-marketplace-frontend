@@ -3,11 +3,13 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { AssetModel } from '@app/shared/models/asset.model';
-import {  Subscription, switchMap } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
-import { ShoppingCartService } from '@app/shared/services/shopping-cart/shopping-cart.service';
 import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
-
+import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
+import { BookmarkBodyRemove, BookmarkService } from '../../services/common-services/bookmark-service/bookmark.service';
+import { UserModel } from '@app/shared/models/user.model';
+import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 @Component({
   selector: 'app-asset-detail',
   templateUrl: './asset-detail.component.html',
@@ -15,13 +17,20 @@ import { GeneralAssetService } from '../../services/assets-services/general-asse
 })
 
 export class AssetDetailComponent implements OnInit, OnDestroy{
+  public userProfile!: UserProfile;
+
   constructor(
     private appConfig: AppConfigService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
-    private generalAssetSerice: GeneralAssetService,
-    private shoppingCartService: ShoppingCartService,
-  ) {}
+    private bookmarkService: BookmarkService,
+    private generalAssetService: GeneralAssetService,
+  ) {
+    this.authService.userProfileSubject.subscribe((profile) => {
+      this.userProfile = profile;
+    });
+  }
   
   private subscriptions: Subscription = new Subscription();
   public icon!: string;
@@ -34,14 +43,14 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
 
   private getAsset(id: number, category: AssetCategory): void {
     this.isLoading = true;
-    this.generalAssetSerice.setAssetCategory(category);
+    this.generalAssetService.setAssetCategory(category);
     
-    const subscribe = this.generalAssetSerice.getAsset(id).subscribe( {
+    const subscribe = this.generalAssetService.getAsset(id).subscribe( {
       next: (asset: AssetModel) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name)
         this.isLoading = false;
-        console.log  ('Asset', this.asset)
+        // console.log  ('Asset', this.asset)
       },
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000)
@@ -93,9 +102,17 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
       this.subscriptions.add(subscribe);
   }
 
-  protected addItemCart(): void {
-    this.isBookmarked = !this.isBookmarked;
-    this.shoppingCartService.addCartItems(this.asset);
+  protected onClickBookmark(): void {
+    if (!this.isAuthenticated())
+      return;
+
+    if (!this.isBookmarked) {
+      this.addBookmark();
+    } 
+    else 
+      this.deleteBookmark();
+
+    this.isBookmarked = !this.isBookmarked; 
   }
 
   public isURL(value: string): boolean {
@@ -113,4 +130,50 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
+
+  isAuthenticated(): boolean {
+    return this.userProfile && Object.keys(this.userProfile).length > 0;
+  }
+
+  private addBookmark() {
+    if (!!this.userProfile){
+      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
+      const bookmarkedAsset = this.getBookmarkedAsset();
+
+      this.bookmarkService.addBookmark(user, [ bookmarkedAsset ]).subscribe({
+        next: (_bookmarkedAssets: any) => { 
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error bookmarking asset', error)
+      });
+    }    
+  }
+
+  private deleteBookmark() {
+    if (!!this.userProfile){
+      const user = new UserModel({id_user: this.userProfile.identifier, user_email: this.userProfile.email})
+      const deleteBody = {
+        identifier: this.asset.identifier.toString(),
+        category: this.asset.category
+      } as  BookmarkBodyRemove
+
+      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
+        next: () => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error deleting asset from bookmarks', error)
+      });
+    }    
+  }
+
+  private getBookmarkedAsset(): AssetsPurchase {
+    return {
+      identifier: ''+this.asset.identifier,
+      name: this.asset.name,
+      category: this.asset.category,
+      urlMetadata: this.asset.sameAs,
+      price: 0,
+      addedAt: new Date().getDate()
+    } as AssetsPurchase
+  }  
 }

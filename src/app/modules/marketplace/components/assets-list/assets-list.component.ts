@@ -120,18 +120,17 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         },
       });
 
-      this.route.queryParams.subscribe(params => {
-
-        for (const [key, value] of Object.entries(assetCategoryMapping)) {
-          if (value === params['category']) {
-            this.categorySelected = key as AssetCategory;
-            this.lonelyCategory = true;
-            this.searchAssets()
-            break;
-          }
+    this.route.queryParams.subscribe(params => {
+      for (const [key, value] of Object.entries(assetCategoryMapping)) {
+        if (value === params['category']) {
+          this.categorySelected = key as AssetCategory;
+          this.lonelyCategory = true;
+          this.searchAssets()
+          break;
         }
-      });
-      this.isLightTheme = document.documentElement.getAttribute('data-theme');
+      }
+    });
+    this.isLightTheme = document.documentElement.getAttribute('data-theme');
       
   }
 
