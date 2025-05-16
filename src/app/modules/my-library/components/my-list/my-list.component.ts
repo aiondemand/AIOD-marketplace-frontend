@@ -21,7 +21,11 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
     private filterState: FiltersStateService,
     private bookmarkService: BookmarkService,
     private authService: AuthService,
-  ) {}
+  ) {
+    authService.userProfileSubject.subscribe((profile) => {
+      this.userProfile = profile;
+    });
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -82,7 +86,8 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
     const subscribe = this.filterState.assetCategorySelected$.subscribe(category => this.applyFilter(category));
     const subscribeUser = this.authService.userProfileSubject.subscribe((profile) => {
       this.userProfile = profile
-      this.getAssetsPurchases();
+      if (this.isAuthenticated())
+        this.getAssetsPurchases()
     });
     this.subscriptions.add(subscribe);
     this.subscriptions.add(subscribeUser);
@@ -95,5 +100,9 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource.data = []
     this.dataSource.paginator = this.paginator;
+  }
+
+  private isAuthenticated(): boolean {
+    return this.userProfile && Object.keys(this.userProfile).length > 0;
   }
 }
