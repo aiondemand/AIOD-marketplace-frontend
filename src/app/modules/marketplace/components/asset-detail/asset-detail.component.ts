@@ -50,7 +50,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name)
         this.isLoading = false;
-        // console.log  ('Asset', this.asset)
       },
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000)
