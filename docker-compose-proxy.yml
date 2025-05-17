@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  nginx:
+  mylibrary-nginx-proxy:
     image: nginx:1.25.5
-    container_name: nginx
+    container_name: mylibrary-nginx-proxy
     restart: unless-stopped
     env_file:
       - .env
