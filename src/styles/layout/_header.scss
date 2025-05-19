@@ -1181,12 +1181,14 @@ $sidebar-collapsed-width: 75px;
    &-container{
       position: absolute;
       width: inherit;
-      height: calc( 100vh - 110px );
+      height: fit-content;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background-color: #010714;
       border: 1px solid #1B2336;
+      overflow-y: inherit;
+      
     
    }
    &-user{
@@ -1298,6 +1300,12 @@ $sidebar-collapsed-width: 75px;
          padding: 15px 0;
       }
    }
+   .submenu-2{
+      padding-left: 0 !important;
+    
+      .hasnot-submenu{padding-left: 30px !important;}
+      .subsubmenu{padding-left: 30px !important;}
+   }
    ul{
       list-style: none;
       padding: 0;
@@ -1389,7 +1397,7 @@ $sidebar-collapsed-width: 75px;
  }
  
  .has-submenu.open .submenu-toggle {
-   transform: rotate(-90deg); /* Gira a seta ao abrir */
+   transform: rotate(-90deg) ; /* Gira a seta ao abrir */
  }
 
  .sidebar.collapsed{

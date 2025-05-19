@@ -104,8 +104,8 @@
     
     </div>
 
-    <div class="asset-body-keywords">
-        <div>
+    <div  class="asset-body-keywords">
+        <div *ngIf="!!asset.keywords && asset.keywords.length > 0">
           <h3>{{ "ASSETS.ASSET-DETAIL.KEYWORDS" | translate }}</h3>
           <div class="keywords-list">
             <div

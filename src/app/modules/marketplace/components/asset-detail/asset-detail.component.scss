@@ -19,9 +19,7 @@ ul {
   }
 }
 
-.card-news-content {
-  color: $white !important;
-}
+
 
 .asset-title-row {
   display: flex;
@@ -67,12 +65,22 @@ ul {
     color: $white;
   }
 
+  .card-news-content {
+    color: $white ;
+  }
+
  
 }
 
-[data-theme="light"] .asset-tittle {
-  color: black;
-}
+[data-theme="light"]{
+
+  .card-news-content{
+    color: black;
+  }
+  .asset-tittle {
+    color: black;
+  }
+} 
 .asset-body {
   display: flex;
   flex-direction: row;
@@ -123,6 +131,7 @@ a:hover {
 
 .distribution-card {
   width: 360px;
+  background-color: transparent;
 }
 
 .media-container {
