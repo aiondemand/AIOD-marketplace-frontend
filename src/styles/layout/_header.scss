@@ -1153,6 +1153,10 @@ input+.slider {
       #registerLink {
          color: $color-primary2;
       }
+
+      .sidebar-text {
+         color: $color-primary2;
+      }
    }
 
    .user-avatar{
@@ -1161,7 +1165,6 @@ input+.slider {
       }
    }
 }
-
 
 
 
@@ -1373,6 +1376,15 @@ $sidebar-collapsed-width: 75px;
 
 #registerLink {
    color: $color-primary3;
+}
+
+.sidebar-text {
+   color: $color-primary3;
+   width: 80%;
+   text-align: end;
+   font-size: 12px;
+   margin-left: auto;
+   margin-right: 15px;
 }
 
 .has-submenu {
