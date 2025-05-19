@@ -7,6 +7,7 @@ table {
 // .mat-mdc-row .mat-mdc-cell {
 //   cursor: pointer;
 // }
+
 tr.element-row:hover {
   background: whitesmoke;
 }
@@ -60,8 +61,6 @@ tr.element-row:hover {
   .paginator{
       color: #ffffffb2;
   }
-
- 
 }
 
 [data-theme="light"] {
@@ -107,11 +106,19 @@ tr.element-row:hover {
   [data-theme="dark"] {
     .mat-mdc-table .mat-mdc-header-cell {
       color:#ffffff !important;
-  }
+    }
 
-  .mat-mdc-table tbody *{
-    color:#ffffff !important;
-  }
+    .mat-mdc-table tbody *{
+      color:#ffffff !important;
+    }
+
+    span.chip-asset-category {
+      color: black !important;
+    }
+
+    tr.element-row:hover {
+      background: rgba(0, 0, 0, 0.87) !important;
+    }
 }
 
 }

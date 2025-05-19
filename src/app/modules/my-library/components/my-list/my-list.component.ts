@@ -43,6 +43,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe({
         next: (assets: AssetsPurchase[]) => {
           this.dataSource.data = assets;
+          this.dataSource.filter = 'any'; // Show all types of assets
           this.lengthTable = this.dataSource.data.length
           this.isLoading = false;
         },
@@ -89,7 +90,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.isAuthenticated())
         this.getAssetsPurchases()
     });
-    this.subscriptions.add(subscribe);
+    // this.subscriptions.add(subscribe);
     this.subscriptions.add(subscribeUser);
     
   }
