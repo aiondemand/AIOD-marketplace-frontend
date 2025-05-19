@@ -80,6 +80,11 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
   }
+
+  login() {
+    this.authService.login(window.location.pathname);
+  }
+
   toggleSidenav() {
     this.sidenavService.toggle();
   }

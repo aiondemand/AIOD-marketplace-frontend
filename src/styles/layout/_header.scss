@@ -1149,7 +1149,9 @@ input+.slider {
          p{
             color: $black;
          }
-        
+      }
+      #registerLink {
+         color: $color-primary2;
       }
    }
 
@@ -1369,6 +1371,9 @@ $sidebar-collapsed-width: 75px;
    }
 }
 
+#registerLink {
+   color: $color-primary3;
+}
 
 .has-submenu {
    cursor: pointer;
@@ -1401,6 +1406,8 @@ $sidebar-collapsed-width: 75px;
  }
 
  .sidebar.collapsed{
+   overflow-y: unset;
+
    @include max-lg{  
       left: -100%;
 
@@ -1427,6 +1434,18 @@ $sidebar-collapsed-width: 75px;
    }
 
    .sidebar-footer #collapseButton{
+      i {
+         transform: rotate(180deg);
+         display: inline-block;
+      }
+   }
+
+   .sidebar-footer #registerDiv *:not(i){
+      opacity: 0;
+      visibility: hidden;
+   }
+
+   .sidebar-footer #registerDiv{
       i {
          transform: rotate(180deg);
          display: inline-block;

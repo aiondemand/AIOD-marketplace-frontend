@@ -76,7 +76,7 @@
                 <span  (click)="isToolsOpened = !isToolsOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-forum"></i> <span>Tools</span></div>
+                  <div><i class="icon-grid"></i> <span>Tools</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
@@ -129,7 +129,10 @@
                     <span (click)="isMediaOpened = !isMediaOpened"
                       class="d-flex align-items-center justify-content-between sidebar-link"
                     >
-                      <div><i class="icon-users"></i> <span>Media</span></div>
+                      <div>
+                        <i class="icon-dashboard"></i> 
+                        <span>Press Corner</span>
+                      </div>
                       <span class="submenu-toggle">
                         <i class="icon-arrow-breadcrumb"></i>
                       </span>
@@ -199,30 +202,28 @@
                       </ul>
                     </li> -->
                     <li class="hasnot-submenu">
-                      <a href="https://eu-ai-ecosystem.tnods.nl/"> <i class="icon-map"></i> AI Organisations </a>
+                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
                     </li>
                   </ul>
               </li>
-              
-              <li class="sidebar-link sidebar-link--active">
-                <a href="https://aiod.eu/dashboard">
-                  <i class="icon-dashboard"></i>
-                  <span>Dashboard</span>
-                </a>
-              </li>  
             </ul>
           </div>
 
           <div class="sidebar-footer">
             <div class="menu p-0">
               <ul>
-                <li class="sidebar-link sidebar-link--active">
+                <li class="sidebar-link">
                   <a href="https://aiod.eu/dashboard">
-                    <i class="icon-grid"></i>
+                    <i class="icon-dashboard"></i>
                     <span>Dashboard</span>
                   </a>
                 </li>
               </ul>
+            </div>
+
+            <div id="registerDiv" *ngIf="!isLoggedIn()">
+              <p> Don't have an AIoD account?</p>
+              <p  id="registerLink" (click)="login(); $event.stopPropagation()">Register</p>
             </div>
 
             <div
