@@ -18,9 +18,15 @@
   }
 
   .mdc-list-item__primary-text {
-    color: aliceblue !important;
+    // color: aliceblue !important;
+    color: black !important;
   }
 }
+
+
+  // [data-theme="light"] .mat-mdc-select-value-text {
+  //   color: white !important; /* Add your styles here */
+  // }
 
 .header {
   position: fixed;
@@ -86,9 +92,6 @@
   & img {
     max-width: 200px;
   }
-}
-
-.sidenav-content {
 }
 
 .acknowledgments {
