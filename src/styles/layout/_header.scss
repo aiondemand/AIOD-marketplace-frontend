@@ -974,6 +974,9 @@ input+.slider {
 // Light Mode
 
 [data-theme="light"] {
+   .corner{
+      border-color: #00000066 !important;
+   }
 
    input+.slider {
       &:before {
@@ -1403,6 +1406,16 @@ $sidebar-collapsed-width: 75px;
          color: $color-primary2;
       }
    }
+
+   .corner{
+      width: 14px;
+      height: 10px;
+      display: inline-block;
+      border-left: 1px solid #FFFFFF66;
+      border-bottom: 1px solid #FFFFFF66;
+      margin-right: 10px;
+   }
+
  }
  
  .submenu.open {
