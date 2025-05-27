@@ -68,7 +68,37 @@
       </div>
     </form>
   
-
+    <div   *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
+      <a
+        id="allCat"
+        class="btn d-none m-2"
+        (click)="selectAllCat()"
+        title="Click to select all categories, "
+        [ngClass]="
+        platformSelected== ''
+          ? 'btn-default'
+          : 'btn-success btn-success--blue'
+      "
+      >
+        All categories
+      </a>
+      <div *ngFor="let category of assetCategories; index as i">
+        <a
+          id="{{ category }}"
+          class="btn m-2"
+          [ngClass]="
+            categorySelected == category
+              ? 'btn-default'
+              : 'btn-success btn-success--blue'
+          "
+          (click)="selectCat(category)"
+          (dblclick)="unSelectCat(category)"
+          tittle="Click to select category, double-click to deselect"
+        >
+          {{ category }}
+        </a>
+      </div>
+    </div>
   <!-- Filters  -->
   <div class="filters-row d-flex align-items-center pb-3">
   
@@ -104,37 +134,7 @@
     </div>
   </div>
 
-  <div   *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
-    <a
-      id="allCat"
-      class="btn d-none m-2"
-      (click)="selectAllCat()"
-      title="Click to select all categories, "
-      [ngClass]="
-      platformSelected== ''
-        ? 'btn-default'
-        : 'btn-success btn-success--blue'
-    "
-    >
-      All categories
-    </a>
-    <div *ngFor="let category of assetCategories; index as i">
-      <a
-        id="{{ category }}"
-        class="btn m-2"
-        [ngClass]="
-          categorySelected == category
-            ? 'btn-default'
-            : 'btn-success btn-success--blue'
-        "
-        (click)="selectCat(category)"
-        (dblclick)="unSelectCat(category)"
-        tittle="Click to select category, double-click to deselect"
-      >
-        {{ category }}
-      </a>
-    </div>
-  </div>
+
 
   
 </div>
