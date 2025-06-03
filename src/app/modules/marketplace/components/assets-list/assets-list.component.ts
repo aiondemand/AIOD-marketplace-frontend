@@ -111,6 +111,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           this.isEnhancedSearch = value;
         },
       });
+    
+    const selectedCategory = localStorage.getItem("selectedCategory");
+    if(selectedCategory && this.isValidAssetCategory(selectedCategory)) {
+      this.categorySelected = selectedCategory as AssetCategory;
+      this.selectCat(this.categorySelected);
+    }
+
+
 
     this.filtersStateService.searchQuery$
       .pipe(takeUntil(this.destroy$))
@@ -148,6 +156,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
   protected selectCat(category: AssetCategory) {
     this.categorySelected = category;
+    localStorage.setItem("selectedCategory", category)
     this.filtersService.setAssetCategorySelected(this.categorySelected);
   }
   protected unSelectCat(id: number) {
