@@ -1,106 +1,171 @@
+@import "src/styles/variables.scss";
+
 $borderColor: rgb(212, 212, 212);
 $urlColor: #31488b;
 $ligthTextColor: #8b8b8b;
+$white: #fff;
+
+ul {
+  color: $white;
+}
+.card-news-container {
+  h2,
+  h3,
+  h4 {
+    font-family: "Jura", sans-serif;
+    padding: 24px;
+    margin: 0;
+    padding-bottom: 0;
+  }
+}
+
+
+
+.asset-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn.btn-default {
+  cursor: default;
+}
+.btn-success .btn-success--blue {
+  cursor: default;
+}
 
 .asset-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    .paths {
-        align-self: flex-end;
-    }
-    button {
-        margin-right: 2em;
-    }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .paths {
+    align-self: flex-end;
+  }
+  button {
+    margin-right: 2em;
+  }
 }
-.asset-content {
-    margin-top: 1em;
-    padding: 1em;
-}
+
 .asset-tittle {
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-    margin: 1em 1em 1em 0;
-    color: var(--accent);
-    p {
-        font-weight: bolder;
-        font-size: small;
-    }
-    .title-dates span {
-        margin-right: 10px;
-    }
-    .title-alternames {
-        color: $ligthTextColor; 
-    }
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin: 1em 1em 1em 0;
+  justify-content: space-between;
+  p {
+    font-weight: bolder;
+    font-size: small;
+  }
+  .title-dates span {
+    margin-right: 10px;
+  }
 }
+[data-theme="dark"] {
+  .asset-tittle {
+    color: $white;
+  }
+
+  .card-news-content {
+    color: $white ;
+  }
+
+ 
+}
+
+[data-theme="light"]{
+
+  .card-news-content{
+    color: black;
+  }
+  .asset-tittle {
+    color: black;
+  }
+} 
 .asset-body {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 15px;
-    .mat-icon {
-        vertical-align: middle;
-        font-size: 1.3em;
-    }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  .mat-icon {
+    vertical-align: middle;
+    font-size: 1.3em;
+  }
 }
 .asset-body-description {
-    max-height: 500px; 
-    overflow: auto;
-    margin-right: 1em;
+  max-height: 500px;
+  overflow: auto;
+  margin-right: 1em;
 }
 .asset-body-container {
-    flex-grow: 3;
-    flex-basis: 1em;
-    border-right: 1px solid $borderColor ;
-     margin-right: 1em;
+  flex-grow: 3;
+  flex-basis: 1em;
+  margin-right: 1em;
 }
 
-.asset-body-keywords{
-    flex-grow: 1;
-    flex-basis: 1em;
-    margin-bottom: 1em;
-}
-
-h1{
-    color: var(--primary);
-}
-
-h2,h3,h4{
-    color: var(--accent);
+.asset-body-keywords {
+  flex-grow: 1;
+  flex-basis: 1em;
+  margin-bottom: 1em;
 }
 
 a {
-    text-decoration: none;
-    color: $urlColor;
+  text-decoration: none;
+  color: $color-primary3;
 }
 a:hover {
-    text-decoration: none;
-    color: var(--primary);
+  text-decoration: none;
 }
 
 .distribution-title {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
 .distribution-container {
-    // border: 1px solid red;
-    // background-color: red;
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
+  // border: 1px solid red;
+  // background-color: red;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
 }
 
 .distribution-card {
-    width: 360px;
+  width: 360px;
+  background-color: transparent;
 }
 
 .media-container {
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
-    margin: 1em;
-    justify-content: space-between;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin: 1em;
+  justify-content: space-between;
+}
+
+::ng-deep {
+
+ .xng-breadcrumb-link {
+    color: $white !important;
+  }
+  .xng-breadcrumb-list{
+
+    color: $white !important;
+  }
+
+  [data-theme="light"]{
+
+    .xng-breadcrumb-link {
+        color: black !important;
+      }
+      .xng-breadcrumb-list{
     
+        color: black !important;
+      }
+    
+
+  }
+}
+
+.disabled {
+  opacity: 0.5;
 }

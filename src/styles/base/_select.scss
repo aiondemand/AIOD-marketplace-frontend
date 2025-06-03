@@ -1,0 +1,122 @@
+/*the container must be positioned relative:*/
+.custom-select-option{
+	position: relative;
+	font-size: $selectFontSize;
+
+	select {
+		display: block; /*hide original SELECT element:*/
+		width: 100%;
+		height: auto;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		opacity: 0;
+		z-index: -1;
+
+		&.custom-select__mobile {
+			z-index: 99 !important;
+		}
+	}
+	
+	/* Let's get this party started */
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+	
+	/* Track */
+	::-webkit-scrollbar-track {
+		border-left: 1px solid #eee;
+		background: rgba(0, 0, 0, 0.05);
+	}
+	
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.25);
+	}
+	::-webkit-scrollbar-thumb:window-inactive {
+		background: rgba(0, 0, 0, 0.25);
+	}
+}
+
+.select-selected {
+	height: $selectHeight;
+	padding: 0 $selectFontSize;
+	border-radius: $selectBorderRadius;
+	border: $selectBorder;
+	position: relative;
+	background-color: $selectBackground;
+	line-height: $selectHeight;
+	color: $white;
+	cursor: pointer;
+	vertical-align: middle;
+
+	/*style the arrow inside the select element:*/
+	&:after {
+		content: '';
+		width: 0;
+		height: 0;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translate(0, -2px);
+		border: 4px solid transparent;
+		border-color: rgb(124, 124, 124) transparent transparent transparent;
+	}
+	
+	/*point the arrow upwards when the select box is open (active):*/
+	&.select-arrow-active {
+		border-radius: $selectBorderRadius $selectBorderRadius 0 0;
+		
+		&:after {
+			border-color: transparent transparent rgb(124, 124, 124) transparent;
+			transform: translate(0, -6px);
+		}
+	}
+}
+
+
+/*style the items (options), including the selected item:*/
+.select-items div {
+	height: $selectHeight;
+	padding: 0 $selectFontSize;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	color: #ffffff;
+	line-height: $selectHeight;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+/*style items (options):*/
+.select-items {
+	max-height: 250px;
+	position: absolute;
+	top: $selectHeight;
+	left: 0;
+	right: 0;
+	z-index: 99;
+	overflow: auto;
+	margin-top: -1px;
+	border-radius: 0 0 $selectBorderRadius $selectBorderRadius;
+	border: $selectBorder;
+	background-color: $selectBackground;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+	display: none;
+}
+
+.select-items div {
+	background-color: $selectItemsBackground;
+	color: $selectColor;
+	
+	&:last-child {
+		border-bottom: none;
+	}
+	
+	&:hover {
+		background-color: $selectItemsBackgroundHover;
+		color: $selectItemsColorHover;
+	}
+}

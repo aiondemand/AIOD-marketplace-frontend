@@ -1,51 +1,64 @@
-@use '@angular/material' as mat;
+
+
 .asset-card {
-    max-width: 500px;
-    height: 300px;
-
-    &:hover {
-        @include mat.elevation(12);
-        cursor: pointer;
-    }
-
-    & .mat-mdc-card-title {
-        font-size: 1.1rem;
-    }
-
-    & .mat-mdc-card-content {
-        font-size: 1rem;
-    }
-
-    border: 1px solid var(--border-gray);
-}
-.asset-card-header .mat-icon {
-    transform: scale(0.8);
-    position: relative;
-    top: 5px;
-    left: -4px;
+  position: relative;
+  width: 100%;
+  
 }
 
-.asset-card-content {
-    color: var(--dark-grey);
-    max-height: 150px;
-    max-width: 255px;
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    white-space: nowrap; 
+.bookmark-btn-column{
+  position: absolute;
+  bottom: 1rem; 
+  right: 1rem;
+  z-index: 2;
+  margin: 0;
+ 
 }
 
-.keywords-container {
-    position: absolute;
-    bottom: 5px;
-    left: 1rem;
+.bookmark-btn-row{
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 2;
+  margin: 0;
+ 
 }
 
-.keyword-button {
-    border-radius: 30px;
-    border: 1px solid;
-    background-color: var(--white);
-    border-color: var(--border-gray);
-    padding: 5px 10px;
-    color: var(--black);
-    white-space: nowrap;
+.min-height{
+  min-height: 280px;
 }
+
+h3{
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.colum-flexed{
+
+    margin-top: 2px;
+    flex-direction: column;
+    gap: 1em;
+    display: flex !important;
+    justify-content: space-between;
+    
+  }
+
+  .row-flexed{
+    margin-top: 2px;
+    flex-direction: row;
+    gap: 1em;
+    display: flex !important;
+    
+  }
+
+  .btn-icon {
+
+    margin-left: 0;
+
+  }
+
+.disabled {
+  opacity: 0.5;
+}
+
+  

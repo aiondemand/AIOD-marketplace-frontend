@@ -1,0 +1,14 @@
+.loba {
+	display: inline-block;
+	max-width: 50px;
+	opacity: 0.4;
+	transition: opacity 0.2s ease;
+
+	&:hover {
+		opacity: 1;
+	}
+
+	img {
+		width: 100%; 
+	}
+}

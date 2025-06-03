@@ -1,0 +1,50 @@
+.warnings {
+	font-size: $warningFontSize;
+
+	@if $warningFontSizeMobile != 0 {
+		@include max-sm {
+			font-size: $warningFontSizeMobile;
+		}
+	}
+
+	&.warnings--show {
+		p {
+			display: block !important;
+		}
+	}
+
+
+	// APPLIED TO ALL MESSAGES
+	p {
+		display: none;
+		padding: $warningPadding;
+		@if $warningBorderRadius != 0 {
+			border-radius: $warningBorderRadius;
+		}
+	}
+}
+
+
+
+// SUCCESS MESSAGES
+.warnings__success {
+	@if $warningBorder != 0 {
+		border: $warningBorder $warningSuccessBorderColor;
+	}
+	@if $warningSuccessBackground != 0 {
+		background-color: $warningSuccessBackground;
+	}
+	color: $warningSuccessColor;
+}
+
+
+// ERROR MESSAGES
+.warnings__error {
+	@if $warningBorder != 0 {
+		border: $warningBorder $warningErrorBorderColor;
+	}
+	@if $warningErrorBackground != 0 {
+		background-color: $warningErrorBackground;
+	}
+	color: $warningErrorColor;
+}

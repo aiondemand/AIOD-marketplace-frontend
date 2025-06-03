@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: '',
         component: AboutComponent,
-        data: { breadcrumb: '' },
+        data: { breadcrumb: ' > Resources > About' },
     },
    
 ];

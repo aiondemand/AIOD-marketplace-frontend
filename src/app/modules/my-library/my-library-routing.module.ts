@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         path: '',
         component: MyListComponent,
-        data: { breadcrumb: 'my-library' },
+        data: { breadcrumb: '> Bookmarks' },
     },
    
 ];
