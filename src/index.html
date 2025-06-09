@@ -11,10 +11,12 @@
         <script src="assets/env.js"></script>
         
         <script>
-          var base=window.env.ZOHO_URL;
-          var script= document.createElement('script');
-          script.src=base;
-          document.head.appendChild(script);
+          var base= (window.env && window.env.ZOHO_URL) ? window.env.ZOHO_URL : '';
+          if (base != '') {
+            var script= document.createElement('script');
+            script.src=base;
+            document.head.appendChild(script);
+          }
         </script>
 
     </head>

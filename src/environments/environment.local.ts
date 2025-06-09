@@ -22,5 +22,8 @@ export const environment = {
     },
     enhancedApi: {
         baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'],
+    },
+    zohoConfig:{
+        base: ''
     }
 };
