@@ -1,15 +1,15 @@
 export const endpoints = {
     //AIOD
     prefixApiAssets: '/api-metadata',
-    prefixCount: '/counts',
-    prefixByPlatfoms: '/platforms',
+    prefixCount: '/v2/counts',
+    prefixByPlatfoms: '/v2/platforms',
     
     //Categories 
-    datasets: '/datasets/v1',
-    services: '/services/v1',
-    expetiments: '/experiments/v1',
-    aimodels: '/ml_models/v1',
-    educationalResources: '/educational_resources/v1',
+    datasets: '/datasets',
+    services: '/services',
+    expetiments: '/experiments',
+    aimodels: '/ml_models',
+    educationalResources: '/educational_resources',
 
     //Payments
     prefixApiPayment: '/api-library/api',
@@ -21,8 +21,8 @@ export const endpoints = {
     librariesAssets: '/libraries/:userId/assets',
 
     //Platforms
-    platforms: '/platforms/v1',
+    platforms: '/platforms',
 
     //Search
-    search : '/search',
+    search : '/v2/search',
 };

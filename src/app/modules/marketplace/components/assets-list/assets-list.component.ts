@@ -180,7 +180,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.filtersService.setEnhancedSearch(isEnhancedSearch);
 
     var query = this.searchFormGroup.get("search")?.value;
-    console.log("query cada vez que busco", query);
     this.filtersService.setSearchQuery(query);
   }
 
