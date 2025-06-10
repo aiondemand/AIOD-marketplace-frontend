@@ -3,6 +3,7 @@ export const endpoints = {
     prefixApiAssets: '/api-metadata',
     prefixCount: '/v2/counts',
     prefixByPlatfoms: '/v2/platforms',
+    prefixByCategories: '/v2',
     
     //Categories 
     datasets: '/datasets',
