@@ -38,6 +38,10 @@
         "educational resource": {
             "icon":"book",
             "color":"#FCDFDC"
+        },
+        "publication": {
+            "icon":"book",
+            "color":"#FCDFDC"
         }
     }
 }

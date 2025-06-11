@@ -11,6 +11,7 @@ import { AssetDetailComponent } from './components/asset-detail/asset-detail.com
 import { DatasetComponent } from './components/asset-detail/dataset/dataset.component';
 import { ExperimentComponent } from './components/asset-detail/experiment/experiment.component';
 import { EducationalResourceComponent } from './components/asset-detail/educational-resource/educational-resource.component';
+import { PublicationComponent } from './components/asset-detail/publication/publication.component';
 import { ServiceComponentComponent } from './components/asset-detail/service-component/service-component.component';
 import { AimodelComponent } from './components/asset-detail/aimodel/aimodel.component';
 import { MediaComponent } from './components/asset-detail/media/media.component';
@@ -28,6 +29,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
         AimodelComponent,
         MediaComponent,
         EducationalResourceComponent,
+        PublicationComponent,
     ],
     imports: [
         CommonModule,
