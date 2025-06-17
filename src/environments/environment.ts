@@ -19,5 +19,8 @@ export const environment = {
     },
     enhancedApi: {
         baseEnhanced: '',
+    },
+    zohoConfig:{
+        base:''
     }
 };
