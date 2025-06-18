@@ -9,7 +9,7 @@ export const environment = {
         develop: true,
         production: false,
         api: {
-            base: browserwindow.env?.['API_URL'] || 'http://localhost:8001',
+            base: browserwindow.env?.['API_URL'] || 'http://localhost:8083' ,
             endpoints,
             schemas,
         },
@@ -22,5 +22,8 @@ export const environment = {
         },
         enhancedApi: {
             baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] ,
+        },
+        zohoConfig:{
+            base: ''
         }
     };

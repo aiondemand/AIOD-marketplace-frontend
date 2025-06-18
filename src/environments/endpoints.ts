@@ -26,5 +26,5 @@ export const endpoints = {
     platforms: '/platforms',
 
     //Search
-    search : 'v2/search',
+    search : '/v2/search',
 };
