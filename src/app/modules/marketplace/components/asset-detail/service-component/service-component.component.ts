@@ -15,7 +15,7 @@ export class ServiceComponentComponent implements OnInit, OnDestroy {
  
   private subscriptions: Subscription = new Subscription();
   public service!: ServiceModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getServiceModel() {
     const subscribe = this.serviceService

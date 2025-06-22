@@ -15,7 +15,7 @@ export class AimodelComponent implements OnInit, OnDestroy{
  
   private subscriptions: Subscription = new Subscription();
   public aiModel!: AIModelModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getDatatset() {
     const subscribe = this.aiModelService

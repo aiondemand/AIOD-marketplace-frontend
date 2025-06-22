@@ -41,7 +41,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
   public AssetCategory = AssetCategory;
   protected isBookmarked: boolean = false;
 
-  private getAsset(id: number, category: AssetCategory): void {
+  private getAsset(id: string, category: AssetCategory): void {
     this.isLoading = true;
     this.generalAssetService.setAssetCategory(category);
     
