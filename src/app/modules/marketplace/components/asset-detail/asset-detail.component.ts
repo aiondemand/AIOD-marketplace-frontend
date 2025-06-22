@@ -94,7 +94,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
         this.category = AssetCategory[category as keyof typeof AssetCategory];
         return this.route.params;
       })).subscribe((params: Params) => {
-        const id = +params['id'];
+        const id = params['id'];
         this.getAsset(id, this.category);
       })
 
