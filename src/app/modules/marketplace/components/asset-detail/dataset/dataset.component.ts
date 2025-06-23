@@ -15,7 +15,7 @@ export class DatasetComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
   public dataset!: DatasetModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getDatatset() {
     const subscribe = this.datasetService
