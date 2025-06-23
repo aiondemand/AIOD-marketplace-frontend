@@ -15,7 +15,7 @@ export class EducationalResourceComponent implements OnInit, OnDestroy {
  
   private subscriptions: Subscription = new Subscription();
   public educationalResource!: EducationalResourceModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getEducationalResourceModel() {
     const subscribe = this.educationalResourceService

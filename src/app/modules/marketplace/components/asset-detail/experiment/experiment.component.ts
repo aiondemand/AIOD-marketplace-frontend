@@ -15,7 +15,7 @@ export class ExperimentComponent implements OnInit, OnDestroy {
  
   private subscriptions: Subscription = new Subscription();
   public experiment!: ExperimentModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getExperiment() {
     const subscribe = this.expetimentService
