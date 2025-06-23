@@ -36,7 +36,7 @@ export class ShoppingCartService {
         this.cartItems.next(items);
     }
 
-    public deleteCartItem(id: number, category: AssetCategory): void {
+    public deleteCartItem(id: string, category: AssetCategory): void {
         const items = this.getCartItems()
             .filter(asset => asset.identifier !== id || asset.category !== category);
         localStorage.setItem(this.key, JSON.stringify(items));
