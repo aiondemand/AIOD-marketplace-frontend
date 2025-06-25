@@ -11,6 +11,7 @@ export const endpoints = {
     expetiments: '/experiments',
     aimodels: '/ml_models',
     educationalResources: '/educational_resources',
+    publications: '/publications',
 
     //Payments
     prefixApiPayment: '/api-library/api',

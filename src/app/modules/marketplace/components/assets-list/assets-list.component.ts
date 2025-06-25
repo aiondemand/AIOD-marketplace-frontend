@@ -40,6 +40,7 @@ const assetCategoryMapping = {
   [AssetCategory.Experiment]: "experiments",
   [AssetCategory["Educational resource"]]: "educational_resources",
   [AssetCategory["Service"]]: "services",
+  [AssetCategory["Publication"]]: "publications",
 };
 
 @Component({

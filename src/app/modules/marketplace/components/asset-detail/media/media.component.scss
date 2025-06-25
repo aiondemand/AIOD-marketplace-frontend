@@ -5,7 +5,7 @@
     font-family: "Jura", sans-serif !important;
     font-size: 1.5em !important;
   }
-  
+
 
   [data-theme="dark"] .media-card .mat-expansion-panel-header-description,
   [data-theme="dark"] .media-card .mat-expansion-indicator::after {
@@ -18,8 +18,6 @@
 
 
 }
-
-
 
 $urlColor: #31488b;
 
@@ -38,7 +36,7 @@ $urlColor: #31488b;
     .mat-expansion-indicator ::after {
       color: #000 !important;
     }
-    
+
   }
   [data-theme="dark"] {
     color: #fff;
@@ -65,17 +63,20 @@ $urlColor: #31488b;
   p {
     text-align: justify;
   }
-  .card-actions {
+
+}
+
+.card-actions {
     margin-top: auto;
     a {
-      color: $urlColor;
+      color: #41B6E6;
     }
   }
-  .media-card-description {
+.media-card-description {
     overflow: auto;
     margin-right: 1em;
-  }
 }
+
 
 .props-chip {
   display: grid;
@@ -92,7 +93,7 @@ $urlColor: #31488b;
 :host-context([data-theme="light"]) .props-chip {
     color: #000 !important;
   }
-  
+
   :host-context([data-theme="dark"]) .props-chip {
     color: #fff !important;
   }
