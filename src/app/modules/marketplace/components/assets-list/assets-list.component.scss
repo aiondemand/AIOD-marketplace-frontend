@@ -2,10 +2,16 @@
   justify-content: space-between;
 }
 
-
+select {
+  background-color: transparent;
+}
 
 .viewer {
   width: 100%;
+}
+
+.d-xs-none {
+  display: none !important;
 }
 
 .btn-default {
@@ -28,6 +34,11 @@
 
 .search-row {
   width: 70%;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    margin: 5px;
+  }
 }
 .search-input {
   width: 100%;
@@ -39,28 +50,18 @@
   }
 }
 
-.featured-products-item {
-  padding: 10px 20px;
-}
-.featured-products-item-title {
-  font-size: 60px;
-  margin-bottom: 55px;
-}
-
 .slider:before {
-   background-color: transparent; 
-
+  background-color: transparent;
 }
 
-.active{
-  background: #0047BB;
+.active {
+  background: #0047bb;
   border-radius: 50%;
   height: 30px;
   width: 30px;
   justify-content: center;
-  display: flex
-;
-  
+  display: flex;
+
   align-items: center;
 }
 
@@ -88,12 +89,24 @@
   }
 
   [data-theme="light"] {
-      .mat-mdc-checkbox-disabled label {
-        color:#757a7b;
-      }
-      .mdc-checkbox--disabled .mdc-checkbox__background {
-        border-color:#757a7b;
-      }
+    .mat-mdc-checkbox-disabled label {
+      color: #757a7b;
+    }
+    .mdc-checkbox--disabled .mdc-checkbox__background {
+      border-color: #757a7b;
+    }
+
+    select {
+      color: black;
+    }
+  }
+
+  [data-theme="dark"] {
+  
+
+    select {
+      color: #ffffffb2;
+    }
   }
 
   .mat-mdc-checkbox
@@ -102,7 +115,17 @@
     ~ .mdc-checkbox__background {
     background-color: #000000;
   }
+}
 
-
- 
+@media (max-width: 576px) {
+  .viewer {
+    display: none;
+  }
+  .sdk {
+    display: none;
+  }
+  .card-limited {
+    max-width: 350px;
+    display: block;
+  }
 }

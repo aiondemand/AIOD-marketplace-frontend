@@ -36,9 +36,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     private appConfigService: AppConfigService,
     public spinnerService: SpinnerService
   ) {
-    this.mobileQuery = this.media.matchMedia("(max-width: 1366px)");
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
+
   }
 
   protected environment = environment;
@@ -49,8 +47,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     top: 0,
   });
 
-  mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
+
 
   mainLinks = [
     {

@@ -107,6 +107,8 @@ ul {
   flex-grow: 1;
   flex-basis: 1em;
   margin-bottom: 1em;
+
+
 }
 
 a {
@@ -168,4 +170,17 @@ a:hover {
 
 .disabled {
   opacity: 0.5;
+}
+
+@media(max-width:576px){
+
+
+.asset-body-keywords{ max-width: 350px;
+}
+
+.asset-body-category{
+  max-width:350px;
+  
+}
+ 
 }

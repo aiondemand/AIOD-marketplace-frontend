@@ -67,7 +67,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public currentPage = 1;
 
   protected displayModeValue: number = 1; //normally on several labels per line
-
+  protected screenWidth: number= window.innerWidth;
   destroy$ = new Subject<any>();
 
   assetCategories!: any;
@@ -86,7 +86,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private filtersService: FiltersStateService,
     private platformService: PlatformService,
     protected authService: AuthService,
@@ -103,6 +102,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.getPlatforms();
     this.subscription?.add(this.subscriptionAssetCategory());
     this.getFilters();
+    window.addEventListener('resize', this.onResize);
+
+
 
     this.filtersStateService.isEnhancedSerach$
       .pipe(takeUntil(this.destroy$))
@@ -140,7 +142,13 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     });
     this.isLightTheme = document.documentElement.getAttribute('data-theme');
       
-  }
+  } 
+   
+  onResize = () => {
+    this.screenWidth = window.innerWidth;
+    console.log("Screen width changed:", this.screenWidth);
+  };
+
 
   protected selectPlat(platform: string) {
     this.platformSelected = platform;
@@ -185,15 +193,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   onInputChange() {
     const searchValue = this.searchFormGroup.get("search")?.value;
-    this.inputTooShort = searchValue.trim().length < 3;
-
-    if (this.inputTooShort){ 
-      this.searchFormGroup.get("enhancedSearch")?.disable();
-      this.searchFormGroup.get("enhancedSearch")?.setValue(false);
-                  
-    }
-    else {this.searchFormGroup.get("enhancedSearch")?.enable()}
-     
+    this.searchFormGroup.get("enhancedSearch")?.enable();
 
     if (!searchValue.trim()) {
             this.filtersService.setSearchQuery('');
@@ -502,7 +502,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           if (searchQuery !== "") {
             if (isEnhanced) {
               this.enhancedSearch(searchQuery);
-              console.log("query con enhanced", searchQuery);
             } else {
               this.basicSearch();
             }

@@ -209,6 +209,9 @@
 .footer-bottom {
    margin: 24px 0;
    padding: 0 10%;
+ 
+
+ 
 
 
    @include max-sm {
@@ -228,6 +231,12 @@
       display: flex;
       margin-bottom: 10px;
       padding: 0;
+
+      @media(max-width: 576px) {
+   
+         justify-content: center;}
+     
+  
 
       li {
          list-style: none;

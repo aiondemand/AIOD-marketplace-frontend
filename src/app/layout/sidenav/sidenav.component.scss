@@ -17,6 +17,10 @@
     overflow: hidden !important;
   }
 
+  .mat-drawer {
+    overflow-x: hidden !important;
+  }
+
   .mdc-list-item__primary-text {
     // color: aliceblue !important;
     color: black !important;
@@ -33,7 +37,7 @@
 .sidenav-item {
   padding: 0 25px;
 }
-
+ 
 .sidenav-item:hover .mdc-list-item {
   background-color: $color-accent;
   color: $color-default2;
@@ -65,7 +69,19 @@
 }
 
 .mat-drawer-content {
-  min-height: 100vh;
+  //min-height: 100vh;
+}
+
+
+.expanded{
+  margin-left: 70px !important;
+  transition: margin-left 0.3s;
+}
+
+// Si el menú expandido deja un margen mayor:
+.sidenav-content {
+
+  transition: margin-left 0.3s;
 }
 
 .sidenav-footer {
@@ -129,3 +145,4 @@
   align-items: center;
   margin-right: 20px;
 }
+

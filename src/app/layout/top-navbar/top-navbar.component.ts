@@ -18,30 +18,27 @@ export class TopNavbarComponent {
     constructor(
         private readonly authService: AuthService,
         private ren: Renderer2,
-        private changeDetectorRef: ChangeDetectorRef,
-        private media: MediaMatcher,
         private sidenavService: SidenavService,
         protected appConfigService: AppConfigService,
         private shoppingCartService: ShoppingCartService,
         private router: Router,
         
     ) {
-        this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
-        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-        this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-        authService.userProfileSubject.subscribe((profile) => {
-            this.userProfile = profile;
-        });
-        this.getCartItemCount();
+  
     }
     protected sideBarUser: boolean= false;
-    private _mobileQueryListener: () => void;
     protected environment = environment;
-    mobileQuery: MediaQueryList;
     userProfile?: UserProfile;
     isMatMenuOpen = false;
     enteredButton = false;
     cartItems: number = 0; 
+    protected mobileOpened: boolean = false;
+
+    ngOnInit() {
+        if (window.innerWidth >= 768) { 
+            this.mobileOpened = true;
+        } 
+    }
 
     login() {
         this.authService.login(window.location.pathname);
@@ -154,4 +151,8 @@ export class TopNavbarComponent {
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
       }
+
+    openMovileMenu(){
+        this.mobileOpened = !this.mobileOpened;
+    }
 }
