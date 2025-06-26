@@ -26,6 +26,10 @@ export class CaseStudyModel extends AssetModel {
   targetAudience: string[];
   type: string;
 
+  isAccessibleForFree: string;
+  aiAssetIdentifier: string;
+
+
   constructor(data: any) {
     super(data, AssetCategory["Case study"]);
     this.aiodEntry = {
@@ -36,25 +40,29 @@ export class CaseStudyModel extends AssetModel {
       editor: data.aiod_entry.editor,
       status: data.aiod_entry.status,
     };
-    this.timeRequired = data.time_required;
-    this.accessMode = data.access_mode;
+    this.isAccessibleForFree = data.is_accessible_for_free;
+    this.aiAssetIdentifier = data.ai_asset_identifier
     this.aiResourceIdentifier = data.ai_resource_identifier;
     this.applicationArea = data.application_area;
     this.contact = data.contact;
-    this.content = data.content?.plain;
     this.creator = data.creator;
-    this.educationalLevel = data.educational_level;
     this.hasPart = data.has_part;
-    this.inLanguage = data.in_language;
     this.industrialSector = data.industrial_sector;
     this.isPartOf = data.is_part_of;
-    this.location = data.location;
     this.note = data.note;
-    this.pace = data.pace;
-    this.prerequisite = data.prerequisite;
     this.relevantLink = data.relevant_link;
     this.relevantResource = data.relevant_resource;
     this.relevantTo = data.relevant_to;
+
+
+    this.timeRequired = data.time_required;
+    this.accessMode = data.access_mode;
+    this.content = data.content?.plain;
+    this.educationalLevel = data.educational_level;
+    this.inLanguage = data.in_language;
+    this.location = data.location;
+    this.pace = data.pace;
+    this.prerequisite = data.prerequisite;
     this.targetAudience = data.target_audience;
     this.type = data.type;
   }
