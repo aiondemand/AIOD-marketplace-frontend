@@ -38,6 +38,10 @@
         "educational resource": {
             "icon":"book",
             "color":"#FCDFDC"
+        },
+        "case study": {
+            "icon":"book",
+            "color":"#FCDFDC"
         }
     }
 }

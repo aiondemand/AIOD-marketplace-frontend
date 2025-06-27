@@ -39,6 +39,7 @@ const assetCategoryMapping = {
   [AssetCategory.Dataset]: "datasets",
   [AssetCategory.Experiment]: "experiments",
   [AssetCategory["Educational resource"]]: "educational_resources",
+  [AssetCategory["Case study"]]: "case_studys",
   [AssetCategory["Service"]]: "services",
 };
 

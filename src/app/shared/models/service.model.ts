@@ -6,7 +6,6 @@ export class ServiceModel extends AssetModel {
     slogan: string;
     termsOfService: string;
     aiodEntry: AiodEntry;
-    applicationArea: string[];
     contact: any[];
     hasPart: any[];
     industrialSector: string[];
@@ -28,7 +27,6 @@ export class ServiceModel extends AssetModel {
             editor: data.aiod_entry.editor,
             status: data.aiod_entry.status,
         };
-        this.applicationArea = data.application_area;
         this.contact = data.contact;
         this.hasPart = data.has_part;
         this.industrialSector = data.industrial_sector;

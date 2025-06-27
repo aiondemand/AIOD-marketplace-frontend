@@ -76,6 +76,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy{
           "sameAs": "https://huggingface.co/datasets/bigIR/ar_cov19",
           "scientific_domain": [],
           "research_area": [],
+          "applicationArea" : [],
           "date_published": new Date("2023-12-19T09:25:41.000Z"),
           "media": [],
           "citation": [],

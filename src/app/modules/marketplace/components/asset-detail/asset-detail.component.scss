@@ -60,19 +60,20 @@ ul {
     margin-right: 10px;
   }
 }
-[data-theme="dark"] {
+
+:host-context([data-theme="dark"]) {
   .asset-tittle {
     color: $white;
   }
 
   .card-news-content {
-    color: $white ;
+    color: $white;
   }
 
- 
 }
 
-[data-theme="light"]{
+
+:host-context([data-theme="light"]){
 
   .card-news-content{
     color: black;

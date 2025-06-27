@@ -15,7 +15,6 @@ export class ExperimentModel extends AssetModel {
         dateModified: string;
         dateCreated: string;
     };
-    applicationArea: string[];
     assetIdentifier: number;
     badge: string[];
     contact: any[];
@@ -65,7 +64,6 @@ export class ExperimentModel extends AssetModel {
             dateModified: data.aiod_entry.date_modified,
             dateCreated: data.aiod_entry.date_created,
         };
-        this.applicationArea = data.application_area;
         this.assetIdentifier = data.asset_identifier;
         this.badge = data.badge;
         this.contact = data.contact;
