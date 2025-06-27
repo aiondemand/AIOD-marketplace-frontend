@@ -164,7 +164,8 @@
             "SAMEAS" : "Same as",
             "DATA_CREATED": "Date Created",
             "VERSION": "Version",
-            "CITATION": "Citations"
+            "CITATION": "Citations",
+            "APPLICATION_AREA": "Application Area"
         }
     },
     "DATASET": {

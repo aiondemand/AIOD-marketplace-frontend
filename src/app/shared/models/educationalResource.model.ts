@@ -7,7 +7,6 @@ export class EducationalResourceModel extends AssetModel {
   timeRequired: string;
   accessMode: string[];
   aiResourceIdentifier: number;
-  applicationArea: string[];
   contact: any[];
   content: string;
   creator: string[];
@@ -39,7 +38,6 @@ export class EducationalResourceModel extends AssetModel {
     this.timeRequired = data.time_required;
     this.accessMode = data.access_mode;
     this.aiResourceIdentifier = data.ai_resource_identifier;
-    this.applicationArea = data.application_area;
     this.contact = data.contact;
     this.content = data.content?.plain;
     this.creator = data.creator;

@@ -5,7 +5,6 @@ import { AssetModel } from "./asset.model";
 export class CaseStudyModel extends AssetModel {
   aiodEntry: AiodEntry;
   aiResourceIdentifier: number;
-  applicationArea: string[];
   contact: any[];
   creator: string[];
   hasPart: any[];
@@ -32,7 +31,7 @@ export class CaseStudyModel extends AssetModel {
     this.isAccessibleForFree = data.is_accessible_for_free;
     this.aiAssetIdentifier = data.ai_asset_identifier
     this.aiResourceIdentifier = data.ai_resource_identifier;
-    this.applicationArea = data.application_area;
+
     this.contact = data.contact;
     this.creator = data.creator;
     this.hasPart = data.has_part;

@@ -143,6 +143,18 @@
             </div>
           </div>
         </div>
+
+        <div *ngIf="!!asset.applicationArea && asset.applicationArea.length > 0">
+          <h3>{{ "ASSETS.ASSET-DETAIL.APPLICATION_AREA" | translate }}</h3>
+          <div class="application-area-list">
+            <div
+              class="btn btn-success btn-success--blue m-1"
+              *ngFor="let area of asset.applicationArea"
+            >
+              {{ area }}
+            </div>
+          </div>
+        </div>
     </div>
     
 

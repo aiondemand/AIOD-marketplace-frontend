@@ -19,6 +19,7 @@ export class AssetModel {
     version?: string;
     citation?: string[];
     dateCreated?: Date | undefined;
+    applicationArea?: string[];
 
     constructor(data: any, category: AssetCategory) {
         this.identifier = data.identifier??"asset-identifier-unknown";
@@ -40,5 +41,6 @@ export class AssetModel {
         this.version = data.version;
         this.citation = data.citation;
         this.dateCreated = data.aiod_entry?.date_created? new Date(data.aiod_entry?.date_created): undefined;
+        this.applicationArea = data.application_area;
     }
 }
