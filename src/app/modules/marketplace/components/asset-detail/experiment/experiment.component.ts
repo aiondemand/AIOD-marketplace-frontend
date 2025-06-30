@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-experiment',
   templateUrl: './experiment.component.html',
-  styleUrls: ['./experiment.component.scss']
+  styleUrls: ['../asset-detail.component.scss']
 })
 export class ExperimentComponent implements OnInit, OnDestroy {
   constructor(

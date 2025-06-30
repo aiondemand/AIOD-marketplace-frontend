@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-educational-resource',
   templateUrl: './educational-resource.component.html',
-  styleUrls: ['./educational-resource.component.scss']
+  styleUrls: ['../asset-detail.component.scss']
 })
 export class EducationalResourceComponent implements OnInit, OnDestroy {
   constructor(

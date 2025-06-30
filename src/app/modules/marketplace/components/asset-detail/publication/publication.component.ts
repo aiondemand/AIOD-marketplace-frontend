@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-publication',
   templateUrl: './publication.component.html',
-  styleUrls: ['./publication.component.scss']
+  styleUrls: ['../asset-detail.component.scss']
 })
 export class PublicationComponent implements OnInit, OnDestroy {
   constructor(
@@ -15,7 +15,7 @@ export class PublicationComponent implements OnInit, OnDestroy {
  
   private subscriptions: Subscription = new Subscription();
   public publication!: PublicationModel;
-  @Input() identifier!: number;
+  @Input() identifier!: string;
 
   private getPublicationModel() {
     const subscribe = this.publicationService
