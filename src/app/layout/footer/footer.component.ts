@@ -1,4 +1,4 @@
-import { Component,Input, OnChanges } from "@angular/core";
+import { AfterViewInit, Component,Input, OnChanges } from "@angular/core";
 
 @Component({
 
@@ -6,7 +6,12 @@ import { Component,Input, OnChanges } from "@angular/core";
     templateUrl:'./footer.component.html',
     styleUrls: ['./footer.component.scss']
 
-}) export class FooterComponent {
+}) export class FooterComponent implements AfterViewInit{
 
+    ngAfterViewInit() {
+        const script = document.createElement('script');
+        script.src = 'https://aiod.eu/common/assets/header.js';
+        document.body.appendChild(script);
+      }
 
 }
