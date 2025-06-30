@@ -87,7 +87,6 @@
       </div>
 
       <div *ngIf="!!asset.identifier" class="asset-body-category m-3" [ngSwitch]="asset.category">
-        <!-- <div class="card-news-content"> -->
           <div *ngSwitchCase="AssetCategory.Dataset">
             <app-dataset [identifier]="asset.identifier"></app-dataset>
           </div>
@@ -105,7 +104,6 @@
           <div *ngSwitchCase="AssetCategory.Publication">
             <app-publication [identifier]="asset.identifier"></app-publication>
           </div>
-        <!-- </div> -->
       </div>
     
     </div>
