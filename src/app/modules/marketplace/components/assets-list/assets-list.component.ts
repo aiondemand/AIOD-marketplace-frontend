@@ -150,7 +150,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   };
 
 
-  protected selectPlat(platform: string) {
+  protected selectPlat(platform: any) {
     this.platformSelected = platform;
     this.filtersService.setPlatformSelected(this.platformSelected);
   }
@@ -162,7 +162,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.searchAssets()
 
   }
-  protected selectCat(category: AssetCategory) {
+  protected selectCat(category: any) {
     this.categorySelected = category;
     localStorage.setItem("selectedCategory", category)
     this.filtersService.setAssetCategorySelected(this.categorySelected);
