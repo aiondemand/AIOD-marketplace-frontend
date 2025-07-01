@@ -133,18 +133,18 @@
   <ng-template #smallDevice>
     <div class="filters-row d-flex align-items-center pb-3">
       <!--category for small devices-->
-      <select *ngIf="!lonelyCategory" class="mr-2" (change)="selectCat($event )">
+      <select *ngIf="!lonelyCategory" #categorySelect class="mr-2" [(ngModel)]="categorySelected" (change)="selectCat(categorySelect.value)" >
         <option
           *ngFor="let category of assetCategories; index as i"
           [value]="category"
         >
           {{ category }}
         </option>
-        <option value="all">All categories</option>
       </select>
 
       <!--platform for small devices-->
-      <select (change)="selectPlat($event)">
+      <select #platformSelect  [(ngModel)]="platformSelected" (change)="selectPlat(platformSelect.value)">
+        <option [value]="''">All Platforms</option>
         <option
           *ngFor="let platform of platforms; index as i"
           [value]="platform.name"
@@ -152,7 +152,6 @@
         >
           {{ platform.name }}
         </option>
-        <option [value]="''">All Platforms</option>
       </select>
     </div>
   </ng-template>

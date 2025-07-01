@@ -32,6 +32,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { PlatformService } from "../../services/common-services/platform.service";
 import { AuthService } from "@app/core/services/auth/auth.service";
 
+
 const MAX_ATTEMPTS = 15;
 
 const assetCategoryMapping = {
@@ -146,7 +147,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
    
   onResize = () => {
     this.screenWidth = window.innerWidth;
-    console.log("Screen width changed:", this.screenWidth);
   };
 
 
