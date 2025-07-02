@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-aimodel',
   templateUrl: './aimodel.component.html',
-  styleUrls: ['../asset-detail.component.scss']
+  styleUrls: ['./aimodel.component.scss']
 })
 export class AimodelComponent implements OnInit, OnDestroy{
   constructor(

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-publication',
   templateUrl: './publication.component.html',
-  styleUrls: ['../asset-detail.component.scss']
+  styleUrls: ['./publication.component.scss']
 })
 export class PublicationComponent implements OnInit, OnDestroy {
   constructor(
