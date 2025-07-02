@@ -9,9 +9,9 @@ import { AfterViewInit, Component,Input, OnChanges } from "@angular/core";
 }) export class FooterComponent implements AfterViewInit{
 
     ngAfterViewInit() {
-        const script = document.createElement('script');
-        script.src = 'https://aiod.eu/common/assets/header.js';
-        document.body.appendChild(script);
+        //const script = document.createElement('script');
+        //script.src = 'https://aiod.eu/common/assets/header.js';
+        //document.body.appendChild(script);
       }
 
 }
