@@ -1,11 +1,5 @@
 $colorBoder: rgb(212, 212, 212);
 
-h2,
-h3,
-h4 {
-    color: var(--accent);
-}
-
 .dataset-body {
     display: flex;
     flex-direction: column;
@@ -23,7 +17,6 @@ h4 {
 
 .dataset-values h3 {
     margin: 0;
-    /* Elimina el margen de los títulos */
 }
 
 

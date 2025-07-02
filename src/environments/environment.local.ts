@@ -9,7 +9,7 @@ export const environment = {
     develop: true,
     production: false,
     api: {
-        base: browserwindow.env?.['API_URL'] || '',
+        base: browserwindow.env?.['API_URL'] ||  '',
         endpoints,
         schemas,
     },
