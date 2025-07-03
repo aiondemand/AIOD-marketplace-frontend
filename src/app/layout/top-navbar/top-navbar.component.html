@@ -7,13 +7,13 @@
 
                <div class="header-nav-logo">
                      
-                  <div class="open-mobile-menu">
-                   <div class="hamburguer d-lg-none d-xl-none">
+                  <div class="open-mobile-menu" (click)="openMovileMenu()">
+                      <i class="icon-menu"></i>
+                   
+                   <div  class="hamburguer d-lg-none d-xl-none">
                       <span></span>
                    </div>
-                   <div class="hamburguer-close d-lg-none d-xl-none">
-                      <span></span>
-                   </div>
+                 
                 </div>
 
                 
@@ -33,7 +33,7 @@
            
 
                   
-                   <div *ngIf="!isLoggedIn()" >
+                   <div *ngIf="!isLoggedIn() && mobileOpened" >
                       <ul   class="main-menu">   
                          <li class="menu">
                             <div class="menu-link-mobile">
