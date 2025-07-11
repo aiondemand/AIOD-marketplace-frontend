@@ -1,4 +1,7 @@
-<mat-sidenav-container class="mat-primary">
+<mat-sidenav-container 
+  class="mat-primary"
+  [ngClass]="isMenuCollapsed ? 'sidebar-collapsed' : 'sidebar-expanded'"
+>
   <mat-sidenav
     #sidenav
     [mode]="mobileQuery.matches ? 'over' : 'side'"
@@ -229,7 +232,7 @@
             </div>
 
             <div
-              (click)="isMenuCollapsed = !isMenuCollapsed"
+              (click)="toggleCollapse()"
               id="collapseButton"
             >
               <i class="icon-colapse"></i>
