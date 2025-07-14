@@ -93,7 +93,7 @@ jobs:
           name: aiod_my_library_prod
           path: /tmp/aiod_my_library_prod.tar
  
-  test-inside-docker:
+  load-img-docker:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -118,8 +118,9 @@ jobs:
       - name: Load image Prod
         run: docker load --input /tmp/aiod_my_library_prod.tar
 
+
   publish:
-    needs: [test-inside-docker]
+    needs: [load-img-docker]
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
     steps:
