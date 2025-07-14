@@ -43,7 +43,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     })
   }
 
-  public deleteCartItem(id: number, category: AssetCategory): void {
+  public deleteCartItem(id: string, category: AssetCategory): void {
     this.shoppingCartService.deleteCartItem(id, category);
   }
 

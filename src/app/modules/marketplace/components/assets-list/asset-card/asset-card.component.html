@@ -1,29 +1,58 @@
-<mat-card class="asset-card" routerLink="{{ asset.identifier }}" [queryParams]="{category: categoryKey}">
-    <mat-card-header class="asset-card-header">
-        <mat-card-title>
-            <mat-icon
-                matTooltip="{{asset.category}}"
-                color="primary"
-                >{{assetIcon}}</mat-icon
-            >
-            <span>{{ asset.name }}</span>
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <mat-divider></mat-divider>
+<!--  card-horizontal 
+product-list-developer-card  
+-->
+<div
+  class="card-news card-numbers card-position asset-card"
+  routerLink="{{ asset.identifier }}"
+  [queryParams]="{ category: categoryKey }"
+>
+  <div class="card-news-container" [ngClass]="mode==1 ? 'min-height' : ''">
+    <div class="card-news-content mt-0">
+      
+      <div>
+        <h3 style="word-wrap: break-word;">
+          {{ asset.name }}
+        </h3>
+      </div>
 
-        <div class="asset-card-content">
-            <markdown>
-                {{ asset.description }}
-            </markdown>
+      <div  [ngClass]="mode==1 ? 'colum-flexed' : ' row-flexed'">
+        <div class="btn-icon">
+          <span>Type</span>
+          <span><strong>{{ asset.category }}</strong></span>
         </div>
-    </mat-card-content>
-    <mat-card-actions align="start">
-        <mat-card-subtitle class="mt-2 mb-2 keywords-container">
-            <mat-chip-listbox aria-label="Keywords">
-                <mat-chip [style.background]="categoryColor">{{ asset.category | lowercase}}  </mat-chip>
-                <mat-chip *ngIf="asset.platform">{{ asset.platform }} </mat-chip>
-            </mat-chip-listbox>
-        </mat-card-subtitle>
-    </mat-card-actions>
-</mat-card>
+
+        <div class="btn-icon">
+          <span>Platform 🤗</span>
+          <span
+        ><strong>{{ asset.platform }}</strong></span
+          >
+        </div>
+
+        <div class="btn-icon">
+          <i class="icon-clock"></i>
+          <span>{{ asset.date_published }}</span>
+        </div>
+
+      
+      </div>
+
+      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'" [class.disabled]="!isAuthenticated()"
+        [title]="!isAuthenticated()
+          ? !isBookmarked
+            ? 'Log in to bookmark'
+            : 'Log to delete bookmark'
+          : !isBookmarked
+            ? 'Add to bookmarks'
+            : 'Delete bookmark'
+          "
+      >
+          <div
+        (click)="onClickBookmark(); $event.stopPropagation()"
+        class="btn btn-circle not-rotate ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
+          >
+        <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

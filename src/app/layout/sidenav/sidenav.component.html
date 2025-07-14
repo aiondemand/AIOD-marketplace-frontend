@@ -1,106 +1,364 @@
-<mat-sidenav-container class="container mat-primary">
-    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" class="sidenav"
-        [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
-        [fixedBottomGap]="options.value.bottom">
-        <div class="corner-ribbon red" *ngIf="environment.develop">Dev</div>
-        <div class="dashboard-logo-container">
-            <button *ngIf="mobileQuery.matches" mat-icon-button (click)="toggleSidenav()" style="z-index: 99">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <a routerLink="">
-                <img src="../../../assets/images/dashboard-logo.png" />
-            </a>
-        </div>
+<mat-sidenav-container class="mat-primary">
+  <mat-sidenav
+    #sidenav
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="!mobileQuery.matches"
+    class="sidenav"
+    [fixedInViewport]="options.value.fixed"
+    [fixedTopGap]="options.value.top"
+    [fixedBottomGap]="options.value.bottom"
+  >
+    <main class="d-flex">
+      <div
+        class="sidebar scrollable"
+        [ngClass]="isMenuCollapsed ? 'collapsed' : ''"
+        id="sidebar"
+      >
+        <div class="sidebar-container">
+          <div class="menu">
+            <ul>
 
-        <nav id="sidebarMenu" class="">
-            <mat-nav-list>
-                <ng-container *ngFor="let link of mainLinks">
-                    <mat-list-item *ngIf="
-                            !link.isRestricted ||
-                            (link.isRestricted && isLoggedIn())
-                        " class="sidenav-item" [disabled]="link.isDisabled">
-                        <a mat-list-item [routerLink]="!link.isDisabled ? link.url : null" routerLinkActive="active"
-                            class="sidenav-link" [routerLinkActiveOptions]="
-                                link.url === '/'
-                                    ? { exact: true }
-                                    : { exact: false }
-                            ">{{ link.name | translate }}</a>
-                    </mat-list-item>
-                </ng-container>
-                <mat-list-item><a mat-list-item href="https://docs.google.com/forms/d/e/1FAIpQLSekGmIn525fK70wEs0WugxoqJScKzIF5S8T5jLRujv5FdIzeQ/viewform?embedded=true" target="_blank" class="sidenav-link">Contact</a></mat-list-item>
-                <mat-divider class="mt-3 mb-3"></mat-divider>
-            </mat-nav-list>            
-        </nav>
-        <div *ngIf="isFiltersVisible">
-            <div class="filters" *ngIf="!isFilterLibraryVisible">
-                <mat-form-field>
-                    <mat-label>{{'SIDENAV.SELECT-PLATFORM' | translate}}</mat-label>
-                    <mat-select [(value)]="selectedPlatform" (selectionChange)="onSelectPlatformChange()">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let platform of platforms" [value]="platform.name">
-                            {{platform.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="filters">
-                <mat-radio-group aria-labelledby="radio-group-label" class="radio-group" [(ngModel)]="selectedCategory"
-                    (change)="onRadioTypeChange()">
-                    <mat-radio-button *ngIf="isFilterLibraryVisible" class="radio-button" [value]="'any'">{{
-                        'MY-LIBRARY.SIDENAV-FILTER' | translate }}</mat-radio-button>
-                    <mat-radio-button class="radio-button" *ngFor="let category of assetCategories" [value]="category">
-                        {{category}}
-                    </mat-radio-button>
-                </mat-radio-group>
+        
+              <li class="sidebar-link sidebar-link--active">
+                <a href="https://aiod.eu">
+                  <i class="icon-dashboard"></i>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li *ngIf="isLoggedIn()" class="sidebar-link">
+                <a href="/Bookmarks">
+                  <i class="icon-resources-saved"></i>
+                  <span>My Bookmarks</span>
+                </a>
+              </li>
+              <li
+               
+                class="has-submenu"
+                [ngClass]="isResourcesOpened ? 'open' : ''"
+              >
+                <span  (click)="isResourcesOpened = !isResourcesOpened"
+                  class="d-flex align-items-center justify-content-between sidebar-link"
+                >
+                  <div ><i class="icon-ai"></i> <span>Resources</span></div>
+                  <span class="submenu-toggle">
+                    <i class="icon-arrow-breadcrumb"></i>
+                  </span>
+                </span>
+                <ul class="submenu" [ngClass]="isResourcesOpened ? 'open' : ''">
+                  <li>
+                    <a href="">
+                      <i class="icon-catalogue"></i>
+                      Catalogue
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://api.aiod.eu/redoc"
+                      ><i class="icon-catalogue"></i>SDKs and APIs</a
+                    >
+                  </li>
+                    <!-- <li>
+                    <a
+                      [routerLink]="['/resources']"
+                      [queryParams]="{ category: 'educational_resources' }"
+                    >
+                      <i class="icon-catalogue"></i>Educational Resources
+                    </a>
+                    </li> -->
+                    <li>
+                      <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
+                      <p class="sidebar-text">Powered by <a href="https://ai4eosc.eu/">ai4eosc</a> marketplace</p>
+                    </li>
+                </ul>
+              </li>
+              <li class="has-submenu"   [ngClass]="isToolsOpened ? 'open' : ''">
+                <span  (click)="isToolsOpened = !isToolsOpened"
+                  class="d-flex align-items-center justify-content-between sidebar-link"
+                >
+                  <div><i class="icon-grid"></i> <span>Tools</span></div>
+                  <span class="submenu-toggle">
+                    <i class="icon-arrow-breadcrumb"></i>
+                  </span>
+                </span>
+                <ul class="submenu"  [ngClass]="isToolsOpened ? 'open' : ''">
+                  <li>
+                    <a href="https://aiod.eu/tools">
+                      <i class="icon-dashboard"></i>
+                      All Tools
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://aiod.eu/get-started/">
+                      <i class="icon-dashboard"></i>
+                      Get started
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a href=""> <i class="icon-file-text"></i>Documentation </a>
+                  </li> -->
+                  <li>
+                    <a href="https://aiod.eu/technical-support"> 
+                    <i class="icon-dashboard"></i>
+                    Technical Support </a>
+                  </li>
+                </ul>
+              </li>
+              <li
+               
+                [ngClass]="isCommunityOpened ? 'open' : ''"
+                class="has-submenu"
+              >
+                <span (click)="isCommunityOpened = !isCommunityOpened"
+                  class="d-flex align-items-center justify-content-between sidebar-link"
+                >
+                  <div><i class="icon-users"></i> <span>Community</span></div>
+                  <span class="submenu-toggle">
+                    <i class="icon-arrow-breadcrumb"></i>
+                  </span>
+                </span>
+             
+              </li>
+
+              <li>
+
+                <ul class="submenu submenu-2"   [ngClass]="isCommunityOpened ? 'open' : ''">
+                  <!-- -->
+                    <li
+                    [ngClass]="isMediaOpened ? 'open' : ''"
+                    class="has-submenu"
+                  >
+                    <span (click)="isMediaOpened = !isMediaOpened"
+                      class="d-flex align-items-center justify-content-between sidebar-link"
+                    >
+                      <div>
+                        <i class="icon-dashboard"></i> 
+                        <span>Press Corner</span>
+                      </div>
+                      <span class="submenu-toggle">
+                        <i class="icon-arrow-breadcrumb"></i>
+                      </span>
+                    </span>
+                    <ul class="submenu "   [ngClass]="isMediaOpened ? 'open' : ''">
+                      <li class="subsubmenu">
+                        <a href="https://aiod.eu/press-corner-types/events">
+                          <span class="corner"></span>
+                          Events
+                        </a>
+                      </li>
+                      <li class="subsubmenu">
+                        <a href="https://aiod.eu/press-corner-types/news">
+                          <span class="corner"></span>
+                          News
+                        </a>
+                      </li>
+                      <li class="subsubmenu">
+                        <a href="https://aiod.eu/press-corner-types/newsletter">
+                          <span class="corner"></span>
+                          Newsletter
+                        </a>
+                      </li>                    
+                    </ul>
+                    </li>
+                  <!-- -->
+  
+                    <li class="hasnot-submenu">
+                      <a href="https://aiod.eu/project"> <i class="icon-file-text"></i>Projects </a>
+                    </li>
+                    <li class="hasnot-submenu">
+                      <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
+                    </li>
+                    <li class="hasnot-submenu">
+                      <a href="https://aiod.eu/ai-experts"> <i class="icon-star"></i>Pool of Experts </a>
+                    </li>                  
+                    <!-- <li>
+                                  <a href="">
+                                     <i class="icon-star"></i>Sucess Stories
+                                  </a>
+                               </li> 
+                     <li class="has-submenu sub-submenu">
+                      <a
+                        href="javascript:void(0)"
+                        class="d-flex align-items-center justify-content-between sub-submenu-link"
+                      >
+                        <div><i class="icon-star"></i>Success Stories</div>
+                        <span class="submenu-toggle">
+                          <i class="icon-plus"></i>
+                        </span>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a href="https://success-stories.aiod.eu/">
+                            <span class="corner"></span>Success Stories
+                          </a>
+                        </li>
+                        <li>
+                          <a href="">
+                            <span class="corner"></span>Research Areas
+                          </a>
+                        </li>
+                        <li>
+                          <a href="">
+                            <span class="corner"></span>Industry and Application
+                            Areas
+                          </a>
+                        </li>
+                      </ul>
+                    </li> -->
+                    <li class="hasnot-submenu">
+                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
+                    </li>
+                  </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-footer">
+            <div class="menu p-0">
+              <ul>
+                <li class="sidebar-link">
+                  <a href="https://aiod.eu/dashboard">
+                    <i class="icon-dashboard"></i>
+                    <span>Dashboard</span>
+                  </a>
+                </li>
+              </ul>
             </div>
 
-            <div class="filters" *ngIf="!isFilterLibraryVisible">
-                <form [formGroup]="searchFormGroup" class="example-form">
-                    <mat-form-field class="">
-                        <mat-icon matPrefix>search</mat-icon>
-                        <mat-label>Search assets</mat-label>
-                        <input matInput type="search" formControlName="search" placeholder="Enter text to search" (input)="onInputChange()" />
-                    </mat-form-field>
-                    <div class="buttons-container">
-                        <mat-checkbox formControlName="enhancedSearch" class="search-type" (change)="onEnhancedSearchChange($event)">
-                            Enhanced Search
-                        </mat-checkbox>
-                        <button mat-icon-button (click)="searchAssets()" style="z-index: 99" [disabled]="isEnhancedSearch()">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                    </div>
-                </form>
+            <div id="registerDiv" *ngIf="!isLoggedIn()">
+              <p> Don't have an AIoD account?</p>
+              <p  id="registerLink" (click)="login(); $event.stopPropagation()">Register</p>
             </div>
-        </div>
 
-        <div class="sidenav-footer mb-3 ml-3">
-            <div style="display: flex; align-items: center; justify-content: center;">
-                <img src="../../../assets/images/eu-flag.jpg" width="50" class="mr-2" />
-                <img src="../../../assets/images/dashboard-logo.png" width="100" class="mb-1" />
+            <div
+              (click)="isMenuCollapsed = !isMenuCollapsed"
+              id="collapseButton"
+            >
+              <i class="icon-colapse"></i>
+              <span>collapse</span>
             </div>
-            <mat-divider></mat-divider>
-            <div style="margin-top: 10px; text-align: center;">
-                <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" />
-                <p style="margin-top: 0px;">Powered by <a href="https://ai4eosc.eu/">ai4eosc</a> marketplace</p>
+
+            <div class="theme-switch-wrapper mt-0 d-flex d-lg-none">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round">
+                  <div class="theme-switch-icons">
+                    <svg
+                      class="light-icon"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_607_11249)">
+                        <path
+                          d="M10 14.1666C12.3012 14.1666 14.1667 12.3011 14.1667 9.99992C14.1667 7.69873 12.3012 5.83325 10 5.83325C7.69882 5.83325 5.83334 7.69873 5.83334 9.99992C5.83334 12.3011 7.69882 14.1666 10 14.1666Z"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M10 0.833252V2.49992"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M10 17.5V19.1667"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M3.51666 3.5166L4.7 4.69993"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M15.3 15.3L16.4833 16.4834"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M0.833344 10H2.50001"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M17.5 10H19.1667"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M3.51666 16.4834L4.7 15.3"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M15.3 4.69993L16.4833 3.5166"
+                          stroke="white"
+                          stroke-opacity="0.7"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </g>
+                    </svg>
+
+                    <svg
+                      class="dark-icon"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14 8.52667C13.8951 9.66147 13.4692 10.7429 12.7722 11.6445C12.0751 12.5461 11.1357 13.2305 10.0638 13.6177C8.99194 14.0049 7.83199 14.0787 6.71966 13.8307C5.60734 13.5827 4.58866 13.023 3.78281 12.2172C2.97697 11.4113 2.41729 10.3927 2.16927 9.28033C1.92125 8.16801 1.99514 7.00806 2.3823 5.9362C2.76946 4.86434 3.45388 3.92491 4.35547 3.22784C5.25706 2.53076 6.33853 2.10487 7.47333 2C6.80894 2.89884 6.48923 4.0063 6.57235 5.12094C6.65547 6.23559 7.1359 7.28337 7.92626 8.07373C8.71662 8.86409 9.76441 9.34452 10.8791 9.42765C11.9937 9.51077 13.1012 9.19106 14 8.52667Z"
+                        stroke="white"
+                        stroke-opacity="0.7"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </label>
             </div>
-            <!-- <p class="acknowledgments">
-                {{ acknowledgments }}
-                <a [href]="projectUrl">{{ projectName }}</a>
-            </p>
-            <a routerLink="conditions-of-use">{{
-                'SIDENAV.TERMS-OF-USE' | translate
-                }}</a>
-            <a routerLink="privacy-policy" class="ml-3">{{
-                'SIDENAV.PRIVACY-POLICY' | translate
-                }}</a> -->
+          </div>
         </div>
-    </mat-sidenav>
-    <mat-sidenav-content class="pl-3 pr-3 sidenav-content">
-        <app-top-navbar class="top-navbar"></app-top-navbar>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+      </div>
+    </main>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="pl-3 pr-3 sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
-<app-spinner 
-    [isVisible]="(spinnerService.visibility$ | async) ?? false" 
-    [message]="(spinnerService.message$ | async) ?? ''"> spinner
+<app-spinner
+  [isVisible]="(spinnerService.visibility$ | async) ?? false"
+  [message]="(spinnerService.message$ | async) ?? ''"
+>
+  spinner
 </app-spinner>

@@ -1,0 +1,312 @@
+// ===== DEBUG MODE ===== //
+// 0 - not on debug mode
+// 1 - highlights with red border elements without required attributes
+// 2 - highlights with red border elements without required attributes or empty
+
+$debugMode: 0;
+
+// ===== GRID AND VIEWPORTS ===== //
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+$grid-row-columns: 6;
+
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px; // will be the maximum width of the site
+$screen-xxl: 1400px; // will be the maximum width of the site
+$screen-sm-min: $screen-sm;
+$screen-md-min: $screen-md;
+$screen-lg-min: $screen-lg;
+$screen-xl-min: $screen-xl;
+$screen-xxl-min: $screen-xxl;
+$screen-xs-max: (
+   $screen-sm-min - 1
+);
+$screen-sm-max: (
+   $screen-md-min - 1
+);
+$screen-md-max: (
+   $screen-lg-min - 1
+);
+$screen-lg-max: (
+   $screen-xl-min - 1
+);
+$screen-xl-max: (
+   $screen-xxl-min - 1
+);
+
+// ===== COLORS ===== //
+
+$color-primary: #000613;
+$color-primary2: #0047BB;
+$color-primary3: #41B6E6;
+$color-primary4: #FFED00;
+$color-primary5: #FFFFFF;
+$color-primary6: #D9D9D9;
+$color-primary-lighter: $color-primary2;
+$color-primary-darker: $color-primary6;
+
+// Prefix for :root CSS variables
+
+$prefix:                      loba- !default;
+
+
+$color-light-primary: #515151;
+$color-light-primary2: #ECECEC;
+$color-light-primary3: #D3D3D3;
+$color-light-primary4: #000000;
+$color-light-primary5: #FFFFFF;
+$color-light-primary6: #585858;
+
+$color-accent: #535965;
+$color-accent2: #3F4550;
+$color-accent3: #D2D4D7;
+$color-accent4: #0A1121;
+$color-accent5: #E3E5E8;
+$color-accent6: #170F49;
+$color-accent-lighter: $color-accent2;
+$color-accent-darker: $color-accent6;
+
+// Usually text color accross all site
+$color-default: #666a6d;
+$color-default2: #f2f2f2;
+$color-default3: #e8e9e9;
+$color-default4: #d1d3d4;
+$color-default5: #babdbf;
+$color-default6: #808488;
+$color-default7: #4d5052;
+$color-default8: #212122;
+// bootstrap required variables
+$color-default-darker: $color-default8;
+$color-default-lighter: $color-default2;
+
+// Feedback colors - usually colors to be used on
+// messages of success, warning or error from forms.
+$color-success: #95db94; // Used on success messages
+$color-info: #0298ae; // Used on info messages
+$color-warning: #d7a436; // Used on warning messages
+$color-danger: #ff4301; // Used on error messages
+$white: #fff !default;
+$black: #000 !default;
+
+// ===== FONTS ===== //
+
+$font-path: "../fonts";
+$font: 'Jura', sans-serif;
+$font-variant: 'Montserrat', sans-serif;
+
+$font-family-sans-serif: $font !default;
+$font-family-monospace: $font-variant !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-sm: $font-size-base * 0.875 !default;
+
+$font-weight-lighter: 200 !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
+$font-weight-black: 800 !default;
+
+$font-heading-color: #000;
+$font-weight-base: $font-weight-normal !default;
+$line-height-base: 1.5 !default;
+
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
+
+$spacer: 1rem !default;
+
+$headings-margin-bottom: $spacer / 2 !default;
+$headings-font-family: null !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;
+$headings-color: null !default;
+$paragraph-margin-bottom: 1rem !default;
+
+$link-color: $color-primary !default;
+$link-decoration: none !default;
+$link-hover-color: $color-primary-darker !default;
+$link-hover-decoration: underline !default;
+
+$small-font-size: 80% !default;
+$text-muted: $color-default !default;
+
+// ===== Buttons ===== //
+$buttonPadding: 10px 20px;
+$buttonFontSize: 14px;
+$buttonUppercase: 0; // 1 - to make text uppercase
+$buttonBorderRadius: 100px;
+$buttonShadow: 0; // will be applied to all buttons. 0 - to disable it
+$buttonShadowHover: 0; // will be applied to all buttons. 0 - to disable it
+$buttonTransition: all 0.3s ease;
+
+//Default
+$buttonDefaultBorder: 0; // 0 - to disable border
+$buttonDefaultBackground: $color-primary2;
+$buttonDefaultColor: $color-primary5;
+$buttonDefaultShadow: 0;
+$buttonDefaultBorderHover: 0;
+$buttonDefaultBackgroundHover: $color-primary4;
+$buttonDefaultColorHover: $color-primary;
+$buttonDefaultShadowHover: 0;
+// Primary
+$buttonPrimaryBorder: 0; // 0 - to disable border
+$buttonPrimaryBackground: $color-primary4;
+$buttonPrimaryColor: $color-primary2;
+$buttonDefaultShadow: 0;
+$buttonPrimaryBorderHover: 0;
+$buttonPrimaryBackgroundHover: $color-primary2;
+$buttonPrimaryColorHover: $color-primary4;
+$buttonPrimaryShadowHover: 0;
+// Secondary
+$buttonSecondaryBorder: 0; // 0 - to disable border
+$buttonSecondaryBackground: $color-primary3;
+$buttonSecondaryColor: $color-primary2;
+$buttonDefaultShadow: 0;
+$buttonSecondaryBorderHover: 0;
+$buttonSecondaryBackgroundHover: $color-primary5;
+$buttonSecondaryColorHover: $color-primary2;
+$buttonSecondaryShadowHover: 0;
+// Success
+$buttonSuccessBorder: 1px solid $color-primary4; // 0 - to disable border
+$buttonSuccessBackground: transparent;
+$buttonSuccessColor: $color-primary4;
+$buttonDefaultShadow: 0;
+$buttonSuccessBorderHover: 1px solid $color-primary4;
+$buttonSuccessBackgroundHover: $color-primary4;
+$buttonSuccessColorHover: $color-primary2;
+$buttonSuccessShadowHover: 0;
+// XS Buttons
+$buttonXSPadding: 1px 15px;
+$buttonXSFontSize: 10px;
+// SM Buttons
+$buttonSMPadding: 5px 20px;
+$buttonSMFontSize: 12px;
+// LG Buttons
+$buttonLGPadding: 15px 40px;
+$buttonLGFontSize: 18px;
+// XL Buttons
+$buttonXLPadding: 25px 50px;
+$buttonXLFontSize: 24px;
+
+// ===== FORMS ===== //
+$formGroupMarginBottom: 15px;
+$formGroupLabelMarginBottom: 5px;
+$formGroupLabelWeight: bold; // 0 - to disable it
+$formErrorMarginTop: 10px;
+$formErrorMarginBottom: 25px;
+$formErrorColor: $color-danger;
+$formErrorFontSize: 12px;
+
+// ===== INPUT TEXT ===== //
+$inputTextHeight: 44px;
+$inputTextPadding: 10px 16px;
+$inputTextBorderRadius: 100px; // 0 - to disable it
+$inputTextBorder: 1px solid rgba(255, 255, 255, 0.3); // 0 - to disable it
+$inputTextBackground: transparent;
+$inputTextFontSize: 14px;
+$inputTextareaHeight: 100px;
+$input-placeholder-color: $color-primary5;
+
+// Focus state
+$inputTextFocus: 1; // 0 - has no focus state | 1 - focus state exists
+$inputTextFocusBorderColor: $color-primary4;
+$inputTextFocusShadow: 5px 5px transparent;
+$input-focus-bg: transparent;
+$input-focus-border-color: $color-primary4;
+$input-focus-color: $color-primary4;
+$input-focus-width: 1px;
+
+// ===== INPUT CHECKBOXES AND RADIOS ===== //
+$inputWidth: 16px;
+$inputHeight: 16px;
+$inputMarginRight: 10px;
+$inputMarginBottom: 20px;
+$inputDisabledOpacity: 0.5;
+$inputBoxShadow: 0; // 0 - to disable box-shadow
+$inputFocusBoxShadow: 0 ;
+$inputBorderRadius: 2px; // 0 - to disable border radius
+$inputBorder:0; // 0 - to disable border
+$inputBackground: #fff;
+$inputFontSize: 16px;
+$inputFontWeight: normal;
+// Checkboxes
+$inputCheckboxThickness: 3px;
+$inputCheckboxWidth: 10px;
+$inputCheckboxHeight: 6px;
+$inputCheckboxTop: 4px; // Check Position
+$inputCheckboxLeft: 4px; // Check Position
+$inputCheckboxUncheckedColor: transparent;
+$inputCheckboxCheckedColor: $color-primary;
+// Radios
+$inputRadioBorderRadius: 50%;
+$inputRadioBallWidth: 6px;
+$inputRadioBallHeight: 6px;
+$inputRadioBallTop: 5px;
+$inputRadioBallLeft: 5px;
+$inputRadioBallBorderRadius: 50%;
+$inputRadioUncheckedColor: #f3f3f3;
+$inputRadioCheckedColor: $white;
+
+// ===== CUSTOM SELECT BOXES ===== //
+$selectHeight: 34px;
+$selectBorderRadius: 3px;
+$selectBorder: 1px solid #ddd;
+$selectBackground: white;
+$selectBackgroundOpen: $color-primary;
+$selectColor: $color-default;
+$selectFontSize: 14px;
+$selectItemsBackground: white;
+$selectItemsBackgroundHover: $color-primary;
+$selectItemsColorHover: white;
+
+// ===== CUSTOM INPUT FILE ===== //
+$inputFileHeight: 34px;
+$inputFilePadding: 34px;
+$inputFileBorderRadius: 3px;
+$inputFileBorder: 1px solid #ddd;
+$inputFileBackground: white;
+$inputFileColor: $color-default;
+$inputFileFontSize: 14px;
+$inputFileFontWeight: normal;
+$inputFileBackgroundHover: #ddd;
+$inputFileTransition: all 0.2s ease;
+
+// ===== FEEDBACK MESSAGES ===== //
+
+$warningPadding: 10px 20px;
+$warningFontSize: 14px;
+$warningFontSizeMobile: 12px; // 0 - to make the same size on mobile
+$warningBorderRadius: 3px; // 0 - to disable it
+$warningBorder: 1px solid; // 0 - to disable it
+// Success
+$warningSuccessBorderColor: $color-success; // 0 - to disable it
+$warningSuccessBackground: rgba($color-success, 0.6); // 0 - to disable it
+$warningSuccessColor: white; // 0 - to disable it
+// Error
+$warningErrorBorderColor: $color-danger; // 0 - to disable it
+$warningErrorBackground: rgba($color-danger, 0.6); // 0 - to disable it
+$warningErrorColor: white; // 0 - to disable it
+
+// ===== COOKIES ===== //
+$cookiesBackground: rgba(0, 0, 0, 0.6);
+$cookiesBoxMaxWidth: 600px;
+$cookiesBoxBackground: white;
+$cookiesTextColor: $color-default;
+$cookiesTextBaseSize: 12px;
+$cookiesButtonBorderRadius: 0; // 0 - to disable it
+$cookiesButtonBorder: 1px solid $color-default;
+$cookiesButtonBorderHover: 1px solid $color-accent;
+$cookiesButtonBackground: transparent;
+$cookiesButtonBackgroundHover: $color-accent;
+$cookiesButtonColor: $color-default;
+$cookiesButtonColorHover: #000;

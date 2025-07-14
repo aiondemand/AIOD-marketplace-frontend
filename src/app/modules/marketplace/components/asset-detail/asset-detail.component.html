@@ -1,184 +1,274 @@
 <div *ngIf="asset">
-    <mat-toolbar class="mb-3 marketplace-toolbar">
-        <span>{{ asset.category| titlecase }}
-            <mat-icon>{{icon}}</mat-icon></span>
-    </mat-toolbar>
-
-    <div class="asset-header">
-        <div class="paths"><xng-breadcrumb class="mb-3"></xng-breadcrumb></div>
-        <div>
-            <button mat-fab color="accent" aria-label="Add stash" matTooltip="Add stash"
-                (click)="addItemCart()">
-                <mat-icon>add_to_photos</mat-icon>
-            </button>
-        </div>
-
-    </div>
-    <div class="asset-content">
-        <mat-divider></mat-divider>
-        <ng-container *ngTemplateOutlet="assetTitle"></ng-container>
-        <mat-divider></mat-divider>
-        <ng-container *ngTemplateOutlet="assetBody"></ng-container>
-        <mat-divider></mat-divider>
-
-    </div>
+  <div class="m-3 asset-header">
+    <div class="paths"><xng-breadcrumb separator=">"></xng-breadcrumb></div>
+  </div>
+  
+  <div class="asset-content">
+    <ng-container *ngTemplateOutlet="assetTitle"></ng-container>
+    <ng-container *ngTemplateOutlet="assetBody"></ng-container>
+  </div>
 </div>
 
+
 <ng-template #assetBody>
-    <div class="asset-body">
-        <div class="asset-body-container">
-            <div class="asset-body-description">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.DESCRIPTION' | translate }}</h3>
-                <markdown>
-                    {{ asset.description }}
-                </markdown>
-            </div>
+<div class="asset-body">
+      <div class="asset-body-container">
 
-            <div *ngIf="asset.media && asset.media.length > 0">
-                <h3>{{ 'ASSETS.MEDIA.TITLE' | translate }}</h3>
-                <div class="media-container" >
-                    <div *ngFor="let media of asset.media">
-                        <app-media [media]="media"></app-media>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="asset-body-category" [ngSwitch]="asset.category">
-                <div *ngSwitchCase="AssetCategory.Dataset"><app-dataset [identifier]="asset.identifier"></app-dataset>
-                </div>
-                <div *ngSwitchCase="AssetCategory.Service"><app-service-component
-                        [identifier]="asset.identifier"></app-service-component></div>
-                <div *ngSwitchCase="AssetCategory.Experiment"><app-experiment
-                        [identifier]="asset.identifier"></app-experiment></div>
-                <div *ngSwitchCase="AssetCategory.AIModel"><app-aimodel [identifier]="asset.identifier"></app-aimodel>
-                </div>
-            </div>
 
-            <div *ngIf="!!asset.license">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.LICENSE' | translate }}</h3>
-                <div class="field-container">
-                    <a *ngIf="isURL(asset.license)" [href]="asset.license" target="_blank">
-                        {{ asset.license }} <mat-icon>open_in_new</mat-icon>
-                    </a>
-                    <span *ngIf="!isURL(asset.license)"> {{ asset.license }}</span>
-                </div>
-            </div>
-
-            <div *ngIf="!!asset.sameAs">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.SAMEAS' | translate }}</h3>
-                <div class="field-container">
-                    <a [href]="asset.sameAs" target="_blank">
-                        {{ asset.sameAs }} <mat-icon>open_in_new</mat-icon>
-                    </a>
-                </div>
-            </div>
-
-            <div *ngIf="asset.citation && asset.citation.length > 0">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.CITATION' | translate }}</h3>
-                <div class="field-container">
-                    <p *ngFor="let url of asset.citation">
-                        <a href="#" target="_blank" rel="noopener noreferrer">
-                            {{ url }} <mat-icon>open_in_new</mat-icon>
-                        </a>
-                    </p>
-                </div>
-            </div>
-
-            <div *ngIf="!!asset.distributions && asset.distributions.length>0">
-                <h3>{{ 'ASSETS.DISTRIBUTION.TITLE' | translate }}</h3>
-                <div class="distribution-container">
-                    <ng-container *ngFor="let distribution of asset.distributions">
-                        <ng-container [ngTemplateOutlet]="distributionDetail"
-                            [ngTemplateOutletContext]="{distribution: distribution }">
-                        </ng-container>
-                    </ng-container>
-                </div>
-            </div>
+      <div *ngIf="asset.description && asset.description.length > 0" class="asset-body-description card-news-container " class="card-news-container m-3">
+        <h3 >{{ "ASSETS.ASSET-DETAIL.DESCRIPTION" | translate }}</h3>
+        <div class="card-news-content">
+            <markdown class="markdown-white">
+              {{ asset.description }}
+            </markdown>
         </div>
+        
+      </div>
 
-        <div class="asset-body-keywords">
-            <div>
-                <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
-                <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip *ngFor="let keyword of asset.keywords">{{'#'+ keyword }}</mat-chip>
-                </mat-chip-listbox>
-            </div>
+      <div *ngIf="asset.media && asset.media.length > 0" class="card-news-container m-3">
+        <h3>{{ "ASSETS.MEDIA.TITLE" | translate }}</h3>
+        <div class="media-container card-news-content">
+          <div *ngFor="let media of asset.media">
+            <app-media [media]="media"></app-media>
+          </div>
 
-            <div *ngIf="!!asset.research_area && asset.research_area.length>0">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.RESEARCH_AREA' | translate }}</h3>
-                <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip *ngFor="let area of asset.research_area">{{ 'area' }}</mat-chip>
-                </mat-chip-listbox>
-            </div>
+        </div>
+      </div>
 
-            <div *ngIf="!!asset.scientific_domain && asset.scientific_domain.length>0">
-                <h3>{{ 'ASSETS.ASSET-DETAIL.SCIENTIFIC_DOMAIN' | translate }}</h3>
-                <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip *ngFor="let domain of asset.scientific_domain">{{ domain }}</mat-chip>
-                </mat-chip-listbox>
+    
+
+      <div *ngIf="!!asset.license" class=" card-news-container m-3"> 
+        <h3>{{ "ASSETS.ASSET-DETAIL.LICENSE" | translate }}</h3>
+        <div class="field-container card-news-content">
+          <a
+            *ngIf="isURL(asset.license)"
+            [href]="asset.license"
+            target="_blank"
+          >
+            {{ asset.license }} 
+          </a>
+          <span class="" *ngIf="!isURL(asset.license)"> {{ asset.license }}</span>
+        </div>
+        </div>
+      
+
+      <div *ngIf="!!asset.sameAs" class=" card-news-container m-3" >
+        <h3>{{ "ASSETS.ASSET-DETAIL.SAMEAS" | translate }}</h3>
+        <div class="field-container card-news-content ">
+          <a [href]="asset.sameAs" target="_blank">
+            {{ asset.sameAs }} 
+          </a>
+        </div>
+      
+      </div>
+
+      <div *ngIf="asset.citation && asset.citation.length > 0" class=" card-news-container m-3">
+        <h3>{{ "ASSETS.ASSET-DETAIL.CITATION" | translate }}</h3>
+        <div class="field-container card-news-content">
+          <p *ngFor="let url of asset.citation">
+            <a href="#" target="_blank" rel="noopener noreferrer">
+              {{ url }} 
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div *ngIf="!!asset.distributions && asset.distributions.length > 0"  class=" card-news-container m-3">
+        <h3>{{ "ASSETS.DISTRIBUTION.TITLE" | translate }}</h3>
+        <div class="distribution-container card-news-content">
+          <ng-container *ngFor="let distribution of asset.distributions">
+            <ng-container
+              [ngTemplateOutlet]="distributionDetail"
+              [ngTemplateOutletContext]="{ distribution: distribution }"
+            >
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <div *ngIf="!!asset.identifier" class="asset-body-category m-3" [ngSwitch]="asset.category">
+          <div *ngSwitchCase="AssetCategory.Dataset">
+            <app-dataset [identifier]="asset.identifier"></app-dataset>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Service">
+            <app-service-component
+              [identifier]="asset.identifier"
+            ></app-service-component>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Experiment">
+            <app-experiment [identifier]="asset.identifier"></app-experiment>
+          </div>
+          <div *ngSwitchCase="AssetCategory.AIModel">
+            <app-aimodel [identifier]="asset.identifier"></app-aimodel>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Publication">
+            <app-publication [identifier]="asset.identifier"></app-publication>
+          </div>
+      </div>
+    
+    </div>
+
+    <div  class="asset-body-keywords">
+        <div *ngIf="!!asset.keywords && asset.keywords.length > 0">
+          <h3>{{ "ASSETS.ASSET-DETAIL.KEYWORDS" | translate }}</h3>
+          <div class="keywords-list">
+            <div
+              class="btn btn-success btn-success--blue m-1"
+              *ngFor="let keyword of asset.keywords"
+            >
+              {{ "#" + keyword }}
             </div>
+          </div>
+        </div>
+      
+        <div *ngIf="!!asset.research_area && asset.research_area.length > 0">
+          <h3>{{ "ASSETS.ASSET-DETAIL.RESEARCH_AREA" | translate }}</h3>
+          <div class="research-area-list">
+            <div
+              class="btn btn-success btn-success--blue m-1"
+              *ngFor="let area of asset.research_area"
+            >
+              {{ area }}
+            </div>
+          </div>
+        </div>
+      
+        <div *ngIf="!!asset.scientific_domain && asset.scientific_domain.length > 0">
+          <h3>{{ "ASSETS.ASSET-DETAIL.SCIENTIFIC_DOMAIN" | translate }}</h3>
+          <div class="scientific-domain-list">
+            <div
+              class="btn btn-success btn-success--blue m-1"
+              *ngFor="let domain of asset.scientific_domain"
+            >
+              {{ domain }}
+            </div>
+          </div>
         </div>
     </div>
+    
+
+
+ </div>
+ 
 </ng-template>
 
 <ng-template #assetTitle>
-    <div class="asset-tittle">
-        <div style="flex-grow: 3;">
-            <h1>{{ asset.name | titlecase }}</h1>
+    
+<div class="asset-tittle featured-products-item row ">
+    <div class="col-lg-7" >
 
-            <div class="title-dates"> 
+            <div class="asset-title-row">
+                <h2>{{ asset.name | titlecase }}</h2>
+                <button
+                title="Add to bookmarks"
+                class="btn btn-circle not-rotate  ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
+                [class.disabled]="!isAuthenticated()"
+                (click)="onClickBookmark()"
+                [title]="!isAuthenticated()
+                  ? !isBookmarked
+                    ? 'Log in to bookmark'
+                    : 'Log to delete bookmark'
+                  : !isBookmarked
+                    ? 'Add to bookmarks'
+                    : 'Delete bookmark'
+                  "
+                >
+                <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
+              </button>
+            </div>
+        
+            <div class=" title-dates">
                 <span>
-                    {{'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} : {{asset.date_published | date: 'mediumDate'}} 
-                </span> 
+                    {{ "ASSETS.ASSET-DETAIL.DATE_PUBLISHED" | translate }} :
+                    {{ asset.date_published | date: "mediumDate" }}
+                </span>
                 <span *ngIf="asset.dateCreated">|</span>
                 <span *ngIf="asset.dateCreated">
-                    {{'ASSETS.ASSET-DETAIL.DATA_CREATED' | translate }} : {{asset.dateCreated | date: 'mediumDate'}}
+                    {{ "ASSETS.ASSET-DETAIL.DATA_CREATED" | translate }} :
+                    {{ asset.dateCreated | date: "mediumDate" }}
                 </span>
-                <br>
-                <span class="title-alternames" *ngFor="let name of asset.alternateName">{{ name }}</span>
+                <br />
+                <span class="title-alternames" *ngFor="let name of asset.alternateName">{{
+                    name
+                }}</span>
+    
             </div>
-        </div>
-        <div *ngif="asset.version">
-            <p>{{ 'ASSETS.ASSET-DETAIL.VERSION' | translate }}</p>
-            <mat-chip class="chip" >{{ asset.version }} </mat-chip>
-        </div>
-        <div>
-            <p>{{ 'ASSETS.ASSET-DETAIL.CATEGORY' | translate }}</p>
-            <mat-chip class="chip" >{{ asset.category | lowercase}} </mat-chip>
-        </div>
-        <div *ngIf="asset.platform">
-            <p>{{ 'ASSETS.ASSET-DETAIL.PLATFORM' | translate }}</p>
-            <mat-chip class="chip">{{ asset.platform }} </mat-chip>
+
+    </div>
+    
+    <div class="col-lg-3">
+        <div class="row">
+            <div *ngIf="asset.version" class="btn btn-default mr-2">
+                {{ asset.version }}
+            </div>
+            <div class="btn btn-default mr-2">
+                {{ asset.category | lowercase }}
+            </div>
+            <div *ngIf="asset.platform" class="btn btn-default">
+                {{ asset.platform }}
+            </div>
         </div>
     </div>
+</div>
 </ng-template>
 
-
 <ng-template #distributionDetail let-distribution="distribution">
-    <mat-card class="distribution-card">
-        <mat-card-content>
-            <div>
-                <p *ngIf="!!distribution.name">
-                    <span class="distribution-title">{{ 'ASSETS.DISTRIBUTION.NAME' | translate }}</span>
-                    <span>: {{ distribution.name }}</span>
-                </p>
-                <p *ngIf="!!distribution.description">
-                    <span class="distribution-title">{{ 'ASSETS.DISTRIBUTION.DESCRIPTION' | translate }}</span>
-                    <span>: {{ distribution.description }}</span>
-                </p>
-                <p *ngIf="!!distribution.size">
-                    <span class="distribution-title">{{ 'ASSETS.DISTRIBUTION.SIZE' | translate }}</span>
-                    <span>: {{ distribution.size }}</span>
-                </p>
-                <p *ngIf="!!distribution.url">
-                    <span class="distribution-title">{{ 'ASSETS.DISTRIBUTION.URL' | translate }}</span>
-                    <span>: <a [href]="distribution.url" target="_blank">{{ distribution.url }}</a> </span>
-                </p>
-                <p *ngIf="!!distribution.checksum && distribution.checksum.length>0">
-                    <span class="distribution-title">{{ 'ASSETS.DISTRIBUTION.CHECKSUM' | translate }}</span>
-                    <span>: {{ distribution.checksum }} </span>
-                </p>
-            </div>
-        </mat-card-content>
-    </mat-card>
+  <mat-card class="distribution-card">
+    <mat-card-content>
+      <div>
+        <p *ngIf="!!distribution.name">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.NAME" | translate
+          }}</span>
+          <span>: {{ distribution.name }}</span>
+        </p>
+        <p *ngIf="!!distribution.description">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.DESCRIPTION" | translate
+          }}</span>
+          <span>: {{ distribution.description }}</span>
+        </p>
+        <p *ngIf="!!distribution.size">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.SIZE" | translate
+          }}</span>
+          <span>: {{ distribution.size }}</span>
+        </p>
+        <p *ngIf="!!distribution.content_url && distribution.content_url.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.CONTENT_URL" | translate
+          }}</span>
+          <span
+            >:
+            <a [href]="distribution.content_url" target="_blank">{{
+              distribution.content_url
+            }}</a>
+          </span>
+        </p>
+        <p *ngIf="!!distribution.encoding_format && distribution.encoding_format.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.ENCODING_FORMAT" | translate
+          }}</span>
+          <span
+            >:
+            <a [href]="distribution.encoding_format" target="_blank">{{
+              distribution.url
+            }}</a>
+          </span>
+        </p>
+        <p *ngIf="!!distribution.checksum && distribution.checksum.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.CHECKSUM" | translate
+          }}</span>
+          <span>: {{ distribution.checksum }} </span>
+        </p>
+        <p *ngIf="!!distribution.checksum_algorithm && distribution.checksum_algorithm.length > 0">
+          <span class="distribution-title">{{
+            "ASSETS.DISTRIBUTION.CHECKSUM_ALGORITHM" | translate
+          }}</span>
+          <span>: {{ distribution.checksum_algorithm }} </span>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </ng-template>

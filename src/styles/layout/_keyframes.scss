@@ -1,0 +1,13 @@
+@keyframes centeredRotation {
+	0% {
+		transform: translate(-50%, -50%) rotate(0);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+@keyframes countingBar {
+    0% {width: 0;}
+    100% {width:100%;}
+}

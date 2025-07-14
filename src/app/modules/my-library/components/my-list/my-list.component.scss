@@ -1,12 +1,17 @@
+
+@import "src/styles/variables.scss";
+
 table {
-  padding-right: 2em
+  padding-right: 2em;
 }
 // .mat-mdc-row .mat-mdc-cell {
 //   cursor: pointer;
 // }
+
 tr.element-row:hover {
   background: whitesmoke;
 }
+
 
 .mat-column-name {
   text-align: start;
@@ -33,38 +38,89 @@ tr.element-row:hover {
 }
 
 .disabled-link {
-    opacity: 0.5; /* Puedes ajustar la opacidad según tus preferencias */
+  opacity: 0.5; 
 }
 
-a {
-  text-decoration: none;
+
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+[data-theme="dark"] {
+  .paginator{
+      color: #ffffffb2;
+  }
+}
+
+[data-theme="light"] {
+
+.paginator{
   color: black;
-  cursor: pointer;
-  transition: color 0.2s;
+}
 }
 
-a:hover {
-  color: var(--accent);
+::ng-deep {
+  
+  .mat-mdc-table {
+    background: transparent;
+    font-family: "Jura", sans-serif !important;
+  }
+  .mat-mdc-table tbody *{
+    background: transparent;
+    font-family: "Jura", sans-serif !important;
+  }
+  
+  .mat-mdc-paginator-icon {
+    color:$color-primary4;
+  }
+  .mdc-checkbox__background {
+    border-color: $color-primary4 !important;
+  }
+  .mat-mdc-table .mat-mdc-header-cell {
+    font-family: "Jura", sans-serif !important;
+
+  }
+
+  [data-theme="ligth"] {
+    .mat-mdc-table .mat-mdc-header-cell {
+      color:black !important;
+  }
+  .mat-mdc-table tbody *{
+    color:black !important;
+  }
+
+
+}
+  
+  [data-theme="dark"] {
+    .mat-mdc-table .mat-mdc-header-cell {
+      color:#ffffff !important;
+    }
+
+    .mat-mdc-table tbody *{
+      color:#ffffff !important;
+    }
+
+    span.chip-asset-category {
+      color: black !important;
+    }
+
+    tr.element-row:hover {
+      background: rgba(0, 0, 0, 0.87) !important;
+    }
 }
 
-.delete-button-style {
-  .delete-button {
-      color: grey;
-      border: none;
-      border-radius: 50%;
-      padding: 8px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      font-size: 10px;
-      line-height: 1;
-  }
-  
-  .delete-button:hover {
-      background-color: var(--accent);
-      color: whitesmoke;
-  }
-  
-  .delete-button:focus {
-      outline: none;
-  }
 }
+
+

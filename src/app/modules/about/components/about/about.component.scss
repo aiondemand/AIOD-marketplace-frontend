@@ -1,4 +1,14 @@
+@import "src/styles/variables";
+
 .images_about{
     display: flex;
     justify-content: center;
+}
+
+a {
+    color: $color-primary3 !important;
+  }
+
+ul{
+color: $white;
 }

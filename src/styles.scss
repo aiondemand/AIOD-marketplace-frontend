@@ -1,78 +1,135 @@
-/* You can add global styles to this file, and also import other style files */
+// ===== OVERIDE VARIABLES BOOTSTRAP ===== /
 
-@use 'src/theme/partials/spaces';
+@import "src/styles/main";
+
+//@import 'src/theme/partials/spaces';
 
 html,
 body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
-    color: var(--primary-text);
+  height: 100%;
+  overflow-x: scroll;
 }
 
 .grid-2-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
 }
 
 .grid-3-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
 }
 
 .mat-icon-filled {
-    font-variation-settings:
-        'FILL' 1,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48;
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
 }
 
 .spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  min-height: 250px;
 }
 
 .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control:not(
-        :focus
-    )::placeholder {
-    color: transparent;
+    :focus
+  )::placeholder {
+  color: transparent;
 }
 
 .mat-toolbar {
-    background-color: var(--white);
+  background-color: var($color-primary);
 }
 
 .mat-mdc-card {
-    border: 1px solid var(--border-gray) !important;
+  border: 1px solid var($color-accent) !important;
 }
 
-@mixin delete-button-style {
-    .delete-button {
-        color: grey;
-        border: none;
-        border-radius: 50%;
-        padding: 8px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-size: 10px;
-        line-height: 1;
-    }
-    
-    .delete-button:hover {
-        background-color: var(--accent);
-        color: whitesmoke;
-    }
-    
-    .delete-button:focus {
-        outline: none;
-    }
+.mat-drawer-side{
+  border: none;
+
 }
+
+.mat-drawer {
+  background-color: transparent !important;
+  
+}
+.not-rotate{
+  transform: rotate(0deg);
+}
+
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap-reverse; */
+  width: 100%;
+  font-size: inherit;
+  color: #ffffffb2;
+  background: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+[data-theme=light] .paginator {
+  color: inherit;}
+
+
+@mixin delete-button-style {
+  .delete-button {
+    color: grey;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .delete-button:hover {
+    background-color: var($color-accent);
+    color: whitesmoke;
+  }
+
+  .delete-button:focus {
+    outline: none;
+  }
+
+
+
+}
+
+
+:root {
+  .spinner {
+    background-color: transparent;
+  }
+  .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+  .mat-mdc-progress-spinner
+    .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: #ffed00;
+  }
+
+
+
+}
+
+.specific-detail-body {
+  padding: 20px 20px 0px;
+  margin-top: 20px;
+
+  h3 {
+    font-family: inherit;
+  }
+}
+

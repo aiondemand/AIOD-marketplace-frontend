@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: $color-primary3;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M12,14.25l-3.94-4.13-4.06,4.1V2.5h8v11.75ZM5,3.5v8.28l3.07-3.1,2.93,3.07V3.5h-6Z"/>
+</svg>

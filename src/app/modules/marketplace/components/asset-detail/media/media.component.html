@@ -1,13 +1,13 @@
 <mat-card class="media-card">
-    <mat-card-header>
-        <div mat-card-avatar class="card-avatar">
-            <mat-icon>{{media.type}}</mat-icon>
-        </div>
-        <mat-card-title>{{ media.name }}</mat-card-title>
+    <mat-card-header class="m-1">
+     
+            
+    
+        <h2>{{ media.name }}</h2>
     </mat-card-header>
 
     <mat-card-content>
-        <mat-accordion class="example-headers-align" multi>
+        <mat-accordion class="example-headers-align m-1" multi>
             <mat-expansion-panel *ngIf="!!media.description">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -61,7 +61,16 @@
 
 <ng-template #mediaProps let-title="title" let-subtitle="subtitle" let-icon="icon">
     <div class="props-chip">
-        <div class="icon"><mat-icon>{{icon}}</mat-icon></div>
+        <div class="icon">
+            <i [ngClass]="{
+                'fa-lock': icon === 'lock',
+                'fa-code': icon === 'code',
+                'fa-sd-card': icon === 'sd_card',
+                'fa-user-check': icon === 'verified_user',
+                'fa-copyright': icon === 'copyright',
+                'fa-calendar': icon === 'event'
+            }" class="fa"></i>
+        </div>
         <div class="content">
             <div class="title">{{title}}</div>
             <div class="subtitle">{{subtitle}}</div>

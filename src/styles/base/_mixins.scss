@@ -1,0 +1,67 @@
+@mixin min-sm {
+	@media (min-width: $screen-sm-min){
+		@content;
+	}
+}
+@mixin min-md {
+	@media (min-width: $screen-md-min){
+		@content;
+	}
+}
+@mixin min-lg {
+	@media (min-width: $screen-lg-min){
+		@content;
+	}
+}
+@mixin min-xl {
+	@media (min-width: $screen-xl-min){
+		@content;
+	}
+}
+
+@mixin min-xxl {
+	@media (min-width: $screen-xxl-min){
+		@content;
+	}
+}
+
+@mixin max-xs {
+	@media (max-width: $screen-xs-max){
+		@content;
+	}
+}
+@mixin max-sm {
+	@media (max-width: $screen-sm-max){
+		@content;
+	}
+}
+@mixin max-md {
+	@media (max-width: $screen-md-max){
+		@content;
+	}
+}
+@mixin max-lg {
+	@media (max-width: $screen-lg-max){
+		@content;
+	}
+}
+@mixin max-xl {
+	@media (max-width: $screen-xl-max){
+		@content;
+	}
+}
+
+// Colors Project
+@mixin gen-props($prefix, $property) {
+  @each $color-name, $color in $theme-colors {
+    .#{$prefix}-#{$color-name} {
+      #{$property}: $color
+    }
+  }
+}
+
+// Texts
+@include gen-props('text', 'color');
+
+//background
+@include gen-props('bg', 'background');

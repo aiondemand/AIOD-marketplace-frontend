@@ -1,5 +1,5 @@
 {
-    "title": "AIoD My Library",
+    "title": "AIoD Resources",
     "sidenavMenu": [
         {
             "name": "SIDENAV.IAM",
@@ -36,6 +36,10 @@
             "color":"#FCDCDF"
         },
         "educational resource": {
+            "icon":"book",
+            "color":"#FCDFDC"
+        },
+        "publication": {
             "icon":"book",
             "color":"#FCDFDC"
         }

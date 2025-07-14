@@ -23,6 +23,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { AppConfigService } from './core/services/app-config/app-config.service';
 import { SpinnerModule } from './shared/components/spinner/spinner.module';
+import { FooterComponent } from './layout/footer/footer.component';
 
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -60,6 +61,7 @@ renderer.link = (href, title, text) => {
         ContentLayoutComponent,
         SidenavComponent,
         TopNavbarComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

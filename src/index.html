@@ -1,25 +1,24 @@
+
+
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Ai4Dashboard</title>
+        <title>AIoD Resources</title>
         <base href="/" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="article:modified_time" content="2025-07-02T14:15:43+00:00">
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
         <script src="assets/env.js"></script>
+        <script>
+          var base= (window.env && window.env.ZOHO_URL) ? window.env.ZOHO_URL : '';
+          if (base != '') {
+            var script= document.createElement('script');
+            script.src=base;
+            document.head.appendChild(script);
+          }
+        </script>
+
     </head>
     <body class="mat-typography">
         <app-root></app-root>
