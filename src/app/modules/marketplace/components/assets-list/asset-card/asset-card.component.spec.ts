@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { AssetCardComponent } from "./asset-card.component";
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AuthService } from "@app/core/services/auth/auth.service";
+import { BehaviorSubject } from "rxjs";
 
 describe("AssetCardComponent", () => {
   let component: AssetCardComponent;
@@ -13,6 +15,14 @@ describe("AssetCardComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [AssetCardComponent],
       imports: [HttpClientTestingModule],
+      providers:[{
+              provide: AuthService,
+              useValue: {
+                getToken: jest.fn(),
+                userProfileSubject: new BehaviorSubject<any>({}) // <-- Mock real
+              }
+            
+          }]
     }).compileComponents();
    
     fixture = TestBed.createComponent(AssetCardComponent);

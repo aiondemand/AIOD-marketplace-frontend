@@ -3,7 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AssetDetailComponent } from "./asset-detail.component";
 import { ActivatedRoute } from "@angular/router";
-import { of } from "rxjs";
+import { BehaviorSubject, of } from "rxjs";
+import { AuthService } from "@app/core/services/auth/auth.service";
 
 describe("AssetDetailComponent", () => {
   let component: AssetDetailComponent;
@@ -21,8 +22,16 @@ describe("AssetDetailComponent", () => {
           queryParams: of({ category: 'DATASET', id: 1 }),
           params: of({}), 
           snapshot: { paramMap: { get: () => null } }
+        },
+        } ,{
+        provide: AuthService,
+        useValue: {
+          getToken: jest.fn(),
+          userProfileSubject: new BehaviorSubject<any>({}) // <-- Mock real
         }
-      }
+      
+    }
+      
     ]
 
     
