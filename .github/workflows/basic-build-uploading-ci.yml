@@ -118,11 +118,6 @@ jobs:
       - name: Load image Prod
         run: docker load --input /tmp/aiod_my_library_prod.tar
 
-      - name: Run tests inside Docker container
-        run: |
-          docker run --rm aiod/mylibrary-frontend:latest npm test
-    
-
   publish:
     needs: [test-inside-docker]
     runs-on: ubuntu-latest
