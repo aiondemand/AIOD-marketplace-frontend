@@ -233,37 +233,39 @@
   </div>
 </div>
 
-<!--spinner-->
-<div *ngIf="isLoading; else assetList" class="spinner">
-  <mat-progress-spinner class="custom-spinner" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
-
-<!-- paginator-->
-<mat-paginator
-  class="paginator"
-  (page)="handlePageEvent($event)"
-  [length]="assetsSize"
-  [pageSizeOptions]="pageSizeOptions"
-  aria-label="Select page"
-  [disabled]="isPaginationDisabled()"
->
-</mat-paginator>
-
-<ng-template #assetList>
-  <div class="asset-cards-container row">
-    <div
-      id="grid-layout"
-      *ngFor="let asset of assets"
-      class=""
-      [ngClass]="
-        displayModeValue === 1
-          ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
-          : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
-      "
-      class="col-lg-4 col-md-6 col-sm-12"
-    >
-      <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
-    </div>
+<!--main content container-->
+<div class="main-content-wrapper">
+  <!--spinner-->
+  <div *ngIf="isLoading; else assetList" class="spinner">
+    <mat-progress-spinner class="custom-spinner" mode="indeterminate">
+    </mat-progress-spinner>
   </div>
-</ng-template>
+  <ng-template #assetList>
+    <div class="asset-cards-container row">
+      <div
+        id="grid-layout"
+        *ngFor="let asset of assets"
+        class=""
+        [ngClass]="
+          displayModeValue === 1
+            ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
+            : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
+        "
+        class="col-lg-4 col-md-6 col-sm-12"
+      >
+        <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
+      </div>
+    </div>
+  </ng-template>
+  <div class="paginator-container">
+    <mat-paginator
+      class="paginator"
+      (page)="handlePageEvent($event)"
+      [length]="assetsSize"
+      [pageSizeOptions]="pageSizeOptions"
+      aria-label="Select page"
+      [disabled]="isPaginationDisabled()"
+    >
+    </mat-paginator>
+  </div>
+</div>
