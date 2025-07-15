@@ -40,6 +40,22 @@
   font-size: inherit;
 }
 
+.main-content-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.paginator-container {
+  width: 100%;
+  margin-top: 20px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto;
+  font-family: 'Jura', sans-serif;
+  font-size: 16px;
+}
+
 .search-row {
   width: 70%;
 }
@@ -72,17 +88,24 @@
   width: 30px;
   justify-content: center;
   display: flex;
-
   align-items: center;
 }
 
 ::ng-deep {
   .mat-mdc-select-value-text {
-    color: #ffffffb2; /* Add your styles here */
+    color: #ffffffb2;
+    font-family: 'Jura', sans-serif;
+    font-size: 16px;
   }
   .mat-mdc-paginator-icon {
     color: #ffed00;
   }
+
+  .mat-mdc-paginator-range-label,
+  .mat-mdc-paginator-page-size-label {
+    color: #ffffff;
+  }
+
   .mdc-checkbox__background {
     border-color: #ffed00 !important;
   }
@@ -105,6 +128,20 @@
     }
     .mdc-checkbox--disabled .mdc-checkbox__background {
       border-color: #757a7b;
+    }
+
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-paginator-page-size-label {
+      color: #000000;
+      .mdc-text-field--focused{
+        border-color:#000000;
+      }
+    }
+
+    .mat-mdc-select-value-text {
+      color: #000000b2;
+      font-family: 'Jura', sans-serif;
+      font-size: 16px;
     }
   }
 
