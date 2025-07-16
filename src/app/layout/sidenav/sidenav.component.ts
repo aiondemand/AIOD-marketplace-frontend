@@ -1,4 +1,4 @@
-import { MediaMatcher } from "@angular/cdk/layout";
+import { MediaMatcher } from '@angular/cdk/layout';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -6,19 +6,19 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from "@angular/core";
-import { FormBuilder } from "@angular/forms";
-import { MatSidenav } from "@angular/material/sidenav";
-import { AppConfigService } from "@app/core/services/app-config/app-config.service";
-import { AuthService } from "@app/core/services/auth/auth.service";
-import { SidenavService } from "@app/shared/services/sidenav/sidenav.service";
-import { environment } from "src/environments/environment";
-import { SpinnerService } from "@app/shared/services/spinner/spinner.service";
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
+import { AppConfigService } from '@app/core/services/app-config/app-config.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
+import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
+import { environment } from 'src/environments/environment';
+import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 
 @Component({
-  selector: "app-sidenav",
-  templateUrl: "./sidenav.component.html",
-  styleUrls: ["./sidenav.component.scss"],
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("sidenav", { static: true }) public sidenav!: MatSidenav;
@@ -58,28 +58,28 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   mainLinks = [
     {
-      name: "SIDENAV.MARKETPLACE",
-      url: "/marketplace",
+      name: 'SIDENAV.MARKETPLACE',
+      url: '/marketplace',
       isDisabled: false,
       isRestricted: false,
     },
     {
-      name: "SIDENAV.MY-LIBRARY",
-      url: "/my-library",
+      name: 'SIDENAV.MY-LIBRARY',
+      url: '/my-library',
       isDisabled: false,
       isRestricted: true,
     },
     {
-      name: "SIDENAV.ABOUT",
-      url: "/about",
+      name: 'SIDENAV.ABOUT',
+      url: '/about',
       isDisabled: false,
       isRestricted: false,
     },
   ];
 
-  acknowledgments = "";
-  projectName = "";
-  projectUrl = "";
+  acknowledgments = '';
+  projectName = '';
+  projectUrl = '';
 
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();

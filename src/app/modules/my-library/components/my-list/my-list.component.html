@@ -1,66 +1,94 @@
-<div class="paths"><xng-breadcrumb separator=">" class="pt-3 pt-3"></xng-breadcrumb></div>
-
+<div class="paths">
+  <xng-breadcrumb separator=">" class="pt-3 pt-3"></xng-breadcrumb>
+</div>
 
 <div *ngIf="isLoading" class="spinner">
-    <mat-progress-spinner  mode="indeterminate">
-    </mat-progress-spinner>
+  <mat-progress-spinner mode="indeterminate"> </mat-progress-spinner>
 </div>
-
-
 
 <div class="mt-3 pt-3 pt-3 featured-products-item">
-    <table class="" *ngIf="!isLoading" mat-table [dataSource]="dataSource">
+  <table class="" *ngIf="!isLoading" mat-table [dataSource]="dataSource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef style="font-weight: bolder">
+        {{ 'MY-LIBRARY.DISPLAY-COLUMNS.NAME' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let asset">
+        <a
+          [routerLink]="['/resources', asset.identifier]"
+          [queryParams]="{ category: asset.category }"
+        >
+          {{ asset.name | titlecase }}
+        </a>
+      </td>
+    </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef style="font-weight: bolder;">
-                {{ 'MY-LIBRARY.DISPLAY-COLUMNS.NAME' | translate }}
-            </th>
-            <td mat-cell *matCellDef="let asset"> 
-                <a [routerLink]="['/resources', asset.identifier]" [queryParams]="{ category: asset.category }">
-                    {{asset.name | titlecase }}
-                </a>
-            </td>
-        </ng-container>
-    
-        <!-- Category Column -->
-        <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef style="font-weight: bolder;">
-                {{ 'MY-LIBRARY.DISPLAY-COLUMNS.CATEGORY' | translate }}
-            </th>
-            <td mat-cell *matCellDef="let asset">
-                <mat-chip class="chip" [style.background]="getColorCategory(asset.category)">
-                    <span class="chip-asset-category"> {{ asset.category | lowercase}}</span>
-                </mat-chip>
-            </td>
-        </ng-container>
-    
-    
-        <!-- Link Column -->
-        <ng-container matColumnDef="urlMetadata">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let asset">
-                <a *ngIf="!!asset.urlMetadata" [href]="asset.urlMetadata" target="_blank">
-                    <mat-icon matTooltip="{{asset.urlMetadata}}">link</mat-icon>
-                </a>
-            </td>
-        </ng-container>
-    
-        <!-- Delete Column -->
-        <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let asset">
-                <button mat-icon-button class="delete-button" (click)="deleteAssetMyLibrary(asset)">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                        <path d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5c-.1.8-.8 1.5-1.6 1.5H8.1c-.8 0-1.5-.7-1.6-1.5L5 9zm5 2v8h2v-8h-2zm4 0v8h2v-8h-2zM9 4h6v2H9V4z"/>
-                    </svg>
-                </button>
-            </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row class="element-row" *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef style="font-weight: bolder">
+        {{ 'MY-LIBRARY.DISPLAY-COLUMNS.CATEGORY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let asset">
+        <mat-chip
+          class="chip"
+          [style.background]="getColorCategory(asset.category)"
+        >
+          <span class="chip-asset-category">
+            {{ asset.category | lowercase }}</span
+          >
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <!-- Link Column -->
+    <ng-container matColumnDef="urlMetadata">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let asset">
+        <a
+          *ngIf="!!asset.urlMetadata"
+          [href]="asset.urlMetadata"
+          target="_blank"
+        >
+          <mat-icon matTooltip="{{ asset.urlMetadata }}">link</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let asset">
+        <button
+          mat-icon-button
+          class="delete-button"
+          (click)="deleteAssetMyLibrary(asset)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="currentColor"
+          >
+            <path
+              d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5c-.1.8-.8 1.5-1.6 1.5H8.1c-.8 0-1.5-.7-1.6-1.5L5 9zm5 2v8h2v-8h-2zm4 0v8h2v-8h-2zM9 4h6v2H9V4z"
+            />
+          </svg>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      class="element-row"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
 </div>
 
-<mat-paginator class="paginator" [pageSizeOptions]="[10, 15, 25, 100]" aria-label="Select page of Library"></mat-paginator>
+<mat-paginator
+  class="paginator"
+  [pageSizeOptions]="[10, 15, 25, 100]"
+  aria-label="Select page of Library"
+></mat-paginator>

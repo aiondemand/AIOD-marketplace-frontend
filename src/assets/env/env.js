@@ -1,6 +1,6 @@
 // (function(window) {
 //     window.env = window.env || {};
-  
+
 //     // Environment variables
 //     window["env"]["KEYCLOAK_OPENID_CONNECT_URL"] = "${KEYCLOAK_OPENID_CONNECT_URL}";
 //     window["env"]["KEYCLOAK_CLIENT_ID"] = "${KEYCLOAK_CLIENT_ID}"

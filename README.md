@@ -15,7 +15,58 @@ This service is intended to be used in conjunction with other AIoD services, nam
 - The [Marketplace backend](https://github.com/aiondemand/AIOD-marketplace-backend), which provides the necessary functionality to manage all the information regarging the user's library.
 - The [AIoD REST API](https://github.com/aiondemand/AIOD-rest-api), to retrieve information from te AIoD Catalogue and for user's authentication and authorisation.
 
- 
+ ### Pre-commit Hook
+
+ Please run the script to perform the husky install.
+```
+ npm run prepare
+```
+- **Purpose**: Runs ESLint to check code quality before allowing commits
+- **Location**: `.husky/pre-commit`
+- **Command**: `npm run lint`
+
+### Commit Message Hook
+
+- **Purpose**: Validates that commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) specification
+- **Location**: `.husky/commit-msg`
+- **Tool**: Uses [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
+
+## Conventional Commit Format
+
+Commit messages must follow this format:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
+
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `build`: Changes that affect the build system or external dependencies
+- `ci`: Changes to our CI configuration files and scripts
+- `chore`: Other changes that don't modify src or test files
+- `revert`: Reverts a previous commit
+
+### Examples
+
+```bash
+feat: add user authentication
+fix: resolve memory leak in data processing
+docs: update installation instructions
+style: format code according to style guide
+refactor: extract user validation logic
+```
+
 ## Visuals
  
 Here are some snapshots of the AIoD My Library frontend service, which have been taken from the official release of the service available at: https://mylibrary.aiod.eu/

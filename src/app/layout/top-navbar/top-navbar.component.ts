@@ -1,6 +1,6 @@
 import {  Component, Renderer2 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatMenuTrigger, _MatMenuBase } from '@angular/material/menu';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
@@ -8,9 +8,9 @@ import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-top-navbar',
-    templateUrl: './top-navbar.component.html',
-    styleUrls: ['./top-navbar.component.scss'],
+  selector: 'app-top-navbar',
+  templateUrl: './top-navbar.component.html',
+  styleUrls: ['./top-navbar.component.scss'],
 })
 export class TopNavbarComponent {
     constructor(
@@ -38,17 +38,17 @@ export class TopNavbarComponent {
         } 
     }
 
-    login() {
-        this.authService.login(window.location.pathname);
-    }
+  login() {
+    this.authService.login(window.location.pathname);
+  }
 
-    logout() {
-        this.authService.logout();
-    }
+  logout() {
+    this.authService.logout();
+  }
 
-    isLoggedIn(): boolean {
-        return this.authService.isAuthenticated();
-    }
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
 
     menuenter() {
         this.isMatMenuOpen = true;

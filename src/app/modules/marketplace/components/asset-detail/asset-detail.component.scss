@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 $borderColor: rgb(212, 212, 212);
 $urlColor: #31488b;
@@ -12,7 +12,7 @@ ul {
   h2,
   h3,
   h4 {
-    font-family: "Jura", sans-serif;
+    font-family: 'Jura', sans-serif;
     padding: 24px;
     margin: 0;
     padding-bottom: 0;
@@ -58,7 +58,7 @@ ul {
     margin-right: 10px;
   }
 }
-[data-theme="dark"] {
+[data-theme='dark'] {
   .asset-tittle {
     color: $white;
   }

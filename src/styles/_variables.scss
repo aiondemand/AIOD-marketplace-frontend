@@ -20,51 +20,40 @@ $screen-md-min: $screen-md;
 $screen-lg-min: $screen-lg;
 $screen-xl-min: $screen-xl;
 $screen-xxl-min: $screen-xxl;
-$screen-xs-max: (
-   $screen-sm-min - 1
-);
-$screen-sm-max: (
-   $screen-md-min - 1
-);
-$screen-md-max: (
-   $screen-lg-min - 1
-);
-$screen-lg-max: (
-   $screen-xl-min - 1
-);
-$screen-xl-max: (
-   $screen-xxl-min - 1
-);
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+$screen-lg-max: ($screen-xl-min - 1);
+$screen-xl-max: ($screen-xxl-min - 1);
 
 // ===== COLORS ===== //
 
 $color-primary: #000613;
-$color-primary2: #0047BB;
-$color-primary3: #41B6E6;
-$color-primary4: #FFED00;
-$color-primary5: #FFFFFF;
-$color-primary6: #D9D9D9;
+$color-primary2: #0047bb;
+$color-primary3: #41b6e6;
+$color-primary4: #ffed00;
+$color-primary5: #ffffff;
+$color-primary6: #d9d9d9;
 $color-primary-lighter: $color-primary2;
 $color-primary-darker: $color-primary6;
 
 // Prefix for :root CSS variables
 
-$prefix:                      loba- !default;
-
+$prefix: loba- !default;
 
 $color-light-primary: #515151;
-$color-light-primary2: #ECECEC;
-$color-light-primary3: #D3D3D3;
+$color-light-primary2: #ececec;
+$color-light-primary3: #d3d3d3;
 $color-light-primary4: #000000;
-$color-light-primary5: #FFFFFF;
+$color-light-primary5: #ffffff;
 $color-light-primary6: #585858;
 
 $color-accent: #535965;
-$color-accent2: #3F4550;
-$color-accent3: #D2D4D7;
-$color-accent4: #0A1121;
-$color-accent5: #E3E5E8;
-$color-accent6: #170F49;
+$color-accent2: #3f4550;
+$color-accent3: #d2d4d7;
+$color-accent4: #0a1121;
+$color-accent5: #e3e5e8;
+$color-accent6: #170f49;
 $color-accent-lighter: $color-accent2;
 $color-accent-darker: $color-accent6;
 
@@ -92,7 +81,7 @@ $black: #000 !default;
 
 // ===== FONTS ===== //
 
-$font-path: "../fonts";
+$font-path: '../fonts';
 $font: 'Jura', sans-serif;
 $font-variant: 'Montserrat', sans-serif;
 
@@ -233,9 +222,9 @@ $inputMarginRight: 10px;
 $inputMarginBottom: 20px;
 $inputDisabledOpacity: 0.5;
 $inputBoxShadow: 0; // 0 - to disable box-shadow
-$inputFocusBoxShadow: 0 ;
+$inputFocusBoxShadow: 0;
 $inputBorderRadius: 2px; // 0 - to disable border radius
-$inputBorder:0; // 0 - to disable border
+$inputBorder: 0; // 0 - to disable border
 $inputBackground: #fff;
 $inputFontSize: 16px;
 $inputFontWeight: normal;
