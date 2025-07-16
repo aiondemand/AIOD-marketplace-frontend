@@ -1,51 +1,41 @@
+@import 'node_modules/bootstrap/scss/functions';
 
+@import 'variables';
 
+@import 'bootstrap/bootstrap-override';
 
+@import 'bootstrap/bootstrap'; // bootstrap framework
 
-@import "node_modules/bootstrap/scss/functions";
-
-@import "variables";
-
-@import "bootstrap/bootstrap-override";
-
-@import "bootstrap/bootstrap"; // bootstrap framework
-
-
-
-
-@import "base/mixins";
-@import "base/stylesheet";
-@import "base/icons";
-@import "base/fonts";
-@import "base/cards";
-@import "base/base";
-@import "base/inputs";
-@import "base/select";
-@import "base/file";
-@import "base/forms";
-@import "base/warnings";
-@import "base/buttons";
-@import "base/cookies";
+@import 'base/mixins';
+@import 'base/stylesheet';
+@import 'base/icons';
+@import 'base/fonts';
+@import 'base/cards';
+@import 'base/base';
+@import 'base/inputs';
+@import 'base/select';
+@import 'base/file';
+@import 'base/forms';
+@import 'base/warnings';
+@import 'base/buttons';
+@import 'base/cookies';
 
 // ===== REUSABLE BLOCKS OF CODE ===== //
-@import "modules/swiper";
-@import "modules/banner";
+@import 'modules/swiper';
+@import 'modules/banner';
 
 // ===== SPECIFIC PAGE LAYOUT AND NON-REUSABLE STYLES ===== //
 
 // @import "layout/viewname";
-@import "layout/keyframes";
-@import "layout/loba";
-@import "layout/header";
-@import "layout/footer";
-@import "layout/homepage";
-@import "layout/about";
-@import "layout/product";
-@import "layout/privacy-policy";
-@import "layout/communication-requests";
-
-
-
+@import 'layout/keyframes';
+@import 'layout/loba';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/homepage';
+@import 'layout/about';
+@import 'layout/product';
+@import 'layout/privacy-policy';
+@import 'layout/communication-requests';
 
 // ===== DEBUG HTML/CSS ===== //
-@import "layout/debug";
+@import 'layout/debug';

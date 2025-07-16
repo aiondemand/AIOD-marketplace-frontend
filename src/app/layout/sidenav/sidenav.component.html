@@ -17,8 +17,6 @@
         <div class="sidebar-container">
           <div class="menu">
             <ul>
-
-        
               <li class="sidebar-link sidebar-link--active">
                 <a href="https://aiod.eu">
                   <i class="icon-dashboard"></i>
@@ -32,14 +30,14 @@
                 </a>
               </li>
               <li
-               
                 class="has-submenu"
                 [ngClass]="isResourcesOpened ? 'open' : ''"
               >
-                <span  (click)="isResourcesOpened = !isResourcesOpened"
+                <span
+                  (click)="isResourcesOpened = !isResourcesOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div ><i class="icon-ai"></i> <span>Resources</span></div>
+                  <div><i class="icon-ai"></i> <span>Resources</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
@@ -56,7 +54,7 @@
                       ><i class="icon-catalogue"></i>SDKs and APIs</a
                     >
                   </li>
-                    <!-- <li>
+                  <!-- <li>
                     <a
                       [routerLink]="['/resources']"
                       [queryParams]="{ category: 'educational_resources' }"
@@ -64,14 +62,18 @@
                       <i class="icon-catalogue"></i>Educational Resources
                     </a>
                     </li> -->
-                    <li>
-                      <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
-                      <p class="sidebar-text">Powered by <a href="https://ai4eosc.eu/">ai4eosc</a> marketplace</p>
-                    </li>
+                  <li>
+                    <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
+                    <p class="sidebar-text">
+                      Powered by
+                      <a href="https://ai4eosc.eu/">ai4eosc</a> marketplace
+                    </p>
+                  </li>
                 </ul>
               </li>
-              <li class="has-submenu"   [ngClass]="isToolsOpened ? 'open' : ''">
-                <span  (click)="isToolsOpened = !isToolsOpened"
+              <li class="has-submenu" [ngClass]="isToolsOpened ? 'open' : ''">
+                <span
+                  (click)="isToolsOpened = !isToolsOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
                   <div><i class="icon-grid"></i> <span>Tools</span></div>
@@ -79,7 +81,7 @@
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
                 </span>
-                <ul class="submenu"  [ngClass]="isToolsOpened ? 'open' : ''">
+                <ul class="submenu" [ngClass]="isToolsOpened ? 'open' : ''">
                   <li>
                     <a href="https://aiod.eu/tools">
                       <i class="icon-dashboard"></i>
@@ -96,18 +98,19 @@
                     <a href=""> <i class="icon-file-text"></i>Documentation </a>
                   </li> -->
                   <li>
-                    <a href="https://aiod.eu/technical-support"> 
-                    <i class="icon-dashboard"></i>
-                    Technical Support </a>
+                    <a href="https://aiod.eu/technical-support">
+                      <i class="icon-dashboard"></i>
+                      Technical Support
+                    </a>
                   </li>
                 </ul>
               </li>
               <li
-               
                 [ngClass]="isCommunityOpened ? 'open' : ''"
                 class="has-submenu"
               >
-                <span (click)="isCommunityOpened = !isCommunityOpened"
+                <span
+                  (click)="isCommunityOpened = !isCommunityOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
                   <div><i class="icon-users"></i> <span>Community</span></div>
@@ -115,29 +118,31 @@
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
                 </span>
-             
               </li>
 
               <li>
-
-                <ul class="submenu submenu-2"   [ngClass]="isCommunityOpened ? 'open' : ''">
+                <ul
+                  class="submenu submenu-2"
+                  [ngClass]="isCommunityOpened ? 'open' : ''"
+                >
                   <!-- -->
-                    <li
+                  <li
                     [ngClass]="isMediaOpened ? 'open' : ''"
                     class="has-submenu"
                   >
-                    <span (click)="isMediaOpened = !isMediaOpened"
+                    <span
+                      (click)="isMediaOpened = !isMediaOpened"
                       class="d-flex align-items-center justify-content-between sidebar-link"
                     >
                       <div>
-                        <i class="icon-dashboard"></i> 
+                        <i class="icon-dashboard"></i>
                         <span>Press Corner</span>
                       </div>
                       <span class="submenu-toggle">
                         <i class="icon-arrow-breadcrumb"></i>
                       </span>
                     </span>
-                    <ul class="submenu "   [ngClass]="isMediaOpened ? 'open' : ''">
+                    <ul class="submenu" [ngClass]="isMediaOpened ? 'open' : ''">
                       <li class="subsubmenu">
                         <a href="https://aiod.eu/press-corner-types/events">
                           <span class="corner"></span>
@@ -155,21 +160,27 @@
                           <span class="corner"></span>
                           Newsletter
                         </a>
-                      </li>                    
+                      </li>
                     </ul>
-                    </li>
+                  </li>
                   <!-- -->
-  
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/project"> <i class="icon-file-text"></i>Projects </a>
-                    </li>
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
-                    </li>
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/ai-experts"> <i class="icon-star"></i>Pool of Experts </a>
-                    </li>                  
-                    <!-- <li>
+
+                  <li class="hasnot-submenu">
+                    <a href="https://aiod.eu/project">
+                      <i class="icon-file-text"></i>Projects
+                    </a>
+                  </li>
+                  <li class="hasnot-submenu">
+                    <a href="https://aiod.eu/forums">
+                      <i class="icon-forum"></i>Forum
+                    </a>
+                  </li>
+                  <li class="hasnot-submenu">
+                    <a href="https://aiod.eu/ai-experts">
+                      <i class="icon-star"></i>Pool of Experts
+                    </a>
+                  </li>
+                  <!-- <li>
                                   <a href="">
                                      <i class="icon-star"></i>Sucess Stories
                                   </a>
@@ -203,10 +214,12 @@
                         </li>
                       </ul>
                     </li> -->
-                    <li class="hasnot-submenu">
-                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
-                    </li>
-                  </ul>
+                  <li class="hasnot-submenu">
+                    <a href="https://ai-ecosystem.aiod.eu">
+                      <i class="icon-map"></i> AI Organisations
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -224,8 +237,10 @@
             </div>
 
             <div id="registerDiv" *ngIf="!isLoggedIn()">
-              <p> Don't have an AIoD account?</p>
-              <p  id="registerLink" (click)="login(); $event.stopPropagation()">Register</p>
+              <p>Don't have an AIoD account?</p>
+              <p id="registerLink" (click)="login(); $event.stopPropagation()">
+                Register
+              </p>
             </div>
 
             <div

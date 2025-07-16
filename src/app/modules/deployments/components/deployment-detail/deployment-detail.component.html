@@ -1,6 +1,6 @@
 <mat-toolbar class="mb-3 marketplace-toolbar">
   <span>
-    {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.TITLE" | translate }}
+    {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.TITLE' | translate }}
     <mat-icon>view_in_ar</mat-icon></span
   >
 </mat-toolbar>
@@ -8,8 +8,7 @@
 <mat-card class="example-card">
   <ng-template #loading>
     <div class="spinner">
-      <mat-progress-spinner  mode="indeterminate">
-      </mat-progress-spinner>
+      <mat-progress-spinner mode="indeterminate"> </mat-progress-spinner>
     </div>
   </ng-template>
 
@@ -35,31 +34,31 @@
       <div class="deployment-detail-container">
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.DOCKER-IMAGE" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.DOCKER-IMAGE' | translate }}
           </h3>
           <p>{{ deployment?.docker_image }}</p>
         </div>
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.DESCRIPTION" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.DESCRIPTION' | translate }}
           </h3>
           <p>{{ deployment?.description }}</p>
         </div>
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.CREATION-TIME" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.CREATION-TIME' | translate }}
           </h3>
           <p>{{ deployment?.submit_time }}</p>
         </div>
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.DEPLOYMENT-ID" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.DEPLOYMENT-ID' | translate }}
           </h3>
           <p>{{ deployment?.job_ID }}</p>
         </div>
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.RESOURCES-ASSIGNED" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.RESOURCES-ASSIGNED' | translate }}
           </h3>
           <ng-container
             *ngIf="(deployment?.resources | json) !== '{}'; else noResources"
@@ -70,7 +69,7 @@
               >
                 <mat-list-item
                   >{{
-                    "DEPLOYMENTS.DEPLOYMENT-DETAIL.RESOURCES." +
+                    'DEPLOYMENTS.DEPLOYMENT-DETAIL.RESOURCES.' +
                       (resource.key | uppercase) | translate
                   }}: {{ resource.value }}</mat-list-item
                 >
@@ -80,7 +79,7 @@
         </div>
         <div>
           <h3>
-            {{ "DEPLOYMENTS.DEPLOYMENT-DETAIL.ENDPOINTS" | translate }}
+            {{ 'DEPLOYMENTS.DEPLOYMENT-DETAIL.ENDPOINTS' | translate }}
           </h3>
           <ng-container
             *ngIf="(deployment?.endpoints | json) !== '{}'; else noResources"

@@ -6,20 +6,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-educational-resource',
   templateUrl: './educational-resource.component.html',
-  styleUrls: ['./educational-resource.component.scss']
+  styleUrls: ['./educational-resource.component.scss'],
 })
 export class EducationalResourceComponent implements OnInit, OnDestroy {
-  constructor(
-    private educationalResourceService: EducationalResourceService ,
-  ) {}
- 
+  constructor(private educationalResourceService: EducationalResourceService) {}
+
   private subscriptions: Subscription = new Subscription();
   public educationalResource!: EducationalResourceModel;
   @Input() identifier!: string;
 
   private getEducationalResourceModel() {
     const subscribe = this.educationalResourceService
-      .getAsset(this.identifier).subscribe((educationalResource: EducationalResourceModel) => {
+      .getAsset(this.identifier)
+      .subscribe((educationalResource: EducationalResourceModel) => {
         this.educationalResource = educationalResource;
       });
 
@@ -33,5 +32,4 @@ export class EducationalResourceComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }

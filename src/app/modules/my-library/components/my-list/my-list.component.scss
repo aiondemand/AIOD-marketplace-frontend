@@ -1,5 +1,4 @@
-
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 table {
   padding-right: 2em;
@@ -11,7 +10,6 @@ table {
 tr.element-row:hover {
   background: whitesmoke;
 }
-
 
 .mat-column-name {
   text-align: start;
@@ -38,10 +36,8 @@ tr.element-row:hover {
 }
 
 .disabled-link {
-  opacity: 0.5; 
+  opacity: 0.5;
 }
-
-
 
 .paginator {
   display: flex;
@@ -56,60 +52,54 @@ tr.element-row:hover {
   font-size: inherit;
 }
 
-
-[data-theme="dark"] {
-  .paginator{
-      color: #ffffffb2;
+[data-theme='dark'] {
+  .paginator {
+    color: #ffffffb2;
   }
 }
 
-[data-theme="light"] {
-
-.paginator{
-  color: black;
-}
+[data-theme='light'] {
+  .paginator {
+    color: black;
+  }
 }
 
 ::ng-deep {
-  
   .mat-mdc-table {
     background: transparent;
-    font-family: "Jura", sans-serif !important;
+    font-family: 'Jura', sans-serif !important;
   }
-  .mat-mdc-table tbody *{
+  .mat-mdc-table tbody * {
     background: transparent;
-    font-family: "Jura", sans-serif !important;
+    font-family: 'Jura', sans-serif !important;
   }
-  
+
   .mat-mdc-paginator-icon {
-    color:$color-primary4;
+    color: $color-primary4;
   }
   .mdc-checkbox__background {
     border-color: $color-primary4 !important;
   }
   .mat-mdc-table .mat-mdc-header-cell {
-    font-family: "Jura", sans-serif !important;
-
+    font-family: 'Jura', sans-serif !important;
   }
 
-  [data-theme="ligth"] {
+  [data-theme='ligth'] {
     .mat-mdc-table .mat-mdc-header-cell {
-      color:black !important;
-  }
-  .mat-mdc-table tbody *{
-    color:black !important;
+      color: black !important;
+    }
+    .mat-mdc-table tbody * {
+      color: black !important;
+    }
   }
 
-
-}
-  
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     .mat-mdc-table .mat-mdc-header-cell {
-      color:#ffffff !important;
+      color: #ffffff !important;
     }
 
-    .mat-mdc-table tbody *{
-      color:#ffffff !important;
+    .mat-mdc-table tbody * {
+      color: #ffffff !important;
     }
 
     span.chip-asset-category {
@@ -119,8 +109,5 @@ tr.element-row:hover {
     tr.element-row:hover {
       background: rgba(0, 0, 0, 0.87) !important;
     }
+  }
 }
-
-}
-
-

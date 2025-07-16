@@ -6,20 +6,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-publication',
   templateUrl: './publication.component.html',
-  styleUrls: ['./publication.component.scss']
+  styleUrls: ['./publication.component.scss'],
 })
 export class PublicationComponent implements OnInit, OnDestroy {
-  constructor(
-    private publicationService: PublicationService ,
-  ) {}
- 
+  constructor(private publicationService: PublicationService) {}
+
   private subscriptions: Subscription = new Subscription();
   public publication!: PublicationModel;
   @Input() identifier!: string;
 
   private getPublicationModel() {
     const subscribe = this.publicationService
-      .getAsset(this.identifier).subscribe((publication: PublicationModel) => {
+      .getAsset(this.identifier)
+      .subscribe((publication: PublicationModel) => {
         this.publication = publication;
       });
 
@@ -33,5 +32,4 @@ export class PublicationComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }

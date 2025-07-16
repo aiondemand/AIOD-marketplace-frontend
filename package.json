@@ -48,6 +48,8 @@
     "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "~15.2.0",
     "@angular/compiler-cli": "^15.2.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@types/jest": "^29.5.2",
     "@types/marked": "^4.0.8",
     "@typescript-eslint/eslint-plugin": "5.48.2",

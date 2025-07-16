@@ -1,148 +1,145 @@
-.communication-requests{
-   padding-top: 230px;
-   p{
-      font-size: 18px;
-      line-height: 1.6;
-      color:  $white;
-      margin-bottom: 30px;
-   }
-   li{
-      font-size: 18px;
-      line-height: 1.6;
+.communication-requests {
+  padding-top: 230px;
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: $white;
+    margin-bottom: 30px;
+  }
+  li {
+    font-size: 18px;
+    line-height: 1.6;
+    color: $white;
+  }
+  .typewrite {
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 48px;
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  form {
+    margin: 100px 0;
+    .form-group {
+      margin-bottom: 40px;
+      span {
+        display: block;
+        font-size: 16px;
+        font-weight: 300;
+        color: $white;
+        &.note {
+          margin-bottom: 15px;
+          color: rgba(255, 255, 255, 0.7);
+          a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: underline;
+            transition: color 300ms ease;
+            &:hover {
+              color: $white;
+            }
+          }
+        }
+      }
+      &-box {
+        margin-top: 20px;
+      }
+      &-intro {
+        margin-bottom: 20px;
+        span {
+          opacity: 1;
+        }
+      }
+      .form-group-label {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 32.04px;
+        text-align: left;
+        color: $color-primary4;
+        margin-bottom: 10px;
+      }
+      .form-check-label {
+        font-size: 16px;
+        line-height: 1;
+        font-weight: 300;
+        color: $white;
+        margin-bottom: 20px;
+      }
+      .form-control {
+        border-radius: 24px !important;
+        height: 60px;
+        margin-top: 10px;
+        position: relative;
+        &::-webkit-calendar-picker-indicator {
+          position: absolute;
+          right: 20px;
+          width: 18px;
+          height: 18px;
+          background: url('../../assets/icons/calendar.svg') no-repeat;
+          background-size: contain;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-success {
+      border-color: #0047bb;
       color: $white;
-   }
-   .typewrite{
-      font-size: 48px;
-      font-weight: 300;
-      line-height: 48px;
-      text-align: left;
-      margin-bottom: 30px;
-   }
+      padding: 14px 32px;
+      &:hover,
+      &:focus {
+        background-color: #0047bb;
+      }
+    }
+  }
+}
 
-   form{
+[data-theme='light'] {
+  .communication-requests {
+    p,
+    li {
+      color: #030303;
+    }
+
+    form {
       margin: 100px 0;
-      .form-group{
-         margin-bottom: 40px;
-         span{
-            display: block;
-            font-size: 16px;
-            font-weight: 300;
-            color: $white;
-            &.note{
-               margin-bottom: 15px;
-               color: rgba(255, 255, 255, 0.7);
-               a{
-                  color: rgba(255, 255, 255, 0.7);
-                  text-decoration: underline;
-                  transition: color 300ms ease;
-                  &:hover{
-                     color: $white;
-                  }
-               }
-            }
-         }
-         &-box{
-            margin-top: 20px;
-         }
-         &-intro{
-            margin-bottom: 20px;
-            span{
-               opacity: 1;
-            }
-         }
-         .form-group-label{
-            font-size: 24px;
-            font-weight: 300;
-            line-height: 32.04px;
-            text-align: left;
-            color: $color-primary4;
-            margin-bottom: 10px;
-         }
-         .form-check-label{
-            font-size: 16px;
-            line-height: 1;
-            font-weight: 300;
-            color: $white;
-            margin-bottom: 20px;
-         }
-         .form-control{
-            border-radius: 24px !important;
-            height: 60px;
-            margin-top: 10px;
-            position: relative;
-            &::-webkit-calendar-picker-indicator {
-               position: absolute;
-               right: 20px;
-               width: 18px;
-               height: 18px;
-               background: url("../../assets/icons/calendar.svg") no-repeat;
-               background-size: contain;
-               cursor: pointer;
-           }
-         }
-         
-       
-      }
-
-      .btn-success{
-         border-color: #0047BB;
-         color: $white;
-         padding: 14px 32px;
-         &:hover,
-         &:focus{
-            background-color: #0047BB;
-         }
-      }
-   }
-}
-
-[data-theme="light"] {
-   .communication-requests{
-      p,
-      li{
-         color: #030303;
-      }
-
-      form{
-         margin: 100px 0;
-         .form-group{
-            input{
-               &::placeholder{
-                  color: #030303;
-               }
-            }
-            input[type="checkbox"] + label.form-check-label:before,
-            input[type="radio"] + label.form-check-label:before{
-               border: 1px solid rgba(3, 3, 3, 0.4);
-            }
-            span,
-            .form-check-label{
-               color: #030303;
-            }
-            .form-group-label{
-               color: $color-primary2;
-            }
-
-            span{
-               &.note{
-                  color: rgba(3, 3, 3, 0.7);
-                  a{
-                     color: rgba(3, 3, 3, 0.7);
-                     &:hover{
-                        color: #030303;
-                     }
-                  }
-               }
-            }
-         }
-
-         .btn-success{
+      .form-group {
+        input {
+          &::placeholder {
             color: #030303;
-            &:hover{
-               color: $white;
-            }
-         }
-      }
-   }
-}
+          }
+        }
+        input[type='checkbox'] + label.form-check-label:before,
+        input[type='radio'] + label.form-check-label:before {
+          border: 1px solid rgba(3, 3, 3, 0.4);
+        }
+        span,
+        .form-check-label {
+          color: #030303;
+        }
+        .form-group-label {
+          color: $color-primary2;
+        }
 
+        span {
+          &.note {
+            color: rgba(3, 3, 3, 0.7);
+            a {
+              color: rgba(3, 3, 3, 0.7);
+              &:hover {
+                color: #030303;
+              }
+            }
+          }
+        }
+      }
+
+      .btn-success {
+        color: #030303;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}

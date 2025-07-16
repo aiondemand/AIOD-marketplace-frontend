@@ -1,31 +1,31 @@
-import { MediaMatcher } from "@angular/cdk/layout";
+import { MediaMatcher } from '@angular/cdk/layout';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   OnInit,
   ViewChild,
-} from "@angular/core";
-import { FormBuilder } from "@angular/forms";
-import { MatSidenav } from "@angular/material/sidenav";
-import { AppConfigService } from "@app/core/services/app-config/app-config.service";
-import { AuthService } from "@app/core/services/auth/auth.service";
-import { SidenavService } from "@app/shared/services/sidenav/sidenav.service";
-import { environment } from "src/environments/environment";
-import { SpinnerService } from "@app/shared/services/spinner/spinner.service";
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
+import { AppConfigService } from '@app/core/services/app-config/app-config.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
+import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
+import { environment } from 'src/environments/environment';
+import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 
 @Component({
-  selector: "app-sidenav",
-  templateUrl: "./sidenav.component.html",
-  styleUrls: ["./sidenav.component.scss"],
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
-  @ViewChild("sidenav", { static: true }) public sidenav!: MatSidenav;
-  protected isMenuCollapsed: boolean = false;
-  protected isResourcesOpened:boolean=true;
-  protected isToolsOpened:boolean=false;
-  protected isCommunityOpened:boolean=false;
-   protected isMediaOpened:boolean=false;
+  @ViewChild('sidenav', { static: true }) public sidenav!: MatSidenav;
+  protected isMenuCollapsed = false;
+  protected isResourcesOpened = true;
+  protected isToolsOpened = false;
+  protected isCommunityOpened = false;
+  protected isMediaOpened = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -34,11 +34,11 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     private media: MediaMatcher,
     private sidenavService: SidenavService,
     private appConfigService: AppConfigService,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
   ) {
-    this.mobileQuery = this.media.matchMedia("(max-width: 1366px)");
+    this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
   protected environment = environment;
@@ -54,28 +54,28 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   mainLinks = [
     {
-      name: "SIDENAV.MARKETPLACE",
-      url: "/marketplace",
+      name: 'SIDENAV.MARKETPLACE',
+      url: '/marketplace',
       isDisabled: false,
       isRestricted: false,
     },
     {
-      name: "SIDENAV.MY-LIBRARY",
-      url: "/my-library",
+      name: 'SIDENAV.MY-LIBRARY',
+      url: '/my-library',
       isDisabled: false,
       isRestricted: true,
     },
     {
-      name: "SIDENAV.ABOUT",
-      url: "/about",
+      name: 'SIDENAV.ABOUT',
+      url: '/about',
       isDisabled: false,
       isRestricted: false,
     },
   ];
 
-  acknowledgments = "";
-  projectName = "";
-  projectUrl = "";
+  acknowledgments = '';
+  projectName = '';
+  projectUrl = '';
 
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
@@ -98,8 +98,4 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
-
-
-
-  ngOnDestroy(): void {}
 }
