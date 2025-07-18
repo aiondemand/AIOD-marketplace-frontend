@@ -24,6 +24,29 @@ This service is intended to be used in conjunction with other AIoD services, nam
 - **Purpose**: Runs ESLint to check code quality before allowing commits
 - **Location**: `.husky/pre-commit`
 - **Command**: `npm run lint`
+### Fixing lint error with the console
+
+- **Purpose**: Automatically fix code style and formatting issues detected by ESLint and Prettier.
+- **How to use**:  
+  Run the following commands in the root of the project to automatically fix formatting and lint errors:
+
+  ```bash
+  npx prettier --write .
+  npm run lint -- --fix
+  ```
+
+  - The first command (`npx prettier --write .`) formats all files in the project according to your Prettier configuration.
+  - The second command (`npm run lint -- --fix`) attempts to automatically fix lint errors detected by ESLint.
+
+- **Tip**:  
+  If you want to fix a specific file, you can specify its path, for example:
+
+  ```bash
+  npx prettier --write src/environments/environment.local.ts
+  ```
+
+- **Recommendation**:  
+  It is good practice to run these commands before
 
 ### Commit Message Hook
 
