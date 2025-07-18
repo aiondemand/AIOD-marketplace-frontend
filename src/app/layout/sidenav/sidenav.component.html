@@ -4,8 +4,8 @@
 >
   <mat-sidenav
     #sidenav
-    [mode]=" 'side'"
-    [opened]="true"
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="!mobileQuery.matches"
     class="sidenav"
     [fixedInViewport]="options.value.fixed"
     [fixedTopGap]="options.value.top"
@@ -355,7 +355,7 @@
     </main>
   </mat-sidenav>
 
-  <mat-sidenav-content [ngClass]="isMenuCollapsed? 'expanded':''"  class="pl-3 pr-3 sidenav-content">
+  <mat-sidenav-content class="pl-3 pr-3 sidenav-content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
