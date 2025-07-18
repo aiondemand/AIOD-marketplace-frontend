@@ -7,7 +7,7 @@
 html,
 body {
   height: 100%;
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .grid-2-columns {
@@ -54,6 +54,7 @@ body {
 
 .mat-drawer-side{
   border: none;
+  overflow:hidden;
 
 }
 
@@ -124,4 +125,12 @@ body {
 
 }
 
+.specific-detail-body {
+  padding: 20px 20px 0px;
+  margin-top: 20px;
+
+  h3 {
+    font-family: inherit;
+  }
+}
 

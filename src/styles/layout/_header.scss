@@ -523,7 +523,9 @@ header {
             right: 0;
          }
       }
-      
+      .top-bar-buttons{
+         width:55%;
+      }
    }
 
    .header-items-icon {
@@ -1175,7 +1177,7 @@ input+.slider {
 
 
 // sidebar
-$sidebar-width: 299px;
+$sidebar-width: 280px;
 $sidebar-collapsed-width: 75px;
 
 .sidebar {

@@ -11,7 +11,6 @@
   background-color: transparent;
 }
 
-
 ::ng-deep {
   .sidenav .mat-drawer-inner-container {
     overflow: hidden !important;
@@ -24,6 +23,52 @@
   .mdc-list-item__primary-text {
     // color: aliceblue !important;
     color: black !important;
+  }
+
+  .mat-sidenav-container.mat-drawer-container {
+    background-color: transparent;
+  }
+
+  .mat-sidenav-content.mat-drawer-content {
+    overflow-x: hidden;
+    transition: margin-left 0.9s ease-in-out, width 0.9s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mat-sidenav.mat-drawer.mat-drawer-side {
+    border-right: none;
+    transition: width 0.9s ease-in-out;
+  }
+
+  .sidebar-collapsed .mat-sidenav.mat-drawer.mat-drawer-side {
+    @media (min-width: 769px) {
+      width: 75px !important;
+      min-width: 75px !important;
+      max-width: 75px !important;
+    }
+  }
+
+  .sidebar-expanded .mat-sidenav.mat-drawer.mat-drawer-side {
+    @media (min-width: 769px) {
+      width: 280px !important;
+      min-width: 280px !important;
+      max-width: 280px !important;
+    }
+  }
+
+  .sidebar-collapsed .mat-sidenav-content.mat-drawer-content {
+    @media (min-width: 769px) {
+      width: calc(100vw - 75px);
+      margin-left: 0;
+    }
+  }
+
+  .sidebar-expanded .mat-sidenav-content.mat-drawer-content {
+    @media (min-width: 769px) {
+      width: calc(100vw - 299px);
+      margin-left: 0;
+    }
   }
 }
 
@@ -69,19 +114,12 @@
 }
 
 .mat-drawer-content {
-  //min-height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-
-.expanded{
-  margin-left: 70px !important;
-  transition: margin-left 0.3s;
-}
-
-// Si el menú expandido deja un margen mayor:
 .sidenav-content {
-
-  transition: margin-left 0.3s;
+  transition: margin-left 0.5s ease;
 }
 
 .sidenav-footer {

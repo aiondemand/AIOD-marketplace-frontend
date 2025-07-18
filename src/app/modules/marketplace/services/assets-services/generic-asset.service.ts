@@ -8,14 +8,16 @@ const { base, endpoints, schemas } = environment.api;
 const { baseEnhanced } = environment.enhancedApi;
 
 export abstract class GenericAssetService<T> implements AssetService<T> {
-    constructor(protected http: HttpClient, protected endpoint: string) { }
+    constructor(protected http: HttpClient, protected endpoint: string) {
+    }
 
     protected abstract parseResponse(item: any): T;
+
     protected abstract parseRequest(item: T): any;
 
     private buildHttpParams(paramsAsset: ParamsReqAsset): HttpParams {
         return new HttpParams()
-            .set('schema', paramsAsset.schama??schemas.aiod)
+            .set('schema', paramsAsset.schama ?? schemas.aiod)
             .set('offset', paramsAsset.offset)
             .set('limit', paramsAsset.limit);
     }
@@ -24,7 +26,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
         let params = this.buildHttpParams(paramsAsset);
         return this.http.get<any[]>(`${base}${endpoints.prefixApiAssets}${endpoints.prefixByCategories}${this.endpoint}`, {params}).pipe(map(items => items.map(item => this.parseResponse(item))))
     }
-    
+
     public getAssetsByPlatform(platform: string, paramsAsset: ParamsReqAsset): Observable<T[]> {
         let params = this.buildHttpParams(paramsAsset);
         return this.http.get<any[]>(`${base}${endpoints.prefixApiAssets}${endpoints.prefixByPlatfoms}/${platform}${this.endpoint}`, {params}).pipe(map(item => item.map(item => this.parseResponse(item))))

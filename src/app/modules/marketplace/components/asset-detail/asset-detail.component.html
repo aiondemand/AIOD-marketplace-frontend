@@ -86,23 +86,24 @@
         </div>
       </div>
 
-      <div *ngIf="!!asset.identifier" class="asset-body-category   m-3" [ngSwitch]="asset.category">
-        <div class="card-news-content">
-        <div *ngSwitchCase="AssetCategory.Dataset">
-          <app-dataset [identifier]="asset.identifier"></app-dataset>
-        </div>
-        <div *ngSwitchCase="AssetCategory.Service">
-          <app-service-component
-            [identifier]="asset.identifier"
-          ></app-service-component>
-        </div>
-        <div *ngSwitchCase="AssetCategory.Experiment">
-          <app-experiment [identifier]="asset.identifier"></app-experiment>
-        </div>
-        <div *ngSwitchCase="AssetCategory.AIModel">
-          <app-aimodel [identifier]="asset.identifier"></app-aimodel>
-        </div>
-        </div>
+      <div *ngIf="!!asset.identifier" class="asset-body-category m-3" [ngSwitch]="asset.category">
+          <div *ngSwitchCase="AssetCategory.Dataset">
+            <app-dataset [identifier]="asset.identifier"></app-dataset>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Service">
+            <app-service-component
+              [identifier]="asset.identifier"
+            ></app-service-component>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Experiment">
+            <app-experiment [identifier]="asset.identifier"></app-experiment>
+          </div>
+          <div *ngSwitchCase="AssetCategory.AIModel">
+            <app-aimodel [identifier]="asset.identifier"></app-aimodel>
+          </div>
+          <div *ngSwitchCase="AssetCategory.Publication">
+            <app-publication [identifier]="asset.identifier"></app-publication>
+          </div>
       </div>
     
     </div>

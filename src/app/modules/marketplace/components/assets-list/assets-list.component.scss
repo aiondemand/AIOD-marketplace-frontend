@@ -2,10 +2,6 @@
   justify-content: space-between;
 }
 
-select {
-  background-color: transparent;
-}
-
 .viewer {
   width: 100%;
 }
@@ -16,6 +12,22 @@ select {
 
 .btn-default {
   padding: 11px 20px;
+  width: 90%;
+  height: 90%;
+}
+
+.filters-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  .btn {
+    width: auto;
+    height: auto;
+    padding: 11px 20px;
+    flex-shrink: 0;
+  }
 }
 
 .paginator {
@@ -95,17 +107,6 @@ select {
     .mdc-checkbox--disabled .mdc-checkbox__background {
       border-color: #757a7b;
     }
-
-    select {
-      color: black;
-    }
-  }
-
-  [data-theme="dark"] {
-  
-
-    select {
-      background-color: rgb(1, 7, 20);    }
   }
 
   .mat-mdc-checkbox
@@ -113,18 +114,5 @@ select {
     .mdc-checkbox__native-control:enabled:checked
     ~ .mdc-checkbox__background {
     background-color: #000000;
-  }
-}
-
-@media (max-width: 576px) {
-  .viewer {
-    display: none;
-  }
-  .sdk {
-    display: none;
-  }
-  .card-limited {
-    max-width: 350px;
-    display: block;
   }
 }

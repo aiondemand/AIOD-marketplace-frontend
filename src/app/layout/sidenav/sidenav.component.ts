@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from "@angular/core";
@@ -19,13 +20,13 @@ import { SpinnerService } from "@app/shared/services/spinner/spinner.service";
   templateUrl: "./sidenav.component.html",
   styleUrls: ["./sidenav.component.scss"],
 })
-export class SidenavComponent implements OnInit, AfterViewInit {
+export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("sidenav", { static: true }) public sidenav!: MatSidenav;
-  protected isMenuCollapsed: boolean = false;
-  protected isResourcesOpened:boolean=true;
-  protected isToolsOpened:boolean=false;
-  protected isCommunityOpened:boolean=false;
-   protected isMediaOpened:boolean=false;
+  protected isMenuCollapsed: boolean = true;
+  protected isResourcesOpened: boolean = true;
+  protected isToolsOpened: boolean = false;
+  protected isCommunityOpened: boolean = false;
+  protected isMediaOpened: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -34,9 +35,14 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     private media: MediaMatcher,
     private sidenavService: SidenavService,
     private appConfigService: AppConfigService,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
   ) {
-
+    this.mobileQuery = this.media.matchMedia("(max-width: 768px)");
+    this._mobileQueryListener = () => {
+      this.isMenuCollapsed = this.mobileQuery.matches;
+      this.changeDetectorRef.detectChanges();
+    };
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
   protected environment = environment;
@@ -86,17 +92,35 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     this.sidenavService.toggle();
   }
 
+  toggleCollapse() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
+
+    this.changeDetectorRef.detectChanges();
+
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+      this.changeDetectorRef.detectChanges();
+    }, 50);
+
+    setTimeout(() => {
+      this.changeDetectorRef.detectChanges();
+    }, 350);
+  }
+
   ngOnInit(): void {
     this.acknowledgments = this.appConfigService.acknowledgments;
     this.projectName = this.appConfigService.projectName;
     this.projectUrl = this.appConfigService.projectUrl;
+
+    // Set initial collapse state based on screen size
+    this.isMenuCollapsed = this.mobileQuery.matches;
   }
 
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
-
-
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
+  }
 }
