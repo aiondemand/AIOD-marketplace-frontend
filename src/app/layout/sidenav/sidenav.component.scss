@@ -16,10 +16,6 @@
     overflow: hidden !important;
   }
 
-  .mat-drawer {
-    overflow-x: hidden !important;
-  }
-
   .mdc-list-item__primary-text {
     // color: aliceblue !important;
     color: black !important;
@@ -82,7 +78,7 @@
 .sidenav-item {
   padding: 0 25px;
 }
- 
+
 .sidenav-item:hover .mdc-list-item {
   background-color: $color-accent;
   color: $color-default2;
@@ -183,4 +179,3 @@
   align-items: center;
   margin-right: 20px;
 }
-
