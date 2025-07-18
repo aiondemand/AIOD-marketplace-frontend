@@ -6,20 +6,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-service-component',
   templateUrl: './service-component.component.html',
-  styleUrls: ['./service-component.component.scss']
+  styleUrls: ['./service-component.component.scss'],
 })
 export class ServiceComponentComponent implements OnInit, OnDestroy {
-  constructor(
-    private serviceService: ServiceService ,
-  ) {}
- 
+  constructor(private serviceService: ServiceService) {}
+
   private subscriptions: Subscription = new Subscription();
   public service!: ServiceModel;
   @Input() identifier!: string;
 
   private getServiceModel() {
     const subscribe = this.serviceService
-      .getAsset(this.identifier).subscribe((service: ServiceModel) => {
+      .getAsset(this.identifier)
+      .subscribe((service: ServiceModel) => {
         this.service = service;
       });
 
@@ -33,5 +32,4 @@ export class ServiceComponentComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }

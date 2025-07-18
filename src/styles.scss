@@ -1,6 +1,6 @@
 // ===== OVERIDE VARIABLES BOOTSTRAP ===== /
 
-@import "src/styles/main";
+@import 'src/styles/main';
 
 //@import 'src/theme/partials/spaces';
 
@@ -24,10 +24,10 @@ body {
 
 .mat-icon-filled {
   font-variation-settings:
-    "FILL" 1,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 48;
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
 }
 
 .spinner {
@@ -52,19 +52,16 @@ body {
   border: 1px solid var($color-accent) !important;
 }
 
-.mat-drawer-side{
+.mat-drawer-side {
   border: none;
-
 }
 
 .mat-drawer {
   background-color: transparent !important;
-  
 }
-.not-rotate{
+.not-rotate {
   transform: rotate(0deg);
 }
-
 
 .paginator {
   display: flex;
@@ -80,9 +77,9 @@ body {
   font-size: inherit;
 }
 
-[data-theme=light] .paginator {
-  color: inherit;}
-
+[data-theme='light'] .paginator {
+  color: inherit;
+}
 
 @mixin delete-button-style {
   .delete-button {
@@ -104,11 +101,7 @@ body {
   .delete-button:focus {
     outline: none;
   }
-
-
-
 }
-
 
 :root {
   .spinner {
@@ -119,9 +112,6 @@ body {
     .mdc-circular-progress__indeterminate-circle-graphic {
     stroke: #ffed00;
   }
-
-
-
 }
 
 .specific-detail-body {
@@ -132,4 +122,3 @@ body {
     font-family: inherit;
   }
 }
-

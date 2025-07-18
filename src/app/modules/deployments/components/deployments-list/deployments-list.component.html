@@ -1,21 +1,20 @@
 <mat-toolbar class="mb-3 marketplace-toolbar">
-    <span
-        >{{ 'DEPLOYMENTS.TITLE' | translate }}
-        <mat-icon>view_in_ar</mat-icon></span
-    >
+  <span
+    >{{ 'DEPLOYMENTS.TITLE' | translate }} <mat-icon>view_in_ar</mat-icon></span
+  >
 </mat-toolbar>
 
 <mat-card class="example-card">
-    <mat-card-content>
-        <div class="table-container">
-            <table
-                mat-table
-                [dataSource]="dataSource"
-                class="mat-elevation-z8"
-                matSort
-                (matSortChange)="announceSortChange($event)"
-            >
-                <!-- selection column with checkbox 
+  <mat-card-content>
+    <div class="table-container">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+        matSort
+        (matSortChange)="announceSortChange($event)"
+      >
+        <!-- selection column with checkbox 
             <ng-container matColumnDef="select">
                 <mat-header-cell *matHeaderCellDef class="selection-checkbox">
                     <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
@@ -31,109 +30,100 @@
             </ng-container>
             -->
 
-                <!-- Rest of the columns-->
-                <ng-container
-                    *ngFor="let column of columns"
-                    [matColumnDef]="column.columnDef"
-                >
-                    <mat-header-cell
-                        *matHeaderCellDef
-                        mat-sort-header
-                        sortActionDescription="Sort by {column.header}"
-                        >{{ column.header | translate }}</mat-header-cell
-                    >
-                    <mat-cell *matCellDef="let row" class="content-cell">
-                        <ng-container *ngIf="column.columnDef === 'actions'">
-                            <button
-                                mat-button
-                                matTooltip="Info"
-                                matBadgeOverlap="false"
-                                matBadgeSize="small"
-                                [matBadgeHidden]="!hasDeploymentErrors(row)"
-                                matBadge="priority_high"
-                                matBadgeColor="warn"
-                                class="action-button-in-cell"
-                                (click)="openDeploymentDetailDialog(row)"
-                            >
-                                <mat-icon color="accent" id="infoIcon"
-                                    >info</mat-icon
-                                >
-                            </button>
-
-                            <div matTooltip="Quick access">
-                                <a
-                                    mat-button
-                                    [disabled]="!isDeploymentRunning(row)"
-                                    [href]="row.mainEndpoint"
-                                    target="_blank"
-                                    class="action-button-in-cell"
-                                    (click)="$event.stopPropagation()"
-                                >
-                                    <mat-icon color="accent" id="accessIcon"
-                                        >terminal</mat-icon
-                                    >
-                                </a>
-                            </div>
-
-                            <button
-                                mat-button
-                                matTooltip="Delete"
-                                class="action-button-in-cell"
-                                (click)="removeDeployment($event, row)"
-                            >
-                                <mat-icon color="warn">delete</mat-icon>
-                            </button>
-                        </ng-container>
-                        <ng-container *ngIf="column.columnDef === 'status'">
-                            <img
-                                src="https://img.shields.io/badge/{{
-                                    returnDeploymentBadge(row[column.columnDef])
-                                }}"
-                                height="20"
-                            />
-                        </ng-container>
-                        <ng-container *ngIf="column.columnDef !== 'status'">
-                            {{ row[column.columnDef] }}
-                        </ng-container>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row
-                    *matHeaderRowDef="displayedColumns"
-                ></mat-header-row>
-                <mat-row
-                    *matRowDef="let row; columns: displayedColumns"
-                ></mat-row>
-
-                <!--No data in table message-->
-                <ng-container *ngIf="!isLoading">
-                    <div *matNoDataRow class="no-deployment-message-container">
-                        {{ 'DEPLOYMENTS.NO-DEPLOYMENTS' | translate }}
-                    </div>
-                </ng-container>
-            </table>
-        </div>
-
-        <div *ngIf="isLoading" class="spinner">
-            <mat-progress-spinner  mode="indeterminate">
-            </mat-progress-spinner>
-        </div>
-    </mat-card-content>
-    <mat-card-actions align="end">
-        <a
-            mat-raised-button
-            aria-label=""
-            color="accent"
-            class="mt-2 mr-2 mb-2"
-            routerLink="/modules/DEEP-OC-generic-dev/train"
+        <!-- Rest of the columns-->
+        <ng-container
+          *ngFor="let column of columns"
+          [matColumnDef]="column.columnDef"
         >
-            {{ 'DEPLOYMENTS.NEW-DEPLOYMENT' | translate }}
-        </a>
-    </mat-card-actions>
+          <mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by {column.header}"
+            >{{ column.header | translate }}</mat-header-cell
+          >
+          <mat-cell *matCellDef="let row" class="content-cell">
+            <ng-container *ngIf="column.columnDef === 'actions'">
+              <button
+                mat-button
+                matTooltip="Info"
+                matBadgeOverlap="false"
+                matBadgeSize="small"
+                [matBadgeHidden]="!hasDeploymentErrors(row)"
+                matBadge="priority_high"
+                matBadgeColor="warn"
+                class="action-button-in-cell"
+                (click)="openDeploymentDetailDialog(row)"
+              >
+                <mat-icon color="accent" id="infoIcon">info</mat-icon>
+              </button>
+
+              <div matTooltip="Quick access">
+                <a
+                  mat-button
+                  [disabled]="!isDeploymentRunning(row)"
+                  [href]="row.mainEndpoint"
+                  target="_blank"
+                  class="action-button-in-cell"
+                  (click)="$event.stopPropagation()"
+                >
+                  <mat-icon color="accent" id="accessIcon">terminal</mat-icon>
+                </a>
+              </div>
+
+              <button
+                mat-button
+                matTooltip="Delete"
+                class="action-button-in-cell"
+                (click)="removeDeployment($event, row)"
+              >
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="column.columnDef === 'status'">
+              <img
+                src="https://img.shields.io/badge/{{
+                  returnDeploymentBadge(row[column.columnDef])
+                }}"
+                height="20"
+              />
+            </ng-container>
+            <ng-container *ngIf="column.columnDef !== 'status'">
+              {{ row[column.columnDef] }}
+            </ng-container>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+        <!--No data in table message-->
+        <ng-container *ngIf="!isLoading">
+          <div *matNoDataRow class="no-deployment-message-container">
+            {{ 'DEPLOYMENTS.NO-DEPLOYMENTS' | translate }}
+          </div>
+        </ng-container>
+      </table>
+    </div>
+
+    <div *ngIf="isLoading" class="spinner">
+      <mat-progress-spinner mode="indeterminate"> </mat-progress-spinner>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <a
+      mat-raised-button
+      aria-label=""
+      color="accent"
+      class="mt-2 mr-2 mb-2"
+      routerLink="/modules/DEEP-OC-generic-dev/train"
+    >
+      {{ 'DEPLOYMENTS.NEW-DEPLOYMENT' | translate }}
+    </a>
+  </mat-card-actions>
 </mat-card>
 
 <div class="deployment-actions">
-    <!--<button mat-raised-button [disabled]="!selection.hasValue()" [matMenuTriggerFor]="menu" class="mt-1">
+  <!--<button mat-raised-button [disabled]="!selection.hasValue()" [matMenuTriggerFor]="menu" class="mt-1">
         {{ "DEPLOYMENTS.BULK-ACTIONS" | translate }}
         <mat-icon iconPositionEnd>more_vert</mat-icon>
     </button>

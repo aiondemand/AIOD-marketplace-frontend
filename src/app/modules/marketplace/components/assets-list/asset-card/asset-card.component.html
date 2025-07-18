@@ -6,25 +6,26 @@ product-list-developer-card
   routerLink="{{ asset.identifier }}"
   [queryParams]="{ category: categoryKey }"
 >
-  <div class="card-news-container" [ngClass]="mode==1 ? 'min-height' : ''">
+  <div class="card-news-container" [ngClass]="mode === 1 ? 'min-height' : ''">
     <div class="card-news-content mt-0">
-      
       <div>
-        <h3 style="word-wrap: break-word;">
+        <h3 style="word-wrap: break-word">
           {{ asset.name }}
         </h3>
       </div>
 
-      <div  [ngClass]="mode==1 ? 'colum-flexed' : ' row-flexed'">
+      <div [ngClass]="mode === 1 ? 'colum-flexed' : ' row-flexed'">
         <div class="btn-icon">
           <span>Type</span>
-          <span><strong>{{ asset.category }}</strong></span>
+          <span
+            ><strong>{{ asset.category }}</strong></span
+          >
         </div>
 
         <div class="btn-icon">
           <span>Platform 🤗</span>
           <span
-        ><strong>{{ asset.platform }}</strong></span
+            ><strong>{{ asset.platform }}</strong></span
           >
         </div>
 
@@ -32,26 +33,33 @@ product-list-developer-card
           <i class="icon-clock"></i>
           <span>{{ asset.date_published }}</span>
         </div>
-
-      
       </div>
 
-      <div class="" [ngClass]="mode==1 ? 'bookmark-btn-column' : 'bookmark-btn-row'" [class.disabled]="!isAuthenticated()"
-        [title]="!isAuthenticated()
-          ? !isBookmarked
-            ? 'Log in to bookmark'
-            : 'Log to delete bookmark'
-          : !isBookmarked
+      <div
+        class=""
+        [ngClass]="mode === 1 ? 'bookmark-btn-column' : 'bookmark-btn-row'"
+        [class.disabled]="!isAuthenticated()"
+        [title]="
+          !isAuthenticated()
+            ? !isBookmarked
+              ? 'Log in to bookmark'
+              : 'Log to delete bookmark'
+            : !isBookmarked
             ? 'Add to bookmarks'
             : 'Delete bookmark'
-          "
+        "
       >
-          <div
-        (click)="onClickBookmark(); $event.stopPropagation()"
-        class="btn btn-circle not-rotate ml-2" [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
-          >
-        <i [ngClass]="isBookmarked? 'icon-resources-saved':'icon-resources-saved' "></i>
-          </div>
+        <div
+          (click)="onClickBookmark(); $event.stopPropagation()"
+          class="btn btn-circle not-rotate ml-2"
+          [ngClass]="isBookmarked ? 'btn-circle--yellow' : 'btn-circle--blue'"
+        >
+          <i
+            [ngClass]="
+              isBookmarked ? 'icon-resources-saved' : 'icon-resources-saved'
+            "
+          ></i>
+        </div>
       </div>
     </div>
   </div>

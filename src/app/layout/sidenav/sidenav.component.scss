@@ -1,6 +1,6 @@
-@use "sass:map";
+@use 'sass:map';
 
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .mat-primary {
   top: 0px;
@@ -10,7 +10,6 @@
   overflow: hidden;
   background-color: transparent;
 }
-
 
 ::ng-deep {
   .sidenav .mat-drawer-inner-container {

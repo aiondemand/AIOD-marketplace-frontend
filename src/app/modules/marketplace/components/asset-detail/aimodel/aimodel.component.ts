@@ -6,20 +6,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-aimodel',
   templateUrl: './aimodel.component.html',
-  styleUrls: ['./aimodel.component.scss']
+  styleUrls: ['./aimodel.component.scss'],
 })
-export class AimodelComponent implements OnInit, OnDestroy{
-  constructor(
-    private aiModelService: AIModelService,
-  ) {}
- 
+export class AimodelComponent implements OnInit, OnDestroy {
+  constructor(private aiModelService: AIModelService) {}
+
   private subscriptions: Subscription = new Subscription();
   public aiModel!: AIModelModel;
   @Input() identifier!: string;
 
   private getDatatset() {
     const subscribe = this.aiModelService
-      .getAsset(this.identifier).subscribe((aimodel: AIModelModel) => {
+      .getAsset(this.identifier)
+      .subscribe((aimodel: AIModelModel) => {
         this.aiModel = aimodel;
       });
 

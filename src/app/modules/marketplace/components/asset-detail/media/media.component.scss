@@ -1,44 +1,39 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 :root {
   .mat-mdc-card-header {
-    font-family: "Jura", sans-serif !important;
+    font-family: 'Jura', sans-serif !important;
     font-size: 1.5em !important;
   }
 
-
-  [data-theme="dark"] .media-card .mat-expansion-panel-header-description,
-  [data-theme="dark"] .media-card .mat-expansion-indicator::after {
+  [data-theme='dark'] .media-card .mat-expansion-panel-header-description,
+  [data-theme='dark'] .media-card .mat-expansion-indicator::after {
     color: #fff !important;
   }
-  [data-theme="light"] .media-card .mat-expansion-panel-header-description,
-  [data-theme="light"] .media-card .mat-expansion-indicator::after {
+  [data-theme='light'] .media-card .mat-expansion-panel-header-description,
+  [data-theme='light'] .media-card .mat-expansion-indicator::after {
     color: #000 !important;
   }
-
-
 }
 
 $urlColor: #31488b;
 
-.media-card{
-    border-left: 5px solid #0047bb !important;
-    background: transparent !important;
+.media-card {
+  border-left: 5px solid #0047bb !important;
+  background: transparent !important;
 }
-
 
 .media-card * {
   background: transparent !important;
 
-  [data-theme="light"] {
+  [data-theme='light'] {
     color: #000;
 
     .mat-expansion-indicator ::after {
       color: #000 !important;
     }
-
   }
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     color: #fff;
     .mat-expansion-indicator::after {
       color: #fff !important;
@@ -48,9 +43,8 @@ $urlColor: #31488b;
     }
   }
 
-
   h4 {
-    color:#41B6E6 !important;
+    color: #41b6e6 !important;
     margin-top: 20px;
   }
 
@@ -63,20 +57,18 @@ $urlColor: #31488b;
   p {
     text-align: justify;
   }
-
 }
 
 .card-actions {
-    margin-top: auto;
-    a {
-      color: #41B6E6;
-    }
+  margin-top: auto;
+  a {
+    color: #41b6e6;
   }
-.media-card-description {
-    overflow: auto;
-    margin-right: 1em;
 }
-
+.media-card-description {
+  overflow: auto;
+  margin-right: 1em;
+}
 
 .props-chip {
   display: grid;
@@ -87,16 +79,15 @@ $urlColor: #31488b;
   padding: 5px 10px;
   margin: 5px;
   align-items: center;
-
 }
 
-:host-context([data-theme="light"]) .props-chip {
-    color: #000 !important;
-  }
+:host-context([data-theme='light']) .props-chip {
+  color: #000 !important;
+}
 
-  :host-context([data-theme="dark"]) .props-chip {
-    color: #fff !important;
-  }
+:host-context([data-theme='dark']) .props-chip {
+  color: #fff !important;
+}
 
 .props-chip .icon {
   width: 20px;
@@ -117,10 +108,10 @@ $urlColor: #31488b;
 }
 
 :host ::ng-deep .media-card .mat-expansion-indicator::after {
-    filter: none !important;
-    color: #41B6E6 !important;
-  }
-  :host[data-theme="dark"] ::ng-deep .media-card .mat-expansion-indicator::after {
-    filter: invert(1) !important;
-    color: #41B6E6 !important;
-  }
+  filter: none !important;
+  color: #41b6e6 !important;
+}
+:host[data-theme='dark'] ::ng-deep .media-card .mat-expansion-indicator::after {
+  filter: invert(1) !important;
+  color: #41b6e6 !important;
+}

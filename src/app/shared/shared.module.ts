@@ -10,14 +10,14 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { BreadcrumbModule } from 'xng-breadcrumb';
 
 @NgModule({
-    declarations: [ConfirmationDialogComponent],
-    imports: [CommonModule, MaterialModule],
-    exports: [
-        ReactiveFormsModule,
-        MaterialModule,
-        RouterModule,
-        TranslateModule,
-        BreadcrumbModule,
-    ],
+  declarations: [ConfirmationDialogComponent],
+  imports: [CommonModule, MaterialModule],
+  exports: [
+    ReactiveFormsModule,
+    MaterialModule,
+    RouterModule,
+    TranslateModule,
+    BreadcrumbModule,
+  ],
 })
 export class SharedModule {}
