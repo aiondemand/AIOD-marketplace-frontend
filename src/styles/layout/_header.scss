@@ -187,6 +187,7 @@ header {
             flex-direction: column;
             align-items: flex-start;
             margin: 0;
+            background-color: #0047BB;
          }
 
          .menu {
@@ -310,6 +311,7 @@ header {
          @include max-sm {
             justify-content: center;
             margin-top: 40px;
+            background:red
          }
 
          &:hover {

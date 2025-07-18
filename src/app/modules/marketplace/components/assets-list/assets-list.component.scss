@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.d-xs-none {
+  display: none !important;
+}
+
 .btn-default {
   padding: 11px 20px;
   width: 90%;
@@ -42,6 +46,11 @@
 
 .search-row {
   width: 70%;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    margin: 5px;
+  }
 }
 .search-input {
   width: 100%;
@@ -51,14 +60,6 @@
     top: 2px;
     right: -10px;
   }
-}
-
-.featured-products-item {
-  padding: 10px 20px;
-}
-.featured-products-item-title {
-  font-size: 60px;
-  margin-bottom: 55px;
 }
 
 .slider:before {
