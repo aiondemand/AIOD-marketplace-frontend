@@ -152,7 +152,7 @@ export class TopNavbarComponent {
         localStorage.setItem('theme', newTheme);
       }
 
-    openMovileMenu(){
+    openMobileMenu(){
         this.mobileOpened = !this.mobileOpened;
     }
 }
