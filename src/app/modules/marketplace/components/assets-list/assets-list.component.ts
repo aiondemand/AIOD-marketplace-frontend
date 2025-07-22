@@ -49,15 +49,13 @@ const assetCategoryMapping = {
   styleUrls: ["./assets-list.component.scss"],
 })
 export class AssetsListComponent implements OnInit, OnDestroy {
-
-
   private subscriptions: Subscription = new Subscription();
   private enhancedSearchSubscription?: Subscription;
 
   public isLoading = false;
   public assets: AssetModel[] | any[] = [];
   protected categorySelected!: AssetCategory;
-  protected platformSelected: string = '';
+  protected platformSelected: string = "";
   public isEnhancedSearch: boolean = false;
   public searchQueryValue: string = "";
 
@@ -65,7 +63,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public pageSize = 15; /* assets per page */
   public offset = 0;
   public pageSizeOptions = [15, 20, 50, 100];
-  public currentPage = 1;
+  public currentPage = 0;
 
   protected displayModeValue: number = 1; //normally on several labels per line
 
@@ -76,14 +74,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   isFiltersVisible = false;
   isFilterLibraryVisible = false;
-  inputTooShort:boolean = true;
+  inputTooShort: boolean = true;
 
   private subscription: Subscription | undefined;
 
   platforms: any = [];
 
-  protected lonelyCategory:boolean = false;
-  isLightTheme: string | null ='dark';
+  protected lonelyCategory: boolean = false;
+  isLightTheme: string | null = "dark";
 
   constructor(
     private fb: FormBuilder,
@@ -112,14 +110,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           this.isEnhancedSearch = value;
         },
       });
-    
+
     const selectedCategory = localStorage.getItem("selectedCategory");
-    if(selectedCategory && this.isValidAssetCategory(selectedCategory)) {
+    if (selectedCategory && this.isValidAssetCategory(selectedCategory)) {
       this.categorySelected = selectedCategory as AssetCategory;
       this.selectCat(this.categorySelected);
     }
-
-
 
     this.filtersStateService.searchQuery$
       .pipe(takeUntil(this.destroy$))
@@ -129,18 +125,33 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         },
       });
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       for (const [key, value] of Object.entries(assetCategoryMapping)) {
-        if (value === params['category']) {
+        if (value === params["category"]) {
           this.categorySelected = key as AssetCategory;
           this.lonelyCategory = true;
-          this.searchAssets()
+          this.searchAssets();
           break;
         }
       }
     });
-    this.isLightTheme = document.documentElement.getAttribute('data-theme');
-      
+    this.isLightTheme = document.documentElement.getAttribute("data-theme");
+    console.log("Initial theme:", this.isLightTheme);
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-theme"
+        ) {
+          this.isLightTheme =
+            document.documentElement.getAttribute("data-theme");
+          console.log("Theme changed to:", this.isLightTheme);
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
   }
 
   protected selectPlat(platform: string) {
@@ -151,13 +162,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     //TODO MAKE THEM UNSElECTED
   }
   protected selectAllPlat() {
-    this.platformSelected = '';
-    this.searchAssets()
-
+    this.platformSelected = "";
+    this.searchAssets();
   }
   protected selectCat(category: AssetCategory) {
     this.categorySelected = category;
-    localStorage.setItem("selectedCategory", category)
+    localStorage.setItem("selectedCategory", category);
     this.filtersService.setAssetCategorySelected(this.categorySelected);
   }
   protected unSelectCat(id: number) {
@@ -166,13 +176,11 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   protected selectAllCat() {
     throw new Error("Method not implemented.");
   }
-  
-  
-  
+
   initializeSearchForm() {
     this.searchFormGroup = this.fb.group({
       search: "",
-      enhancedSearch: {value: false, disabled:true }
+      enhancedSearch: { value: false, disabled: true },
     });
   }
 
@@ -188,17 +196,16 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const searchValue = this.searchFormGroup.get("search")?.value;
     this.inputTooShort = searchValue.trim().length < 3;
 
-    if (this.inputTooShort){ 
+    if (this.inputTooShort) {
       this.searchFormGroup.get("enhancedSearch")?.disable();
       this.searchFormGroup.get("enhancedSearch")?.setValue(false);
-                  
+    } else {
+      this.searchFormGroup.get("enhancedSearch")?.enable();
     }
-    else {this.searchFormGroup.get("enhancedSearch")?.enable()}
-     
 
     if (!searchValue.trim()) {
-            this.filtersService.setSearchQuery('');
-        }
+      this.filtersService.setSearchQuery("");
+    }
   }
 
   onEnhancedSearchChange(event: any) {
@@ -209,7 +216,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
   }
-
 
   subscriptionAssetCategory() {
     return this.filtersService.assetCategorySelected$.subscribe(
@@ -456,7 +462,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             version: "1",
             citation: [],
             dateCreated: "2023-11-29T14:25:05.000Z",
-          }
+          },
         ]),
           setTimeout(() => (this.isLoading = false), 3000);
         console.error("Error get assets", error);
@@ -529,14 +535,46 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  isPaginationDisabled() {
-    if (this.isEnhancedSearch && !this.searchQueryValue) {
-      return true;
-    }
+  // Custom paginator methods
+  public currentPageSize = 15;
 
-    return false;
+  public onPageSizeChange(event: any) {
+    const newPageSize = parseInt(event.target.value);
+    this.pageSize = newPageSize;
+    this.currentPageSize = newPageSize;
+    this.currentPage = 0;
+    this.offset = 0;
+
+    if (!this.isEnhancedSearch) {
+      this.getAssets();
+    } else if (this.searchQueryValue) {
+      this.enhancedSearch(this.searchQueryValue);
+    }
   }
 
+  public goToPage(pageIndex: number) {
+    this.currentPage = pageIndex;
+    this.offset = pageIndex * this.pageSize;
+
+    if (!this.isEnhancedSearch) {
+      this.getAssets();
+    } else if (this.searchQueryValue) {
+      this.enhancedSearch(this.searchQueryValue);
+    }
+  }
+
+  public getTotalPages(): number {
+    return Math.ceil(this.assetsSize / this.pageSize);
+  }
+
+  public getRangeLabel(): string {
+    const start = this.currentPage * this.pageSize + 1;
+    const end = Math.min(
+      (this.currentPage + 1) * this.pageSize,
+      this.assetsSize
+    );
+    return `${start} - ${end} of ${this.assetsSize}`;
+  }
   initSpinner() {
     this.spinnerService.show("Initializing enhanced search...");
   }
@@ -613,8 +651,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         take(1),
         switchMap((response) => {
-          if (response.result_asset_ids && response.result_asset_ids.length > 0) {
-            
+          if (
+            response.result_asset_ids &&
+            response.result_asset_ids.length > 0
+          ) {
             return this.generalAssetService.getMultipleAssets(
               response.result_asset_ids
             );
