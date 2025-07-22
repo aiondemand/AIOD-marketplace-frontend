@@ -1,7 +1,12 @@
 .marketplace-toolbar {
   justify-content: space-between;
 }
+.sdk{
 
+  @media(max-width: 768px) {
+    display: none;
+  }
+}
 .viewer {
   width: 100%;
 }
@@ -47,7 +52,7 @@
 .search-row {
   width: 70%;
 
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     width: 100%;
     margin: 5px;
   }

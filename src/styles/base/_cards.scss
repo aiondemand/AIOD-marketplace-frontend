@@ -21,10 +21,13 @@
          margin-right: auto;
       }
 
-      @include max-sm{
+      &-detail{
+         
+      @include max-xs{
 
          max-width: 350px;
-      }
+      }}
+
    
       img {
          height: 160px;
@@ -423,7 +426,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: border 300ms ease;
      
-      @include max-sm{
+      @include max-xs{
 
          max-width: 350px;
          margin-left: 0 !important;

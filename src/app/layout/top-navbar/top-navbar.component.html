@@ -34,7 +34,7 @@
 
                <div class="top-bar-buttons"> 
                    <div *ngIf="!isLoggedIn()" >
-                      <ul   class="main-menu">   
+                      <ul   class="main-menu" [ngClass]=" mobileOpened? '': 'd-none'   ">   
                          <li class="menu">
                             <div class="menu-link-mobile">
                                <a class="menu-link" href="#">Resources <i class="icon-arrow d-block d-lg-none"></i></a>

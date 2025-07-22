@@ -1,10 +1,8 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import {  Component, Renderer2 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatMenuTrigger, _MatMenuBase } from '@angular/material/menu';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
-import { ShoppingCartService } from '@app/shared/services/shopping-cart/shopping-cart.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
@@ -20,7 +18,6 @@ export class TopNavbarComponent {
         private ren: Renderer2,
         private sidenavService: SidenavService,
         protected appConfigService: AppConfigService,
-        private shoppingCartService: ShoppingCartService,
         private router: Router,
         
     ) {
@@ -133,14 +130,6 @@ export class TopNavbarComponent {
 
     toggleSidenav() {
         this.sidenavService.toggle();
-    }
-
-    private getCartItemCount(): void{
-        this.shoppingCartService.cartItems$.subscribe(assets => this.cartItems = assets.length);
-    }
-
-    goToShoppingCart() {
-        this.router.navigate(['/shopping-cart']);
     }
 
 

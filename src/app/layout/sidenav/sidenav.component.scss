@@ -53,13 +53,6 @@
     }
   }
 
-  .sidebar-collapsed .mat-sidenav-content.mat-drawer-content {
-    @media (min-width: 769px) {
-      width: calc(100vw - 75px);
-      margin-left: 0;
-    }
-  }
-
   .sidebar-expanded .mat-sidenav-content.mat-drawer-content {
     @media (min-width: 769px) {
       width: calc(100vw - 299px);

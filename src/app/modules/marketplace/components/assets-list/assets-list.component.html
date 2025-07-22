@@ -63,7 +63,7 @@
     </div>
   </form>
 
-  <ng-container *ngIf="screenWidth >= 576; else smallDevice">
+  <ng-container *ngIf="screenWidth >= 768; else smallDevice">
     <!-- Filters  -->
     <div *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
       <a
@@ -133,7 +133,7 @@
   <ng-template #smallDevice>
     <div class="filters-row d-flex align-items-center pb-3">
       <!--category for small devices-->
-      <select *ngIf="!lonelyCategory" #categorySelect class="mr-2" [(ngModel)]="categorySelected" (change)="selectCat(categorySelect.value)" >
+      <select *ngIf="!lonelyCategory" #categorySelect [(ngModel)]="categorySelected" (change)="selectCat(categorySelect.value)" >
         <option
           *ngFor="let category of assetCategories; index as i"
           [value]="category"
@@ -157,7 +157,7 @@
   </ng-template>
 </div>
 <!--Viewer Selector-->
-<div class="viewer row flex-row-reverse pr-3 pt-3 pb-3">
+<div class=" sdk viewer row flex-row-reverse pr-3 pt-3 pb-3">
   <div class="theme-switch-wrapper">
     <label class="theme-switch" for="viewModeCheckbox">
       <input type="checkbox" id="viewModeCheckbox" />

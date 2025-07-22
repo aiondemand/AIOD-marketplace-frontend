@@ -148,6 +148,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
    
   onResize = () => {
     this.screenWidth = window.innerWidth;
+    if (this.screenWidth >= 768) {
+      this.displayMode(1)
+    }
   };
 
 
