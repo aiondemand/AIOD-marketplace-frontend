@@ -65,8 +65,12 @@ ul {
     color: $white;
   }
 
-  .card-news-content {
+  .card-news-content span {
     color: $white ;
+  }
+
+  .card-news-container{
+    color:$white;
   }
 
  
@@ -124,12 +128,23 @@ a:hover {
 }
 
 .distribution-container {
-  // border: 1px solid red;
-  // background-color: red;
+  
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  overflow: hidden;
+
+  a{
+    text-decoration: none;
+    color: #41b6e6;
+    max-width: 300px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+  }
 }
+
+
 
 .distribution-card {
   width: 360px;
