@@ -115,3 +115,12 @@ $urlColor: #31488b;
   filter: invert(1) !important;
   color: #41b6e6 !important;
 }
+
+// Mat-divider styling for light/dark themes
+:host-context([data-theme='light']) ::ng-deep .mat-divider {
+  border-top-color: white !important;
+}
+
+:host-context([data-theme='dark']) ::ng-deep .mat-divider {
+  border-top-color: #504a4a !important;
+}

@@ -145,11 +145,20 @@ a:hover {
     color: $white !important;
   }
 
+  [data-theme='dark'] {
+    .asset-license {
+      color: $white !important;
+    }
+  }
+
   [data-theme='light'] {
     .xng-breadcrumb-link {
       color: black !important;
     }
     .xng-breadcrumb-list {
+      color: black !important;
+    }
+    .asset-license {
       color: black !important;
     }
   }
