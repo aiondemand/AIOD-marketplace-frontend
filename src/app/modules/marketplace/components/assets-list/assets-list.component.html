@@ -17,7 +17,7 @@
         <h2>Check the SDKs and APIs</h2>
       </div>
       <div class="d-flex align-items-center">
-        <a href="https://api.aiod.eu/redoc" class="btn btn-default"
+        <a href="https://api.aiod.eu/redoc" class="btn check-btn btn-default"
           >Check now <i class="icon-arrow"></i>
         </a>
       </div>
@@ -63,7 +63,7 @@
     </div>
   </form>
 
-  <ng-container *ngIf="screenWidth >= 768; else smallDevice">
+  <ng-container *ngIf="screenWidth >= widthSmallDevice; else smallDevice">
     <!-- Filters  -->
     <div *ngIf="!lonelyCategory" class="filters-row d-flex pb-3">
       <a
@@ -184,9 +184,7 @@
                 [attr.fill]="
                   displayModeValue === 1
                     ? '#fff'
-                    : isLightTheme
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
               <rect
@@ -197,9 +195,7 @@
                 [attr.fill]="
                   displayModeValue === 1
                     ? '#fff'
-                    : isLightTheme
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
               <rect
@@ -210,9 +206,7 @@
                 [attr.fill]="
                   displayModeValue === 1
                     ? '#fff'
-                    : isLightTheme
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
               <rect
@@ -223,9 +217,7 @@
                 [attr.fill]="
                   displayModeValue === 1
                     ? '#fff'
-                    : isLightTheme
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
             </svg>
@@ -252,9 +244,7 @@
                 [attr.fill]="
                   displayModeValue === 2
                     ? '#fff'
-                    : isLightTheme && displayModeValue === 2
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
               <rect
@@ -265,9 +255,7 @@
                 [attr.fill]="
                   displayModeValue === 2
                     ? '#fff'
-                    : isLightTheme && displayModeValue === 2
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
               <rect
@@ -278,9 +266,7 @@
                 [attr.fill]="
                   displayModeValue === 2
                     ? '#fff'
-                    : isLightTheme && displayModeValue === 2
-                    ? '#000'
-                    : '#fff'
+                    : '#bdbdbd'
                 "
               />
             </svg>
