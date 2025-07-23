@@ -21,21 +21,9 @@
 @import 'base/cookies';
 
 // ===== REUSABLE BLOCKS OF CODE ===== //
-@import 'modules/swiper';
-@import 'modules/banner';
 
 // ===== SPECIFIC PAGE LAYOUT AND NON-REUSABLE STYLES ===== //
 
 // @import "layout/viewname";
-@import 'layout/keyframes';
-@import 'layout/loba';
 @import 'layout/header';
 @import 'layout/footer';
-@import 'layout/homepage';
-@import 'layout/about';
-@import 'layout/product';
-@import 'layout/privacy-policy';
-@import 'layout/communication-requests';
-
-// ===== DEBUG HTML/CSS ===== //
-@import 'layout/debug';
