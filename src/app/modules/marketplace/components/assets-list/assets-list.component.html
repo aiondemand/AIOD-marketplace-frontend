@@ -233,37 +233,61 @@
   </div>
 </div>
 
-<!--spinner-->
-<div *ngIf="isLoading; else assetList" class="spinner">
-  <mat-progress-spinner class="custom-spinner" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
-
-<!-- paginator-->
-<mat-paginator
-  class="paginator"
-  (page)="handlePageEvent($event)"
-  [length]="assetsSize"
-  [pageSizeOptions]="pageSizeOptions"
-  aria-label="Select page"
-  [disabled]="isPaginationDisabled()"
->
-</mat-paginator>
-
-<ng-template #assetList>
-  <div class="asset-cards-container row">
-    <div
-      id="grid-layout"
-      *ngFor="let asset of assets"
-      class=""
-      [ngClass]="
-        displayModeValue === 1
-          ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
-          : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
-      "
-      class="col-lg-4 col-md-6 col-sm-12"
-    >
-      <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
+<!--main content container-->
+<div class="main-content-wrapper">
+  <!--spinner-->
+  <div *ngIf="isLoading; else assetList" class="spinner">
+    <mat-progress-spinner class="custom-spinner" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  <ng-template #assetList>
+    <div class="asset-cards-container row">
+      <div
+        id="grid-layout"
+        *ngFor="let asset of assets"
+        class=""
+        [ngClass]="
+          displayModeValue === 1
+            ? ' mt-3 mb-3 col-lg-3 col-md-6 col-sm-12'
+            : ' mt-3 mb-3 col-lg-12 col-md-12 col-sm-12'
+        "
+        class="col-lg-4 col-md-6 col-sm-12"
+      >
+        <app-asset-card class="" [asset]="asset" [mode]="displayModeValue"></app-asset-card>
+      </div>
+    </div>
+  </ng-template>
+  <div class="paginator-container">
+    <div class="custom-paginator" [ngClass]="{'light-theme': isLightTheme === 'light'}">
+      <div class="paginator-left">
+        <span class="page-size-label">Items per page:</span>
+        <select 
+          class="page-size-select"
+          [(ngModel)]="currentPageSize"
+          (change)="onPageSizeChange($event)"
+        >
+          <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+        </select>
+      </div>
+      <div class="paginator-right">
+        <span class="range-label">{{ getRangeLabel() }}</span>
+        <button 
+          class="nav-button prev-page"
+          [disabled]="currentPage === 0"
+          (click)="goToPage(currentPage - 1)"
+          title="Previous page"
+        >
+          <span>&#8249;</span>
+        </button>
+        <button 
+          class="nav-button next-page"
+          [disabled]="currentPage >= getTotalPages() - 1"
+          (click)="goToPage(currentPage + 1)"
+          title="Next page"
+        >
+          <span>&#8250;</span>
+        </button>
+      </div>
     </div>
   </div>
-</ng-template>
+</div>
