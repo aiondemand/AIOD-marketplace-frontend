@@ -27,7 +27,9 @@
 
   .mat-sidenav-content.mat-drawer-content {
     overflow-x: hidden;
-    transition: margin-left 0.9s ease-in-out, width 0.9s ease-in-out;
+    transition:
+      margin-left 0.9s ease-in-out,
+      width 0.9s ease-in-out;
     width: 100%;
     box-sizing: border-box;
   }
@@ -50,13 +52,6 @@
       width: 280px !important;
       min-width: 280px !important;
       max-width: 280px !important;
-    }
-  }
-
-  .sidebar-collapsed .mat-sidenav-content.mat-drawer-content {
-    @media (min-width: 769px) {
-      width: calc(100vw - 75px);
-      margin-left: 0;
     }
   }
 

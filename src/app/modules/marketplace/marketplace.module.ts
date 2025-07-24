@@ -16,6 +16,7 @@ import { ServiceComponentComponent } from './components/asset-detail/service-com
 import { AimodelComponent } from './components/asset-detail/aimodel/aimodel.component';
 import { MediaComponent } from './components/asset-detail/media/media.component';
 import { MatExpansionModule } from '@angular/material/expansion'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ],
     imports: [
         CommonModule,
+        FormsModule,
         MarketplaceRoutingModule,
         SharedModule,
         MatPaginatorModule,

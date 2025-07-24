@@ -7,12 +7,10 @@
 }
 
 .bookmark-btn-column{
-  position: absolute;
-  bottom: 1rem; 
-  right: 1rem;
-  z-index: 2;
-  margin: 0;
- 
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-top:2rem;
 }
 
 .bookmark-btn-row{

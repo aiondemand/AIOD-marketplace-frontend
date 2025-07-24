@@ -11,16 +11,16 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     //canActivate: [NoAuthGuard], // Should be replaced with actual auth guard
     children: [
-      {
-        path: "",
-        redirectTo: "resources",
+     {
+       path: "",
+       redirectTo: "resources",
         pathMatch: "full",
-      },
+  },
      //{
         //This is the redirect from the keycloak login
       // path: environment.keycloakConfig.redirectUri + "resources",
-     //  redirectTo: "resources",
-      //  pathMatch: "full",
+      //redirectTo: "resources",
+        //pathMatch: "full",
      //},
       {
         path: "resources",

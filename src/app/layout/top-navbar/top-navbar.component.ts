@@ -1,10 +1,8 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
+import {  Component, Renderer2 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatMenuTrigger, _MatMenuBase } from '@angular/material/menu';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
-import { ShoppingCartService } from '@app/shared/services/shopping-cart/shopping-cart.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
@@ -18,30 +16,27 @@ export class TopNavbarComponent {
     constructor(
         private readonly authService: AuthService,
         private ren: Renderer2,
-        private changeDetectorRef: ChangeDetectorRef,
-        private media: MediaMatcher,
         private sidenavService: SidenavService,
         protected appConfigService: AppConfigService,
-        private shoppingCartService: ShoppingCartService,
         private router: Router,
         
     ) {
-        this.mobileQuery = this.media.matchMedia('(max-width: 1366px)');
-        this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-        this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-        authService.userProfileSubject.subscribe((profile) => {
-            this.userProfile = profile;
-        });
-        this.getCartItemCount();
+  
     }
     protected sideBarUser: boolean= false;
-    private _mobileQueryListener: () => void;
     protected environment = environment;
-    mobileQuery: MediaQueryList;
     userProfile?: UserProfile;
     isMatMenuOpen = false;
     enteredButton = false;
     cartItems: number = 0; 
+    protected mobileOpened: boolean = false;
+    private widthSmallDevice: number = 768;
+
+    ngOnInit() {
+        if (window.innerWidth >= this.widthSmallDevice) { 
+            this.mobileOpened = true;
+        } 
+    }
 
     login() {
         this.authService.login(window.location.pathname);
@@ -138,14 +133,6 @@ export class TopNavbarComponent {
         this.sidenavService.toggle();
     }
 
-    private getCartItemCount(): void{
-        this.shoppingCartService.cartItems$.subscribe(assets => this.cartItems = assets.length);
-    }
-
-    goToShoppingCart() {
-        this.router.navigate(['/shopping-cart']);
-    }
-
 
     toggleTheme() {
         const html = document.documentElement;
@@ -154,4 +141,8 @@ export class TopNavbarComponent {
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
       }
+
+    openMobileMenu(){
+        this.mobileOpened = !this.mobileOpened;
+    }
 }

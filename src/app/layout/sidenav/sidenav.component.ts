@@ -37,7 +37,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     private appConfigService: AppConfigService,
     public spinnerService: SpinnerService,
   ) {
-    this.mobileQuery = this.media.matchMedia("(max-width: 768px)");
+    this.mobileQuery = this.media.matchMedia("(max-width: 992px)");
     this._mobileQueryListener = () => {
       this.isMenuCollapsed = this.mobileQuery.matches;
       this.changeDetectorRef.detectChanges();
