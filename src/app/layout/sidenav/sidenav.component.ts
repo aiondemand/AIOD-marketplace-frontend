@@ -21,12 +21,12 @@ import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild("sidenav", { static: true }) public sidenav!: MatSidenav;
-  protected isMenuCollapsed: boolean = true;
-  protected isResourcesOpened: boolean = true;
-  protected isToolsOpened: boolean = false;
-  protected isCommunityOpened: boolean = false;
-  protected isMediaOpened: boolean = false;
+  @ViewChild('sidenav', { static: true }) public sidenav!: MatSidenav;
+  protected isMenuCollapsed = true;
+  protected isResourcesOpened = true;
+  protected isToolsOpened = false;
+  protected isCommunityOpened = false;
+  protected isMediaOpened = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -37,12 +37,12 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     private appConfigService: AppConfigService,
     public spinnerService: SpinnerService,
   ) {
-    this.mobileQuery = this.media.matchMedia("(max-width: 992px)");
+    this.mobileQuery = this.media.matchMedia('(max-width: 992px)');
     this._mobileQueryListener = () => {
       this.isMenuCollapsed = this.mobileQuery.matches;
       this.changeDetectorRef.detectChanges();
     };
-    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
   protected environment = environment;
@@ -99,7 +99,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.changeDetectorRef.detectChanges();
 
     setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
+      window.dispatchEvent(new Event('resize'));
       this.changeDetectorRef.detectChanges();
     }, 50);
 
@@ -122,6 +122,6 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
 }

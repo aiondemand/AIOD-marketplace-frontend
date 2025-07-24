@@ -32,7 +32,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlatformService } from '../../services/common-services/platform.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
-
 const MAX_ATTEMPTS = 15;
 
 const assetCategoryMapping = {
@@ -56,9 +55,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public isLoading = false;
   public assets: AssetModel[] | any[] = [];
   protected categorySelected!: AssetCategory;
-  protected platformSelected: string = "";
-  public isEnhancedSearch: boolean = false;
-  public searchQueryValue: string = "";
+  protected platformSelected = '';
+  public isEnhancedSearch = false;
+  public searchQueryValue = '';
 
   public assetsSize = 0; /* number of assets found */
   public pageSize = 15; /* assets per page */
@@ -66,8 +65,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public pageSizeOptions = [15, 20, 50, 100];
   public currentPage = 0;
 
-  protected displayModeValue: number = 1; //normally on several labels per line
-  protected screenWidth: number= window.innerWidth;
+  protected displayModeValue = 1; //normally on several labels per line
+  protected screenWidth: number = window.innerWidth;
   destroy$ = new Subject<any>();
 
   assetCategories!: any;
@@ -75,15 +74,15 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   isFiltersVisible = false;
   isFilterLibraryVisible = false;
-  inputTooShort: boolean = true;
+  inputTooShort = true;
 
   private subscription: Subscription | undefined;
 
   platforms: any = [];
 
-  protected lonelyCategory:boolean = false;
-  isLightTheme: string | null ='dark';
-  widthSmallDevice: number = 768;
+  protected lonelyCategory = false;
+  isLightTheme: string | null = 'dark';
+  widthSmallDevice = 768;
 
   constructor(
     private fb: FormBuilder,
@@ -94,24 +93,23 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private generalAssetService: GeneralAssetService,
     private filtersStateService: FiltersStateService,
     private searchService: ElasticSearchService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
   ) {
-        // Listen for theme changes
+    // Listen for theme changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "data-theme"
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-theme'
         ) {
           this.isLightTheme =
-            document.documentElement.getAttribute("data-theme");
-          console.log("Theme changed to:", this.isLightTheme);
+            document.documentElement.getAttribute('data-theme');
+          console.log('Theme changed to:', this.isLightTheme);
         }
       });
     });
 
     observer.observe(document.documentElement, { attributes: true });
-  
   }
 
   ngOnInit(): void {
@@ -122,8 +120,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.getFilters();
     window.addEventListener('resize', this.onResize);
 
-
-
     this.filtersStateService.isEnhancedSerach$
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -132,7 +128,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         },
       });
 
-    const selectedCategory = localStorage.getItem("selectedCategory");
+    const selectedCategory = localStorage.getItem('selectedCategory');
     if (selectedCategory && this.isValidAssetCategory(selectedCategory)) {
       this.categorySelected = selectedCategory as AssetCategory;
       this.selectCat(this.categorySelected);
@@ -148,7 +144,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe((params) => {
       for (const [key, value] of Object.entries(assetCategoryMapping)) {
-        if (value === params["category"]) {
+        if (value === params['category']) {
           this.categorySelected = key as AssetCategory;
           this.lonelyCategory = true;
           this.searchAssets();
@@ -157,18 +153,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       }
     });
     this.isLightTheme = document.documentElement.getAttribute('data-theme');
-      
-  } 
-   
+  }
+
   onResize = () => {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= this.widthSmallDevice) {
-      this.displayMode(1)
+      this.displayMode(1);
     }
   };
-  
-
-
 
   protected selectPlat(platform: any) {
     this.platformSelected = platform;
@@ -178,12 +170,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     //TODO MAKE THEM UNSElECTED
   }
   protected selectAllPlat() {
-    this.platformSelected = "";
+    this.platformSelected = '';
     this.searchAssets();
   }
   protected selectCat(category: any) {
     this.categorySelected = category;
-    localStorage.setItem("selectedCategory", category);
+    localStorage.setItem('selectedCategory', category);
     this.filtersService.setAssetCategorySelected(this.categorySelected);
   }
   protected unSelectCat(id: number) {
@@ -195,7 +187,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   initializeSearchForm() {
     this.searchFormGroup = this.fb.group({
-      search: "",
+      search: '',
       enhancedSearch: { value: false, disabled: true },
     });
   }
@@ -209,11 +201,11 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   onInputChange() {
-    const searchValue = this.searchFormGroup.get("search")?.value;
-    this.searchFormGroup.get("enhancedSearch")?.enable();
+    const searchValue = this.searchFormGroup.get('search')?.value;
+    this.searchFormGroup.get('enhancedSearch')?.enable();
 
     if (!searchValue.trim()) {
-      this.filtersService.setSearchQuery("");
+      this.filtersService.setSearchQuery('');
     }
   }
 
@@ -302,7 +294,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         this.assets = assets;
       },
       error: (error: any) => {
-        // this.assets bellow might be used for testing purposes 
+        // this.assets bellow might be used for testing purposes
         // (this.assets = [
         //   {
         //     identifier: 24,
@@ -475,7 +467,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         //   }
         // ]) ,
         //   setTimeout(() => (this.isLoading = false), 3000);
-        console.error("Error get assets", error);
+        console.error('Error get assets', error);
       },
     });
     this.subscriptions.add(subscribe);
@@ -580,7 +572,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const start = this.currentPage * this.pageSize + 1;
     const end = Math.min(
       (this.currentPage + 1) * this.pageSize,
-      this.assetsSize
+      this.assetsSize,
     );
     return `${start} - ${end} of ${this.assetsSize}`;
   }
@@ -707,7 +699,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     return '';
   }
 
-
   protected displayMode(mode: number): void {
     this.displayModeValue = mode;
   }
@@ -721,5 +712,4 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.destroy$.next(null);
     this.destroy$.complete();
   }
-
 }
