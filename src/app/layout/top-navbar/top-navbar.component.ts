@@ -30,9 +30,10 @@ export class TopNavbarComponent {
     enteredButton = false;
     cartItems: number = 0; 
     protected mobileOpened: boolean = false;
+    private widthSmallDevice: number = 768;
 
     ngOnInit() {
-        if (window.innerWidth >= 768) { 
+        if (window.innerWidth >= this.widthSmallDevice) { 
             this.mobileOpened = true;
         } 
     }
