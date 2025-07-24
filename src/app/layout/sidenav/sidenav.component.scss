@@ -27,7 +27,9 @@
 
   .mat-sidenav-content.mat-drawer-content {
     overflow-x: hidden;
-    transition: margin-left 0.9s ease-in-out, width 0.9s ease-in-out;
+    transition:
+      margin-left 0.9s ease-in-out,
+      width 0.9s ease-in-out;
     width: 100%;
     box-sizing: border-box;
   }
