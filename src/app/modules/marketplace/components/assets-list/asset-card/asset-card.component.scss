@@ -3,7 +3,14 @@
   width: 100%;
 }
 
-.bookmark-btn-column {
+.bookmark-btn-column{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    margin-top:2rem;
+}
+
+.bookmark-btn-row{
   position: absolute;
   bottom: 1rem;
   right: 1rem;

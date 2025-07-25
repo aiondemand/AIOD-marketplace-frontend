@@ -1,5 +1,14 @@
-.layout-container {
-  display: grid;
-  grid-template-rows: auto auto;
-  width: 100%;
+.layout-container{
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 100%;
+}
+
+@media(max-width: 576px) {
+    app-footer{
+        max-width: 400px;
+        justify-content: center;
+   
+   
+    }
 }
