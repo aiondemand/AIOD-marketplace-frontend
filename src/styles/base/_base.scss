@@ -784,11 +784,14 @@ textarea {
   min-height: $inputTextareaHeight;
 }
 
-main {
-  @include max-lg {
-    padding-left: 0;
-    margin-top: 120px;
-  }
+
+main{
+   @include max-lg{
+      padding-left: 0;
+      
+
+   }
+
 }
 
 .border-top,

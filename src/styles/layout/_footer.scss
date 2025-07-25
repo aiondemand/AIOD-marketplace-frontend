@@ -192,7 +192,7 @@
           color: $color-primary4;
           text-decoration: none;
           &:before {
-            content: '';
+            content: "";
             position: absolute;
             inset: 0;
             border-radius: 100px;
@@ -235,6 +235,10 @@
     display: flex;
     margin-bottom: 10px;
     padding: 0;
+
+    @media (max-width: 576px) {
+      justify-content: center;
+    }
 
     li {
       list-style: none;
@@ -390,7 +394,7 @@
         position: relative;
 
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           top: 50%;
           left: 50%;
@@ -427,7 +431,7 @@
   }
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   .footer {
     background: linear-gradient(
       0deg,
@@ -480,7 +484,7 @@
       }
     }
 
-    input[type='email'] {
+    input[type="email"] {
       border-color: #0000004d;
       color: $black;
       &::placeholder {
