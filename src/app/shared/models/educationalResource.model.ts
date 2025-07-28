@@ -1,6 +1,6 @@
-import { AiodEntry } from "../interfaces/aiod-entry.interface";
-import { AssetCategory } from "./asset-category.model";
-import { AssetModel } from "./asset.model";
+import { AiodEntry } from '../interfaces/aiod-entry.interface';
+import { AssetCategory } from './asset-category.model';
+import { AssetModel } from './asset.model';
 
 export class EducationalResourceModel extends AssetModel {
   aiodEntry: AiodEntry;
@@ -27,7 +27,7 @@ export class EducationalResourceModel extends AssetModel {
   type: string;
 
   constructor(data: any) {
-    super(data, AssetCategory["Educational resource"]);
+    super(data, AssetCategory['Educational resource']);
     this.aiodEntry = {
       platform: data.aiod_entry.platform,
       platformIdentifier: data.aiod_entry.platform_identifier,

@@ -1,17 +1,16 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AboutComponent } from "./components/about/about.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: AboutComponent,
-        data: { breadcrumb: ' > Resources > About' },
-    },
-   
+  {
+    path: '',
+    component: AboutComponent,
+    data: { breadcrumb: ' > Resources > About' },
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)],
 })
 export class AboutRoutingModule {}

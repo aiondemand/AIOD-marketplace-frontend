@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { AssetCategory } from "@app/shared/models/asset-category.model";
-import { ParamsReqAsset } from "@app/shared/interfaces/asset-service.interface";
-import { AssetModel } from "@app/shared/models/asset.model";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AssetCategory } from '@app/shared/models/asset-category.model';
+import { ParamsReqAsset } from '@app/shared/interfaces/asset-service.interface';
+import { AssetModel } from '@app/shared/models/asset.model';
 import {
   Subject,
   Subscription,
@@ -18,36 +18,35 @@ import {
   takeUntil,
   takeWhile,
   throwError,
-} from "rxjs";
-import { FiltersStateService } from "@app/shared/services/sidenav/filters-state.service";
-import { PageEvent } from "@angular/material/paginator";
-import { ParamsReqSearchAsset } from "@app/shared/interfaces/search-service.interface";
-import { GeneralAssetService } from "../../services/assets-services/general-asset.service";
-import { ElasticSearchService } from "../../services/elastic-search/elastic-search.service";
-import { SearchModel } from "@app/shared/models/search.model";
-import { SpinnerService } from "@app/shared/services/spinner/spinner.service";
-import { hasQuotes } from "../../utils/common.utils";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { PlatformService } from "../../services/common-services/platform.service";
-import { AuthService } from "@app/core/services/auth/auth.service";
-
+} from 'rxjs';
+import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
+import { PageEvent } from '@angular/material/paginator';
+import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.interface';
+import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
+import { ElasticSearchService } from '../../services/elastic-search/elastic-search.service';
+import { SearchModel } from '@app/shared/models/search.model';
+import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
+import { hasQuotes } from '../../utils/common.utils';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlatformService } from '../../services/common-services/platform.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 
 const MAX_ATTEMPTS = 15;
 
 const assetCategoryMapping = {
-  [AssetCategory.AIModel]: "ml_models",
-  [AssetCategory.Dataset]: "datasets",
-  [AssetCategory.Experiment]: "experiments",
-  [AssetCategory["Educational resource"]]: "educational_resources",
-  [AssetCategory["Service"]]: "services",
-  [AssetCategory["Publication"]]: "publications",
+  [AssetCategory.AIModel]: 'ml_models',
+  [AssetCategory.Dataset]: 'datasets',
+  [AssetCategory.Experiment]: 'experiments',
+  [AssetCategory['Educational resource']]: 'educational_resources',
+  [AssetCategory['Service']]: 'services',
+  [AssetCategory['Publication']]: 'publications',
 };
 
 @Component({
-  selector: "app-assets-list",
-  templateUrl: "./assets-list.component.html",
-  styleUrls: ["./assets-list.component.scss"],
+  selector: 'app-assets-list',
+  templateUrl: './assets-list.component.html',
+  styleUrls: ['./assets-list.component.scss'],
 })
 export class AssetsListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -56,9 +55,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public isLoading = false;
   public assets: AssetModel[] | any[] = [];
   protected categorySelected!: AssetCategory;
-  protected platformSelected: string = "";
-  public isEnhancedSearch: boolean = false;
-  public searchQueryValue: string = "";
+  protected platformSelected = '';
+  public isEnhancedSearch = false;
+  public searchQueryValue = '';
 
   public assetsSize = 0; /* number of assets found */
   public pageSize = 15; /* assets per page */
@@ -66,8 +65,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public pageSizeOptions = [15, 20, 50, 100];
   public currentPage = 0;
 
-  protected displayModeValue: number = 1; //normally on several labels per line
-  protected screenWidth: number= window.innerWidth;
+  protected displayModeValue = 1; //normally on several labels per line
+  protected screenWidth: number = window.innerWidth;
   destroy$ = new Subject<any>();
 
   assetCategories!: any;
@@ -75,15 +74,15 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   isFiltersVisible = false;
   isFilterLibraryVisible = false;
-  inputTooShort: boolean = true;
+  inputTooShort = true;
 
   private subscription: Subscription | undefined;
 
   platforms: any = [];
 
-  protected lonelyCategory:boolean = false;
-  isLightTheme: string | null ='dark';
-  widthSmallDevice: number = 768;
+  protected lonelyCategory = false;
+  isLightTheme: string | null = 'dark';
+  widthSmallDevice = 768;
 
   constructor(
     private fb: FormBuilder,
@@ -94,24 +93,23 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private generalAssetService: GeneralAssetService,
     private filtersStateService: FiltersStateService,
     private searchService: ElasticSearchService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
   ) {
-        // Listen for theme changes
+    // Listen for theme changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "data-theme"
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-theme'
         ) {
           this.isLightTheme =
-            document.documentElement.getAttribute("data-theme");
-          console.log("Theme changed to:", this.isLightTheme);
+            document.documentElement.getAttribute('data-theme');
+          console.log('Theme changed to:', this.isLightTheme);
         }
       });
     });
 
     observer.observe(document.documentElement, { attributes: true });
-  
   }
 
   ngOnInit(): void {
@@ -122,8 +120,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.getFilters();
     window.addEventListener('resize', this.onResize);
 
-
-
     this.filtersStateService.isEnhancedSerach$
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -132,7 +128,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         },
       });
 
-    const selectedCategory = localStorage.getItem("selectedCategory");
+    const selectedCategory = localStorage.getItem('selectedCategory');
     if (selectedCategory && this.isValidAssetCategory(selectedCategory)) {
       this.categorySelected = selectedCategory as AssetCategory;
       this.selectCat(this.categorySelected);
@@ -148,7 +144,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe((params) => {
       for (const [key, value] of Object.entries(assetCategoryMapping)) {
-        if (value === params["category"]) {
+        if (value === params['category']) {
           this.categorySelected = key as AssetCategory;
           this.lonelyCategory = true;
           this.searchAssets();
@@ -157,18 +153,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       }
     });
     this.isLightTheme = document.documentElement.getAttribute('data-theme');
-      
-  } 
-   
+  }
+
   onResize = () => {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth >= this.widthSmallDevice) {
-      this.displayMode(1)
+      this.displayMode(1);
     }
   };
-  
-
-
 
   protected selectPlat(platform: any) {
     this.platformSelected = platform;
@@ -178,42 +170,42 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     //TODO MAKE THEM UNSElECTED
   }
   protected selectAllPlat() {
-    this.platformSelected = "";
+    this.platformSelected = '';
     this.searchAssets();
   }
   protected selectCat(category: any) {
     this.categorySelected = category;
-    localStorage.setItem("selectedCategory", category);
+    localStorage.setItem('selectedCategory', category);
     this.filtersService.setAssetCategorySelected(this.categorySelected);
   }
   protected unSelectCat(id: number) {
     //TODO MAKE THEM UNSElECTED
   }
   protected selectAllCat() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   initializeSearchForm() {
     this.searchFormGroup = this.fb.group({
-      search: "",
+      search: '',
       enhancedSearch: { value: false, disabled: true },
     });
   }
 
   searchAssets() {
-    const isEnhancedSearch = this.searchFormGroup.get("enhancedSearch")?.value;
+    const isEnhancedSearch = this.searchFormGroup.get('enhancedSearch')?.value;
     this.filtersService.setEnhancedSearch(isEnhancedSearch);
 
-    var query = this.searchFormGroup.get("search")?.value;
+    const query = this.searchFormGroup.get('search')?.value;
     this.filtersService.setSearchQuery(query);
   }
 
   onInputChange() {
-    const searchValue = this.searchFormGroup.get("search")?.value;
-    this.searchFormGroup.get("enhancedSearch")?.enable();
+    const searchValue = this.searchFormGroup.get('search')?.value;
+    this.searchFormGroup.get('enhancedSearch')?.enable();
 
     if (!searchValue.trim()) {
-      this.filtersService.setSearchQuery("");
+      this.filtersService.setSearchQuery('');
     }
   }
 
@@ -230,7 +222,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     return this.filtersService.assetCategorySelected$.subscribe(
       (category: AssetCategory) => {
         this.categorySelected = category;
-      }
+      },
     );
   }
 
@@ -246,10 +238,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   private basicSearch(): void {
     this.isLoading = true;
 
-    var query = this.filtersStateService.searchQuery;
-    var platformsSelected = [];
+    const query = this.filtersStateService.searchQuery;
+    const platformsSelected = [];
 
-    if (!!this.filtersStateService.platformSelected) {
+    if (this.filtersStateService.platformSelected) {
       platformsSelected.push(this.filtersStateService.platformSelected);
     }
 
@@ -274,7 +266,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         },
         error: (error: any) => {
           setTimeout(() => (this.isLoading = false), 5000);
-          console.error("Error get assets", error);
+          console.error('Error get assets', error);
         },
       });
     this.subscriptions.add(subscribe);
@@ -289,10 +281,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const parms: ParamsReqAsset = { offset: this.offset, limit: this.pageSize };
     this.generalAssetService.setAssetCategory(this.categorySelected);
 
-    const serviceObs = !!this.platformSelected
+    const serviceObs = this.platformSelected
       ? this.generalAssetService.getAssetsByPlatform(
           this.platformSelected,
-          parms
+          parms,
         )
       : this.generalAssetService.getAssets(parms);
 
@@ -302,7 +294,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         this.assets = assets;
       },
       error: (error: any) => {
-        // this.assets bellow might be used for testing purposes 
+        // this.assets bellow might be used for testing purposes
         // (this.assets = [
         //   {
         //     identifier: 24,
@@ -475,7 +467,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         //   }
         // ]) ,
         //   setTimeout(() => (this.isLoading = false), 3000);
-        console.error("Error get assets", error);
+        console.error('Error get assets', error);
       },
     });
     this.subscriptions.add(subscribe);
@@ -487,7 +479,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       next: (size: number) => (this.assetsSize = size),
       error: (error: any) => {
         this.assetsSize = 0;
-        console.error("Error get assets size", error);
+        console.error('Error get assets size', error);
       },
     });
     this.subscriptions.add(subscribe);
@@ -500,7 +492,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           if (!this.isValidAssetCategory(this.categorySelected)) {
             this.categorySelected = AssetCategory.Dataset;
             this.filtersStateService.setAssetCategorySelected(
-              AssetCategory.Dataset
+              AssetCategory.Dataset,
             );
           } else {
             this.categorySelected = category;
@@ -516,7 +508,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         debounceTime(300),
         switchMap(([searchQuery, isEnhanced]) => {
-          if (searchQuery !== "") {
+          if (searchQuery !== '') {
             if (isEnhanced) {
               this.enhancedSearch(searchQuery);
             } else {
@@ -527,9 +519,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             this.getAssetsSize(this.categorySelected);
           }
           return of(null);
-        })
+        }),
       )
-      .subscribe(() => {});
+      .subscribe();
     this.subscriptions.add(subscribe);
   }
 
@@ -580,13 +572,13 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const start = this.currentPage * this.pageSize + 1;
     const end = Math.min(
       (this.currentPage + 1) * this.pageSize,
-      this.assetsSize
+      this.assetsSize,
     );
     return `${start} - ${end} of ${this.assetsSize}`;
   }
 
   initSpinner() {
-    this.spinnerService.show("Initializing enhanced search...");
+    this.spinnerService.show('Initializing enhanced search...');
   }
 
   private enhancedSearch(query: string): void {
@@ -603,7 +595,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         switchMap((locationHeader) => {
           return interval(2000).pipe(
             switchMap(() =>
-              this.generalAssetService.checkEnhancedSearchStatus(locationHeader)
+              this.generalAssetService.checkEnhancedSearchStatus(
+                locationHeader,
+              ),
             ),
             scan(
               (attempts: any, response: any) => {
@@ -614,7 +608,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
                   response: response,
                 };
               },
-              { attempts: 0, response: null }
+              { attempts: 0, response: null },
             ),
             map((data: any) => ({
               ...data.response,
@@ -622,38 +616,40 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             })),
             takeWhile(
               (response) =>
-                response.status === "In_progress" &&
+                response.status === 'In_progress' &&
                 response._attemptNumber < MAX_ATTEMPTS,
-              true
-            )
+              true,
+            ),
           );
         }),
         filter(
           (response) =>
-            response.status === "Completed" && !!response.result_asset_ids
+            response.status === 'Completed' && !!response.result_asset_ids,
         ),
         switchMap((response) => {
           if (
-            response.status === "In_progress" &&
+            response.status === 'In_progress' &&
             response._attemptNumber >= MAX_ATTEMPTS
           ) {
             this.spinnerService.updateMessage(
-              "Search is taking longer than expected..."
+              'Search is taking longer than expected...',
             );
 
             return throwError(
               () =>
-                new Error(`Attemps limit exceded (${MAX_ATTEMPTS * 2} seconds)`)
+                new Error(
+                  `Attemps limit exceded (${MAX_ATTEMPTS * 2} seconds)`,
+                ),
             );
           }
 
-          if (response.status === "Completed" && !response.result_asset_ids) {
-            this.spinnerService.updateMessage("No results found.");
+          if (response.status === 'Completed' && !response.result_asset_ids) {
+            this.spinnerService.updateMessage('No results found.');
             return of({ result_asset_ids: [] });
           }
 
-          if (response.status === "Completed" && response.result_asset_ids) {
-            this.spinnerService.updateMessage("Loading results...");
+          if (response.status === 'Completed' && response.result_asset_ids) {
+            this.spinnerService.updateMessage('Loading results...');
             return of(response);
           }
 
@@ -666,7 +662,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             response.result_asset_ids.length > 0
           ) {
             return this.generalAssetService.getMultipleAssets(
-              response.result_asset_ids
+              response.result_asset_ids,
             );
           }
 
@@ -674,7 +670,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.spinnerService.hide();
-        })
+        }),
       )
       .subscribe({
         next: (assets: any[]) => {
@@ -700,9 +696,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     }
 
     this.spinnerService.hide();
-    return "";
+    return '';
   }
-
 
   protected displayMode(mode: number): void {
     this.displayModeValue = mode;
@@ -717,5 +712,4 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.destroy$.next(null);
     this.destroy$.complete();
   }
-
 }

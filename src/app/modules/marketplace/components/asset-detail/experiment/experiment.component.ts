@@ -6,20 +6,19 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-experiment',
   templateUrl: './experiment.component.html',
-  styleUrls: ['./experiment.component.scss']
+  styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent implements OnInit, OnDestroy {
-  constructor(
-    private expetimentService: ExperimentService ,
-  ) {}
- 
+  constructor(private expetimentService: ExperimentService) {}
+
   private subscriptions: Subscription = new Subscription();
   public experiment!: ExperimentModel;
   @Input() identifier!: string;
 
   private getExperiment() {
     const subscribe = this.expetimentService
-      .getAsset(this.identifier).subscribe((experiment: ExperimentModel) => {
+      .getAsset(this.identifier)
+      .subscribe((experiment: ExperimentModel) => {
         this.experiment = experiment;
       });
 

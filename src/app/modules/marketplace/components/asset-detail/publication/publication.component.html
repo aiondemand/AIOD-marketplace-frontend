@@ -1,15 +1,21 @@
 <div *ngIf="publication">
-    <div *ngIf="!!publication.note && publication.note.length>0" class="card-news-container specific-detail-body">
-        <h3>{{ 'AIMODEL.NOTE' | translate }}</h3>
-        <div *ngFor="let point of publication.note">
-            <ul>
-                <li>{{point}}</li>
-            </ul>
-        </div>
+  <div
+    *ngIf="!!publication.note && publication.note.length > 0"
+    class="card-news-container specific-detail-body"
+  >
+    <h3>{{ 'AIMODEL.NOTE' | translate }}</h3>
+    <div *ngFor="let point of publication.note">
+      <ul>
+        <li>{{ point }}</li>
+      </ul>
     </div>
+  </div>
 
-    <div *ngIf="!!publication.type" class="card-news-container specific-detail-body">
-        <h3>{{ 'AIMODEL.TYPE' | translate }}</h3>
-        <markdown>{{publication.type}}</markdown>
-    </div>
+  <div
+    *ngIf="!!publication.type"
+    class="card-news-container specific-detail-body"
+  >
+    <h3>{{ 'AIMODEL.TYPE' | translate }}</h3>
+    <markdown>{{ publication.type }}</markdown>
+  </div>
 </div>

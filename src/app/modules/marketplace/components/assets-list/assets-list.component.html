@@ -72,27 +72,27 @@
         (click)="selectAllCat()"
         title="Click to select all categories, "
         [ngClass]="
-          platformSelected == ''
+          platformSelected === ''
             ? 'btn-default'
             : 'btn-success btn-success--blue'
         "
       >
-        All categories
+        {{ categorySelected }}
       </a>
-      <div *ngFor="let category of assetCategories; index as i">
+
+      <div *ngFor="let platform of platforms; index as i">
         <a
-          id="{{ category }}"
-          class="btn m-2"
+          id="{{ platform.name }}"
+          class="btn m-1"
           [ngClass]="
-            categorySelected == category
+            platformSelected === platform.name
               ? 'btn-default'
               : 'btn-success btn-success--blue'
           "
-          (click)="selectCat(category)"
-          (dblclick)="unSelectCat(category)"
-          tittle="Click to select category, double-click to deselect"
+          (click)="selectPlat(platform.name)"
+          (dblclick)="unSelectPlat(platform.name)"
         >
-          {{ category }}
+          {{ platform.name }}
         </a>
       </div>
     </div>
@@ -103,8 +103,8 @@
         class="btn m-2"
         (click)="selectPlat('')"
         [ngClass]="
-          platformSelected == ''
-            ? ' btn-default'
+          platformSelected === ''
+            ? 'btn-default'
             : 'btn-success btn-success--blue'
         "
         title="Click to select all platforms"
@@ -117,7 +117,7 @@
           id="{{ platform.name }}"
           class="btn m-1"
           [ngClass]="
-            platformSelected == platform.name
+            platformSelected === platform.name
               ? 'btn-default'
               : 'btn-success btn-success--blue'
           "

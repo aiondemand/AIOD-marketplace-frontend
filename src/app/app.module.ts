@@ -25,103 +25,102 @@ import { AppConfigService } from './core/services/app-config/app-config.service'
 import { SpinnerModule } from './shared/components/spinner/spinner.module';
 import { FooterComponent } from './layout/footer/footer.component';
 
-
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 const { base } = environment.api;
 
 const renderer = new MarkedRenderer();
 
 renderer.paragraph = (text: string) => {
-    if (text.startsWith('&lt;img')) {
-        const div = document.createElement('div');
-        div.innerHTML = text.trim();
-        if (div.firstChild?.textContent != null) {
-            return div.firstChild.textContent;
-        } else {
-            return '';
-        }
+  if (text.startsWith('&lt;img')) {
+    const div = document.createElement('div');
+    div.innerHTML = text.trim();
+    if (div.firstChild?.textContent != null) {
+      return div.firstChild.textContent;
     } else {
-        return '<p>' + text + '</p>';
+      return '';
     }
+  } else {
+    return '<p>' + text + '</p>';
+  }
 };
 
 renderer.link = (href, title, text) => {
-    if (text.endsWith('/&gt;')) {
-        return text;
-    } else {
-        return '<a href="' + href + '" title="' + title + '">' + text + '</a>';
-    }
+  if (text.endsWith('/&gt;')) {
+    return text;
+  } else {
+    return '<a href="' + href + '" title="' + title + '">' + text + '</a>';
+  }
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ContentLayoutComponent,
-        SidenavComponent,
-        TopNavbarComponent,
-        FooterComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule,
-        SpinnerModule,
-        OAuthModule.forRoot({
-            resourceServer: {
-                allowedUrls: [base],
-                sendAccessToken: true,
-            },
-        }),
-        TranslateModule.forRoot({
-            defaultLanguage: 'en',
-            useDefaultLang: true,
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient],
-            },
-        }),
-        BrowserAnimationsModule,
-        SharedModule,
-        CoreModule,
-        MarkdownModule.forRoot({
-            markedOptions: {
-                provide: MarkedOptions,
-                useValue: {
-                    renderer: renderer,
-                    gfm: true,
-                    breaks: false,
-                    sanitize: false,
-                },
-            },
-        }),
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpErrorInterceptor,
-            multi: true,
+  declarations: [
+    AppComponent,
+    ContentLayoutComponent,
+    SidenavComponent,
+    TopNavbarComponent,
+    FooterComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    SpinnerModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [base],
+        sendAccessToken: true,
+      },
+    }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      useDefaultLang: true,
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    BrowserAnimationsModule,
+    SharedModule,
+    CoreModule,
+    MarkdownModule.forRoot({
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          renderer: renderer,
+          gfm: true,
+          breaks: false,
+          sanitize: false,
         },
-        {
-            provide: APP_INITIALIZER,
-            multi: true,
-            deps: [AppConfigService],
-            useFactory: (appConfigService: AppConfigService) => {
-                return () => {
-                    return appConfigService.loadAppConfig();
-                };
-            },
-        },
-        Title,
-    ],
-    bootstrap: [AppComponent],
+      },
+    }),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppConfigService],
+      useFactory: (appConfigService: AppConfigService) => {
+        return () => {
+          return appConfigService.loadAppConfig();
+        };
+      },
+    },
+    Title,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-    constructor(iconRegistry: MatIconRegistry) {
-        iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
-    }
+  constructor(iconRegistry: MatIconRegistry) {
+    iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+  }
 }

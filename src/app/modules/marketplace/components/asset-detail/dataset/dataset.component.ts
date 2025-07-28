@@ -6,12 +6,10 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dataset',
   templateUrl: './dataset.component.html',
-  styleUrls: ['./dataset.component.scss']
+  styleUrls: ['./dataset.component.scss'],
 })
 export class DatasetComponent implements OnInit, OnDestroy {
-  constructor(
-    private datasetService: DatasetService,
-  ) { }
+  constructor(private datasetService: DatasetService) {}
 
   private subscriptions: Subscription = new Subscription();
   public dataset!: DatasetModel;
@@ -19,7 +17,8 @@ export class DatasetComponent implements OnInit, OnDestroy {
 
   private getDatatset() {
     const subscribe = this.datasetService
-      .getAsset(this.identifier).subscribe((dataset: DatasetModel) => {
+      .getAsset(this.identifier)
+      .subscribe((dataset: DatasetModel) => {
         this.dataset = dataset;
       });
 
@@ -33,5 +32,4 @@ export class DatasetComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }

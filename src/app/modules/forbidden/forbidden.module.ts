@@ -6,7 +6,7 @@ import { ForbiddenComponent } from './forbidden.component';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
-    declarations: [ForbiddenComponent],
-    imports: [CommonModule, ForbiddenRoutingModule, SharedModule],
+  declarations: [ForbiddenComponent],
+  imports: [CommonModule, ForbiddenRoutingModule, SharedModule],
 })
 export class ForbiddenModule {}

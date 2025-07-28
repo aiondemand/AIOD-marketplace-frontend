@@ -6,14 +6,12 @@ import { MyListComponent } from './components/my-list/my-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  declarations: [
-    MyListComponent
-  ],
+  declarations: [MyListComponent],
   imports: [
     CommonModule,
     SharedModule,
     MatPaginatorModule,
     MyLibraryRoutingModule,
-  ]
+  ],
 })
-export class MyLibraryModule { }
+export class MyLibraryModule {}
