@@ -56,34 +56,34 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000);
         console.error('Error get asset', error);
-        this.asset = {
-          identifier: 'data_02E1OuNCoTvFQPkYTkHDCOLX',
-          category: AssetCategory.Dataset,
-          name: 'bigIR/ar_cov19',
-          description:
-            'ArCOV-19 is an Arabic COVID-19 Twitter dataset that covers the period from 27th of January till 30th of April 2020. ArCOV-19 is designed to enable research under several domains including natural language processing, information retrieval, and social computing, among others',
-          platform: 'huggingface',
-          platform_resource_identifier: '11111111',
-          keywords: [
-            'source_datasets:original',
-            'multilinguality:monolingual',
-            'region:us',
-            'language_creators:found',
-            'language:ar',
-            'annotations_creators:no-annotation',
-            'size_categories:1m<n<10m',
-            'task_categories:other',
-            'arxiv:2004.05861',
-            'data-mining',
-          ],
-          sameAs: 'https://huggingface.co/datasets/bigIR/ar_cov19',
-          scientific_domain: [],
-          research_area: [],
-          date_published: new Date('2023-12-19T09:25:41.000Z'),
-          media: [],
-          citation: [],
-          dateCreated: new Date('2023-12-19T09:25:41.000Z'),
-        };
+        //   this.asset bellow might be used for testing purposes
+        // this.asset={
+        //     "identifier": "data_02E1OuNCoTvFQPkYTkHDCOLX",
+        //     "category": AssetCategory.Dataset,
+        //     "name": "bigIR/ar_cov19",
+        //     "description": "ArCOV-19 is an Arabic COVID-19 Twitter dataset that covers the period from 27th of January till 30th of April 2020. ArCOV-19 is designed to enable research under several domains including natural language processing, information retrieval, and social computing, among others",
+        //     "platform": "huggingface",
+        //     "platform_resource_identifier": "11111111",
+        //     "keywords": [
+        //         "source_datasets:original",
+        //         "multilinguality:monolingual",
+        //         "region:us",
+        //         "language_creators:found",
+        //         "language:ar",
+        //         "annotations_creators:no-annotation",
+        //         "size_categories:1m<n<10m",
+        //         "task_categories:other",
+        //         "arxiv:2004.05861",
+        //         "data-mining"
+        //     ],
+        //     "sameAs": "https://huggingface.co/datasets/bigIR/ar_cov19",
+        //     "scientific_domain": [],
+        //     "research_area": [],
+        //     "date_published": new Date("2023-12-19T09:25:41.000Z"),
+        //     "media": [],
+        //     "citation": [],
+        //     "dateCreated": new Date("2023-12-19T09:25:41.000Z")
+        // }
       },
     });
   }
