@@ -177,11 +177,12 @@ header {
       margin-bottom: 0;
       transition: margin 300ms ease-in-out;
 
-      @include max-md {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0;
-      }
+         @include max-md {
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0;
+            background-color: #0047BB;
+         }
 
       .menu {
         margin-right: 20px;
@@ -284,122 +285,7 @@ header {
          // }
       }
 
-      .main-menu {
-         list-style: none;
-         display: flex;
-         padding-left: 0;
-         align-items: flex-end;
-         margin-bottom: 0;
-         transition: margin 300ms ease-in-out;
-
-         @include max-md {
-            flex-direction: column;
-            align-items: flex-start;
-            margin: 0;
-            background-color: #0047BB;
-         }
-
-         .menu {
-            margin-right: 20px;
-
-            &:before {
-               content: "";
-               position: absolute;
-               bottom: -30px;
-               height: 30px;
-               left: 0;
-               left: 0;
-               width: 100%;
-               background-color: transparent;
-            }
-
-            @include max-lg {
-               margin-right: 5px;
-            }
-
-            @include max-md {
-               margin-right: 0;
-               width: 100%;
-               padding: 0;
-               text-align: center;
-               margin: 30px 0;
-            }
-
-            &.active .menu-link {
-               font-family: $font-variant;
-               font-weight: $font-weight-bold;
-               // text-decoration: underline;
-               color: $color-primary3;
-               font-size: 16px;
-
-            }
-
-
-            .menu-link {
-               font-family: $font-variant;
-               color: $color-primary5;
-               font-weight: $font-weight-medium;
-               font-size: 16px;
-               line-height: 1;
-               text-decoration: none;
-               position: relative;
-               cursor: pointer;
-               overflow: hidden;
-               display: block;
-               transition: color 250ms ease;
-               padding: 15px 18px;
-               border-radius: 100px;
-               background-color: transparent;
-               transition: all 250ms ease;
-
-               @include max-md {
-                  padding: 0 20px;
-                  font-size: 20px;
-                  line-height: 24px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  width: 100%;
-               }
-            }
-
-            &:last-of-type {
-               margin-right: 0px;
-            }
-
-            &:hover {
-               .sub-menu {
-                  @include min-lg {
-                     visibility: visible;
-                     opacity: 1;
-                  }
-               }
-
-               .menu-link {
-                  @include min-lg {
-                     position: relative;
-                     background-color: $color-primary2;
-                     color: $color-primary4;
-
-                     &:before {
-                        content: "";
-                        position: absolute;
-                        inset: 0;
-                        border-radius: 100px;
-                        padding: 2px;
-                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.125) 53.65%, rgba(255, 255, 255, 0) 100%);
-                        -webkit-mask:
-                           linear-gradient(#fff 0 0) content-box,
-                           linear-gradient(#fff 0 0);
-                        -webkit-mask-composite: xor;
-                        mask-composite: exclude;
-                     }
-                  }
-               }
-            }
-         }
-      }
-
+    
       .single-link {
          font-family: $font-variant;
          color: $color-default2;
