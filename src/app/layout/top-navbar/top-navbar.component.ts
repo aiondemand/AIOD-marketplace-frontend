@@ -47,7 +47,7 @@ export class TopNavbarComponent {
     return this.authService.isAuthenticated();
   }
 
-  menuenter() {
+  menuEnter() {
     this.isMatMenuOpen = true;
   }
 
