@@ -40,13 +40,20 @@ export class TopNavbarComponent {
     if (window.innerWidth >= this.widthSmallDevice) {
       this.mobileOpened = true;
     }
-    const theme = localStorage.getItem('theme');
-    if (
-      (this.isdarkModePrefered && theme === 'light') ||
-      (this.isLightModePrefered && theme === 'dark')
-    ) {
-      this.toggleTheme();
-    }
+
+    const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkMediaQuery.addEventListener('change', (event) => {
+      if (event.matches) {
+        this.toggleThemeTo('dark');
+      } else {
+        this.toggleThemeTo('light');
+      }
+    });
+  }
+
+  toggleThemeTo(theme: 'light' | 'dark') {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 
   login() {
