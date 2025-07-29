@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericItem } from '@app/shared/models/generic.model';
 
 @Component({
@@ -12,16 +12,32 @@ export class GenericComponent {
   @Input() title?: string;
 
   formatColumnName(columnName: string): string {
+    // Special case for nested properties - show only the first part
+    if (columnName.includes('.')) {
+      columnName = columnName.split('.')[0];
+    }
+
     // Convert camelCase or snake_case to readable format
     return columnName
       .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
       .replace(/_/g, ' ') // Replace underscores with spaces
-      .replace(/\./g, ' ') // Replace dots with spaces for nested properties
       .replace(/\b\w/g, (l) => l.toUpperCase()) // Capitalize first letter of each word
       .trim();
   }
 
   getValueType(value: any): string {
+    if (Array.isArray(value)) {
+      // Check if it's an array of objects
+      if (
+        value.length > 0 &&
+        typeof value[0] === 'object' &&
+        value[0] !== null
+      ) {
+        return 'object-array';
+      }
+      // It's an array of primitive values
+      return 'array';
+    }
     if (this.isURL(value)) {
       return 'url';
     }
@@ -41,11 +57,48 @@ export class GenericComponent {
     }
   }
 
+  getArrayValues(value: any): string[] {
+    if (Array.isArray(value)) {
+      return value.map((item) => String(item));
+    }
+    return this.parseArray(value);
+  }
+
   parseArray(value: string): string[] {
     if (typeof value !== 'string') return [];
     return value
       .split(',')
       .map((item) => item.trim())
       .filter((item) => item.length > 0);
+  }
+
+  getObjectKeys(objects: any[]): string[] {
+    if (!Array.isArray(objects) || objects.length === 0) return [];
+    return Object.keys(objects[0]);
+  }
+
+  formatObjectValue(value: any): string {
+    if (typeof value === 'string' && this.isURL(value)) {
+      return value;
+    }
+    return String(value);
+  }
+
+  isObjectValueURL(value: any): boolean {
+    return typeof value === 'string' && this.isURL(value);
+  }
+
+  getDisplayValueForObjectTable(key: string, value: any): string {
+    // Special formatting for certain field types
+    if (key === 'name' && typeof value === 'string') {
+      return value;
+    }
+    if (key === 'encoding_format' && typeof value === 'string') {
+      return value;
+    }
+    if (key === 'checksum_algorithm' && typeof value === 'string') {
+      return value.toUpperCase();
+    }
+    return this.formatObjectValue(value);
   }
 }

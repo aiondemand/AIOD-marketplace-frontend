@@ -12,9 +12,32 @@
             {{ item[col] }}
           </a>
           <div *ngSwitchCase="'array'" class="">
-            <span *ngFor="let arrayItem of parseArray(item[col]); let last = last" class="">
+            <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" class="">
               {{ arrayItem }}<span *ngIf="!last">, </span>
             </span>
+          </div>
+          <div *ngSwitchCase="'object-array'" class="object-array-container">
+            <table class="table table-striped" *ngIf="item[col].length > 0">
+              <thead>
+                <tr>
+                  <th *ngFor="let key of getObjectKeys(item[col])">
+                    {{ formatColumnName(key) }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of item[col]">
+                  <td *ngFor="let key of getObjectKeys(item[col])">
+                    <a *ngIf="isObjectValueURL(obj[key])" [href]="obj[key]" target="_blank" class="text-primary">
+                      {{ getDisplayValueForObjectTable(key, obj[key]) }}
+                    </a>
+                    <span *ngIf="!isObjectValueURL(obj[key])">
+                      {{ getDisplayValueForObjectTable(key, obj[key]) }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <markdown *ngSwitchDefault class="">
             {{ item[col] }}

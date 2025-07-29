@@ -13,6 +13,8 @@ import {
 } from '../../services/common-services/bookmark-service/bookmark.service';
 import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
+import { GenericItem } from '@app/shared/models/generic.model';
+import { modelConfig } from '@app/shared/models/modelConfig';
 @Component({
   selector: 'app-asset-detail',
   templateUrl: './asset-detail.component.html',
@@ -34,16 +36,21 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private subscriptions: Subscription = new Subscription();
+  public subscriptions: Subscription = new Subscription();
   public icon!: string;
   public categoryColor!: string;
   public isLoading = false;
   public asset!: AssetModel;
-  private category!: AssetCategory;
+  public category!: AssetCategory;
   public AssetCategory = AssetCategory;
   protected isBookmarked = false;
 
-  private getAsset(id: string, category: AssetCategory): void {
+  // Use configuration from modelConfig - will be set dynamically based on asset category
+  public genericData: GenericItem[] = [];
+  public genericColumns: string[] = [];
+  public genericTitle = '';
+
+  public getAsset(id: string, category: AssetCategory): void {
     this.isLoading = true;
     this.generalAssetService.setAssetCategory(category);
 
@@ -52,6 +59,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
+        this.prepareGenericData();
       },
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000);
@@ -147,7 +155,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       const bookmarkedAsset = this.getBookmarkedAsset();
 
       this.bookmarkService.addBookmark(user, [bookmarkedAsset]).subscribe({
-        next: (_bookmarkedAssets: any) => {
+        next: () => {
           // ToDo: change bookmark icon style
         },
         error: (error: any) => console.error('Error bookmarking asset', error),
@@ -185,5 +193,91 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       price: 0,
       addedAt: new Date().getDate(),
     } as AssetsPurchase;
+  }
+
+  private getNestedProperty(obj: any, path: string): any {
+    const keys = path.split('.');
+    let current = obj;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
+      if (current && current[key] !== undefined) {
+        current = current[key];
+
+        // If we have more keys to process and current is an array
+        if (i < keys.length - 1 && Array.isArray(current)) {
+          const remainingPath = keys.slice(i + 1).join('.');
+          // Collect the property from all array items
+          const values = current
+            .map((item) => this.getNestedProperty(item, remainingPath))
+            .filter((value) => value !== null && value !== undefined);
+
+          return values.length > 0 ? values.join(', ') : null;
+        }
+      } else {
+        return null;
+      }
+    }
+
+    return current;
+  }
+
+  private formatValue(value: any): string {
+    return String(value);
+  }
+
+  private prepareGenericData(): void {
+    const categoryKey = this.category as keyof typeof modelConfig;
+    const config = modelConfig[categoryKey];
+
+    this.genericColumns = config.columns;
+    this.genericTitle = config.title;
+
+    const assetData: any = { id: '1' };
+
+    // Group columns by parent path
+    const groupedColumns: { [key: string]: string[] } = {};
+
+    this.genericColumns.forEach((column) => {
+      const parts = column.split('.');
+      if (parts.length > 1) {
+        const parentPath = parts[0];
+        if (!groupedColumns[parentPath]) {
+          groupedColumns[parentPath] = [];
+        }
+        groupedColumns[parentPath].push(column);
+      } else {
+        // Handle single-level properties normally
+        const value = this.getNestedProperty(this.asset, column);
+        assetData[column] = this.formatValue(value);
+      }
+    });
+
+    // Process grouped columns
+    Object.keys(groupedColumns).forEach((parentPath) => {
+      const columns = groupedColumns[parentPath];
+      const parentArray = (this.asset as any)[parentPath];
+
+      if (Array.isArray(parentArray)) {
+        const result = parentArray.map((item) => {
+          const obj: any = {};
+          columns.forEach((column) => {
+            const propertyName = column.split('.').slice(1).join('.');
+            obj[propertyName] = this.getNestedProperty(item, propertyName);
+          });
+          return obj;
+        });
+        assetData[parentPath] = result;
+      } else {
+        // Fallback to original behavior if not an array
+        columns.forEach((column) => {
+          const value = this.getNestedProperty(this.asset, column);
+          assetData[column] = this.formatValue(value);
+        });
+      }
+    });
+    console.log(assetData);
+    this.genericData = [assetData];
   }
 }

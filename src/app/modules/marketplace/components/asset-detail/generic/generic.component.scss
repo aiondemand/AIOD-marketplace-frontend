@@ -5,3 +5,39 @@
     margin: 1rem 1rem 1rem 0;
   }
 }
+
+.object-array-container {
+  overflow-x: auto;
+
+  .table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #dee2e6;
+      word-break: break-word;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
