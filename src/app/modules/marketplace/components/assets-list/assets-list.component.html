@@ -80,19 +80,20 @@
         {{ categorySelected }}
       </a>
 
-      <div *ngFor="let platform of platforms; index as i">
+      <div *ngFor="let category of assetCategories; index as i">
         <a
-          id="{{ platform.name }}"
-          class="btn m-1"
+          id="{{ category }}"
+          class="btn m-2"
           [ngClass]="
-            platformSelected === platform.name
+            categorySelected === category
               ? 'btn-default'
               : 'btn-success btn-success--blue'
           "
-          (click)="selectPlat(platform.name)"
-          (dblclick)="unSelectPlat(platform.name)"
+          (click)="selectCat(category)"
+          (dblclick)="unSelectCat(category)"
+          tittle="Click to select category, double-click to deselect"
         >
-          {{ platform.name }}
+          {{ category }}
         </a>
       </div>
     </div>
