@@ -30,6 +30,11 @@
     @content;
   }
 }
+@mixin max-xxs {
+  @media (max-width: $screen-xxs-max) {
+    @content;
+  }
+}
 @mixin max-sm {
   @media (max-width: $screen-sm-max) {
     @content;
