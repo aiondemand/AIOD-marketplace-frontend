@@ -37,7 +37,7 @@
         <input
           type="text"
           formControlName="search"
-          placeholder="Find AI resources in your Language"
+          placeholder="{{ screenWidth >= widthSmallDevice ? 'Find AI resources in your Language' : 'Find Resources' }}"
           id="name"
           class="form-control"
           (input)="onInputChange()"
@@ -47,7 +47,7 @@
 
       <a
         (click)="searchAssets()"
-        class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-none d-lg-flex"
+        class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-flex"
         ><i class="icon-lupa"></i
       ></a>
     </div>
@@ -91,7 +91,7 @@
           "
           (click)="selectCat(category)"
           (dblclick)="unSelectCat(category)"
-          tittle="Click to select category, double-click to deselect"
+          title="Click to select category, double-click to deselect"
         >
           {{ category }}
         </a>

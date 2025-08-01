@@ -108,13 +108,14 @@ ul {
   margin-bottom: 1em;
 }
 
-a {
-  text-decoration: none;
-  color: $color-primary3;
-}
-a:hover {
-  text-decoration: none;
-}
+  a {
+    text-decoration: none;
+    color: #41b6e6;
+    max-width: 300px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+  }
 
 .distribution-title {
   font-weight: bolder;
@@ -126,14 +127,7 @@ a:hover {
   flex-wrap: wrap;
   overflow: hidden;
 
-  a {
-    text-decoration: none;
-    color: #41b6e6;
-    max-width: 300px;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-  }
+
 }
 
 .distribution-card {
