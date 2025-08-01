@@ -29,13 +29,6 @@ export class TopNavbarComponent {
   protected mobileOpened = false;
   private widthSmallDevice = 768;
 
-  protected isdarkModePrefered = window.matchMedia(
-    '(prefers-color-scheme: dark)',
-  ).matches;
-  protected isLightModePrefered = window.matchMedia(
-    '(prefers-color-scheme: light)',
-  ).matches;
-
   ngOnInit() {
     if (window.innerWidth >= this.widthSmallDevice) {
       this.mobileOpened = true;
