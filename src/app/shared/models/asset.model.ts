@@ -7,7 +7,7 @@ export class AssetModel {
   description: string;
   platform: string;
   platform_resource_identifier: string;
-  keywords: string[];
+  keyword: string[];
   sameAs: string;
   license?: string;
   research_area?: string[];
@@ -28,7 +28,7 @@ export class AssetModel {
     this.platform = data.platform ?? '';
     this.platform_resource_identifier =
       data.platform_resource_identifier ?? 'platform-identifier-unknown';
-    this.keywords = data.keyword ?? [];
+    this.keyword = data.keyword ?? [];
     this.sameAs = data.same_as;
     this.license = data.license;
     this.scientific_domain = data.scientific_domain;
