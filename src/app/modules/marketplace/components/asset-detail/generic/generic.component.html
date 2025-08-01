@@ -3,46 +3,98 @@
     <div
       *ngIf="item[col] && item[col] !== 'N/A'"
       class="item-info-container"
-      style="padding: 10px; border: 1px solid #ccc"
+      [ngClass]="col"
     >
       <h3>{{ formatColumnName(col) }}</h3>
       <div class="">
-        <ng-container [ngSwitch]="getValueType(item[col])">
-          <a *ngSwitchCase="'url'" [href]="item[col]" target="_blank" class="">
-            {{ item[col] }}
-          </a>
-          <div *ngSwitchCase="'array'" class="">
-            <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" class="">
-              {{ arrayItem }}<span *ngIf="!last">, </span>
-            </span>
+        <!-- Array type -->
+        <div *ngIf="getValueType(item[col]) === 'array'  && col !== 'description.plain'" class="">
+          <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" class="">
+            {{ arrayItem }} 2<span *ngIf="!last">, </span>
+          </span>
+        </div>
+        <!-- Distribution fields: show all items -->
+        <div *ngIf="col === 'distribution'">
+          <div *ngFor="let dist of item[col]" class="distribution-entry">
+            <div *ngIf="dist.name"><strong>Name:</strong> {{ dist.name }}</div>
+            <div *ngIf="dist.checksum"><strong>Checksum:</strong> {{ dist.checksum }}</div>
+            <div *ngIf="dist.checksum_algorithm"><strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}</div>
+            <div *ngIf="dist.content_url"><strong>Content URL:</strong> <a style='color:#41b6e6' [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a></div>
+            <div *ngIf="dist.encoding_format"><strong>Encoding Format:</strong> {{ dist.encoding_format }}</div>
+            <hr />
           </div>
-          <div *ngSwitchCase="'object-array'" class="object-array-container">
-            <table class="table table-striped" *ngIf="item[col].length > 0">
-              <thead>
-                <tr>
-                  <th *ngFor="let key of getObjectKeys(item[col])">
-                    {{ formatColumnName(key) }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let obj of item[col]">
-                  <td *ngFor="let key of getObjectKeys(item[col])">
-                    <a *ngIf="isObjectValueURL(obj[key])" [href]="obj[key]" target="_blank" class="text-primary">
-                      {{ getDisplayValueForObjectTable(key, obj[key]) }}
-                    </a>
-                    <span *ngIf="!isObjectValueURL(obj[key])">
-                      {{ getDisplayValueForObjectTable(key, obj[key]) }}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+        <!-- Object-array type -->
+        <div *ngIf="getValueType(item[col]) === 'object-array' && col !== 'description.plain' && col !== 'distribution'" class="object-array-media">
+          <div *ngFor="let obj of item[col]" class="media-card">
+            <div class="media-content"> 
+              <div class="media-section">
+                <h3 class="media-title">{{ getDistributionName() }}</h3>
+                  <span class="media-desc-label dropdown-toggle" (click)="obj.showDescription = !obj.showDescription">
+                  Description
+                  <span *ngIf="!obj.showDescription">▼</span>
+                  <span *ngIf="obj.showDescription">▲</span>
+                </span>
+                <div class="dropdown-content" [ngClass]="{'animate-dropdown': obj.showDescription}">
+                  <p class="media-description">{{ item['description.plain'] }}</p>
+                </div>
+              </div>
+              <div class="media-section">
+                <span class="media-properties-label dropdown-toggle" (click)="obj.showProperties = !obj.showProperties">
+                  Properties
+                  <span *ngIf="!obj.showProperties">▼</span>
+                  <span *ngIf="obj.showProperties">▲</span>
+                </span>
+                <div class="media-properties-list dropdown-content" [ngClass]="{'animate-dropdown': obj.showProperties}">
+                  <div class="media-property">
+                    <div class="media-property-value">{{ obj.checksum_algorithm }}</div>
+                    <div class="media-property-label">Checksum Algorithm</div>
+                  </div>
+                  <div class="media-property">
+                    <div class="media-property-value">{{ obj.content_size_kb }}</div>
+                    <div class="media-property-label">Content size (KB)</div>
+                  </div>
+                  <div class="media-property">
+                    <div class="media-property-value">
+                      <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank" class="text-primary">{{ obj.content_url }}</a>
+                    </div>
+                    <div class="media-property-label">Content URL</div>
+                  </div>
+                  <div class="media-property">
+                    <div class="media-property-value">{{ obj.copyright }}</div>
+                    <div class="media-property-label">Copyright</div>
+                  </div>
+                  <div class="media-property">
+                    <div class="media-property-value">{{ obj.date_published }}</div>
+                    <div class="media-property-label">Date Published</div>
+                  </div>
+                </div>
+                <hr />
+                <div class="">
+                    <div class="">
+                        <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank" class="text-primary"> Source</a>
+                    </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <markdown *ngSwitchDefault class="">
-            {{ item[col] }}
-          </markdown>
-        </ng-container>
+        </div>
+        <!-- Normal type -->
+        <markdown *ngIf="col === 'description.plain'" class="markdown-white">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="col === 'license'" class="license" style="color: blue;">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="col === 'same_as'" class="same_as">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="col === 'execution_settings'" class="execution_settings">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="col === 'badge'" class="same_as">
+          {{ item[col] }}
+        </markdown>
       </div>
     </div>
   </div>

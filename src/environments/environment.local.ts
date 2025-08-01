@@ -15,7 +15,8 @@ export const environment = {
   },
   keycloakConfig: {
     baseUrl:
-      browserwindow.env?.['KEYCLOAK_URL'] || 'https://auth.aiod.eu/aiod-auth',
+      browserwindow.env?.['KEYCLOAK_URL'] ||
+      'https://aiod-dev.i3a.es/aiod-auth',
     realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
     clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
     redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '',

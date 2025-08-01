@@ -20,12 +20,12 @@
     </div>
 
     <div class="asset-body-keywords">
-      <div *ngIf="!!asset.keywords && asset.keywords.length > 0">
+      <div *ngIf="!!asset.keyword && asset.keyword.length > 0">
         <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
         <div class="keywords-list">
           <div
             class="btn btn-success btn-success--blue m-1"
-            *ngFor="let keyword of asset.keywords"
+            *ngFor="let keyword of asset.keyword"
           >
             {{ '#' + keyword }}
           </div>

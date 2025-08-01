@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { GenericItem } from '@app/shared/models/generic.model';
 
@@ -6,18 +7,19 @@ import { GenericItem } from '@app/shared/models/generic.model';
   templateUrl: './generic.component.html',
   styleUrls: ['./generic.component.scss'],
 })
-export class GenericComponent {
+export class GenericComponent implements OnInit {
+  ngOnInit(): void {
+    console.log('items:', this.items);
+  }
   @Input() items: GenericItem[] = [];
   @Input() columns: string[] = [];
   @Input() title?: string;
 
   formatColumnName(columnName: string): string {
-    // Special case for nested properties - show only the first part
     if (columnName.includes('.')) {
       columnName = columnName.split('.')[0];
     }
 
-    // Convert camelCase or snake_case to readable format
     return columnName
       .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
       .replace(/_/g, ' ') // Replace underscores with spaces
@@ -100,5 +102,11 @@ export class GenericComponent {
       return value.toUpperCase();
     }
     return this.formatObjectValue(value);
+  }
+  getDistributionName(): string {
+    // Example: get from first item, or implement your logic
+    return this.items[0] && this.items[0]['distribution'][0]
+      ? this.items[0]['distribution'][0].name
+      : '';
   }
 }

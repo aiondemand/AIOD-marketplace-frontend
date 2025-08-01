@@ -2,6 +2,7 @@ export const modelConfig = {
   AIModel: {
     columns: [
       'description.plain',
+      'license',
       'same_as',
       'distribution',
       'distribution.dependency',
@@ -41,9 +42,6 @@ export const modelConfig = {
       'distribution.checksum_algorithm',
       'execution_settings',
       'badge',
-      'research_area',
-      'scientific_domain',
-      'keyword',
     ],
     title: 'Experiment',
   },

@@ -254,7 +254,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Process grouped columns
     Object.keys(groupedColumns).forEach((parentPath) => {
       const columns = groupedColumns[parentPath];
       const parentArray = (this.asset as any)[parentPath];
@@ -277,7 +276,6 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         });
       }
     });
-    console.log(assetData);
     this.genericData = [assetData];
   }
 }
