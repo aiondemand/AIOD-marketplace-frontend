@@ -25,7 +25,8 @@
         "REGISTER": "Register",
         "POWEREDBY": "Powered by",
         "AI4":"ai4eosc",
-        "MARKETPLACE":"marketplace"
+        "MARKETPLACE":"marketplace",
+        "CATALOGUE":"Catalogue"
                             
         },
     "TOP-NAVBAR": {
@@ -236,6 +237,7 @@
         "CHECK-SDKS-APIS":"Check the SDKs and APIs",
         "CHECK-NOW":"Check now",
         "EXPLORE-AI-CATALOGUE":"Explore AI Catalogue",
-        "ITEMS-PER-PAGE": "Items per page"
+        "ITEMS-PER-PAGE": "Items per page",
+        "ENHANCED-SEARCH": "Enhanced Search"
     }
 }
