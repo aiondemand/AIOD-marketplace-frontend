@@ -23,13 +23,13 @@
               <li class="sidebar-link sidebar-link--active">
                 <a href="https://aiod.eu">
                   <i class="icon-dashboard"></i>
-                  <span>Home</span>
+                  <span> {{ 'SIDENAV.HOME' | translate }}</span>
                 </a>
               </li>
               <li *ngIf="isLoggedIn()" class="sidebar-link">
                 <a href="/Bookmarks">
                   <i class="icon-resources-saved"></i>
-                  <span>My Bookmarks</span>
+                  <span>{{ 'SIDENAV.MY-BOOKMARKS' | translate }}</span>
                 </a>
               </li>
               <li
@@ -40,7 +40,7 @@
                   (click)="isResourcesOpened = !isResourcesOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-ai"></i> <span>Resources</span></div>
+                  <div><i class="icon-ai"></i> <span>{{ 'SIDENAV.RESOURCES' | translate }}</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
@@ -49,17 +49,17 @@
                   <li>
                     <a href="">
                       <i class="icon-catalogue"></i>
-                      Catalogue
+                      {{'SIDENAV.CATALOGUE' | translate}}
                     </a>
                   </li>
                   <li>
                     <a href="https://api.aiod.eu/redoc"
-                      ><i class="icon-catalogue"></i>SDKs and APIs</a
+                      ><i class="icon-catalogue"></i>{{'SIDENAV.SDKS-AND-APIS' | translate}}</a
                     >
                   </li>
                   <!-- <li>
                     <a
-                      [routerLink]="['/resources']"
+                      [routerLink]="['/resources']"MY-BOOKMARKS
                       [queryParams]="{ category: 'educational_resources' }"
                     >
                       <i class="icon-catalogue"></i>Educational Resources
@@ -68,8 +68,8 @@
                   <li>
                     <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
                     <p class="sidebar-text">
-                      Powered by
-                      <a href="https://ai4eosc.eu/">ai4eosc</a> marketplace
+                     {{"SIDENAV.POWEREDBY" | translate}}
+                      <a href="https://ai4eosc.eu/">{{"SIDENAV.AI4" | translate }}</a> {{"SIDENAV.MARKETPLACE" | translate}}
                     </p>
                   </li>
                 </ul>
@@ -79,7 +79,7 @@
                   (click)="isToolsOpened = !isToolsOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-grid"></i> <span>Tools</span></div>
+                  <div><i class="icon-grid"></i> <span>{{"SIDENAV.TOOLS" | translate}}</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
@@ -88,13 +88,13 @@
                   <li>
                     <a href="https://aiod.eu/tools">
                       <i class="icon-dashboard"></i>
-                      All Tools
+                      {{"SIDENAV.ALL-TOOLS" | translate }}
                     </a>
                   </li>
                   <li>
                     <a href="https://aiod.eu/get-started/">
                       <i class="icon-dashboard"></i>
-                      Get started
+                      {{"SIDENAV.GET-STARTED" | translate}}
                     </a>
                   </li>
                   <!-- <li>
@@ -103,7 +103,7 @@
                   <li>
                     <a href="https://aiod.eu/technical-support">
                       <i class="icon-dashboard"></i>
-                      Technical Support
+                      {{"SIDENAV.TECHNICAL-SUPPORT" | translate }}
                     </a>
                   </li>
                 </ul>
@@ -116,7 +116,7 @@
                   (click)="isCommunityOpened = !isCommunityOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-users"></i> <span>Community</span></div>
+                  <div><i class="icon-users"></i> <span>{{ 'SIDENAV.COMMUNITY' | translate }}</span></div>
                   <span class="submenu-toggle">
                     <i class="icon-arrow-breadcrumb"></i>
                   </span>
@@ -139,7 +139,7 @@
                     >
                       <div>
                         <i class="icon-dashboard"></i>
-                        <span>Press Corner</span>
+                        <span>{{ 'SIDENAV.PRESS-CORNER' | translate }}</span>
                       </div>
                       <span class="submenu-toggle">
                         <i class="icon-arrow-breadcrumb"></i>
@@ -149,19 +149,19 @@
                       <li class="subsubmenu">
                         <a href="https://aiod.eu/press-corner-types/events">
                           <span class="corner"></span>
-                          Events
+                          {{ 'SIDENAV.EVENTS' | translate }}
                         </a>
                       </li>
                       <li class="subsubmenu">
                         <a href="https://aiod.eu/press-corner-types/news">
                           <span class="corner"></span>
-                          News
+                          {{ 'SIDENAV.NEWS' | translate }}
                         </a>
                       </li>
                       <li class="subsubmenu">
                         <a href="https://aiod.eu/press-corner-types/newsletter">
                           <span class="corner"></span>
-                          Newsletter
+                          {{'SIDENAV.NEWSLETTER'| translate}}
                         </a>
                       </li>
                     </ul>
@@ -169,16 +169,16 @@
                   <!-- -->
   
                     <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/project"> <i class="icon-file-text"></i>Projects </a>
+                      <a href="https://aiod.eu/project"> <i class="icon-file-text"></i>{{'SIDENAV.PROJECTS'| translate}} </a>
                     </li>
                     <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
+                      <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>{{'SIDENAV.FORUM'| translate}} </a>
                     </li>
                     <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/ai-experts"> <i class="icon-star"></i>Pool of Experts </a>
-                    </li>                  
+                      <a href="https://aiod.eu/ai-experts"> <i class="icon-star"></i>{{'SIDENAV.POOL-OF-EXPERTS'| translate}} </a>
+                    </li>
                   <li class="hasnot-submenu">
-                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
+                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i>{{'SIDENAV.AI-ORGANISATIONS'| translate}} </a>
                     </li>
                   </ul>
               </li>
@@ -191,16 +191,16 @@
                 <li class="sidebar-link">
                   <a href="https://aiod.eu/dashboard">
                     <i class="icon-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span>{{"SIDENAV.DASHBOARD" | translate }}</span>
                   </a>
                 </li>
               </ul>
             </div>
 
             <div id="registerDiv" *ngIf="!isLoggedIn()">
-              <p>Don't have an AIoD account?</p>
+              <p>{{ "SIDENAV.DONT-HAVE-ACCOUNT" | translate }}</p>
               <p id="registerLink" (click)="login(); $event.stopPropagation()">
-                Register
+                {{"SIDENAV.REGISTER" | translate }}
               </p>
             </div>
 
@@ -209,7 +209,7 @@
               id="collapseButton"
             >
               <i class="icon-colapse"></i>
-              <span>collapse</span>
+              <span>{{ "SIDENAV.COLLAPSE" | translate }}</span>
             </div>
 
           
