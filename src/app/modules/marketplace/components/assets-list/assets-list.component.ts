@@ -59,7 +59,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public isEnhancedSearch = false;
   public searchQueryValue = '';
 
-  public assetsSize = 0; /* number of assets found */
+  public assetsSize: number | null = null;
   public pageSize = 15; /* assets per page */
   public offset = 0;
   public pageSizeOptions = [15, 20, 50, 100];
@@ -565,10 +565,17 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   public getTotalPages(): number {
+    if (this.assetsSize == null || this.assetsSize <= 0) {
+      return 0;
+    }
     return Math.ceil(this.assetsSize / this.pageSize);
   }
 
   public getRangeLabel(): string {
+    if (this.assetsSize == null || this.assetsSize <= 0) {
+      return `0`;
+    }
+
     const start = this.currentPage * this.pageSize + 1;
     const end = Math.min(
       (this.currentPage + 1) * this.pageSize,
