@@ -304,7 +304,14 @@
         </select>
       </div>
       <div class="paginator-right">
-        <span class="range-label">{{ getRangeLabel() }}</span>
+        <span class="range-label">
+          <ng-container *ngIf="assetsSize === null; else showRange">
+            <div>
+              <mat-progress-spinner class="custom-spinner" mode="indeterminate" diameter="20"></mat-progress-spinner>
+            </div>
+          </ng-container>
+          <ng-template #showRange>{{ getRangeLabel() }}</ng-template>
+        </span>
         <button
           class="nav-button prev-page"
           [disabled]="currentPage === 0"
