@@ -18,9 +18,64 @@
         script.src = base;
         document.head.appendChild(script);
       }
+      (function() {
+        function getQueryParam(name) {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            return params.get(name);
+          } catch (e) {
+            return null;
+          }
+        }
+  
+        var headerSrc = 'https://aiod.eu/common/assets/header.js?redirect_uri="https://catalogue-aiod-dev.iti.es"';
+        var headerScript = document.createElement('script');
+        console.log(headerSrc);
+        headerScript.src = headerSrc;
+        headerScript.async = true;
+        document.head.appendChild(headerScript);
+
+        function updateLoginHref() {
+          var btn = document.getElementById('login-button');
+          if (!btn) return false;
+          try {
+            var href = btn.getAttribute('href') || btn.href;
+            console.log('login-button original href:', href);
+            if (!href) return true;
+            var url = new URL(href, window.location.origin);
+            var finalHref = url.toString();
+            console.log('login-button final href:', finalHref);
+            btn.setAttribute('href', finalHref);
+ 
+            if (!btn.dataset.overrideClick) {
+              btn.addEventListener('click', function(e) {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                e.preventDefault();
+                window.location.href = finalHref;
+              });
+              btn.dataset.overrideClick = '1';
+            }
+          } catch (e) {
+            console.error('Failed to update login-button href', e);
+          }
+          return true;
+        }
+        if (!updateLoginHref()) {
+          var target = document.getElementById('common-header-target') || document.body;
+          var observer = new MutationObserver(function(mutations, obs) {
+            if (updateLoginHref()) {
+              obs.disconnect();
+            }
+          });
+          observer.observe(target, { childList: true, subtree: true });
+          setTimeout(function() {
+            updateLoginHref();
+            observer.disconnect();
+          }, 5000);
+        }
+      })();
     </script>
     <div id="common-header-target"></div>
-    <script src="https://aiod.eu/common/assets/header.js"></script>
   </head>
   <body class="mat-typography">
     <app-root></app-root>
