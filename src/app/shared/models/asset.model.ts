@@ -18,7 +18,9 @@ export class AssetModel {
   media?: Media[];
   version?: string;
   citation?: string[];
-  dateCreated?: Date | undefined;
+  aiod_entry?: {
+    date_modified: Date;
+  };
 
   constructor(data: any, category: AssetCategory) {
     this.identifier = data.identifier ?? 'asset-identifier-unknown';
@@ -39,8 +41,6 @@ export class AssetModel {
     this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
     this.version = data.version;
     this.citation = data.citation;
-    this.dateCreated = data.aiod_entry?.date_created
-      ? new Date(data.aiod_entry?.date_created)
-      : undefined;
+    this.aiod_entry = data.aiod_entry;
   }
 }

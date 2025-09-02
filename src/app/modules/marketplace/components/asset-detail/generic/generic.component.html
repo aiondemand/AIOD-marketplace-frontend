@@ -15,36 +15,52 @@
         </div>
         <!-- Distribution fields: show all items -->
         <div *ngIf="col === 'distribution'">
-          <div *ngFor="let dist of item[col]" class="distribution-entry">
-            <div *ngIf="dist.name"><strong>Name:</strong> {{ dist.name }}</div>
-            <div *ngIf="dist.checksum"><strong>Checksum:</strong> {{ dist.checksum }}</div>
-            <div *ngIf="dist.checksum_algorithm"><strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}</div>
-            <div *ngIf="dist.content_url"><strong>Content URL:</strong> <a style='color:#41b6e6' [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a></div>
-            <div *ngIf="dist.encoding_format"><strong>Encoding Format:</strong> {{ dist.encoding_format }}</div>
-            <hr />
+          <div class="distribution-grid">
+            <div *ngFor="let dist of item[col]" class="distribution-entry">
+              <div *ngIf="dist.name" class="distribution-item"><strong>Name:</strong> {{ dist.name }}</div>
+              <div *ngIf="dist.description" class="distribution-item"><strong>Description:</strong> {{ dist.description }}</div>
+              <div *ngIf="dist.content_url" class="distribution-item"><strong>URL:</strong> <a style='color:#41b6e6' [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a></div>
+              <div *ngIf="dist.encoding_format" class="distribution-item"><strong>Encoding Format:</strong> {{ dist.encoding_format }}</div>
+              <div *ngIf="dist.checksum" class="distribution-item"><strong>Checksum:</strong> {{ dist.checksum }}</div>
+              <div *ngIf="dist.checksum_algorithm" class="distribution-item"><strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}</div>
+            </div>
           </div>
         </div>
         <!-- Object-array type -->
         <div *ngIf="getValueType(item[col]) === 'object-array' && col !== 'description.plain' && col !== 'distribution'" class="object-array-media">
           <div *ngFor="let obj of item[col]" class="media-card">
+              <h3 class="media-title">{{ getDistributionName() }}</h3>
             <div class="media-content"> 
-              <div class="media-section">
-                <h3 class="media-title">{{ getDistributionName() }}</h3>
-                  <span class="media-desc-label dropdown-toggle" (click)="obj.showDescription = !obj.showDescription">
-                  Description
-                  <span *ngIf="!obj.showDescription">▼</span>
-                  <span *ngIf="obj.showDescription">▲</span>
-                </span>
+              <div class="media-section" role="button" tabindex="0"
+                   (click)="obj.showDescription = !obj.showDescription"
+                   (keydown.enter)="obj.showDescription = !obj.showDescription"
+                   (keydown.space)="$event.preventDefault(); obj.showDescription = !obj.showDescription"
+                   style="cursor: pointer;">
+                <div class="media-header" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+                  <span class="media-desc-label">Description</span>
+                  <mat-icon class="media-desc-arrow"
+                            [attr.aria-label]="obj.showDescription ? 'Collapse' : 'Expand'"
+                            [style.transform]="obj.showDescription ? 'rotate(180deg)' : 'rotate(0deg)'"
+                            [style.transition]="'transform 180ms ease'"
+                            [style.color]="'#5bc0f7'">expand_more</mat-icon>
+                </div>
                 <div class="dropdown-content" [ngClass]="{'animate-dropdown': obj.showDescription}">
                   <p class="media-description">{{ item['description.plain'] }}</p>
                 </div>
               </div>
-              <div class="media-section">
-                <span class="media-properties-label dropdown-toggle" (click)="obj.showProperties = !obj.showProperties">
-                  Properties
-                  <span *ngIf="!obj.showProperties">▼</span>
-                  <span *ngIf="obj.showProperties">▲</span>
-                </span>
+              <div class="media-section" role="button" tabindex="0"
+                   (click)="obj.showProperties = !obj.showProperties"
+                   (keydown.enter)="obj.showProperties = !obj.showProperties"
+                   (keydown.space)="$event.preventDefault(); obj.showProperties = !obj.showProperties"
+                   style="cursor: pointer;">
+                <div class="media-header" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+                  <span class="media-properties-label">Properties</span>
+                  <mat-icon class="media-properties-arrow"
+                            [attr.aria-label]="obj.showProperties ? 'Collapse' : 'Expand'"
+                            [style.transform]="obj.showProperties ? 'rotate(180deg)' : 'rotate(0deg)'"
+                            [style.transition]="'transform 180ms ease'"
+                            [style.color]="'#5bc0f7'">expand_more</mat-icon>
+                </div>
                 <div class="media-properties-list dropdown-content" [ngClass]="{'animate-dropdown': obj.showProperties}">
                   <div class="media-property">
                     <div class="media-property-value">{{ obj.checksum_algorithm }}</div>
@@ -69,14 +85,14 @@
                     <div class="media-property-label">Date Published</div>
                   </div>
                 </div>
-                <hr />
-                <div class="">
-                    <div class="">
-                        <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank" class="text-primary"> Source</a>
-                    </div>
-                </div>
               </div>
             </div>
+                <div style=" padding-top: 2rem;">
+                  <a *ngIf="obj.content_url" [href]="obj.content_url" style="color: #41b6e6" target="_blank">
+                    <mat-icon style="vertical-align: middle; font-size: 16px; height: unset;">open_in_new</mat-icon>
+                    <span style="margin-left: 6px; vertical-align: middle;">Source</span>
+                  </a>
+                </div>
           </div>
         </div>
         <!-- Normal type -->
@@ -92,7 +108,10 @@
         <markdown *ngIf="col === 'execution_settings'" class="execution_settings">
           {{ item[col] }}
         </markdown>
-        <markdown *ngIf="col === 'badge'" class="same_as">
+        <markdown *ngIf="col === 'badge'" class="badge">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="col === 'type'" class="badge">
           {{ item[col] }}
         </markdown>
       </div>

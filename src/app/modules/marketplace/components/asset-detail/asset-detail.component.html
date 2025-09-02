@@ -12,11 +12,11 @@
 <ng-template #assetBody>
   <div class="asset-body">
     <div class="asset-body-container">
-              <app-generic
+              <app-generic-asset
                 [items]="genericData"
                 [columns]="genericColumns"
                 [title]="genericTitle"
-              ></app-generic>
+              ></app-generic-asset>
     </div>
 
     <div class="asset-body-keywords">
@@ -95,10 +95,10 @@
           {{ 'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} :
           {{ asset.date_published | date: 'mediumDate' }}
         </span>
-        <span *ngIf="asset.dateCreated">|</span>
-        <span *ngIf="asset.dateCreated">
+        <span *ngIf="asset.date_published && asset.aiod_entry?.date_modified">|</span>
+        <span *ngIf="asset.aiod_entry?.date_modified">
           {{ 'ASSETS.ASSET-DETAIL.DATA_CREATED' | translate }} :
-          {{ asset.dateCreated | date: 'mediumDate' }}
+          {{ asset.aiod_entry?.date_modified | date: 'mediumDate' }}
         </span>
         <br />
         <span

@@ -12,6 +12,7 @@ export const endpoints = {
   aimodels: '/ml_models',
   educationalResources: '/educational_resources',
   publications: '/publications',
+  caseStudies: '/case_studies',
 
   //Payments
   prefixApiPayment: '/api-library/api',

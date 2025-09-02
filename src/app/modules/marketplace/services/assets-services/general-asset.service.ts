@@ -49,6 +49,9 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
       case AssetCategory['Publication']:
         this.endpoint = endpoints.publications;
         break;
+      case AssetCategory['Case studies']:
+        this.endpoint = endpoints.caseStudies;
+        break;
       default:
         throw new Error('Does not exit category selected');
     }

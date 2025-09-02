@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { GenericItem } from '@app/shared/models/generic.model';
 
 @Component({
-  selector: 'app-generic',
+  selector: 'app-generic-asset',
   templateUrl: './generic.component.html',
   styleUrls: ['./generic.component.scss'],
 })

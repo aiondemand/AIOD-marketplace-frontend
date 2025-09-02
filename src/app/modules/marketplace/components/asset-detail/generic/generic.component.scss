@@ -38,11 +38,15 @@
   }
   .media-card {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-    padding: 2rem;
+    padding: 1rem;
     margin-bottom: 2rem;
     border-left: 6px solid #2a5db0;
+    .media-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding:0px 24px;
+    }
   }
   .media-header {
     color: #2a5db0;
@@ -51,46 +55,48 @@
   }
   .media-title {
     color: #2a5db0;
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
+    font-size: 40px;
+    margin-bottom: 2.5rem;
   }
   .media-desc-label {
     color: #5bc0f7;
-    font-size: 1.2rem;
+    font-size: 24px;
     margin-bottom: 0.2rem;
   }
   .media-description {
     color: #222;
     font-size: 1.1rem;
     margin-bottom: 2rem;
+    text-align: justify;
   }
   .media-properties-label {
     color: #5bc0f7;
-    font-size: 1.2rem;
+    font-size: 24px;
     margin-bottom: 1rem;
   }
   .media-properties-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
   .media-property {
-    background: #f8fafd;
-    border-radius: 8px;
-    padding: 0.7rem 1rem;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #e0e7ef;
+    display: block;
+    grid-template-columns: auto 1fr;
+    border-radius: 10px;
+    border: 1px solid #504a4a;
+    padding: 5px 10px;
+    margin: 5px;
+    align-items: center;
+    background: transparent !important;
+    color: #000 !important;
   }
   .media-property-value {
-    font-size: 1.15rem;
+    font-size: 14px;
     color: #222;
-    font-weight: 500;
-    margin-bottom: 0.2rem;
+    font-weight: 700;
     word-break: break-all;
   }
   .media-property-label {
-    font-size: 0.95rem;
+    font-size: 14px;
     color: #7a8ca5;
   }
   .text-primary {
@@ -110,13 +116,13 @@
     border-radius: 20px;
     margin: 1rem 1rem 1rem 0;
     padding: 1.2rem;
-    border: 2px solid;
-    border-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid;
+    border-color: #00000026;
     font-family: Jura, sans-serif;
     transition-delay: 0s;
     transition-duration: 0.3s;
     transition-property: border;
-    display:block;
+    display: block;
   }
   .item-info-body .item-info-container h3 {
     font-family: Jura, sans-serif;
@@ -155,5 +161,29 @@
   }
   .object-array-container .table a:hover {
     text-decoration: underline;
+  }
+  .badge {
+    text-align: left;
+  }
+  .distribution-entry {
+    padding: 16px;
+    .distribution-item {
+      margin-bottom: 12px;
+      font-family: Montserrat, sans-serif;
+    }
+  }
+
+  /* New: grid layout for distributions (rows of 2) */
+  .distribution-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .distribution-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }

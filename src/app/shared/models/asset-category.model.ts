@@ -5,5 +5,5 @@ export enum AssetCategory {
   Service = 'Service',
   'Educational resource' = 'Educational resource',
   'Publication' = 'Publication',
-  Generic = 'Generic',
+  'Case studies' = 'Case studies',
 }

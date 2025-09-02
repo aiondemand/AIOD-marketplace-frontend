@@ -2,7 +2,6 @@ export const modelConfig = {
   AIModel: {
     columns: [
       'description.plain',
-      'license',
       'same_as',
       'distribution',
       'distribution.dependency',
@@ -48,18 +47,31 @@ export const modelConfig = {
   'Educational resource': {
     columns: [
       'description.plain',
+      'distribution',
       'media',
       'media.name',
       'media.content_url',
       'same_as',
-      'research_area',
-      'scientific_domain',
-      'keyword',
     ],
     title: 'Educational Resource',
   },
   Publication: {
     columns: ['description.plain', 'type'],
     title: 'Publication',
+  },
+  'Case studies': {
+    columns: [
+      'description.plain',
+      'distribution',
+      'media',
+      'media.checksum',
+      'media.checksum_algorithm',
+      'media.content_size_kb',
+      'media.content_url',
+      'media.copyright',
+      'media.date_published',
+      'same_as',
+    ],
+    title: 'Case Studies',
   },
 };
