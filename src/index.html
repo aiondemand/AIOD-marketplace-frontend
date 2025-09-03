@@ -61,7 +61,7 @@
           return true;
         }
         if (!updateLoginHref()) {
-          var target = document.getElementById('common-header-target') || document.body;
+          var target = document.getElementById('common-header-target') || document.documentElement;
           var observer = new MutationObserver(function(mutations, obs) {
             if (updateLoginHref()) {
               obs.disconnect();
