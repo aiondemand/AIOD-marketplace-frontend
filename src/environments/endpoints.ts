@@ -18,9 +18,8 @@ export const endpoints = {
   [AssetCategory['Success stories']]: '/case_studies',
   [AssetCategory['Resource Bundle']]: '/resource_bundles',
 
-  //Payments
-  prefixApiPayment: '/api-library/api',
-  payment: '/libraries/:userId/assets',
+  //Bookmarks
+  bookmarks: '/bookmarks',
 
   //My-library
   prefixApiLibraries: '/api-library/api',

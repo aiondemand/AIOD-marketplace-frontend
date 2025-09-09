@@ -8,10 +8,7 @@ import {
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { Subscription } from 'rxjs';
-import {
-  BookmarkBodyRemove,
-  BookmarkService,
-} from '../../../marketplace/services/common-services/bookmark-service/bookmark.service';
+import { BookmarkService } from '../../../marketplace/services/common-services/bookmark-service/bookmark.service';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
@@ -31,9 +28,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
     private bookmarkService: BookmarkService,
     private authService: AuthService,
   ) {
-    authService.userProfileSubject.subscribe((profile) => {
-      this.userProfile = profile;
-    });
+    // constructor should not create unmanaged subscriptions; subscribe in ngOnInit
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,24 +48,20 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private getAssetsPurchases(): void {
     this.isLoading = true;
-    const subscribeLib = this.bookmarkService
-      .getBookmarks({
-        id: this.userProfile.identifier,
-        email: this.userProfile.email,
-      })
-      .subscribe({
-        next: (assets: AssetsPurchase[]) => {
-          this.dataSource.data = assets;
-          this.dataSource.filter = 'any'; // Show all types of assets
-          this.lengthTable = this.dataSource.data.length;
-          this.isLoading = false;
-        },
-        error: (error: any) => {
-          this.dataSource.data = [];
-          setTimeout(() => (this.isLoading = false), 3000);
-          console.error('Error to get assets purchases', error);
-        },
-      });
+    const subscribeLib = this.bookmarkService.getBookmarks().subscribe({
+      next: (assets: AssetsPurchase[]) => {
+        this.dataSource.data = assets;
+        this.dataSource.filter = 'any';
+        console.log('dataSource after getBookmarks:', this.dataSource);
+        this.lengthTable = this.dataSource.data.length;
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        this.dataSource.data = [];
+        setTimeout(() => (this.isLoading = false), 3000);
+        console.error('Error to get assets purchases', error);
+      },
+    });
     this.subscriptions.add(subscribeLib);
   }
 
@@ -80,23 +71,14 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public deleteAssetMyLibrary(asset: AssetsPurchase): void {
-    const body = {
-      identifier: asset.identifier,
-      category: asset.category,
-    } as BookmarkBodyRemove;
-
-    this.bookmarkService
-      .deleteBookmark(
-        { id: this.userProfile.identifier, email: this.userProfile.email },
-        body,
-      )
-      .subscribe({
-        next: () => {
-          this.getAssetsPurchases();
-        },
-        error: (error: any) =>
-          console.error('Error to delete asset of my libreary', error),
-      });
+    console.log(asset);
+    this.bookmarkService.deleteBookmark(asset.identifier).subscribe({
+      next: () => {
+        this.getAssetsPurchases();
+      },
+      error: (error: any) =>
+        console.error('Error to delete asset of my libreary', error),
+    });
   }
 
   private applyFilter(category: AssetCategory): void {
@@ -111,25 +93,29 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const subscribe = this.filterState.assetCategorySelected$.subscribe(
-      (category) => this.applyFilter(category),
+    this.subscriptions.add(
+      this.filterState.assetCategorySelected$.subscribe((category) =>
+        this.applyFilter(category),
+      ),
     );
-    const subscribeUser = this.authService.userProfileSubject.subscribe(
-      (profile) => {
+    this.subscriptions.add(
+      this.authService.userProfileSubject.subscribe((profile) => {
         this.userProfile = profile;
-        if (this.isAuthenticated()) this.getAssetsPurchases();
-      },
+        if (!this.isAuthenticated()) this.getAssetsPurchases();
+      }),
     );
-    // this.subscriptions.add(subscribe);
-    this.subscriptions.add(subscribeUser);
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
   ngAfterViewInit() {
-    this.dataSource.data = [];
+    // Initialize paginator and then load bookmarks so the table and paginator
+    // are ready when data arrives. Deferring the initial load to the next
+    // macrotask avoids ExpressionChangedAfterItHasBeenCheckedError when the
+    // data source updates synchronously during view initialization.
     this.dataSource.paginator = this.paginator;
+    setTimeout(() => this.getAssetsPurchases());
   }
 
   private isAuthenticated(): boolean {
