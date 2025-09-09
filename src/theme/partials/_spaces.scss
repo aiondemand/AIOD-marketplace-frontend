@@ -5,29 +5,29 @@
 $spacer: 1rem !default;
 
 $spacers: (
-    0: 0,
-    1: $spacer * 0.25,
-    2: $spacer * 0.5,
-    3: $spacer,
-    4: $spacer * 1.5,
-    5: $spacer * 3,
-    auto: auto,
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  auto: auto,
 ) !default;
 
 // generate m-0 to m-5 and m-auto
 // generate p-0 to p-5
 @each $key, $value in $spacers {
-    // generate m-* classes
-    .m-#{$key} {
-        margin: #{$value} !important;
-    }
+  // generate m-* classes
+  .m-#{$key} {
+    margin: #{$value} !important;
+  }
 
-    // generate p-* classes excluding key = auto
-    @if $key != auto {
-        .p-#{$key} {
-            padding: #{$value} !important;
-        }
+  // generate p-* classes excluding key = auto
+  @if $key != auto {
+    .p-#{$key} {
+      padding: #{$value} !important;
     }
+  }
 }
 
 // generate mt-0, mb-0, ml-0, mr-0 to mt-5, mb-5, ml-5, mr-5 and mt-auto, mb-auto, ml-auto, mr-auto
@@ -35,19 +35,19 @@ $spacers: (
 $sides: (top, bottom, left, right);
 
 @each $key, $value in $spacers {
-    @each $side in $sides {
-        // generate m* classes
-        .m#{str-slice($side, 0, 1)}-#{$key} {
-            margin-#{$side}: #{$value} !important;
-        }
-
-        // generate p* classes excluding key = auto
-        @if $key != auto {
-            .p#{str-slice($side, 0, 1)}-#{$key} {
-                padding-#{$side}: #{$value} !important;
-            }
-        }
+  @each $side in $sides {
+    // generate m* classes
+    .m#{str-slice($side, 0, 1)}-#{$key} {
+      margin-#{$side}: #{$value} !important;
     }
+
+    // generate p* classes excluding key = auto
+    @if $key != auto {
+      .p#{str-slice($side, 0, 1)}-#{$key} {
+        padding-#{$side}: #{$value} !important;
+      }
+    }
+  }
 }
 
 // generate mx-0 to mx-5 and my-0 to my-5 and mx-auto, my-auto
@@ -55,41 +55,41 @@ $sides: (top, bottom, left, right);
 $axises: (x, y);
 
 @each $key, $value in $spacers {
-    @each $axis in $axises {
-        @if $axis == x {
-            // generate classes for x axis
+  @each $axis in $axises {
+    @if $axis == x {
+      // generate classes for x axis
 
-            // generate mx-* classes
-            .m#{$axis}-#{$key} {
-                margin-left: #{$value} !important;
-                margin-right: #{$value} !important;
-            }
+      // generate mx-* classes
+      .m#{$axis}-#{$key} {
+        margin-left: #{$value} !important;
+        margin-right: #{$value} !important;
+      }
 
-            // generate px-* classes excluding key = auto
-            @if $key != auto {
-                .p#{$axis}-#{$key} {
-                    padding-left: #{$value} !important;
-                    padding-right: #{$value} !important;
-                }
-            }
-        } @else if $axis == y {
-            // generate classes for y axis
-
-            // generate my-* classes
-            .m#{$axis}-#{$key} {
-                margin-top: #{$value} !important;
-                margin-bottom: #{$value} !important;
-            }
-
-            // generate py-* classes excluding key = auto
-            @if $key != auto {
-                .p#{$axis}-#{$key} {
-                    padding-top: #{$value} !important;
-                    padding-bottom: #{$value} !important;
-                }
-            }
-        } @else {
-            @error "Unknown axis #{$axis}.";
+      // generate px-* classes excluding key = auto
+      @if $key != auto {
+        .p#{$axis}-#{$key} {
+          padding-left: #{$value} !important;
+          padding-right: #{$value} !important;
         }
+      }
+    } @else if $axis == y {
+      // generate classes for y axis
+
+      // generate my-* classes
+      .m#{$axis}-#{$key} {
+        margin-top: #{$value} !important;
+        margin-bottom: #{$value} !important;
+      }
+
+      // generate py-* classes excluding key = auto
+      @if $key != auto {
+        .p#{$axis}-#{$key} {
+          padding-top: #{$value} !important;
+          padding-bottom: #{$value} !important;
+        }
+      }
+    } @else {
+      @error "Unknown axis #{$axis}.";
     }
+  }
 }

@@ -7,19 +7,17 @@ import { AppConfigService } from '@app/core/services/app-config/app-config.servi
 const mockedConfigService: any = {};
 
 describe('DeploymentsService', () => {
-    let service: DeploymentsService;
+  let service: DeploymentsService;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [
-                { provide: AppConfigService, useValue: mockedConfigService },
-            ],
-        });
-        service = TestBed.inject(DeploymentsService);
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: AppConfigService, useValue: mockedConfigService }],
     });
+    service = TestBed.inject(DeploymentsService);
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

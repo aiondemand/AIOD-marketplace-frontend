@@ -1,6 +1,6 @@
-import { AiodEntry } from "../interfaces/aiod-entry.interface";
-import { AssetCategory } from "./asset-category.model";
-import { AssetModel } from "./asset.model";
+import { AiodEntry } from '../interfaces/aiod-entry.interface';
+import { AssetCategory } from './asset-category.model';
+import { AssetModel } from './asset.model';
 
 export class PublicationModel extends AssetModel {
   aiodEntry: AiodEntry;
@@ -16,11 +16,11 @@ export class PublicationModel extends AssetModel {
   hasPart: any[];
   contact: any[];
   creator: string[];
-  aiAssetIdentifier : string;
-  documents : string[];
+  aiAssetIdentifier: string;
+  documents: string[];
 
   constructor(data: any) {
-    super(data, AssetCategory["Publication"]);
+    super(data, AssetCategory['Publication']);
 
     this.aiodEntry = {
       platform: data.aiod_entry.platform, //platform
@@ -30,9 +30,9 @@ export class PublicationModel extends AssetModel {
       editor: data.aiod_entry.editor,
       status: data.aiod_entry.status,
     };
-    this.aiAssetIdentifier = data.ai_asset_identifier
+    this.aiAssetIdentifier = data.ai_asset_identifier;
     this.aiResourceIdentifier = data.ai_resource_identifier;
-    this.alternateName = data.alternate_name
+    this.alternateName = data.alternate_name;
     this.applicationArea = data.application_area;
     this.contact = data.contact;
     this.creator = data.creator;

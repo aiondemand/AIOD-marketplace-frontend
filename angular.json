@@ -33,7 +33,6 @@
               "includePaths": [
                 "src/theme/exports",
                 "src/styles"
-                
               ]
             },
             "scripts": []

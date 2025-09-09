@@ -10,20 +10,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const mockedConfigService: any = {};
 const mockedAuthService: any = {
-    isAuthenticated: jest.fn(),
+  isAuthenticated: jest.fn(),
 };
 const mockedMediaQueryList: MediaQueryList = {
-    matches: true,
-    media: 'test',
-    onchange: jest.fn(),
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-    removeEventListener: jest.fn(),
+  matches: true,
+  media: 'test',
+  onchange: jest.fn(),
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+  addEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+  removeEventListener: jest.fn(),
 };
 const mockedMediaMatcher: any = {
-    matchMedia: jest.fn().mockReturnValue(mockedMediaQueryList),
+  matchMedia: jest.fn().mockReturnValue(mockedMediaQueryList),
 };
 
 describe('SidenavComponent', () => {

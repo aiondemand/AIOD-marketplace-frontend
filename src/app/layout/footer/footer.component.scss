@@ -1,13 +1,13 @@
 .footer {
-    position: relative;
-    overflow: hidden;
-    z-index: 101;
-    padding: 0 10%;
-    background: linear-gradient(0deg,#0047bb66 .11%,#41b6e600);
+  position: relative;
+  overflow: hidden;
+  z-index: 101;
+  padding: 0 10%;
+  background: linear-gradient(0deg, #0047bb66 0.11%, #41b6e600);
 }
 
 @media screen and (max-width: 1500px) {
-    .footer {
-        margin:0 2%
-    }
+  .footer {
+    margin: 0 2%;
+  }
 }

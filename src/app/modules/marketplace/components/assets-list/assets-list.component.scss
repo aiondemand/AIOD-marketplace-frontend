@@ -1,33 +1,70 @@
 .marketplace-toolbar {
   justify-content: space-between;
 }
+.sdk{
 
-
-
+  @media(max-width: 768px) {
+    display: none;
+  }
+}
 .viewer {
   width: 100%;
 }
 
+.d-xs-none {
+  display: none !important;
+}
+
 .btn-default {
   padding: 11px 20px;
+  width: 90%;
+  height: 90%;
+}
+
+.check-btn{
+  width: 100% !important;
+}
+
+.filters-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  .btn {
+    width: auto;
+    height: auto;
+    padding: 11px 20px;
+    flex-shrink: 0;
+  }
 }
 
 .paginator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 8px;
-  /* flex-wrap: wrap-reverse; */
+  position: relative;
+  overflow: visible;
+  z-index: 11;
+}
+
+.main-content-wrapper {
   width: 100%;
-  font-size: inherit;
-  //color: #ffffffb2;
-  background: inherit;
-  font-family: inherit;
-  font-size: inherit;
+  position: relative;
+}
+
+.paginator-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .search-row {
   width: 70%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 5px;
+  }
 }
 .search-input {
   width: 100%;
@@ -39,38 +76,35 @@
   }
 }
 
-.featured-products-item {
-  padding: 10px 20px;
-}
-.featured-products-item-title {
-  font-size: 60px;
-  margin-bottom: 55px;
-}
-
 .slider:before {
-   background-color: transparent; 
-
+  background-color: transparent;
 }
 
-.active{
-  background: #0047BB;
+.active {
+  background: #0047bb;
   border-radius: 50%;
   height: 30px;
   width: 30px;
   justify-content: center;
-  display: flex
-;
-  
+  display: flex;
   align-items: center;
 }
 
 ::ng-deep {
   .mat-mdc-select-value-text {
-    color: #ffffffb2; /* Add your styles here */
+    color: #ffffffb2;
+    font-family: "Jura", sans-serif;
+    font-size: 16px;
   }
   .mat-mdc-paginator-icon {
     color: #ffed00;
   }
+
+  .mat-mdc-paginator-range-label,
+  .mat-mdc-paginator-page-size-label {
+    color: #ffffff;
+  }
+
   .mdc-checkbox__background {
     border-color: #ffed00 !important;
   }
@@ -80,7 +114,7 @@
   }
 
   .mat-mdc-checkbox label {
-    font-family: "Jura", sans-serif;
+    font-family: 'Jura', sans-serif;
   }
 
   .mat-mdc-checkbox-disabled label {
@@ -88,12 +122,26 @@
   }
 
   [data-theme="light"] {
-      .mat-mdc-checkbox-disabled label {
-        color:#757a7b;
+    .mat-mdc-checkbox-disabled label {
+      color: #757a7b;
+    }
+    .mdc-checkbox--disabled .mdc-checkbox__background {
+      border-color: #757a7b;
+    }
+
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-paginator-page-size-label {
+      color: #666666;
+      .mdc-text-field--focused {
+        border-color: #666666;
       }
-      .mdc-checkbox--disabled .mdc-checkbox__background {
-        border-color:#757a7b;
-      }
+    }
+
+    .mat-mdc-select-value-text {
+      color: #666666b2;
+      font-family: "Jura", sans-serif;
+      font-size: 16px;
+    }
   }
 
   .mat-mdc-checkbox
@@ -102,7 +150,169 @@
     ~ .mdc-checkbox__background {
     background-color: #000000;
   }
+}
 
+// Custom Paginator Styles
+.custom-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-family: "Jura", sans-serif;
+  font-size: 16px;
+  color: #ffffff;
 
- 
+  .paginator-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 2rem;
+
+    .page-size-label {
+      font-size: 16px;
+      color: inherit;
+      min-width: 8rem;
+    }
+
+    .page-size-select {
+      background: transparent;
+      color: inherit;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 8px;
+      font-family: "Jura", sans-serif;
+      font-size: 16px;
+      min-width: 50px;
+
+      &:focus {
+        outline: none;
+        border-bottom-color: #ffed00;
+      }
+
+      option {
+        background: #1a1a1a;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .paginator-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .range-label {
+      font-size: 14px;
+      color: inherit;
+    }
+
+    .nav-button {
+      background: none;
+      border: none;
+      color: #ffed00;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 18px;
+      transition: opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+
+      &:hover:not(:disabled) {
+        opacity: 0.7;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        color: #666666;
+      }
+
+      span {
+        line-height: 1;
+      }
+    }
+  }
+}
+
+// Light theme overrides
+[data-theme="light"] {
+  .custom-paginator {
+    color: #212529 !important;
+
+    .paginator-left {
+      .page-size-label {
+        color: #212529 !important;
+      }
+
+      .page-size-select {
+        color: #212529 !important;
+        border-bottom-color: rgba(102, 102, 102, 0.3);
+
+        &:focus {
+          border-bottom-color: #0047bb;
+        }
+
+        option {
+          background: #ffffff;
+          color: #212529 !important;
+        }
+      }
+    }
+
+    .paginator-right {
+      .range-label {
+        color: #212529 !important;
+      }
+
+      .nav-button {
+        color: #0047bb;
+
+        &:disabled {
+          color: #cccccc;
+        }
+      }
+    }
+  }
+}
+
+// Class-based light theme (fallback)
+.custom-paginator.light-theme {
+  color: #212529 !important;
+
+  .paginator-left {
+    .page-size-label {
+      color: #212529 !important;
+    }
+
+    .page-size-select {
+      color: #212529 !important;
+      border-bottom-color: rgba(255, 237, 0, 1);
+
+      &:focus {
+        border-bottom-color: #0047bb;
+      }
+
+      option {
+        background: #ffffff;
+        color: #212529 !important;
+      }
+    }
+  }
+
+  .paginator-right {
+    .range-label {
+      color: #212529 !important;
+    }
+
+    .nav-button {
+      color: rgba(255, 237, 0, 1);
+
+      &:disabled {
+        color: #cccccc;
+      }
+    }
+  }
 }

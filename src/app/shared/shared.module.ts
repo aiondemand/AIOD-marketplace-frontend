@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material.module';
@@ -10,14 +10,15 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { BreadcrumbModule } from 'xng-breadcrumb';
 
 @NgModule({
-    declarations: [ConfirmationDialogComponent],
-    imports: [CommonModule, MaterialModule],
-    exports: [
-        ReactiveFormsModule,
-        MaterialModule,
-        RouterModule,
-        TranslateModule,
-        BreadcrumbModule,
-    ],
+  declarations: [ConfirmationDialogComponent],
+  imports: [CommonModule, MaterialModule],
+  exports: [
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialModule,
+    RouterModule,
+    TranslateModule,
+    BreadcrumbModule,
+  ],
 })
 export class SharedModule {}

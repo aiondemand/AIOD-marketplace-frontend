@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 $borderColor: rgb(212, 212, 212);
 $urlColor: #31488b;
@@ -12,14 +12,12 @@ ul {
   h2,
   h3,
   h4 {
-    font-family: "Jura", sans-serif;
+    font-family: 'Jura', sans-serif;
     padding: 24px;
     margin: 0;
     padding-bottom: 0;
   }
 }
-
-
 
 .asset-title-row {
   display: flex;
@@ -60,27 +58,28 @@ ul {
     margin-right: 10px;
   }
 }
-[data-theme="dark"] {
+[data-theme='dark'] {
   .asset-tittle {
     color: $white;
   }
 
-  .card-news-content {
-    color: $white ;
+  .card-news-content span {
+    color: $white;
   }
 
- 
+  .card-news-container {
+    color: $white;
+  }
 }
 
-[data-theme="light"]{
-
-  .card-news-content{
+[data-theme="light"] {
+  .card-news-content {
     color: black;
   }
   .asset-tittle {
     color: black;
   }
-} 
+}
 .asset-body {
   display: flex;
   flex-direction: row;
@@ -109,24 +108,26 @@ ul {
   margin-bottom: 1em;
 }
 
-a {
-  text-decoration: none;
-  color: $color-primary3;
-}
-a:hover {
-  text-decoration: none;
-}
+  a {
+    text-decoration: none;
+    color: #41b6e6;
+    max-width: 300px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+  }
 
 .distribution-title {
   font-weight: bolder;
 }
 
 .distribution-container {
-  // border: 1px solid red;
-  // background-color: red;
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  overflow: hidden;
+
+
 }
 
 .distribution-card {
@@ -143,29 +144,33 @@ a:hover {
 }
 
 ::ng-deep {
-
- .xng-breadcrumb-link {
+  .xng-breadcrumb-link {
     color: $white !important;
   }
-  .xng-breadcrumb-list{
-
+  .xng-breadcrumb-list {
     color: $white !important;
   }
 
-  [data-theme="light"]{
-
+  [data-theme="light"] {
     .xng-breadcrumb-link {
-        color: black !important;
-      }
-      .xng-breadcrumb-list{
-    
-        color: black !important;
-      }
-    
-
+      color: black !important;
+    }
+    .xng-breadcrumb-list {
+      color: black !important;
+    }
   }
 }
 
 .disabled {
   opacity: 0.5;
+}
+
+@media (max-width: 576px) {
+  .asset-body-keywords {
+    max-width: 350px;
+  }
+
+  .asset-body-category {
+    max-width: 350px;
+  }
 }

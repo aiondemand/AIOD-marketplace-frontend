@@ -4,20 +4,20 @@ import { AssetsListComponent } from './components/assets-list/assets-list.compon
 import { AssetDetailComponent } from './components/asset-detail/asset-detail.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: AssetsListComponent,
-        data: { breadcrumb: '> Resources > Catalogue' },
-    },
-    {
-        path: ':id',
-        component: AssetDetailComponent,
-        data: { breadcrumb: { alias: 'assetName'} },
-    },
+  {
+    path: '',
+    component: AssetsListComponent,
+    data: { breadcrumb: '> Resources > Catalogue' },
+  },
+  {
+    path: ':id',
+    component: AssetDetailComponent,
+    data: { breadcrumb: { alias: 'assetName' } },
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class MarketplaceRoutingModule {}

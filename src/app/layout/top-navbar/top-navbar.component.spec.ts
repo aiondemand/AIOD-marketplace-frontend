@@ -9,26 +9,26 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 
 const mockedAuthService: any = {
-    isAuthenticated: jest.fn(),
-    userProfileSubject: of({}),
+  isAuthenticated: jest.fn(),
+  userProfileSubject: of({}),
 };
 const mockedMediaQueryList: MediaQueryList = {
-    matches: true,
-    media: 'test',
-    onchange: jest.fn(),
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-    removeEventListener: jest.fn(),
+  matches: true,
+  media: 'test',
+  onchange: jest.fn(),
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+  addEventListener: jest.fn(),
+  dispatchEvent: jest.fn(),
+  removeEventListener: jest.fn(),
 };
 const mockedMediaMatcher: any = {
-    matchMedia: jest.fn().mockReturnValue(mockedMediaQueryList),
+  matchMedia: jest.fn().mockReturnValue(mockedMediaQueryList),
 };
 
 describe('TopNavbarComponent', () => {
-    let component: TopNavbarComponent;
-    let fixture: ComponentFixture<TopNavbarComponent>;
+  let component: TopNavbarComponent;
+  let fixture: ComponentFixture<TopNavbarComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -40,12 +40,12 @@ describe('TopNavbarComponent', () => {
             ],
         }).compileComponents();
 
-        fixture = TestBed.createComponent(TopNavbarComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+    fixture = TestBed.createComponent(TopNavbarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
