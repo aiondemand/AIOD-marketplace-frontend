@@ -92,31 +92,7 @@ refactor: extract user validation logic
 
 ## Visuals
  
-Here are some snapshots of the AIoD My Library frontend service, which have been taken from the official release of the service available at: https://mylibrary.aiod.eu/
-
-<figure>
-  <img src="docs/images/mylibrary-front-main.png" alt="main screen">
-  <figcaption>Main screen to browse AIoD Catalogue</figcaption>
-</figure>
-</BR>
-
-<figure>
-  <img src="docs/images/mylibrary-front-detail.png" alt="assets detailed view">
-  <figcaption>Asset's details screen</figcaption>
-</figure>
-</BR>
-
-<figure>
-  <img src="docs/images/mylibrary-frontend-shoppingcart.png" alt="stash screen">
-  <figcaption>stash screen, showing assets to be added to user's library</figcaption>
-</figure>
-</BR>
-
-<figure>
-  <img src="docs/images/mylibrary-front-mylibrary.png" alt="My Library screen">
-  <figcaption>User's "My Library" screen</figcaption>
-</figure>
-</BR>
+To update with new screenshots
 
 
 ## Configuration and Deployment
