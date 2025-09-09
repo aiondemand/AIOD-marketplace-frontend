@@ -30,15 +30,19 @@ describe('TopNavbarComponent', () => {
   let component: TopNavbarComponent;
   let fixture: ComponentFixture<TopNavbarComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [TopNavbarComponent],
-            imports: [HttpClientTestingModule,MatMenuModule, TranslateModule.forRoot()],
-            providers: [
-                { provide: AuthService, useValue: mockedAuthService },
-                { provide: MediaMatcher, useValue: mockedMediaMatcher },
-            ],
-        }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TopNavbarComponent],
+      imports: [
+        HttpClientTestingModule,
+        MatMenuModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        { provide: AuthService, useValue: mockedAuthService },
+        { provide: MediaMatcher, useValue: mockedMediaMatcher },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TopNavbarComponent);
     component = fixture.componentInstance;

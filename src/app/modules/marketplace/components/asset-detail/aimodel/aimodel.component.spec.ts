@@ -9,11 +9,10 @@ describe('AimodelComponent', () => {
   let httpClient: HttpClient;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AimodelComponent ],
-      imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
-    httpClient=TestBed.inject(HttpClient);
+      declarations: [AimodelComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
+    httpClient = TestBed.inject(HttpClient);
     fixture = TestBed.createComponent(AimodelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

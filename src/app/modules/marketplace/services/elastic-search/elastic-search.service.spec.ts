@@ -8,9 +8,9 @@ describe('ElasticSearchService', () => {
   let service: ElasticSearchService;
   let httpClient: HttpClient;
   beforeEach(() => {
-    TestBed.configureTestingModule({imports: [HttpClientTestingModule]});
+    TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
     service = TestBed.inject(ElasticSearchService);
-    httpClient= TestBed.inject(HttpClient);
+    httpClient = TestBed.inject(HttpClient);
   });
 
   it('should be created', () => {

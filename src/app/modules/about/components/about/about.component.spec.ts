@@ -11,11 +11,10 @@ describe('AboutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AboutComponent ],
-      imports:[HttpClientTestingModule]
-    })
-    .compileComponents();
-  
+      declarations: [AboutComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AboutComponent);
 
     component = fixture.componentInstance;

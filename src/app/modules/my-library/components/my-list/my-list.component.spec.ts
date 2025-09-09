@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import{ HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { MyListComponent } from './my-list.component';
@@ -7,37 +7,39 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
-
 describe('MyListComponent', () => {
   let component: MyListComponent;
   let fixture: ComponentFixture<MyListComponent>;
   let httpClient: HttpClient;
   class ActivatedRouteMock {
-  queryParams = new Observable( observer => {
-    const urlParams = {
-      type: 'mocck'
-    }
-    
-    observer.next(urlParams);
-    observer.complete();
-  });
-}
+    queryParams = new Observable((observer) => {
+      const urlParams = {
+        type: 'mocck',
+      };
+
+      observer.next(urlParams);
+      observer.complete();
+    });
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyListComponent ],imports: [HttpClientTestingModule,TranslateModule.forRoot()],
+      declarations: [MyListComponent],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
         {
           provide: ActivatedRoute,
-          useClass: ActivatedRouteMock
-        }, {
-            provide:AuthService,
-            useValue: {
-              getToken: jest.fn(), userProfileSubject: new BehaviorSubject<any>({})} // <-- Mock real}
-
-        } ]
-    })
-    .compileComponents();
+          useClass: ActivatedRouteMock,
+        },
+        {
+          provide: AuthService,
+          useValue: {
+            getToken: jest.fn(),
+            userProfileSubject: new BehaviorSubject<any>({}),
+          }, // <-- Mock real}
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MyListComponent);
     component = fixture.componentInstance;

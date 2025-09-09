@@ -10,10 +10,9 @@ describe('EducationalResourceComponent', () => {
   let httpClient: HttpClient;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EducationalResourceComponent,],
+      declarations: [EducationalResourceComponent],
       imports: [HttpClientTestingModule],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EducationalResourceComponent);
     component = fixture.componentInstance;

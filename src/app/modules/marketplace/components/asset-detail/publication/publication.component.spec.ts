@@ -10,10 +10,9 @@ describe('PublicationComponent', () => {
   let httpClient: HttpClient;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PublicationComponent ],imports:[HttpClientTestingModule], // Import HttpClientTestingModule for testing HTTP requests
-    
-    })
-    .compileComponents();
+      declarations: [PublicationComponent],
+      imports: [HttpClientTestingModule], // Import HttpClientTestingModule for testing HTTP requests
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PublicationComponent);
     httpClient = TestBed.inject(HttpClient);

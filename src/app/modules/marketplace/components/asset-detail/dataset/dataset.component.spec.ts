@@ -10,10 +10,9 @@ describe('DatasetComponent', () => {
   let httpClient: HttpClient;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DatasetComponent ],
-      imports:[HttpClientTestingModule]
-    })
-    .compileComponents();
+      declarations: [DatasetComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
     httpClient = TestBed.inject(HttpClient);
     fixture = TestBed.createComponent(DatasetComponent);
     component = fixture.componentInstance;

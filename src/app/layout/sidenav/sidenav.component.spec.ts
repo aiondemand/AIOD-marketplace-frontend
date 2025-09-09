@@ -27,29 +27,29 @@ const mockedMediaMatcher: any = {
 };
 
 describe('SidenavComponent', () => {
-    let component: SidenavComponent;
-    let fixture: ComponentFixture<SidenavComponent>;
-    let appConfigService: AppConfigService;
-    let httpClient: HttpClient;
+  let component: SidenavComponent;
+  let fixture: ComponentFixture<SidenavComponent>;
+  let appConfigService: AppConfigService;
+  let httpClient: HttpClient;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [SidenavComponent],
-            imports: [TranslateModule.forRoot(), HttpClientTestingModule],
-            providers: [
-                { provide: AppConfigService, useValue: mockedConfigService },
-                { provide: AuthService, useValue: mockedAuthService },
-                { provide: MediaMatcher, useValue: mockedMediaMatcher },
-            ],
-        }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [SidenavComponent],
+      imports: [TranslateModule.forRoot(), HttpClientTestingModule],
+      providers: [
+        { provide: AppConfigService, useValue: mockedConfigService },
+        { provide: AuthService, useValue: mockedAuthService },
+        { provide: MediaMatcher, useValue: mockedMediaMatcher },
+      ],
+    }).compileComponents();
 
-        fixture = TestBed.createComponent(SidenavComponent);
-        component = fixture.componentInstance;
-        httpClient = TestBed.inject(HttpClient);
-        fixture.detectChanges();
-    });
+    fixture = TestBed.createComponent(SidenavComponent);
+    component = fixture.componentInstance;
+    httpClient = TestBed.inject(HttpClient);
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

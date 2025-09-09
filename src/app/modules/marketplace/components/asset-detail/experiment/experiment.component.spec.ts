@@ -9,11 +9,10 @@ describe('ExperimentComponent', () => {
   let httpClient: HttpClient;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExperimentComponent ],
-      imports: [HttpClientTestingModule]
-    })
-    .compileComponents();
- 
+      declarations: [ExperimentComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ExperimentComponent);
     component = fixture.componentInstance;
     httpClient = TestBed.inject(HttpClient);

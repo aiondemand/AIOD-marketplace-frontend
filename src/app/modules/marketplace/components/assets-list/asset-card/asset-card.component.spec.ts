@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssetCardComponent } from "./asset-card.component";
-import { HttpClient } from "@angular/common/http";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { AuthService } from "@app/core/services/auth/auth.service";
-import { BehaviorSubject } from "rxjs";
+import { AssetCardComponent } from './asset-card.component';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuthService } from '@app/core/services/auth/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
-describe("AssetCardComponent", () => {
+describe('AssetCardComponent', () => {
   let component: AssetCardComponent;
   let fixture: ComponentFixture<AssetCardComponent>;
   let httpClient: HttpClient;
@@ -15,25 +15,26 @@ describe("AssetCardComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [AssetCardComponent],
       imports: [HttpClientTestingModule],
-      providers:[{
-              provide: AuthService,
-              useValue: {
-                getToken: jest.fn(),
-                userProfileSubject: new BehaviorSubject<any>({}) // <-- Mock real
-              }
-            
-          }]
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            getToken: jest.fn(),
+            userProfileSubject: new BehaviorSubject<any>({}), // <-- Mock real
+          },
+        },
+      ],
     }).compileComponents();
-   
+
     fixture = TestBed.createComponent(AssetCardComponent);
 
     component = fixture.componentInstance;
-    component.asset = { identifier: "test-id" } as any; // Mock asset for testing
+    component.asset = { identifier: 'test-id' } as any; // Mock asset for testing
     httpClient = TestBed.inject(HttpClient);
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
