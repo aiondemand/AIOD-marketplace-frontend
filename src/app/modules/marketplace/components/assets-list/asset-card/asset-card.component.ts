@@ -3,14 +3,10 @@ import { AppConfigService } from '@app/core/services/app-config/app-config.servi
 import { AssetModel } from '@app/shared/models/asset.model';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
-import {
-  BookmarkBodyRemove,
-  BookmarkService,
-} from '@app/modules/marketplace/services/common-services/bookmark-service/bookmark.service';
+import { BookmarkService } from '@app/modules/marketplace/services/common-services/bookmark-service/bookmark.service';
 import { environment } from '@environments/environment';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
 import { Router } from '@angular/router';
-import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 
 @Component({
@@ -63,7 +59,7 @@ export class AssetCardComponent implements OnInit {
   }
 
   protected onClickBookmark(): void {
-    if (!this.isAuthenticated()) return;
+    if (this.isAuthenticated()) return;
 
     if (!this.isBookmarked) {
       this.addBookmark();
@@ -78,39 +74,29 @@ export class AssetCardComponent implements OnInit {
 
   private addBookmark() {
     if (this.userProfile) {
-      const user = new UserModel({
-        id_user: this.userProfile.identifier,
-        user_email: this.userProfile.email,
-      });
-      const bookmarkedAsset = this.getBookmarkedAsset();
-
-      this.bookmarkService.addBookmark(user, [bookmarkedAsset]).subscribe({
-        next: (_bookmarkedAssets: any) => {
-          // ToDo: change bookmark icon style
-        },
-        error: (error: any) => console.error('Error bookmarking asset', error),
-      });
+      this.bookmarkService
+        .addBookmark(this.asset.identifier.toString())
+        .subscribe({
+          next: (_bookmarkedAssets: any) => {
+            // ToDo: change bookmark icon style
+          },
+          error: (error: any) =>
+            console.error('Error bookmarking asset', error),
+        });
     }
   }
 
   private deleteBookmark() {
     if (this.userProfile) {
-      const user = new UserModel({
-        id_user: this.userProfile.identifier,
-        user_email: this.userProfile.email,
-      });
-      const deleteBody = {
-        identifier: this.asset.identifier.toString(),
-        category: this.asset.category,
-      } as BookmarkBodyRemove;
-
-      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
-        next: () => {
-          // ToDo: change bookmark icon style
-        },
-        error: (error: any) =>
-          console.error('Error deleting asset from bookmarks', error),
-      });
+      this.bookmarkService
+        .deleteBookmark(this.asset.identifier.toString())
+        .subscribe({
+          next: () => {
+            // ToDo: change bookmark icon style
+          },
+          error: (error: any) =>
+            console.error('Error deleting asset from bookmarks', error),
+        });
     }
   }
 }
