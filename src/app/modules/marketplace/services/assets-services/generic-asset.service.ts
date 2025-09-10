@@ -105,7 +105,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
 
     return this.http
       .post(
-        '/rail-api/search/query',
+        '/rail-api/search/v2/query',
         {},
         {
           observe: 'response',
