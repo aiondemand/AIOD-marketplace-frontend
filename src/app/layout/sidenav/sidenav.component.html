@@ -20,12 +20,6 @@
         <div class="sidebar-container">
           <div class="menu">
             <ul>
-              <li class="sidebar-link sidebar-link--active">
-                <a href="https://aiod.eu">
-                  <i class="icon-dashboard"></i>
-                  <span>Home</span>
-                </a>
-              </li>
               <li *ngIf="isLoggedIn()" class="sidebar-link">
                 <a href="/Bookmarks">
                   <i class="icon-resources-saved"></i>
@@ -41,9 +35,6 @@
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
                   <div><i class="icon-ai"></i> <span>Resources</span></div>
-                  <span class="submenu-toggle">
-                    <i class="icon-arrow-breadcrumb"></i>
-                  </span>
                 </span>
                 <ul class="submenu" [ngClass]="isResourcesOpened ? 'open' : ''">
                   <li>
@@ -53,19 +44,11 @@
                     </a>
                   </li>
                   <li>
-                    <a href="https://api.aiod.eu/redoc"
+                    <a href="https://api.aiod.eu"
                       ><i class="icon-catalogue"></i>SDKs and APIs</a
                     >
                   </li>
-                  <!-- <li>
-                    <a
-                      [routerLink]="['/resources']"
-                      [queryParams]="{ category: 'educational_resources' }"
-                    >
-                      <i class="icon-catalogue"></i>Educational Resources
-                    </a>
-                    </li> -->
-                  <li>
+                    <li>
                     <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
                     <p class="sidebar-text">
                       Powered by
@@ -74,125 +57,17 @@
                   </li>
                 </ul>
               </li>
-              <li class="has-submenu" [ngClass]="isToolsOpened ? 'open' : ''">
-                <span
-                  (click)="isToolsOpened = !isToolsOpened"
-                  class="d-flex align-items-center justify-content-between sidebar-link"
-                >
-                  <div><i class="icon-grid"></i> <span>Tools</span></div>
-                  <span class="submenu-toggle">
-                    <i class="icon-arrow-breadcrumb"></i>
-                  </span>
-                </span>
-                <ul class="submenu" [ngClass]="isToolsOpened ? 'open' : ''">
-                  <li>
-                    <a href="https://aiod.eu/tools">
-                      <i class="icon-dashboard"></i>
-                      All Tools
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://aiod.eu/get-started/">
-                      <i class="icon-dashboard"></i>
-                      Get started
-                    </a>
-                  </li>
-                  <!-- <li>
-                    <a href=""> <i class="icon-file-text"></i>Documentation </a>
-                  </li> -->
-                  <li>
-                    <a href="https://aiod.eu/technical-support">
-                      <i class="icon-dashboard"></i>
-                      Technical Support
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li
-                [ngClass]="isCommunityOpened ? 'open' : ''"
-                class="has-submenu"
-              >
-                <span
-                  (click)="isCommunityOpened = !isCommunityOpened"
-                  class="d-flex align-items-center justify-content-between sidebar-link"
-                >
-                  <div><i class="icon-users"></i> <span>Community</span></div>
-                  <span class="submenu-toggle">
-                    <i class="icon-arrow-breadcrumb"></i>
-                  </span>
-                </span>
-              </li>
-
-              <li>
-                <ul
-                  class="submenu submenu-2"
-                  [ngClass]="isCommunityOpened ? 'open' : ''"
-                >
-                  <!-- -->
-                  <li
-                    [ngClass]="isMediaOpened ? 'open' : ''"
-                    class="has-submenu"
-                  >
-                    <span
-                      (click)="isMediaOpened = !isMediaOpened"
-                      class="d-flex align-items-center justify-content-between sidebar-link"
-                    >
-                      <div>
-                        <i class="icon-dashboard"></i>
-                        <span>Press Corner</span>
-                      </div>
-                      <span class="submenu-toggle">
-                        <i class="icon-arrow-breadcrumb"></i>
-                      </span>
-                    </span>
-                    <ul class="submenu" [ngClass]="isMediaOpened ? 'open' : ''">
-                      <li class="subsubmenu">
-                        <a href="https://aiod.eu/press-corner-types/events">
-                          <span class="corner"></span>
-                          Events
-                        </a>
-                      </li>
-                      <li class="subsubmenu">
-                        <a href="https://aiod.eu/press-corner-types/news">
-                          <span class="corner"></span>
-                          News
-                        </a>
-                      </li>
-                      <li class="subsubmenu">
-                        <a href="https://aiod.eu/press-corner-types/newsletter">
-                          <span class="corner"></span>
-                          Newsletter
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <!-- -->
-  
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/project"> <i class="icon-file-text"></i>Projects </a>
-                    </li>
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/forums"> <i class="icon-forum"></i>Forum </a>
-                    </li>
-                    <li class="hasnot-submenu">
-                      <a href="https://aiod.eu/ai-experts"> <i class="icon-star"></i>Pool of Experts </a>
-                    </li>                  
-                  <li class="hasnot-submenu">
-                      <a href="https://ai-ecosystem.aiod.eu"> <i class="icon-map"></i> AI Organisations </a>
-                    </li>
-                  </ul>
-              </li>
             </ul>
           </div>
 
           <div class="sidebar-footer">
             <div class="menu p-0">
               <ul>
-                <li class="sidebar-link">
-                  <a href="https://aiod.eu/dashboard">
-                    <i class="icon-dashboard"></i>
-                    <span>Dashboard</span>
-                  </a>
+                <li *ngIf="!isLoggedIn() && !isMenuCollapsed" class="sidebar-link">
+                  <div class="login-message">Join our community, grow your knowledge and learn from others!</div>
+                  <button class="btn btn-primary login-button" (click)="login(); $event.stopPropagation()">
+                      <span>Sign in</span>
+                  </button>
                 </li>
               </ul>
             </div>

@@ -448,8 +448,12 @@
     transition: border 300ms ease;
 
     @include max-xs {
-      max-width: 350px;
+      max-width: 450px;
       margin-left: 0 !important;
+    }
+
+    @include max-xxs{
+      max-width: 360px;
     }
   }
 
