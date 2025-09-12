@@ -17,11 +17,11 @@ import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-my-list',
-  templateUrl: './my-list.component.html',
-  styleUrls: ['./my-list.component.scss'],
+  selector: 'app-bookmark-view',
+  templateUrl: './bookmark-view.html',
+  styleUrls: ['./bookmark-view.scss'],
 })
-export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private appConfig: AppConfigService,
     private filterState: FiltersStateService,
