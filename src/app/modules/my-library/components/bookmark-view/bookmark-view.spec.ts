@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { MyListComponent } from './my-list.component';
+import { BookmarkViewComponent } from './bookmark-view';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
-describe('MyListComponent', () => {
-  let component: MyListComponent;
-  let fixture: ComponentFixture<MyListComponent>;
+describe('BookmarkViewComponent', () => {
+  let component: BookmarkViewComponent;
+  let fixture: ComponentFixture<BookmarkViewComponent>;
   let httpClient: HttpClient;
   class ActivatedRouteMock {
     queryParams = new Observable((observer) => {
@@ -24,7 +24,7 @@ describe('MyListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MyListComponent],
+      declarations: [BookmarkViewComponent],
       imports: [HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
         {
@@ -41,7 +41,7 @@ describe('MyListComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MyListComponent);
+    fixture = TestBed.createComponent(BookmarkViewComponent);
     component = fixture.componentInstance;
     httpClient = TestBed.inject(HttpClient);
     fixture.detectChanges();
