@@ -11,14 +11,9 @@
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <script src="assets/env.js"></script>
-    <script>
-      var base = window.env && window.env.ZOHO_URL ? window.env.ZOHO_URL : '';
-      if (base != '') {
-        var script = document.createElement('script');
-        script.src = base;
-        document.head.appendChild(script);
-      }
+    <script src="https://aiod.eu/common/assets/header.js?redirect_uri=https://catalogue-aiod-dev.iti.es&client_id=marketplace">
     </script>
+    <div id="common-header-target"></div>
   </head>
   <body class="mat-typography">
     <app-root></app-root>

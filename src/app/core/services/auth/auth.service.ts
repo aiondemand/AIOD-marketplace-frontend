@@ -12,8 +12,21 @@ export interface UserProfile {
   isAuthorized: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
+  private defaultProfile: UserProfile = {
+    name: '',
+    email: '',
+    identifier: '',
+    isAuthorized: false,
+  };
+  public userProfileSubject = new BehaviorSubject<UserProfile>(
+    this.defaultProfile,
+  );
+  public userProfile$ = this.userProfileSubject.asObservable();
+
   constructor(
     private oauthService: OAuthService,
     private router: Router,
@@ -22,94 +35,64 @@ export class AuthService {
     this.configureOAuthService();
   }
 
-  userProfileSubject = new BehaviorSubject<UserProfile>({} as UserProfile);
-
-  /**
-   * Configure the oauth service, tries to login and saves the user profile for display.
-   *
-   *
-   * @memberof AuthService
-   */
   configureOAuthService() {
-    this.oauthService.configure(authCodeFlowConfig);
+    const config = { ...authCodeFlowConfig };
+    if (config.issuer) {
+      config.issuer = config.issuer.replace('/realms/', '/realms/');
+    }
+    this.oauthService.configure(config);
     this.oauthService.setupAutomaticSilentRefresh();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then((isLoggedIn) => {
-      if (isLoggedIn && this.isAuthenticated()) {
-        if (this.oauthService.hasValidAccessToken()) {
-          this.oauthService.loadUserProfile().then((profile: any) => {
-            const userProfile: UserProfile = {
-              name: profile['info']['name'],
-              email: profile['info']['email'],
-              identifier: profile['info']['sub'],
-              isAuthorized: false,
-            };
-            // Note: commented out as it is not currently necessary, but
-            //       may need to be considered and adapted in the future, but for a different virtual organisation
-            // if (
-            //     profile['info']['eduperson_entitlement'] &&
-            //     profile['info']['eduperson_entitlement']
-            //         .length > 0
-            // ) {
-            //     const vos: string[] =
-            //         this.parseVosFromProfile(
-            //             profile['info'][
-            //                 'eduperson_entitlement'
-            //             ]
-            //         );
-            //     vos.forEach((vo) => {
-            //         if (
-            //             vo.includes(
-            //                 this.appConfigService.voName
-            //             )
-            //         ) {
-            //             userProfile.isAuthorized = true;
-            //         }
-            //     });
-            // }
-            this.userProfileSubject.next(userProfile);
-            if (
-              this.oauthService.state &&
-              this.oauthService.state !== 'undefined' &&
-              this.oauthService.state !== 'null'
-            ) {
-              let stateUrl = this.oauthService.state;
-              if (stateUrl.startsWith('/') === false) {
-                stateUrl = decodeURIComponent(stateUrl);
-              }
-              this.router.navigateByUrl(stateUrl);
-            }
-          });
-        } else {
-          // Force logout as we have no access to refresh tokens without client secret
-          this.logout();
+
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (this.oauthService.hasValidAccessToken()) {
+        const claims = this.oauthService.getIdentityClaims();
+        if (claims) {
+          const userProfile: UserProfile = {
+            name: claims['name'] || claims['preferred_username'],
+            email: claims['email'],
+            identifier: claims['sub'],
+            isAuthorized: false,
+          };
+          this.userProfileSubject.next(userProfile);
+
+          localStorage.setItem('aiod-user', JSON.stringify(claims));
+          window.dispatchEvent(
+            new CustomEvent('aiod-login', { detail: claims }),
+          );
+        }
+
+        if (
+          this.oauthService.state &&
+          this.oauthService.state !== 'undefined' &&
+          this.oauthService.state !== 'null'
+        ) {
+          let stateUrl = this.oauthService.state;
+          if (stateUrl.startsWith('/') === false) {
+            stateUrl = decodeURIComponent(stateUrl);
+          }
+          this.router.navigateByUrl(stateUrl);
         }
       }
     });
   }
 
-  login(url: string) {
-    this.oauthService.initLoginFlow(url);
+  public login(url?: string): void {
+    this.oauthService.initCodeFlow(url);
   }
 
-  logout() {
+  public logout(): void {
+    localStorage.removeItem('aiod-user');
+    window.dispatchEvent(new CustomEvent('aiod-logout'));
+
     this.oauthService.logOut();
+    this.userProfileSubject.next(this.defaultProfile);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.oauthService.getIdToken();
+  public isAuthenticated(): boolean {
+    return this.oauthService.hasValidAccessToken();
   }
 
-  getToken(): any {
-    return this.oauthService?.getAccessToken() ?? undefined;
-  }
-
-  parseVosFromProfile(entitlements: string[]): string[] {
-    const foundVos: string[] = [];
-    entitlements.forEach((vo) => {
-      if (vo.match('group:(.+?):')?.[0]) {
-        foundVos.push(vo.match('group:(.+?):')![0]);
-      }
-    });
-    return foundVos;
+  public getToken(): string | undefined {
+    return this.oauthService.getAccessToken() ?? undefined;
   }
 }
