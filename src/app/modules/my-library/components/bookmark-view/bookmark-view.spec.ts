@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyListComponent } from './my-list.component';
+import { BookmarkViewComponent } from './bookmark-view';
 
-describe('MyListComponent', () => {
-  let component: MyListComponent;
-  let fixture: ComponentFixture<MyListComponent>;
+describe('BookmarkViewComponent', () => {
+  let component: BookmarkViewComponent;
+  let fixture: ComponentFixture<BookmarkViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MyListComponent],
+      declarations: [BookmarkViewComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MyListComponent);
+    fixture = TestBed.createComponent(BookmarkViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
