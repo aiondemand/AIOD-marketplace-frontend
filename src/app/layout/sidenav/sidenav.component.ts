@@ -43,15 +43,17 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
       this.changeDetectorRef.detectChanges();
     };
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+
+    this.options = this._formBuilder.group({
+      bottom: 0,
+      fixed: false,
+      top: 0,
+    });
   }
 
   protected environment = environment;
 
-  options = this._formBuilder.group({
-    bottom: 0,
-    fixed: false,
-    top: 0,
-  });
+  options: any;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -86,7 +88,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   login() {
-    this.authService.login(window.location.pathname);
+    return;
   }
 
   toggleSidenav() {

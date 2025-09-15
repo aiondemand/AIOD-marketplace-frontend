@@ -50,7 +50,7 @@ export class TopNavbarComponent {
   }
 
   login() {
-    this.authService.login(window.location.pathname);
+    this.authService.login();
   }
 
   logout() {

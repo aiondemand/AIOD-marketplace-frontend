@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { BehaviorSubject } from 'rxjs';
-import { authCodeFlowConfig } from './auth.config';
-import { AppConfigService } from '../app-config/app-config.service';
+import Keycloak, { KeycloakInstance } from 'keycloak-js';
 
 export interface UserProfile {
   name: string;
@@ -12,104 +9,96 @@ export interface UserProfile {
   isAuthorized: boolean;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(
-    private oauthService: OAuthService,
-    private router: Router,
-    private appConfigService: AppConfigService,
-  ) {
-    this.configureOAuthService();
-  }
+  private keycloak: KeycloakInstance;
+  private _mockToken: string | null = null;
 
   userProfileSubject = new BehaviorSubject<UserProfile>({} as UserProfile);
 
-  /**
-   * Configure the oauth service, tries to login and saves the user profile for display.
-   *
-   *
-   * @memberof AuthService
-   */
-  configureOAuthService() {
-    this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.setupAutomaticSilentRefresh();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then((isLoggedIn) => {
-      if (isLoggedIn && this.isAuthenticated()) {
-        if (this.oauthService.hasValidAccessToken()) {
-          this.oauthService.loadUserProfile().then((profile: any) => {
-            const userProfile: UserProfile = {
-              name: profile['info']['name'],
-              email: profile['info']['email'],
-              identifier: profile['info']['sub'],
-              isAuthorized: false,
-            };
-            // Note: commented out as it is not currently necessary, but
-            //       may need to be considered and adapted in the future, but for a different virtual organisation
-            // if (
-            //     profile['info']['eduperson_entitlement'] &&
-            //     profile['info']['eduperson_entitlement']
-            //         .length > 0
-            // ) {
-            //     const vos: string[] =
-            //         this.parseVosFromProfile(
-            //             profile['info'][
-            //                 'eduperson_entitlement'
-            //             ]
-            //         );
-            //     vos.forEach((vo) => {
-            //         if (
-            //             vo.includes(
-            //                 this.appConfigService.voName
-            //             )
-            //         ) {
-            //             userProfile.isAuthorized = true;
-            //         }
-            //     });
-            // }
-            this.userProfileSubject.next(userProfile);
-            if (
-              this.oauthService.state &&
-              this.oauthService.state !== 'undefined' &&
-              this.oauthService.state !== 'null'
-            ) {
-              let stateUrl = this.oauthService.state;
-              if (stateUrl.startsWith('/') === false) {
-                stateUrl = decodeURIComponent(stateUrl);
-              }
-              this.router.navigateByUrl(stateUrl);
-            }
-          });
-        } else {
-          // Force logout as we have no access to refresh tokens without client secret
-          this.logout();
-        }
-      }
+  constructor() {
+    this.keycloak = new (Keycloak as any)({
+      url: 'https://auth.aiod.eu',
+      realm: 'aiod',
+      clientId: 'marketplace',
     });
   }
 
-  login(url: string) {
-    this.oauthService.initLoginFlow(url);
+  async init(): Promise<void> {
+    await this.keycloak.init({
+      onLoad: 'check-sso', // auto-login if user has Keycloak session
+      pkceMethod: 'S256',
+      silentCheckSsoRedirectUri:
+        window.location.origin + '/assets/silent-check-sso.html',
+    } as any);
   }
 
-  logout() {
-    this.oauthService.logOut();
+  setMockToken(token: string): void {
+    this._mockToken = token;
+    // Decode the token to get profile info
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    this.userProfileSubject.next({
+      name: payload.name || payload.preferred_username,
+      email: payload.email,
+      identifier: payload.sub,
+      isAuthorized: true,
+    });
   }
 
   isAuthenticated(): boolean {
-    return !!this.oauthService.getIdToken();
+    return this._mockToken !== null || (this.keycloak.authenticated ?? false);
   }
 
-  getToken(): any {
-    return this.oauthService?.getAccessToken() ?? undefined;
+  getToken(): string | undefined {
+    return this._mockToken || this.keycloak.token;
   }
 
-  parseVosFromProfile(entitlements: string[]): string[] {
-    const foundVos: string[] = [];
-    entitlements.forEach((vo) => {
-      if (vo.match('group:(.+?):')?.[0]) {
-        foundVos.push(vo.match('group:(.+?):')![0]);
-      }
-    });
-    return foundVos;
+  getProfile() {
+    if (this._mockToken) {
+      const payload = JSON.parse(atob(this._mockToken.split('.')[1]));
+      return {
+        name: payload.name || payload.preferred_username,
+        avatar: payload.avatar_url,
+      };
+    }
+    return {
+      name:
+        (this.keycloak.idTokenParsed as any)?.name ||
+        (this.keycloak.idTokenParsed as any)?.preferred_username,
+      avatar: (this.keycloak.idTokenParsed as any)?.avatar_url,
+    };
+  }
+
+  async loadUserProfile() {
+    if (this._mockToken) {
+      const payload = JSON.parse(atob(this._mockToken.split('.')[1]));
+      return {
+        id: payload.sub,
+        username: payload.preferred_username,
+        email: payload.email,
+        firstName: payload.given_name,
+        lastName: payload.family_name,
+        enabled: true,
+        emailVerified: payload.email_verified,
+        totp: false,
+        createdTimestamp: Date.now(),
+      };
+    }
+    return this.keycloak.loadUserProfile();
+  }
+
+  login(): void {
+    if (!this._mockToken) {
+      this.keycloak.login();
+    }
+  }
+
+  logout(): void {
+    if (this._mockToken) {
+      this._mockToken = null;
+      this.userProfileSubject.next({} as UserProfile);
+    } else {
+      this.keycloak.logout();
+    }
   }
 }
