@@ -27,9 +27,7 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private filterState: FiltersStateService,
     private bookmarkService: BookmarkService,
     private authService: AuthService,
-  ) {
-    // constructor should not create unmanaged subscriptions; subscribe in ngOnInit
-  }
+  ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -52,7 +50,6 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (assets: AssetsPurchase[]) => {
         this.dataSource.data = assets;
         this.dataSource.filter = 'any';
-        console.log('dataSource after getBookmarks:', this.dataSource);
         this.lengthTable = this.dataSource.data.length;
         this.isLoading = false;
       },

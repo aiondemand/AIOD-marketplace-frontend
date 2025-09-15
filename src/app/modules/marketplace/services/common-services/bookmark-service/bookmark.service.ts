@@ -14,6 +14,11 @@ export enum AssetCategoryShort {
   pub = 'Publication',
 }
 
+interface BookmarkItem {
+  resource_identifier: string;
+  created_at: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -74,40 +79,44 @@ export class BookmarkService {
   }
 
   public getBookmarks(): Observable<AssetsPurchase[]> {
-    const mockedResponse = [
-      {
-        resource_identifier: 'mdl_000028bcIa2SCbO9aVlIB0Xc',
-        created_at: '2025-09-08T16:13:20.758Z',
-      },
-      {
-        resource_identifier: 'data_0000003G7ndn66DnJD6t8zXi',
-        created_at: '2025-09-08T16:13:20.758Z',
-      },
-      {
-        resource_identifier: 'exp_AALCxB5r1YitJvhfIRMTJ5XO',
-        created_at: '2025-09-08T16:13:20.758Z',
-      },
-    ];
+    return this.http
+      .get<BookmarkItem[]>(this.BOOKMARKS_URL, {
+        headers: this.getHttpHeader(),
+      })
+      .pipe(
+        map((response: BookmarkItem[]) => {
+          const requestData = response.map((item) => {
+            const identifier = item.resource_identifier;
+            const prefix = this.getPrefix(identifier);
+            const endpoint = this.getEndpoint(prefix);
+            const url = `https://mylibrary.aiod.eu/api-metadata/${endpoint}/${identifier}`;
 
-    const requestData = mockedResponse.map((item) => {
-      const identifier = item.resource_identifier;
-      const prefix = this.getPrefix(identifier);
-      const endpoint = this.getEndpoint(prefix);
-      const url = `https://mylibrary.aiod.eu/api-metadata/${endpoint}/${identifier}`;
+            return {
+              request: this.http.get<any>(url).pipe(catchError(() => of(item))),
+              prefix,
+            };
+          });
 
-      return {
-        request: this.http.get<any>(url).pipe(catchError(() => of(item))),
-        prefix,
-      };
-    });
-
-    return forkJoin(requestData.map((rd) => rd.request)).pipe(
-      map((responses: any[]) =>
-        responses.map((r, i) =>
-          this.parseResponseAssetsPurchase(r, requestData[i].prefix),
-        ),
-      ),
-    );
+          return forkJoin(requestData.map((rd) => rd.request)).pipe(
+            map((responses: any[]) =>
+              responses.map((r, i) =>
+                this.parseResponseAssetsPurchase(r, requestData[i].prefix),
+              ),
+            ),
+          );
+        }),
+        catchError((error) => {
+          console.error('Error fetching bookmarks:', error);
+          return of([]);
+        }),
+      )
+      .pipe(
+        map((result) => result as AssetsPurchase[]),
+        catchError((error) => {
+          console.error('Final error in getBookmarks:', error);
+          return of([]);
+        }),
+      );
   }
 
   public addBookmark(identifier: string): Observable<string> {
@@ -119,9 +128,6 @@ export class BookmarkService {
 
   public deleteBookmark(identifier: string): Observable<string> {
     console.log(identifier);
-    return this.http.delete<string>(this.BOOKMARKS_URL, {
-      headers: this.getHttpHeader(),
-      params: new HttpParams().set('resource_identifier', identifier),
-    });
+    return this.http.delete<string>(this.BOOKMARKS_URL, {});
   }
 }
