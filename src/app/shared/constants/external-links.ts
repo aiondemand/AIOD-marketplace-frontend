@@ -10,6 +10,8 @@ export const EXTERNAL_LINKS = {
   AIOD_HOME: 'https://aiod.eu',
   GET_STARTED: 'https://aiod.eu/get-started/',
   MY_LIBRARY: 'https://mylibrary.aiod.eu/',
+  BOOKMARKS_TEST: 'https://test.openml.org/aiod/bookmarks',
+  BOOKMARKS_PROD: 'https://api.aiod.eu/aiod/bookmarks',
   COMMUNICATION_MATERIALS:
     'https://aiod.eu/ai-on-demand-communication-and-dissemination-materials/',
   TOOLS: 'https://aiod.eu/tools',
