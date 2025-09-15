@@ -59,7 +59,7 @@ export class AssetCardComponent implements OnInit {
   }
 
   protected onClickBookmark(): void {
-    if (this.isAuthenticated()) return;
+    if (!this.isAuthenticated()) return;
 
     if (!this.isBookmarked) {
       this.addBookmark();
