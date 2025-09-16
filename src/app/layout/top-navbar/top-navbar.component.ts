@@ -6,6 +6,7 @@ import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
+import { setCookie } from '../../shared/utils/theme.utils';
 
 @Component({
   selector: 'app-top-navbar',
@@ -34,6 +35,7 @@ export class TopNavbarComponent {
       this.mobileOpened = true;
     }
 
+    //designed for phone users, so dark/light mode of the phone can be respected
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     darkMediaQuery.addEventListener('change', (event) => {
       if (event.matches) {
@@ -47,6 +49,7 @@ export class TopNavbarComponent {
   toggleThemeTo(theme: 'light' | 'dark') {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    setCookie('theme', theme);
   }
 
   login() {
