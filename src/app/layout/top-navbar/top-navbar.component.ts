@@ -26,7 +26,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   protected sideBarUser = false;
   protected environment = environment;
   userProfile?: UserProfile;
-  preferredUsername?: string; // Added to store preferred_username
+  preferredUsername?: string;
   isMatMenuOpen = false;
   enteredButton = false;
   cartItems = 0;
@@ -49,24 +49,34 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Fetch user profile and extract preferred_username
-    if (this.authService.isAuthenticated()) {
-      const profile = this.authService.getProfile();
-      this.userProfile = {
-        name: profile.name,
-        email: '', // Placeholder, replace with actual email if available
-        identifier: '', // Placeholder, replace with actual identifier if available
-        isAuthorized: true,
-      };
-      this.preferredUsername = profile.name; // Assuming name corresponds to preferred_username
-    }
+    this.navSub = new Subscription();
+    const authSub = this.authService.userProfileSubject.subscribe((profile) => {
+      if (this.authService.isAuthenticated()) {
+        this.userProfile = {
+          name: profile.name || '',
+          email: profile.email || '',
+          identifier: profile.identifier || '',
+          isAuthorized: profile.isAuthorized || false,
+        };
+        this.preferredUsername = profile.name || '';
+        localStorage.removeItem('loginPrompted');
+      } else {
+        const hasBeenPrompted =
+          localStorage.getItem('loginPrompted') === 'true';
+        if (!hasBeenPrompted) {
+          this.login();
+          localStorage.setItem('loginPrompted', 'true');
+        }
+      }
+    });
+    this.navSub.add(authSub);
 
-    // Load navigation and build hierarchical menu
-    this.navSub = this.navigationService
+    const navigationSub = this.navigationService
       .getNavigation()
       .subscribe((items: any[]) => {
         this.menuItems = this.buildMenu(items || []);
       });
+    this.navSub.add(navigationSub);
   }
 
   ngOnDestroy(): void {
@@ -74,7 +84,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   private buildMenu(items: any[]): any[] {
-    // Ensure every item has an id. If API provides id use it, otherwise assign a synthetic one.
     items = items.map((it, idx) => ({ id: it.id ?? idx + 1, ...it }));
 
     const map = new Map<number, any>();
@@ -89,7 +98,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
       } else if (map.has(it.parent)) {
         map.get(it.parent).children.push(map.get(it.id));
       } else {
-        // If parent not found, try to attach to a root that matches title (best-effort fallback), otherwise push as root
         const fallback = roots.find((r) => r.title === it.parentTitle || false);
         if (fallback) {
           fallback.children.push(map.get(it.id));
@@ -108,7 +116,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.authService.login();
+    this.authService.login(window.location.pathname);
   }
 
   logout() {
@@ -213,7 +221,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   toggleSubmenu(item: any, event: Event) {
-    // On small devices we want to toggle submenu visibility instead of navigating immediately
     if (
       window.innerWidth < this.widthSmallDevice &&
       item.children &&

@@ -88,7 +88,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   login() {
-    return;
+    this.authService.login(window.location.pathname);
   }
 
   toggleSidenav() {

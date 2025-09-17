@@ -24,6 +24,7 @@
             /></a>
 
             <!--not shown on bigger screens-->
+        
 
             <a
               class="btn btn-success btn-success--white mr-0 d-flex d-lg-none"
@@ -33,32 +34,39 @@
           </div>
 
           <div class="top-bar-buttons">
-            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
-              <li class="menu" *ngFor="let item of menuItems" (mouseenter)="item.open = true" (mouseleave)="item.open = false">
-                <div class="menu-link-mobile" [ngClass]="item.children?.length ? 'has-submenu' : ''" (click)="toggleSubmenu(item, $event)">
-                  <a class="menu-link" [href]="item.url || '#'">{{ item.title }} <i class="icon-arrow d-block d-lg-none" *ngIf="item.children?.length"></i></a>
-                </div>
-
-                <div class="sub-menu d-flex flex-column" *ngIf="item.children?.length && item.open">
-                  <ul>
-                    <li *ngFor="let child of item.children" [ngClass]="child.highlight ? 'highlight' : ''">
-                      <a [href]="child.url">
-                        <span>{{ child.title }}</span>
-                        <p *ngIf="child.description">{{ child.description }}</p>
-                      </a>
-                    </li>
-                  </ul>
-
-                  <a *ngIf="item.extraButton && item.extraButton.url" class="mt-4 btn btn-secondary" [href]="item.extraButton.url">{{ item.extraButton.text || 'More' }}</a>
-                </div>
-              </li>
-            </ul>
+              <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+                <li class="menu" *ngFor="let item of menuItems">
+                  <div class="menu-link-mobile" [ngClass]="{'has-submenu': item.children && item.children.length > 0}">
+                    <a class="menu-link" [href]="item.url || '#'" [attr.target]="item.url ? '_blank' : null">
+                      {{ item.title }} <i class="icon-arrow d-block d-lg-none"></i>
+                    </a>
+                  </div>
+                  <div class="sub-menu d-flex flex-column" *ngIf="item.children && item.children.length > 0" [style.margin-left]="item.children.length > 4 ? '-500px' : '0'">
+                    <ul>
+                      <li *ngFor="let child of item.children" [ngClass]="{'highlight': child.highlight}">
+                        <a [href]="child.url || '#'" [attr.target]="child.url ? '_blank' : null">
+                          <span>{{ child.title }}</span>
+                          <p *ngIf="child.description">{{ child.description }}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    <a
+                      *ngIf="item.extraButton"
+                      class="mt-4 btn btn-secondary"
+                      [href]="item.extraButton.url"
+                      [attr.target]="item.extraButton.url ? '_blank' : null"
+                      >{{ item.extraButton.text }}</a
+                    >
+                  </div>
+                </li>
+              </ul>
           </div>
 
           <div
             *ngIf="!isLoggedIn(); else logged"
             class="d-flex flex-lg-row menu-right"
           >
+         
             <a
               href="https://aiod.eu/get-started/"
               class="btn btn-default btn-user d-lg-flex"
