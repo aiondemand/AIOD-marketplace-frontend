@@ -5,7 +5,7 @@ import { schemas } from './schemas';
 const browserwindow = window as EnvWindow;
 
 export const environment = {
-  name: 'prod',
+  name: 'dev',
   develop: true,
   production: false,
   api: {

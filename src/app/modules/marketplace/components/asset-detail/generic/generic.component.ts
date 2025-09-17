@@ -1,5 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
+import { VALUE_TYPES } from '@app/shared/constants/value-types';
 import { GenericItem } from '@app/shared/models/generic.model';
 
 @Component({
@@ -8,6 +9,26 @@ import { GenericItem } from '@app/shared/models/generic.model';
   styleUrls: ['./generic.component.scss'],
 })
 export class GenericComponent implements OnInit {
+  // expose constants to template
+  readonly VALUE_TYPES = VALUE_TYPES;
+
+  // Return true when the app is currently using the dark theme.
+  // The app stores theme on the root <html> element as `data-theme` and
+  // also in localStorage under the key `theme` (toggled from the top-navbar).
+  isDarkTheme(): boolean {
+    try {
+      const html = document.documentElement;
+      const themeAttr = html ? html.getAttribute('data-theme') : null;
+      const storageTheme =
+        typeof localStorage !== 'undefined'
+          ? localStorage.getItem('theme')
+          : null;
+      const theme = themeAttr || storageTheme || 'light';
+      return theme === 'dark';
+    } catch (e) {
+      return false;
+    }
+  }
   ngOnInit(): void {
     console.log('items:', this.items);
   }
@@ -35,18 +56,18 @@ export class GenericComponent implements OnInit {
         typeof value[0] === 'object' &&
         value[0] !== null
       ) {
-        return 'object-array';
+        return VALUE_TYPES.OBJECT_ARRAY;
       }
       // It's an array of primitive values
-      return 'array';
+      return VALUE_TYPES.ARRAY;
     }
     if (this.isURL(value)) {
-      return 'url';
+      return VALUE_TYPES.URL;
     }
     if (typeof value === 'string' && value.includes(',')) {
-      return 'array';
+      return VALUE_TYPES.ARRAY;
     }
-    return 'text';
+    return VALUE_TYPES.TEXT;
   }
 
   isURL(value: string): boolean {

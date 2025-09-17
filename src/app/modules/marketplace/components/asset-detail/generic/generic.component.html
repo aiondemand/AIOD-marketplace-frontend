@@ -1,14 +1,14 @@
 <div *ngFor="let item of items">
   <div *ngFor="let col of columns" class="item-info-body">
     <div
-      *ngIf="item[col] && item[col] !== 'N/A'"
+      *ngIf="item[col] && item[col] !== 'N/A' && item[col] !== 'null'"
       class="item-info-container"
-      [ngClass]="col"
+      [ngClass]="{'col': true, 'dark': isDarkTheme(), 'light': !isDarkTheme()}"
     >
       <h3>{{ formatColumnName(col) }}</h3>
       <div class="">
         <!-- Array type -->
-        <div *ngIf="getValueType(item[col]) === 'array'  && col !== 'description.plain'" class="">
+  <div *ngIf="getValueType(item[col]) === VALUE_TYPES.ARRAY  && col !== 'description.plain'" class="">
           <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" class="">
             {{ arrayItem }} 2<span *ngIf="!last">, </span>
           </span>
@@ -17,17 +17,17 @@
         <div *ngIf="col === 'distribution'">
           <div class="distribution-grid">
             <div *ngFor="let dist of item[col]" class="distribution-entry">
-              <div *ngIf="dist.name" class="distribution-item"><strong>Name:</strong> {{ dist.name }}</div>
-              <div *ngIf="dist.description" class="distribution-item"><strong>Description:</strong> {{ dist.description }}</div>
-              <div *ngIf="dist.content_url" class="distribution-item"><strong>URL:</strong> <a style='color:#41b6e6' [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a></div>
-              <div *ngIf="dist.encoding_format" class="distribution-item"><strong>Encoding Format:</strong> {{ dist.encoding_format }}</div>
-              <div *ngIf="dist.checksum" class="distribution-item"><strong>Checksum:</strong> {{ dist.checksum }}</div>
-              <div *ngIf="dist.checksum_algorithm" class="distribution-item"><strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}</div>
+              <div *ngIf="dist.name" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>Name:</strong> {{ dist.name }}</div>
+              <div *ngIf="dist.description" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>Description:</strong> {{ dist.description }}</div>
+              <div *ngIf="dist.content_url" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>URL:</strong> <a style='color:#41b6e6' [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a></div>
+              <div *ngIf="dist.encoding_format" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>Encoding Format:</strong> {{ dist.encoding_format }}</div>
+              <div *ngIf="dist.checksum" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>Checksum:</strong> {{ dist.checksum }}</div>
+              <div *ngIf="dist.checksum_algorithm" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}" ><strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}</div>
             </div>
           </div>
         </div>
         <!-- Object-array type -->
-        <div *ngIf="getValueType(item[col]) === 'object-array' && col !== 'description.plain' && col !== 'distribution'" class="object-array-media">
+  <div *ngIf="getValueType(item[col]) === VALUE_TYPES.OBJECT_ARRAY && col !== 'description.plain' && col !== 'distribution'" class="object-array-media">
           <div *ngFor="let obj of item[col]" class="media-card">
               <h3 class="media-title">{{ getDistributionName() }}</h3>
             <div class="media-content"> 
@@ -62,25 +62,25 @@
                             [style.color]="'#5bc0f7'">expand_more</mat-icon>
                 </div>
                 <div class="media-properties-list dropdown-content" [ngClass]="{'animate-dropdown': obj.showProperties}">
-                  <div class="media-property">
+                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.checksum_algorithm }}</div>
                     <div class="media-property-label">Checksum Algorithm</div>
                   </div>
-                  <div class="media-property">
+                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.content_size_kb }}</div>
                     <div class="media-property-label">Content size (KB)</div>
                   </div>
-                  <div class="media-property">
+                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">
-                      <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank" class="text-primary">{{ obj.content_url }}</a>
+                      <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank">{{ obj.content_url }}</a>
                     </div>
                     <div class="media-property-label">Content URL</div>
                   </div>
-                  <div class="media-property">
+                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.copyright }}</div>
                     <div class="media-property-label">Copyright</div>
                   </div>
-                  <div class="media-property">
+                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()} ">
                     <div class="media-property-value">{{ obj.date_published }}</div>
                     <div class="media-property-label">Date Published</div>
                   </div>
@@ -105,10 +105,10 @@
         <markdown *ngIf="col === 'same_as'" class="same_as">
           {{ item[col] }}
         </markdown>
-        <markdown *ngIf="col === 'execution_settings'" class="execution_settings">
+        <markdown *ngIf="col === 'execution_settings'" class="execution_settings" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
           {{ item[col] }}
         </markdown>
-        <markdown *ngIf="col === 'badge'" class="badge">
+        <markdown *ngIf="col === 'badge'" class="badge" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
           {{ item[col] }}
         </markdown>
         <markdown *ngIf="col === 'type'" class="badge">

@@ -16,6 +16,7 @@ export const modelConfig = {
       'distribution',
       'distribution.name',
       'distribution.checksum',
+      'distribution.description',
       'distribution.checksum_algorithm',
       'distribution.content_url',
       'distribution.encoding_format',
@@ -47,7 +48,6 @@ export const modelConfig = {
   'Educational resource': {
     columns: [
       'description.plain',
-      'distribution',
       'media',
       'media.name',
       'media.content_url',
@@ -63,6 +63,12 @@ export const modelConfig = {
     columns: [
       'description.plain',
       'distribution',
+      'distribution.platform',
+      'distribution.name',
+      'distribution.checksum',
+      'distribution.checksum_algorithm',
+      'distribution.content_url',
+      'distribution.encoding_format',
       'media',
       'media.checksum',
       'media.checksum_algorithm',
