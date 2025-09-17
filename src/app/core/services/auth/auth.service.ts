@@ -27,7 +27,7 @@ export class AuthService {
   async init(): Promise<void> {
     await this.keycloak.init({
       onLoad: 'check-sso', // auto-login if user has Keycloak session
-      pkceMethod: 'S256',
+      pkceMethod: 'S256', // Enable PKCE for enhanced security
       silentCheckSsoRedirectUri:
         window.location.origin + '/assets/silent-check-sso.html',
     } as any);
@@ -57,7 +57,7 @@ export class AuthService {
     if (this._mockToken) {
       const payload = JSON.parse(atob(this._mockToken.split('.')[1]));
       return {
-        name: payload.name || payload.preferred_username,
+        name: payload.preferred_username,
         avatar: payload.avatar_url,
       };
     }

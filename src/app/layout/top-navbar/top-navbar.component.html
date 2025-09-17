@@ -24,7 +24,6 @@
             /></a>
 
             <!--not shown on bigger screens-->
-        
 
             <a
               class="btn btn-success btn-success--white mr-0 d-flex d-lg-none"
@@ -34,86 +33,32 @@
           </div>
 
           <div class="top-bar-buttons">
-            <div *ngIf="!isLoggedIn()">
-              <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
-                <li class="menu">
-                  <div class="menu-link-mobile">
-                    <a class="menu-link" href="#"
-                      >Resources <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                </li>
-                <li class="menu">
-                  <div class="menu-link-mobile has-submenu">
-                    <a class="menu-link"
-                      >Tools <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                  <div class="sub-menu d-flex flex-column">
-                    <ul>
-                      <li>
-                        <a href="https://aiod.eu/tools">
-                          <span>Most Popular Tools</span>
-                          <p>
-                            Explore the research contents on the AI on Demand to
-                            customise your experiments!
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <span>RAIL</span>
-                          <p>
-                            Explore the research contents on the AI on Demand to
-                            customise your experiments!
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <span>AI Builder</span>
-                          <p>
-                            AI4EU Experiments is an open source platform for the
-                            development, training, sharing and deployment of AI
-                            models.
-                          </p>
-                        </a>
-                      </li>
-                      <li class="highlight">
-                        <a href="#">
-                          <span>RoboCompass</span>
-                          <p>
-                            Evaluate non-technological aspects of responsible
-                            robotics.
-                          </p>
-                        </a>
-                      </li>
-                    </ul>
-                    <a
-                      class="mt-4 btn btn-secondary"
-                      href="https://aiod.eu/tools"
-                      >See all tools</a
-                    >
-                  </div>
-                </li>
-                <li class="menu">
-                  <div class="menu-link-mobile">
-                    <a
-                      class="menu-link"
-                      href="https://aiod.eu/community/press-corner/news"
-                      >Community <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+              <li class="menu" *ngFor="let item of menuItems" (mouseenter)="item.open = true" (mouseleave)="item.open = false">
+                <div class="menu-link-mobile" [ngClass]="item.children?.length ? 'has-submenu' : ''" (click)="toggleSubmenu(item, $event)">
+                  <a class="menu-link" [href]="item.url || '#'">{{ item.title }} <i class="icon-arrow d-block d-lg-none" *ngIf="item.children?.length"></i></a>
+                </div>
+
+                <div class="sub-menu d-flex flex-column" *ngIf="item.children?.length && item.open">
+                  <ul>
+                    <li *ngFor="let child of item.children" [ngClass]="child.highlight ? 'highlight' : ''">
+                      <a [href]="child.url">
+                        <span>{{ child.title }}</span>
+                        <p *ngIf="child.description">{{ child.description }}</p>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <a *ngIf="item.extraButton && item.extraButton.url" class="mt-4 btn btn-secondary" [href]="item.extraButton.url">{{ item.extraButton.text || 'More' }}</a>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div
             *ngIf="!isLoggedIn(); else logged"
             class="d-flex flex-lg-row menu-right"
           >
-         
             <a
               href="https://aiod.eu/get-started/"
               class="btn btn-default btn-user d-lg-flex"
@@ -129,27 +74,12 @@
 
           <ng-template #logged>
             <div class="d-flex flex-lg-row menu-right">
-              <form
-                id="customForm"
-                class="search-input d-lg-none d-xl-none d-xs-none"
-              >
-                <input type="hidden" name="action" value="" />
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Search..."
-                    id="name"
-                    class="form-control"
-                    required=""
-                  />
-                </div>
-              </form>
               <a
-                href=""
-                class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"
-                ><i class="icon-lupa"></i
-              ></a>
+                href="https://mylibrary.aiod.eu/"
+                class="btn btn btn-circle btn-circle--blue btn-search ml-2"
+              >
+                <i class="icon-lupa"></i>
+              </a>
               <a
                 href="https://aiod.eu/get-started/"
                 class="btn btn-default btn-user d-none d-lg-flex"
@@ -164,7 +94,7 @@
                   <img src="../assets/img/user-image-default.jpg" alt="" />
                   <span class="notifications">1</span>
                 </div>
-                <span>{{ userProfile?.name }}</span>
+                <span style="font-weight: 700;">{{ userProfile?.name }}</span>
               </div>
               <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
             </div>

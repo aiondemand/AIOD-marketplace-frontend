@@ -1,33 +1,39 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatMenuTrigger, _MatMenuBase } from '@angular/material/menu';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
+import { NavigationService } from '@app/core/services/navigation/navigation.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-top-navbar',
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.scss'],
 })
-export class TopNavbarComponent {
+export class TopNavbarComponent implements OnInit, OnDestroy {
   constructor(
     private readonly authService: AuthService,
     private ren: Renderer2,
     private sidenavService: SidenavService,
     protected appConfigService: AppConfigService,
     private router: Router,
+    private navigationService: NavigationService,
   ) {}
   protected sideBarUser = false;
   protected environment = environment;
   userProfile?: UserProfile;
+  preferredUsername?: string; // Added to store preferred_username
   isMatMenuOpen = false;
   enteredButton = false;
   cartItems = 0;
   protected mobileOpened = false;
   private widthSmallDevice = 768;
+  protected menuItems: any[] = [];
+  private navSub?: Subscription;
 
   ngOnInit() {
     if (window.innerWidth >= this.widthSmallDevice) {
@@ -42,6 +48,58 @@ export class TopNavbarComponent {
         this.toggleThemeTo('light');
       }
     });
+
+    // Fetch user profile and extract preferred_username
+    if (this.authService.isAuthenticated()) {
+      const profile = this.authService.getProfile();
+      this.userProfile = {
+        name: profile.name,
+        email: '', // Placeholder, replace with actual email if available
+        identifier: '', // Placeholder, replace with actual identifier if available
+        isAuthorized: true,
+      };
+      this.preferredUsername = profile.name; // Assuming name corresponds to preferred_username
+    }
+
+    // Load navigation and build hierarchical menu
+    this.navSub = this.navigationService
+      .getNavigation()
+      .subscribe((items: any[]) => {
+        this.menuItems = this.buildMenu(items || []);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.navSub?.unsubscribe();
+  }
+
+  private buildMenu(items: any[]): any[] {
+    // Ensure every item has an id. If API provides id use it, otherwise assign a synthetic one.
+    items = items.map((it, idx) => ({ id: it.id ?? idx + 1, ...it }));
+
+    const map = new Map<number, any>();
+    items.forEach((it) => {
+      map.set(it.id, { ...it, children: [] });
+    });
+
+    const roots: any[] = [];
+    items.forEach((it) => {
+      if (!it.parent || it.parent === 0) {
+        roots.push(map.get(it.id));
+      } else if (map.has(it.parent)) {
+        map.get(it.parent).children.push(map.get(it.id));
+      } else {
+        // If parent not found, try to attach to a root that matches title (best-effort fallback), otherwise push as root
+        const fallback = roots.find((r) => r.title === it.parentTitle || false);
+        if (fallback) {
+          fallback.children.push(map.get(it.id));
+        } else {
+          roots.push(map.get(it.id));
+        }
+      }
+    });
+
+    return roots;
   }
 
   toggleThemeTo(theme: 'light' | 'dark') {
@@ -152,5 +210,17 @@ export class TopNavbarComponent {
 
   openMobileMenu() {
     this.mobileOpened = !this.mobileOpened;
+  }
+
+  toggleSubmenu(item: any, event: Event) {
+    // On small devices we want to toggle submenu visibility instead of navigating immediately
+    if (
+      window.innerWidth < this.widthSmallDevice &&
+      item.children &&
+      item.children.length
+    ) {
+      event.preventDefault();
+      item.open = !item.open;
+    }
   }
 }
