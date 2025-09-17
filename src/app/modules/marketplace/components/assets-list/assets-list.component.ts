@@ -41,6 +41,7 @@ const assetCategoryMapping = {
   [AssetCategory['Educational resource']]: 'educational_resources',
   [AssetCategory['Service']]: 'services',
   [AssetCategory['Publication']]: 'publications',
+  [AssetCategory['Case studies']]: 'case_studies',
 };
 
 @Component({
