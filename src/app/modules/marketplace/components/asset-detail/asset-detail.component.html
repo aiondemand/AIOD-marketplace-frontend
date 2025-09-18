@@ -11,7 +11,7 @@
 
 <ng-template #assetBody>
   <div class="asset-body">
-    <div class="asset-body-container">
+    <div class="asset-body-container col-lg-12 col-md-12 col-sm-12">
               <app-generic-asset
                 [items]="genericData"
                 [columns]="genericColumns"
@@ -19,10 +19,10 @@
               ></app-generic-asset>
     </div>
 
-    <div class="asset-body-keywords">
+    <div class="asset-body-keywords col-lg-12 col-md-12 col-sm-12"  >
       <div *ngIf="!!asset.keyword && asset.keyword.length > 0">
         <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
-        <div class="keywords-list">
+        <div class="keywords-list space-bottom">
           <div
             class="btn btn-success btn-success--blue m-1"
             *ngFor="let keyword of asset.keyword"
@@ -34,7 +34,7 @@
 
       <div *ngIf="!!asset.research_area && asset.research_area.length > 0">
         <h3>{{ 'ASSETS.ASSET-DETAIL.RESEARCH_AREA' | translate }}</h3>
-        <div class="research-area-list">
+        <div class="research-area-list space-bottom">
           <div
             class="btn btn-success btn-success--blue m-1"
             *ngFor="let area of asset.research_area"
@@ -48,7 +48,7 @@
         *ngIf="!!asset.scientific_domain && asset.scientific_domain.length > 0"
       >
         <h3>{{ 'ASSETS.ASSET-DETAIL.SCIENTIFIC_DOMAIN' | translate }}</h3>
-        <div class="scientific-domain-list">
+        <div class="scientific-domain-list space-bottom">
           <div
             class="btn btn-success btn-success--blue m-1"
             *ngFor="let domain of asset.scientific_domain"
@@ -110,7 +110,7 @@
     </div>
 
     <div class="col-lg-3">
-      <div class="row">
+      <div class="row space-between">
         <div class="btn btn-default mr-2">
           {{ this.category | lowercase }}
         </div>
