@@ -11,7 +11,7 @@
 
 <ng-template #assetBody>
   <div class="asset-body">
-    <div class="asset-body-container col-lg-12 col-md-12 col-sm-12">
+    <div class="asset-body-container col-lg-10 col-md-12 col-sm-12">
               <app-generic-asset
                 [items]="genericData"
                 [columns]="genericColumns"
@@ -19,7 +19,7 @@
               ></app-generic-asset>
     </div>
 
-    <div class="asset-body-keywords col-lg-12 col-md-12 col-sm-12"  >
+    <div class="asset-body-keywords col-lg-3 col-md-12 col-sm-12"  >
       <div *ngIf="!!asset.keyword && asset.keyword.length > 0">
         <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
         <div class="keywords-list space-bottom">
