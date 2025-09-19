@@ -1,34 +1,15 @@
 {
-    
     "SIDENAV": {
-      
-        "HOME": "Home",
-        "MY-BOOKMARKS": "My Bookmarks",
-        "RESOURCES":"Resources",
-        "SDKS-AND-APIS":"SDKs and APIs",
-        "TOOLS":"Tools",
-        "ALL-TOOLS":"All tools",
-        "GET-STARTED":"Get started",
-        "TECHNICAL-SUPPORT":"Technical Support",
-        "COMMUNITY": "Community",
-        "PRESS-CORNER":"Press Corner",
-        "EVENTS":"Events",
-        "NEW":"News",
-        "NEWSLETTER":"Newsletter",
-        "PROJECTS":"Projects",
-        "FORUM":"Forum",
-        "POOL-OF-EXPERTS":"Pool of Experts",
-        "AI-ORGANISATIONS":"AI Organisations",
-        "DASHBOARD": "Dashboard",
+        "CATALOGUE":"Catalogue",
         "COLLAPSE": "Collapse",
         "DONT-HAVE-ACCOUNT": "Don't have an AIoD account?",
+        "LOGIN-MESSAGE": "Join our community, grow your knowledge and learn from others!",
+        "MY-BOOKMARKS": "My Bookmarks",
         "REGISTER": "Register",
-        "POWEREDBY": "Powered by",
-        "AI4":"ai4eosc",
-        "MARKETPLACE":"marketplace",
-        "CATALOGUE":"Catalogue"
-                            
-        },
+        "RESOURCES":"Resources",
+        "SDKS-AND-APIS":"SDKs and APIs",
+        "SIGN-IN": "Sign in"
+    },
     "TOP-NAVBAR": {
         "LOGOUT": "Log out",
         "LOGIN": "Log in",
@@ -38,7 +19,6 @@
         "EXPLORE":"Explore the research contents on the AI on Demand to customise your experiments!",
         "RAIL":"Rail",
         "RAIL-EXPLORE":" Explore the research contents on the AI on Demand to customise your experiments!"
-
     },
     "FOOTER":{
         "RIGHTS":"©2023 All Rights Reserved AIoD",
