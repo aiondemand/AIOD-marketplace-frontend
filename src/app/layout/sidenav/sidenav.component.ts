@@ -56,27 +56,6 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
-  mainLinks = [
-    {
-      name: 'SIDENAV.MARKETPLACE',
-      url: '/marketplace',
-      isDisabled: false,
-      isRestricted: false,
-    },
-    {
-      name: 'SIDENAV.MY-LIBRARY',
-      url: '/my-library',
-      isDisabled: false,
-      isRestricted: true,
-    },
-    {
-      name: 'SIDENAV.ABOUT',
-      url: '/about',
-      isDisabled: false,
-      isRestricted: false,
-    },
-  ];
-
   acknowledgments = '';
   projectName = '';
   projectUrl = '';
