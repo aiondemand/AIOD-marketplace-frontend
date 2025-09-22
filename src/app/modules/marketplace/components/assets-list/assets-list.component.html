@@ -8,7 +8,7 @@
 <div
   class="featured-products-item mt-3 pt-3 pb-3 align-items-center justify-content-between"
 >
-  <div class="featured-products-item-title">Explore AI Catalogue</div>
+  <div class="featured-products-item-title">{{"ASSETS-LIST.EXPLORE-AI-CATALOGUE" | translate}}</div>
 
   <form [formGroup]="searchFormGroup" class="search-row d-flex">
     <div class="search-input">
@@ -37,7 +37,7 @@
         (change)="onEnhancedSearchChange($event)"
         [title]="'Click to enable enhanced search'"
       >
-        Enhanced Search
+        {{"ASSETS-LIST.ENHANCED-SEARCH" | translate}}
       </mat-checkbox>
     </div>
   </form>
@@ -271,7 +271,7 @@
       [ngClass]="{ 'light-theme': isLightTheme === 'light' }"
     >
       <div class="paginator-left">
-        <span class="page-size-label">Items per page:</span>
+        <span class="page-size-label">{{ 'ASSETS-LIST.ITEMS-PER-PAGE' | translate }}:</span>
         <select
           class="page-size-select"
           [(ngModel)]="currentPageSize"

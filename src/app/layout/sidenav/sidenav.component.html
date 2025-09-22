@@ -23,7 +23,7 @@
               <li *ngIf="isLoggedIn()" class="sidebar-link">
                 <a href="/Bookmarks">
                   <i class="icon-resources-saved"></i>
-                  <span>My Bookmarks</span>
+                  <span>{{ 'SIDENAV.MY-BOOKMARKS' | translate }}</span>
                 </a>
               </li>
               <li
@@ -34,22 +34,22 @@
                   (click)="isResourcesOpened = !isResourcesOpened"
                   class="d-flex align-items-center justify-content-between sidebar-link"
                 >
-                  <div><i class="icon-ai"></i> <span>Resources</span></div>
+                  <div><i class="icon-ai"></i> <span>{{ 'SIDENAV.RESOURCES' | translate }}</span></div>
+                  <span class="submenu-toggle">
+                    <i class="icon-arrow-breadcrumb"></i>
+                  </span>
                 </span>
                 <ul class="submenu" [ngClass]="isResourcesOpened ? 'open' : ''">
                   <li>
                     <a href="">
                       <i class="icon-catalogue"></i>
-                      Catalogue
+                      {{'SIDENAV.CATALOGUE' | translate}}
                     </a>
                   </li>
                   <li>
                     <a href="https://aiod.eu/metadata-catalogue-rest-api/"
                       ><i class="icon-catalogue"></i>SDKs and APIs</a
                     >
-                  </li>
-                    <li>
-                    <!-- <img src="../../../assets/images/ai4-logo.png" width="150" class="mb-1" /> -->
                   </li>
                 </ul>
               </li>
@@ -60,18 +60,18 @@
             <div class="menu p-0">
               <ul>
                 <li *ngIf="!isLoggedIn() && !isMenuCollapsed" class="sidebar-link">
-                  <div class="login-message">Join our community, grow your knowledge and learn from others!</div>
+                  <div class="login-message">{{'SIDENAV.LOGIN-MESSAGE' | translate}}</div>
                   <button class="btn btn-primary login-button" (click)="login(); $event.stopPropagation()">
-                      <span>Sign in</span>
+                      <span>{{'SIDENAV.SIGN-IN' | translate}}</span>
                   </button>
                 </li>
               </ul>
             </div>
 
             <div id="registerDiv" *ngIf="!isLoggedIn()">
-              <p>Don't have an AIoD account?</p>
+              <p>{{ "SIDENAV.DONT-HAVE-ACCOUNT" | translate }}</p>
               <p id="registerLink" (click)="login(); $event.stopPropagation()">
-                Register
+                {{"SIDENAV.REGISTER" | translate }}
               </p>
             </div>
 
@@ -80,7 +80,7 @@
               id="collapseButton"
             >
               <i class="icon-colapse"></i>
-              <span>collapse</span>
+              <span>{{ "SIDENAV.COLLAPSE" | translate }}</span>
             </div>
 
           

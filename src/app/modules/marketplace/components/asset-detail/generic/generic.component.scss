@@ -109,6 +109,10 @@
   .same_as a {
     color: #41b6e6;
   }
+
+  a{
+    overflow: hidden;
+  }
   .item-info-body {
     margin: 1rem;
   }
@@ -124,6 +128,7 @@
     transition-duration: 0.3s;
     transition-property: border;
     display: block;
+    
     &.dark {
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -215,6 +220,11 @@
   @media (max-width: 768px) {
     .distribution-grid {
       grid-template-columns: 1fr;
+      overflow: scroll;
+    }
+
+    .item-info-body .item-info-container{
+      overflow: scroll;
     }
   }
 }
