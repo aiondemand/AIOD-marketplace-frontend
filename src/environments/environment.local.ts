@@ -9,7 +9,7 @@ export const environment = {
   develop: true,
   production: false,
   api: {
-    base: browserwindow.env?.['API_URL'] || 'https://mylibrary.aiod.eu/',
+    base: browserwindow.env?.['API_URL'] || 'https://test.openml.org/aiod',
     endpoints,
     schemas,
   },
@@ -24,7 +24,7 @@ export const environment = {
   },
   enhancedApi: {
     baseEnhanced:
-      browserwindow.env?.['AIOD_ENHANCED_API'] || 'https://mylibrary.aiod.eu/2',
+      browserwindow.env?.['AIOD_ENHANCED_API'] || 'https://rail-dev.aiod.i3a.es',
   },
   zohoConfig: {
     base: '',
