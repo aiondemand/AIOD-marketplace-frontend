@@ -1,0 +1,230 @@
+:host ::ng-deep {
+  .dropdown-toggle {
+    cursor: pointer;
+    color: #1976d2;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+  .dropdown-toggle:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+  }
+  .dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 1s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.5s;
+    opacity: 0;
+  }
+  .dropdown-content.animate-dropdown.ng-trigger.ng-trigger-animateDropdown {
+    max-height: 500px;
+    opacity: 1;
+  }
+  .dropdown-content.animate-dropdown {
+    max-height: 500px;
+    opacity: 1;
+  }
+  .object-array-media {
+    margin: 2rem 0;
+  }
+  .media-card {
+    background: transparent;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-left: 6px solid #2a5db0;
+    .media-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 0px 24px;
+    }
+  }
+  .media-header {
+    color: #41b6e6;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .media-title {
+    font-size: 40px;
+    margin-bottom: 2.5rem;
+  }
+  .media-desc-label {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+  .media-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: justify;
+  }
+  .media-properties-label {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .media-properties-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .media-property {
+    display: block;
+    grid-template-columns: auto 1fr;
+    border-radius: 10px;
+    border: 1px solid #504a4a;
+    padding: 0.7rem 1rem;
+    margin: 5px;
+    align-items: center;
+    background: transparent !important;
+    &.dark {
+      color: white;
+      a {
+        color: white;
+      }
+    }
+  }
+  .media-property-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    word-break: break-all;
+  }
+  .media-property-label {
+    font-size: 0.95rem;
+  }
+  .text-primary {
+    color: #2a5db0;
+    text-decoration: underline;
+  }
+  .license a {
+    color: #41b6e6;
+  }
+  .same_as a {
+    color: #41b6e6;
+  }
+
+  a{
+    overflow: hidden;
+  }
+  .item-info-body {
+    margin: 1rem;
+  }
+
+  .item-info-body .item-info-container {
+    border-radius: 20px;
+    margin: 1rem 1rem 1rem 0;
+    padding: 1.2rem;
+    border: 1px solid;
+    border-color: #00000026;
+    font-family: Jura, sans-serif;
+    transition-delay: 0s;
+    transition-duration: 0.3s;
+    transition-property: border;
+    display: block;
+    
+    &.dark {
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: border 0.3s ease;
+    }
+    .execution_settings.dark p {
+      color: #e6eef7;
+      a {
+        color: #41b6e6;
+      }
+    }
+    .badge.dark p {
+      color: #e6eef7;
+    }
+  }
+  .item-info-body .item-info-container h3 {
+    font-family: Jura, sans-serif;
+  }
+  .item-info-body .item-info-container:hover {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+  .item-info-body .item-info-container.dark:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .item-info-body .item-info-container.license div .markdown .license p a {
+    color: #41b6e6;
+  }
+  .object-array-container {
+    overflow-x: auto;
+  }
+  .object-array-container .table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+  }
+  .object-array-container .table th,
+  .object-array-container .table td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #dee2e6;
+    word-break: break-word;
+  }
+  .object-array-container .table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+  .object-array-container .table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  .object-array-container .table a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .object-array-container .table a:hover {
+    text-decoration: underline;
+  }
+  .badge {
+    text-align: left;
+  }
+  .distribution-entry {
+    padding: 16px;
+    width: 360px;
+    .distribution-item {
+      margin-bottom: 12px;
+      font-family: Montserrat, sans-serif;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  /* Theme variants for distribution items */
+  .distribution-item-light {
+    color: #222;
+    border-radius: 6px;
+  }
+
+  .distribution-item-dark {
+    color: #e6eef7;
+  }
+
+  /* New: grid layout for distributions (rows of 2) */
+  .distribution-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .distribution-grid {
+      grid-template-columns: 1fr;
+      overflow: scroll;
+    }
+
+    .item-info-body .item-info-container{
+      overflow: scroll;
+    }
+  }
+}

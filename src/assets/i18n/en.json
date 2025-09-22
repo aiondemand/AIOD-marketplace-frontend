@@ -1,26 +1,30 @@
 {
-    "HEADQUARTER": "test",
     "SIDENAV": {
-        "DASHBOARD": "Dashboard",
-        "MODULES": "Modules (marketplace)",
-        "DEPLOYMENTS": "Deployments",
-        "IAM": "Identity and Access",
-        "AI4EOSC-DOCUMENTATION": "AI4EOSC documentation",
-        "IMAGINE-DOCUMENTATION": "iMagine AI platform documentation",
-        "PROJECT-PAGE": "Project page",
-        "OTHER-LINKS": "Other links",
-        "TERMS-OF-USE": "Terms of use",
-        "PRIVACY-POLICY": "Privacy policy",
-        "ACKNOWLEDGMENTS": "The iMagine platform dashboard is a service provided by CSIC, co-funded by",
-        "MARKETPLACE": "Assets catalogue",
-        "MY-LIBRARY": "My Library",
-        "ABOUT": "About",
-        "CONTACT": "Contact us",
-        "SELECT-PLATFORM": "Select platform"
+        "CATALOGUE":"Catalogue",
+        "COLLAPSE": "Collapse",
+        "DONT-HAVE-ACCOUNT": "Don't have an AIoD account?",
+        "LOGIN-MESSAGE": "Join our community, grow your knowledge and learn from others!",
+        "MY-BOOKMARKS": "My Bookmarks",
+        "REGISTER": "Register",
+        "RESOURCES":"Resources",
+        "SDKS-AND-APIS":"SDKs and APIs",
+        "SIGN-IN": "Sign in"
     },
     "TOP-NAVBAR": {
         "LOGOUT": "Log out",
-        "LOGIN-REGISTER": "Login - Register"
+        "LOGIN": "Log in",
+        "RESOURCES":"Resources",
+        "TOOLS":"Tools",
+        "MOST-POPULAR-TOOLS":"Most Popular Tools",
+        "EXPLORE":"Explore the research contents on the AI on Demand to customise your experiments!",
+        "RAIL":"Rail",
+        "RAIL-EXPLORE":" Explore the research contents on the AI on Demand to customise your experiments!"
+    },
+    "FOOTER":{
+        "RIGHTS":"©2023 All Rights Reserved AIoD",
+        "PRIVACY-POLICY":"Privacy Policy",
+        "RESPONSIBLE-DISCLOSURE":"Responsible Disclosure",
+        "TERMS-OF-USE":"Terms of use"
     },
     "DEPLOYMENTS": {
         "TITLE": "Deployments",
@@ -207,5 +211,13 @@
             "LINK": "URL Metadata",
             "ACTIONS": "Delete"
         }
+    },
+    "ASSETS-LIST":{
+
+        "CHECK-SDKS-APIS":"Check the SDKs and APIs",
+        "CHECK-NOW":"Check now",
+        "EXPLORE-AI-CATALOGUE":"Explore AI Catalogue",
+        "ITEMS-PER-PAGE": "Items per page",
+        "ENHANCED-SEARCH": "Enhanced Search"
     }
 }

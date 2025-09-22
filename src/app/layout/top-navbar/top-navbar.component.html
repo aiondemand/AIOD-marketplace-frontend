@@ -24,96 +24,102 @@
             /></a>
 
             <!--not shown on bigger screens-->
-        
+            <a
+              href=""
+              class="btn btn btn-circle btn-circle--blue btn-search ml-5 mr-0 d-flex d-lg-none d-xl-none d-xs-none"
+              ><i class="icon-lupa"></i
+            ></a>
 
             <a
               class="btn btn-success btn-success--white mr-0 d-flex d-lg-none"
-              (click)="login()"
-              >Log In</a
+              href=""
+              >{{ 'TOP-NAVBAR.LOGIN' | translate }}</a
             >
           </div>
 
           <div class="top-bar-buttons">
-            <div *ngIf="!isLoggedIn()">
-              <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
-                <li class="menu">
-                  <div class="menu-link-mobile">
-                    <a class="menu-link" href="#"
-                      >Resources <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                </li>
-                <li class="menu">
-                  <div class="menu-link-mobile has-submenu">
-                    <a class="menu-link"
-                      >Tools <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                  <div class="sub-menu d-flex flex-column">
-                    <ul>
-                      <li>
-                        <a href="https://aiod.eu/tools">
-                          <span>Most Popular Tools</span>
-                          <p>
-                            Explore the research contents on the AI on Demand to
-                            customise your experiments!
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <span>RAIL</span>
-                          <p>
-                            Explore the research contents on the AI on Demand to
-                            customise your experiments!
-                          </p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <span>AI Builder</span>
-                          <p>
-                            AI4EU Experiments is an open source platform for the
-                            development, training, sharing and deployment of AI
-                            models.
-                          </p>
-                        </a>
-                      </li>
-                      <li class="highlight">
-                        <a href="#">
-                          <span>RoboCompass</span>
-                          <p>
-                            Evaluate non-technological aspects of responsible
-                            robotics.
-                          </p>
-                        </a>
-                      </li>
-                    </ul>
-                    <a
-                      class="mt-4 btn btn-secondary"
-                      href="https://aiod.eu/tools"
-                      >See all tools</a
-                    >
-                  </div>
-                </li>
-                <li class="menu">
-                  <div class="menu-link-mobile">
-                    <a
-                      class="menu-link"
-                      href="https://aiod.eu/community/press-corner/news"
-                      >Community <i class="icon-arrow d-block d-lg-none"></i
-                    ></a>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+              <li class="menu">
+                <div class="menu-link-mobile">
+                  <a class="menu-link" href="#"
+                    >{{ 'TOP-NAVBAR.RESOURCES' | translate }}
+                    <i class="icon-arrow d-block d-lg-none"></i
+                  ></a>
+                </div>
+              </li>
+              <li class="menu">
+                <div class="menu-link-mobile has-submenu">
+                  <a class="menu-link"
+                    >{{ 'TOP-NAVBAR.TOOLS' | translate }}
+                    <i class="icon-arrow d-block d-lg-none"></i
+                  ></a>
+                </div>
+                <div class="sub-menu d-flex flex-column">
+                  <ul>
+                    <li>
+                      <a href="https://aiod.eu/tools">
+                        <span>{{ 'TOP-NAVBAR.MOST-POPULAR-TOOLS' | translate }}</span>
+                        <p>
+                          {{ 'TOP-NAVBAR.EXPLORE' | translate }}
+                        </p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>{{ 'TOP-NAVBAR.RAIL' | translate }}</span>
+                        <p>
+                          {{"TOP-NAVBAR.RAIL-EXPLORE"|translate}}
+                        </p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>AI Builder</span>
+                        <p>
+                          AI4EU Experiments is an open source platform for the
+                          development, training, sharing and deployment of AI
+                          models.
+                        </p>
+                      </a>
+                    </li>
+                    <li class="highlight">
+                      <a href="#">
+                        <span>RoboCompass</span>
+                        <p>
+                          Evaluate non-technological aspects of responsible
+                          robotics.
+                        </p>
+                      </a>
+                    </li>
+                  </ul>
+                  <a
+                    class="mt-4 btn btn-secondary"
+                    href="https://aiod.eu/tools"
+                    >See all tools</a
+                  >
+                </div>
+              </li>
+              <li class="menu">
+                <div class="menu-link-mobile">
+                  <a
+                    class="menu-link"
+                    href="https://aiod.eu/community/press-corner/news"
+                    >Community <i class="icon-arrow d-block d-lg-none"></i
+                  ></a>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div
             *ngIf="!isLoggedIn(); else logged"
             class="d-flex flex-lg-row menu-right"
           >
-         
+            <a
+              href=""
+              class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"
+              ><i class="icon-lupa"></i
+            ></a>
             <a
               href="https://aiod.eu/get-started/"
               class="btn btn-default btn-user d-lg-flex"
@@ -311,22 +317,6 @@
         </ul>
       </div>
       <div class="sidebar-footer">
-        <div class="d-none border-bottom">
-          <p class="mb-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore
-          </p>
-        </div>
-        <div class="d-none border-bottom">
-          <p class="mb-0 text-grey">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          </p>
-        </div>
-        <div class="d-none border-bottom">
-          <p class="mb-0 text-grey">
-            Sed do eiusmod tempor incididunt ut labore et dolore
-          </p>
-        </div>
         <div class="border-bottom">
           <a
             class="btn btn-success btn-success--blue mt-3 w-100"

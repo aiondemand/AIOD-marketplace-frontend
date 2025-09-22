@@ -61,7 +61,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
   public getAsset(id: string | number): Observable<T> {
     return this.http
       .get<any>(`${base}${endpoints.prefixApiAssets}${this.endpoint}/${id}`)
-      .pipe(map((item) => this.parseResponse(item)));
+      .pipe(map((item) => item));
   }
 
   public getAssetByPlatform(

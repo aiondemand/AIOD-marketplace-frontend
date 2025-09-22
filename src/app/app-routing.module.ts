@@ -37,11 +37,7 @@ const routes: Routes = [
             (m) => m.MyLibraryModule,
           ),
       },
-      {
-        path: 'about',
-        loadChildren: () =>
-          import('@modules/about/about.module').then((m) => m.AboutModule),
-      },
+
       {
         path: '**',
         component: NotFoundComponent,
