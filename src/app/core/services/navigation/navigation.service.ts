@@ -128,9 +128,7 @@ export class NavigationService {
   ) {}
 
   getNavigation(): Observable<any[]> {
-    if (!environment.production) {
-      return of(this.localNavigation);
-    }
+    return of(this.localNavigation);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getToken()}`,

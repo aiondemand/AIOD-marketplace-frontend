@@ -60,13 +60,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
         };
         this.preferredUsername = profile.name || '';
         localStorage.removeItem('loginPrompted');
-      } else {
-        const hasBeenPrompted =
-          localStorage.getItem('loginPrompted') === 'true';
-        if (!hasBeenPrompted) {
-          this.login();
-          localStorage.setItem('loginPrompted', 'true');
-        }
       }
     });
     this.navSub.add(authSub);
