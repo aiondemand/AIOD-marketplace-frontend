@@ -23,8 +23,7 @@ export const environment = {
     showDebugInformation: true,
   },
   enhancedApi: {
-    baseEnhanced:
-      browserwindow.env?.['AIOD_ENHANCED_API'] || '',
+    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || '',
   },
   zohoConfig: {
     base: '',
