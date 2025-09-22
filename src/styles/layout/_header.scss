@@ -101,7 +101,7 @@ header {
   }
 
   .header-nav {
-    padding: 24px 0;
+    padding: 41px 0px 37px 37px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -118,6 +118,7 @@ header {
     &-logo {
       transition: all 300ms ease-in-out;
       position: relative;
+      margin-left:-20px;
       // margin-bottom: 10px;
       // position: absolute;
       // left: 0;
@@ -393,6 +394,7 @@ header {
       }
       .top-bar-buttons{
          width:55%;
+         margin-left:100px;
       }
    }
 
@@ -443,8 +445,6 @@ header {
       opacity: 0;
       padding-left: 0;
       position: absolute;
-      transform: translateX(-50%);
-      left: 50%;
       margin: 0;
       margin-top: 30px;
       background-color: $color-primary2;
