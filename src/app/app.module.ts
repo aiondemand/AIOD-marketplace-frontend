@@ -72,7 +72,7 @@ renderer.link = (href, title, text) => {
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: [base],
-        sendAccessToken: true,
+        sendAccessToken: false,
       },
     }),
     TranslateModule.forRoot({

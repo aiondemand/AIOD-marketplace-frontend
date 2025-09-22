@@ -38,77 +38,32 @@
           </div>
 
           <div class="top-bar-buttons">
-            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
-              <li class="menu">
-                <div class="menu-link-mobile">
-                  <a class="menu-link" href="#"
-                    >{{ 'TOP-NAVBAR.RESOURCES' | translate }}
-                    <i class="icon-arrow d-block d-lg-none"></i
-                  ></a>
-                </div>
-              </li>
-              <li class="menu">
-                <div class="menu-link-mobile has-submenu">
-                  <a class="menu-link"
-                    >{{ 'TOP-NAVBAR.TOOLS' | translate }}
-                    <i class="icon-arrow d-block d-lg-none"></i
-                  ></a>
-                </div>
-                <div class="sub-menu d-flex flex-column">
-                  <ul>
-                    <li>
-                      <a href="https://aiod.eu/tools">
-                        <span>{{ 'TOP-NAVBAR.MOST-POPULAR-TOOLS' | translate }}</span>
-                        <p>
-                          {{ 'TOP-NAVBAR.EXPLORE' | translate }}
-                        </p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>{{ 'TOP-NAVBAR.RAIL' | translate }}</span>
-                        <p>
-                          {{"TOP-NAVBAR.RAIL-EXPLORE"|translate}}
-                        </p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>AI Builder</span>
-                        <p>
-                          AI4EU Experiments is an open source platform for the
-                          development, training, sharing and deployment of AI
-                          models.
-                        </p>
-                      </a>
-                    </li>
-                    <li class="highlight">
-                      <a href="#">
-                        <span>RoboCompass</span>
-                        <p>
-                          Evaluate non-technological aspects of responsible
-                          robotics.
-                        </p>
-                      </a>
-                    </li>
-                  </ul>
-                  <a
-                    class="mt-4 btn btn-secondary"
-                    href="https://aiod.eu/tools"
-                    >See all tools</a
-                  >
-                </div>
-              </li>
-              <li class="menu">
-                <div class="menu-link-mobile">
-                  <a
-                    class="menu-link"
-                    href="https://aiod.eu/community/press-corner/news"
-                    >Community <i class="icon-arrow d-block d-lg-none"></i
-                  ></a>
-                </div>
-              </li>
-            </ul>
+              <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+                <li class="menu" *ngFor="let item of menuItems">
+                  <div class="menu-link-mobile" [ngClass]="{'has-submenu': item.children && item.children.length > 0}">
+                    <a class="menu-link" [href]="item.url || '#'" [attr.target]="item.url ? '_blank' : null">
+                      {{ item.title }} <i class="icon-arrow d-block d-lg-none"></i>
+                    </a>
+                  </div>
+                  <div class="sub-menu d-flex flex-column" *ngIf="item.children && item.children.length > 0" [style.margin-left]="item.children.length > 4 ? '-500px' : '0'">
+                    <ul>
+                      <li *ngFor="let child of item.children" [ngClass]="{'highlight': child.highlight}">
+                        <a [href]="child.url || '#'" [attr.target]="child.url ? '_blank' : null">
+                          <span>{{ child.title }}</span>
+                          <p *ngIf="child.description">{{ child.description }}</p>
+                        </a>
+                      </li>
+                    </ul>
+                    <a
+                      *ngIf="item.extraButton"
+                      class="mt-4 btn btn-secondary"
+                      [href]="item.extraButton.url"
+                      [attr.target]="item.extraButton.url ? '_blank' : null"
+                      >{{ item.extraButton.text }}</a
+                    >
+                  </div>
+                </li>
+              </ul>
           </div>
 
           <div
@@ -135,27 +90,12 @@
 
           <ng-template #logged>
             <div class="d-flex flex-lg-row menu-right">
-              <form
-                id="customForm"
-                class="search-input d-lg-none d-xl-none d-xs-none"
-              >
-                <input type="hidden" name="action" value="" />
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Search..."
-                    id="name"
-                    class="form-control"
-                    required=""
-                  />
-                </div>
-              </form>
               <a
-                href=""
-                class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-none d-xl-none d-xs-none d-lg-flex"
-                ><i class="icon-lupa"></i
-              ></a>
+                href="https://mylibrary.aiod.eu/"
+                class="btn btn btn-circle btn-circle--blue btn-search ml-2"
+              >
+                <i class="icon-lupa"></i>
+              </a>
               <a
                 href="https://aiod.eu/get-started/"
                 class="btn btn-default btn-user d-none d-lg-flex"
@@ -170,7 +110,7 @@
                   <img src="../assets/img/user-image-default.jpg" alt="" />
                   <span class="notifications">1</span>
                 </div>
-                <span>{{ userProfile?.name }}</span>
+                <span style="font-weight: 700;">{{ userProfile?.name }}</span>
               </div>
               <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
             </div>
