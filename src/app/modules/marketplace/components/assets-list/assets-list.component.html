@@ -4,32 +4,11 @@
     <span class="pt-3"> > {{ categorySelected }}</span>
   </div>
 </div>
-
-<div
-  *ngIf="!lonelyCategory"
-  class="sdk card-numbers card-position card-horizontal pt-3 pb-3"
->
-  <div class="card-news-container">
-    <div
-      class="card-news-content mt-0 d-flex align-items-center justify-content-between"
-    >
-      <div>
-        <h2>Check the SDKs and APIs</h2>
-      </div>
-      <div class="d-flex align-items-center">
-        <a href="https://api.aiod.eu" class="btn check-btn btn-default"
-          >Check now <i class="icon-arrow"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!--Search and filter component -->
 <div
   class="featured-products-item mt-3 pt-3 pb-3 align-items-center justify-content-between"
 >
-  <div class="featured-products-item-title">Explore AI Catalogue</div>
+  <div class="featured-products-item-title">{{"ASSETS-LIST.EXPLORE-AI-CATALOGUE" | translate}}</div>
 
   <form [formGroup]="searchFormGroup" class="search-row d-flex">
     <div class="search-input">
@@ -58,7 +37,7 @@
         (change)="onEnhancedSearchChange($event)"
         [title]="'Click to enable enhanced search'"
       >
-        Enhanced Search
+        {{"ASSETS-LIST.ENHANCED-SEARCH" | translate}}
       </mat-checkbox>
     </div>
   </form>
@@ -292,7 +271,7 @@
       [ngClass]="{ 'light-theme': isLightTheme === 'light' }"
     >
       <div class="paginator-left">
-        <span class="page-size-label">Items per page:</span>
+        <span class="page-size-label">{{ 'ASSETS-LIST.ITEMS-PER-PAGE' | translate }}:</span>
         <select
           class="page-size-select"
           [(ngModel)]="currentPageSize"

@@ -99,6 +99,15 @@ export class AuthService {
     return !!this.oauthService.getIdToken();
   }
 
+  getProfile() {
+    return {
+      name:
+        (this.getToken().idTokenParsed as any)?.name ||
+        (this.getToken().idTokenParsed as any)?.preferred_username,
+      avatar: (this.getToken().idTokenParsed as any)?.avatar_url,
+    };
+  }
+
   getToken(): any {
     return this.oauthService?.getAccessToken() ?? undefined;
   }

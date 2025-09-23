@@ -5,23 +5,24 @@ import { schemas } from './schemas';
 const browserwindow = window as EnvWindow;
 
 export const environment = {
-  name: 'prod',
+  name: 'dev',
   develop: true,
   production: false,
   api: {
-    base: browserwindow.env?.['API_URL'] || 'http://localhost:8083',
+    base: browserwindow.env?.['API_URL'] || '',
     endpoints,
     schemas,
   },
   keycloakConfig: {
-    baseUrl: browserwindow.env?.['KEYCLOAK_URL'],
+    baseUrl:
+      browserwindow.env?.['KEYCLOAK_URL'] || 'https://auth-aiod-dev.iti.es',
     realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
     clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
     redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
     showDebugInformation: true,
   },
   enhancedApi: {
-    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'],
+    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || '',
   },
   zohoConfig: {
     base: '',
