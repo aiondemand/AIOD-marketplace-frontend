@@ -14,14 +14,16 @@ export const environment = {
     schemas,
   },
   keycloakConfig: {
-    baseUrl: browserwindow.env?.['KEYCLOAK_URL'],
+    baseUrl:
+      browserwindow.env?.['KEYCLOAK_URL'] ||
+      'https://auth-aiod-dev.iti.es/aiod-auth',
     realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
     clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
     redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
     showDebugInformation: true,
   },
   enhancedApi: {
-    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'],
+    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || '',
   },
   zohoConfig: {
     base: '',

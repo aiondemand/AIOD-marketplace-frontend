@@ -7,7 +7,7 @@ export class AssetModel {
   description: string;
   platform: string;
   platform_resource_identifier: string;
-  keywords: string[];
+  keyword: string[];
   sameAs: string;
   license?: string;
   research_area?: string[];
@@ -18,7 +18,9 @@ export class AssetModel {
   media?: Media[];
   version?: string;
   citation?: string[];
-  dateCreated?: Date | undefined;
+  aiod_entry?: {
+    date_modified: Date;
+  };
 
   constructor(data: any, category: AssetCategory) {
     this.identifier = data.identifier ?? 'asset-identifier-unknown';
@@ -28,7 +30,7 @@ export class AssetModel {
     this.platform = data.platform ?? '';
     this.platform_resource_identifier =
       data.platform_resource_identifier ?? 'platform-identifier-unknown';
-    this.keywords = data.keyword ?? [];
+    this.keyword = data.keyword ?? [];
     this.sameAs = data.same_as;
     this.license = data.license;
     this.scientific_domain = data.scientific_domain;
@@ -39,8 +41,6 @@ export class AssetModel {
     this.media = data.media?.map((dataMedia: any) => new Media(dataMedia));
     this.version = data.version;
     this.citation = data.citation;
-    this.dateCreated = data.aiod_entry?.date_created
-      ? new Date(data.aiod_entry?.date_created)
-      : undefined;
+    this.aiod_entry = data.aiod_entry;
   }
 }

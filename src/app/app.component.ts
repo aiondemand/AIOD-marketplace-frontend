@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppConfigService } from './core/services/app-config/app-config.service';
+import { getCookie, setCookie } from './shared/utils/theme-utils';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,16 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle(this.appConfigService.title);
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
+    const theme = getCookie('aiod_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.dataset['data-theme'] = theme;
+  }
+
+  toggleTheme() {
+    const newTheme =
+      document.body.dataset['data-theme'] === 'dark' ? 'light' : 'dark';
+    document.body.dataset['data-theme'] = newTheme;
+    document.documentElement.setAttribute('data-theme', newTheme);
+    setCookie('aiod_theme', newTheme);
   }
 }

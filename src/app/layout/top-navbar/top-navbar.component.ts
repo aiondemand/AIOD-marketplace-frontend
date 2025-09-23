@@ -1,33 +1,39 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatMenuTrigger, _MatMenuBase } from '@angular/material/menu';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
+import { NavigationService } from '@app/core/services/navigation/navigation.service';
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-top-navbar',
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.scss'],
 })
-export class TopNavbarComponent {
+export class TopNavbarComponent implements OnInit, OnDestroy {
   constructor(
     private readonly authService: AuthService,
     private ren: Renderer2,
     private sidenavService: SidenavService,
     protected appConfigService: AppConfigService,
     private router: Router,
+    private navigationService: NavigationService,
   ) {}
   protected sideBarUser = false;
   protected environment = environment;
   userProfile?: UserProfile;
+  preferredUsername?: string;
   isMatMenuOpen = false;
   enteredButton = false;
   cartItems = 0;
   protected mobileOpened = false;
   private widthSmallDevice = 768;
+  protected menuItems: any[] = [];
+  private navSub?: Subscription;
 
   ngOnInit() {
     if (window.innerWidth >= this.widthSmallDevice) {
@@ -42,6 +48,59 @@ export class TopNavbarComponent {
         this.toggleThemeTo('light');
       }
     });
+
+    this.navSub = new Subscription();
+    const authSub = this.authService.userProfileSubject.subscribe((profile) => {
+      if (this.authService.isAuthenticated()) {
+        this.userProfile = {
+          name: profile.name || '',
+          email: profile.email || '',
+          identifier: profile.identifier || '',
+          isAuthorized: profile.isAuthorized || false,
+        };
+        this.preferredUsername = profile.name || '';
+        localStorage.removeItem('loginPrompted');
+      }
+    });
+    this.navSub.add(authSub);
+
+    const navigationSub = this.navigationService
+      .getNavigation()
+      .subscribe((items: any[]) => {
+        this.menuItems = this.buildMenu(items || []);
+      });
+    this.navSub.add(navigationSub);
+  }
+
+  ngOnDestroy(): void {
+    this.navSub?.unsubscribe();
+  }
+
+  private buildMenu(items: any[]): any[] {
+    items = items.map((it, idx) => ({ id: it.id ?? idx + 1, ...it }));
+
+    const map = new Map<number, any>();
+    items.forEach((it) => {
+      map.set(it.id, { ...it, children: [] });
+    });
+
+    const roots: any[] = [];
+    items.forEach((it) => {
+      if (!it.parent || it.parent === 0) {
+        roots.push(map.get(it.id));
+      } else if (map.has(it.parent)) {
+        map.get(it.parent).children.push(map.get(it.id));
+      } else {
+        const fallback = roots.find((r) => r.title === it.parentTitle || false);
+        if (fallback) {
+          fallback.children.push(map.get(it.id));
+        } else {
+          roots.push(map.get(it.id));
+        }
+      }
+    });
+
+    return roots;
   }
 
   toggleThemeTo(theme: 'light' | 'dark') {
@@ -152,5 +211,16 @@ export class TopNavbarComponent {
 
   openMobileMenu() {
     this.mobileOpened = !this.mobileOpened;
+  }
+
+  toggleSubmenu(item: any, event: Event) {
+    if (
+      window.innerWidth < this.widthSmallDevice &&
+      item.children &&
+      item.children.length
+    ) {
+      event.preventDefault();
+      item.open = !item.open;
+    }
   }
 }
