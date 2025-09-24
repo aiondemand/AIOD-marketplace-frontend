@@ -14,9 +14,8 @@ export const endpoints = {
   publications: '/publications',
   caseStudies: '/case_studies',
 
-  //Payments
-  prefixApiPayment: '/api-library/api',
-  payment: '/libraries/:userId/assets',
+  //Bookmarks
+  bookmarks: '/bookmarks',
 
   //My-library
   prefixApiLibraries: '/api-library/api',
