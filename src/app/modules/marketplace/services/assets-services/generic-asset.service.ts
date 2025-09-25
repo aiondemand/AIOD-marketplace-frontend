@@ -37,12 +37,10 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
 
   public getAssets(paramsAsset: ParamsReqAsset): Observable<T[]> {
     const params = this.buildHttpParams(paramsAsset);
-    return this.http
-      .get<any[]>(
-        `${base}${endpoints.prefixApiAssets}${endpoints.prefixByCategories}${this.endpoint}`,
-        { params },
-      )
-      .pipe(map((items) => items.map((item) => this.parseResponse(item))));
+    return this.http.get<any[]>(
+      `${base}${endpoints.prefixApiAssets}${endpoints.prefixByCategories}${this.endpoint}`,
+      { params },
+    );
   }
 
   public getAssetsByPlatform(

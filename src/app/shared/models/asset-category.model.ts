@@ -6,4 +6,5 @@ export enum AssetCategory {
   'Educational resource' = 'Educational resource',
   'Publication' = 'Publication',
   'Case studies' = 'Case studies',
+  'Resource Bundle' = 'Resource Bundle',
 }
