@@ -237,6 +237,57 @@
   color: #0047bb;
 }
 
+::ng-deep .aiod-feedback-button {
+  position: fixed;
+  top: 50%;
+  right: -150px;
+  transition:
+    right 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+  z-index: 2000;
+  transform: translateY(-50%);
+  padding: 24px;
+  background: radial-gradient(
+    43.6% 43.6% at 49.98% 100.45%,
+    #41b6e6 0,
+    #0047bb 55%,
+    #039 100%
+  );
+  color: #fff !important;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.4;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  z-index: 100;
+}
+
+::ng-deep .aiod-feedback-button .aiod-feedback-text {
+  display: inline-block;
+}
+
+::ng-deep .aiod-feedback-button:hover,
+::ng-deep .aiod-feedback-button:focus {
+  right: -10px;
+  text-decoration: none;
+}
+
+@media (max-width: 520px) {
+  ::ng-deep .aiod-feedback-button {
+    top: auto;
+    bottom: 16px;
+    right: 12px;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  ::ng-deep .aiod-feedback-button .aiod-feedback-text {
+    display: none;
+  }
+}
+
 ::ng-deep [data-theme='light'] .login-button {
   background: #0047bb;
   color: #ffffff;
