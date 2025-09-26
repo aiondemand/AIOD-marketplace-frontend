@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - main # executed on every pull request to main
+      - staging
     paths:
       - 'src/**'
   push:
