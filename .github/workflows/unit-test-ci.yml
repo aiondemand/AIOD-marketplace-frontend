@@ -1,0 +1,38 @@
+name: CI/CD MyLibrary Marketplace Frontend Unit Testing
+
+# This workflow will run unit tests using node
+
+on:
+  pull_request:
+    branches:
+      - main # executed on every pull request to main
+      - staging
+    paths:
+      - 'src/**'
+  push:
+    branches:
+      - main
+
+  release:
+    types: [published]
+
+
+jobs:
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 18
+
+      - name: Install dependenes
+        run: npm install
+
+      - name: Run test
+        run: npm test
+  

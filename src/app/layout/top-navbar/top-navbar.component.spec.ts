@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 const mockedAuthService: any = {
   isAuthenticated: jest.fn(),
@@ -24,6 +25,22 @@ const mockedMediaQueryList: MediaQueryList = {
 const mockedMediaMatcher: any = {
   matchMedia: jest.fn().mockReturnValue(mockedMediaQueryList),
 };
+// Mock window.matchMedia
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: (query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }),
+  });
+});
 
 describe('TopNavbarComponent', () => {
   let component: TopNavbarComponent;
@@ -32,7 +49,11 @@ describe('TopNavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TopNavbarComponent],
-      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
+      imports: [
+        HttpClientTestingModule,
+        MatMenuModule,
+        TranslateModule.forRoot(),
+      ],
       providers: [
         { provide: AuthService, useValue: mockedAuthService },
         { provide: MediaMatcher, useValue: mockedMediaMatcher },
