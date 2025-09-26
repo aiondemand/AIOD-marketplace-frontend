@@ -15,16 +15,21 @@ const { base, endpoints } = environment.api;
   providedIn: 'root',
 })
 export class DeploymentsService {
+  readonly voParam: HttpParams;
+  readonly vosArrayParam: HttpParams;
   constructor(
     private http: HttpClient,
     private appConfigService: AppConfigService,
-  ) {}
-
-  readonly voParam = new HttpParams().set('vo', this.appConfigService.voName);
-  readonly vosArrayParam = new HttpParams().set(
-    'vos',
-    this.appConfigService.voName,
-  );
+  ) {
+    this.voParam = new HttpParams().set(
+      'vo',
+      this.appConfigService?.voName || '',
+    );
+    this.vosArrayParam = new HttpParams().set(
+      'vos',
+      this.appConfigService?.voName || '',
+    );
+  }
 
   getDeployments(): Observable<Deployment[]> {
     // const url = `${base}${endpoints.deployments}`;
