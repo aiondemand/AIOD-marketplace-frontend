@@ -187,6 +187,7 @@ header {
 
       .menu {
         margin-right: 20px;
+        position: relative;
 
         &:before {
           content: '';
@@ -381,6 +382,9 @@ header {
                -webkit-mask:
                   linear-gradient(#fff 0 0) content-box,
                   linear-gradient(#fff 0 0);
+                mask:
+                  linear-gradient(#fff 0 0) content-box,
+                  linear-gradient(#fff 0 0);
                 -webkit-mask-composite: xor;
                 mask-composite: exclude;
               }
@@ -488,11 +492,14 @@ header {
             rgba(255, 255, 255, 0.125) 53.65%,
             rgba(255, 255, 255, 0) 100%
           );
-          -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
+       -webkit-mask: 
+         linear-gradient(#fff 0 0) content-box,
+         linear-gradient(#fff 0 0);
+       mask: 
+         linear-gradient(#fff 0 0) content-box,
+         linear-gradient(#fff 0 0);
+       -webkit-mask-composite: xor;
+       mask-composite: exclude;
         }
       }
 
