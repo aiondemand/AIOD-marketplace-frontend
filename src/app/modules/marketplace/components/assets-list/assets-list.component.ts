@@ -262,7 +262,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (resp: SearchModel) => {
           this.isLoading = false;
-          this.assets = resp.resources;
+          this.assets = resp.resources.map((asset) => ({
+            ...asset,
+            category: this.categorySelected,
+          }));
           this.assetsSize = resp.totalHits;
         },
         error: (error: any) => {
@@ -292,7 +295,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const subscribe = serviceObs.subscribe({
       next: (assets: AssetModel[]) => {
         this.isLoading = false;
-        this.assets = assets;
+        this.assets = assets.map((asset) => ({
+          ...asset,
+          category: this.categorySelected,
+        }));
       },
       error: (error: any) => {
         // this.assets bellow might be used for testing purposes
@@ -682,7 +688,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (assets: any[]) => {
-          this.assets = assets;
+          this.assets = assets.map((asset) => ({
+            ...asset,
+            category: this.categorySelected,
+          }));
           this.assetsSize = assets.length;
           this.spinnerService.hide();
         },
