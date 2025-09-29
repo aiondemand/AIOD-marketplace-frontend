@@ -16,7 +16,7 @@
         <!-- Distribution fields: show all items -->
         <div *ngIf="col === 'distribution'">
           <div *ngIf="getDistributionDependency()" [ngClass]="{'distribution-item': true, 'distribution-item-dark': isDarkTheme(), 'distribution-item-light': !isDarkTheme()}">
-            Dependency: {{ getDistributionDependency() }}
+            <strong>Dependency:</strong> {{ getDistributionDependency() }}
           </div>
           <div class="distribution-grid">
             <div *ngFor="let dist of item[col]" class="distribution-entry">
