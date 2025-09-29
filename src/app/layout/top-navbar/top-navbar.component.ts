@@ -69,7 +69,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
     const navigationSub = this.navigationService
       .getNavigation()
       .subscribe((items: any[]) => {
-        this.menuItems = this.buildMenu(items || []);
+        this.menuItems = items || [];
       });
     this.navSub.add(navigationSub);
   }

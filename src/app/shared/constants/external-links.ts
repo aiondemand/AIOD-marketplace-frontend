@@ -1,3 +1,5 @@
+// Centralized external links used across the app
+export const NAVIGATION_URL = 'https://aiod.eu/wp-json/aiod/v1/navigation';
 export const EXTERNAL_LINKS = {
   FEEDBACK: 'https://aiod.eu/feedback/',
   METADATA_CATALOGUE_REST_API: 'https://aiod.eu/metadata-catalogue-rest-api/',
