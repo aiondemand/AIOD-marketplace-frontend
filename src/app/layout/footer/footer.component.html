@@ -8,21 +8,21 @@
           <p class="footer-bottom-title">{{"FOOTER.RIGHTS" | translate }}</p>
           <ul class="footer-bottom-list flex-wrap">
             <li>
-              <a href="https://aiod.eu/privacy-policy">{{"FOOTER.PRIVACY-POLICY"|translate}}</a>
+              <a href="{{ externalLinks.PRIVACY_POLICY }}">{{ "FOOTER.PRIVACY-POLICY" | translate }}</a>
               <span>|</span>
             </li>
             <li>
-              <a href="https://aiod.eu/responsible-disclosure"
-                >{{"FOOTER.RESPONSIBLE-DISCLOSURE" | translate}}</a
+              <a href="{{ externalLinks.RESPONSIBLE_DISCLOSURE }}"
+                >{{ "FOOTER.RESPONSIBLE-DISCLOSURE" | translate }}</a
               >
               <span>|</span>
             </li>
             <li></li>
             <li>
-              <a href="https://aiod.eu/terms-conditions">{{ "FOOTER.TERMS-OF-USE" |translate }}</a>
+              <a href="{{ externalLinks.TERMS_CONDITIONS }}">{{ "FOOTER.TERMS-OF-USE" | translate }}</a>
             </li>
           </ul>
-          <a href="https://www.loba.com/en"
+          <a href="{{ externalLinks.LOBA }}"
             ><img src="../assets/img/loba.svg" class="loba-logo" alt=""
           /></a>
         </div>

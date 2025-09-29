@@ -47,7 +47,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="https://aiod.eu/metadata-catalogue-rest-api/"
+                    <a href="{{ externalLinks.METADATA_CATALOGUE_REST_API }}"
                       ><i class="icon-catalogue"></i>SDKs and APIs</a
                     >
                   </li>
@@ -102,10 +102,10 @@
 </app-spinner>
 <a
   class="aiod-feedback-button"
-  href="https://aiod.eu/feedback/"
+  href="{{ externalLinks.FEEDBACK }}"
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Give us your feedback"
+  [attr.aria-label]="'SIDENAV.FEEDBACK' | translate"
 >
-  <span class="aiod-feedback-text">Give us your feedback</span>
+  <span class="aiod-feedback-text">{{ "SIDENAV.FEEDBACK" | translate }}</span>
 </a>
