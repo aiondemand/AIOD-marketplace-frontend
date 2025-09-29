@@ -9,12 +9,8 @@ import { GenericItem } from '@app/shared/models/generic.model';
   styleUrls: ['./generic.component.scss'],
 })
 export class GenericComponent implements OnInit {
-  // expose constants to template
   readonly VALUE_TYPES = VALUE_TYPES;
 
-  // Return true when the app is currently using the dark theme.
-  // The app stores theme on the root <html> element as `data-theme` and
-  // also in localStorage under the key `theme` (toggled from the top-navbar).
   isDarkTheme(): boolean {
     try {
       const html = document.documentElement;
@@ -42,15 +38,14 @@ export class GenericComponent implements OnInit {
     }
 
     return columnName
-      .replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
-      .replace(/_/g, ' ') // Replace underscores with spaces
-      .replace(/\b\w/g, (l) => l.toUpperCase()) // Capitalize first letter of each word
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, (l) => l.toUpperCase())
       .trim();
   }
 
   getValueType(value: any): string {
     if (Array.isArray(value)) {
-      // Check if it's an array of objects
       if (
         value.length > 0 &&
         typeof value[0] === 'object' &&
@@ -58,7 +53,6 @@ export class GenericComponent implements OnInit {
       ) {
         return VALUE_TYPES.OBJECT_ARRAY;
       }
-      // It's an array of primitive values
       return VALUE_TYPES.ARRAY;
     }
     if (this.isURL(value)) {
@@ -112,7 +106,6 @@ export class GenericComponent implements OnInit {
   }
 
   getDisplayValueForObjectTable(key: string, value: any): string {
-    // Special formatting for certain field types
     if (key === 'name' && typeof value === 'string') {
       return value;
     }
@@ -125,9 +118,13 @@ export class GenericComponent implements OnInit {
     return this.formatObjectValue(value);
   }
   getDistributionName(): string {
-    // Example: get from first item, or implement your logic
     return this.items[0] && this.items[0]['distribution'][0]
       ? this.items[0]['distribution'][0].name
+      : '';
+  }
+  getDistributionDependency(): string {
+    return this.items[0] && this.items[0]['distribution'][0]
+      ? this.items[0]['distribution'][0].dependency
       : '';
   }
 }
