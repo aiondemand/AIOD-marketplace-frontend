@@ -13,7 +13,7 @@
             </div>
 
             <div class="corner-ribbon red" *ngIf="environment.develop">Dev</div>
-            <a href="https://aiod.eu"
+            <a href="{{ externalLinks.AIOD_HOME }}"
               ><img
                 src="../assets/img/logo-white.svg"
                 alt=""
@@ -76,7 +76,7 @@
               ><i class="icon-lupa"></i
             ></a>
             <a
-              href="https://aiod.eu/get-started/"
+              href="{{ externalLinks.GET_STARTED }}"
               class="btn btn-default btn-user d-lg-flex"
               >Get Started</a
             >
@@ -91,13 +91,13 @@
           <ng-template #logged>
             <div class="d-flex flex-lg-row menu-right">
               <a
-                href="https://mylibrary.aiod.eu/"
+                href="{{ externalLinks.MY_LIBRARY }}"
                 class="btn btn btn-circle btn-circle--blue btn-search ml-2"
               >
                 <i class="icon-lupa"></i>
               </a>
               <a
-                href="https://aiod.eu/get-started/"
+                href="{{ externalLinks.GET_STARTED }}"
                 class="btn btn-default btn-user d-none d-lg-flex"
                 >Get Started</a
               >
