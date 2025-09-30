@@ -240,7 +240,7 @@
 ::ng-deep .aiod-feedback-button {
   position: fixed;
   top: 50%;
-  right: -150px;
+  right: -180px;
   transition:
     right 220ms ease,
     opacity 220ms ease,
@@ -258,14 +258,20 @@
   border-radius: 100px;
   font-weight: 700;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.1;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   z-index: 100;
+
+  i {
+    display: inline-block;
+    transform: scale(2);
+  }
 }
 
 ::ng-deep .aiod-feedback-button .aiod-feedback-text {
   display: inline-block;
+  margin-left: 20px;
 }
 
 ::ng-deep .aiod-feedback-button:hover,
