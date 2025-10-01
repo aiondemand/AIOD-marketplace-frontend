@@ -46,21 +46,14 @@
                     </a>
                   </div>
                   <div class="sub-menu d-flex flex-column" *ngIf="item.children && item.children.length > 0" [style.margin-left]="item.children.length > 4 ? '-500px' : '0'">
-                    <ul>
-                      <li *ngFor="let child of item.children" [ngClass]="{'highlight': child.highlight}">
+                      <ul>
+                      <li *ngFor="let child of item.children" [ngClass]="{'highlight': child.isHighlighted}">
                         <a [href]="child.url || '#'" [attr.target]="child.url ? '_blank' : null">
                           <span>{{ child.title }}</span>
                           <p *ngIf="child.description">{{ child.description }}</p>
                         </a>
                       </li>
                     </ul>
-                    <a
-                      *ngIf="item.extraButton"
-                      class="mt-4 btn btn-secondary"
-                      [href]="item.extraButton.url"
-                      [attr.target]="item.extraButton.url ? '_blank' : null"
-                      >{{ item.extraButton.text }}</a
-                    >
                   </div>
                 </li>
               </ul>
