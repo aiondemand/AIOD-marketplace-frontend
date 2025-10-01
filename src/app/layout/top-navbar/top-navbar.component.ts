@@ -8,6 +8,7 @@ import { NavigationService } from '@app/core/services/navigation/navigation.serv
 import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { EXTERNAL_LINKS } from '@app/shared/constants/external-links';
 
 @Component({
   selector: 'app-top-navbar',
@@ -25,6 +26,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   ) {}
   protected sideBarUser = false;
   protected environment = environment;
+  protected externalLinks = EXTERNAL_LINKS;
   userProfile?: UserProfile;
   preferredUsername?: string;
   isMatMenuOpen = false;
@@ -67,7 +69,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
     const navigationSub = this.navigationService
       .getNavigation()
       .subscribe((items: any[]) => {
-        this.menuItems = this.buildMenu(items || []);
+        this.menuItems = items || [];
       });
     this.navSub.add(navigationSub);
   }

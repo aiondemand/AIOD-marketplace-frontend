@@ -105,7 +105,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
 
     return this.http
       .post(
-        '/rail-api/search/query',
+        `${endpoints.prefixApiRAIL}${endpoints.enhancedSearch}${endpoints.query}`,
         {},
         {
           observe: 'response',
@@ -130,7 +130,9 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
     locationHeader: string,
   ): Observable<{ status: string; result_doc_ids?: string[] }> {
     return this.http.get<{ status: string; result_doc_ids?: string[] }>(
-      `${baseEnhanced}/search${removeTrailingSlash(locationHeader)}`,
+      `${baseEnhanced}${endpoints.enhancedSearch}${removeTrailingSlash(
+        locationHeader,
+      )}`,
     );
   }
 

@@ -14,6 +14,7 @@ import { AuthService } from '@app/core/services/auth/auth.service';
 import { SidenavService } from '@app/shared/services/sidenav/sidenav.service';
 import { environment } from 'src/environments/environment';
 import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
+import { EXTERNAL_LINKS } from '@app/shared/constants/external-links';
 
 @Component({
   selector: 'app-sidenav',
@@ -52,6 +53,8 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   protected environment = environment;
+
+  protected externalLinks = EXTERNAL_LINKS;
 
   options: any;
 

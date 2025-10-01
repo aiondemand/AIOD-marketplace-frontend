@@ -28,4 +28,9 @@ export const endpoints = {
 
   //Search
   search: '/v2/search',
+
+  //Enhanced Search
+  prefixApiRAIL: '/rail-api',
+  enhancedSearch: '/search/v2',
+  query: '/query',
 };
