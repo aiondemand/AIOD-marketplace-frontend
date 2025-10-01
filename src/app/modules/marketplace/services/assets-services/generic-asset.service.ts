@@ -130,7 +130,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
     locationHeader: string,
   ): Observable<{ status: string; result_doc_ids?: string[] }> {
     return this.http.get<{ status: string; result_doc_ids?: string[] }>(
-      `${baseEnhanced}${endpoints.search}${removeTrailingSlash(
+      `${baseEnhanced}${endpoints.enhancedSearch}${removeTrailingSlash(
         locationHeader,
       )}`,
     );
