@@ -659,7 +659,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           if (
             response.status === 'Completed' &&
             (!response.results ||
-              (!response.results && response.results.length == 0))
+              (response.results && response.results.length == 0))
           ) {
             this.spinnerService.updateMessage('No results found.');
             return of({ result_asset_ids: [] });
