@@ -637,8 +637,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           );
         }),
         filter(
-          (response) =>
-            response.status === 'Completed' && !!response.result_asset_ids,
+          (response) => response.status === 'Completed' && !!response.results,
         ),
         switchMap((response) => {
           if (
@@ -657,12 +656,15 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             );
           }
 
-          if (response.status === 'Completed' && !response.result_asset_ids) {
+          if (
+            response.status === 'Completed' &&
+            (!response.results ||
+              (response.results && response.results.length == 0))
+          ) {
             this.spinnerService.updateMessage('No results found.');
             return of({ result_asset_ids: [] });
           }
-
-          if (response.status === 'Completed' && response.result_asset_ids) {
+          if (response.status === 'Completed' && response.results.length > 0) {
             this.spinnerService.updateMessage('Loading results...');
             return of(response);
           }
@@ -671,13 +673,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         }),
         take(1),
         switchMap((response) => {
-          if (
-            response.result_asset_ids &&
-            response.result_asset_ids.length > 0
-          ) {
-            return this.generalAssetService.getMultipleAssets(
-              response.result_asset_ids,
+          if (response.results && response.results.length > 0) {
+            const asset_ids = response.results.map(
+              (item: { asset_id: string }) => item.asset_id,
             );
+
+            return this.generalAssetService.getMultipleAssets(asset_ids);
           }
 
           return of([]);
