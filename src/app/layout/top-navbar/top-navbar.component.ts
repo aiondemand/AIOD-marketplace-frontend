@@ -111,7 +111,8 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.authService.login(window.location.pathname);
+    const fullPath = window.location.pathname + window.location.search;
+    this.authService.login(fullPath);
   }
 
   logout() {
