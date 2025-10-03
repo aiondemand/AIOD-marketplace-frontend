@@ -14,12 +14,21 @@ export interface UserProfile {
 
 @Injectable()
 export class AuthService {
+  private lastSilentRefreshAt = 0;
+  private readonly minSilentRefreshIntervalMs = 100_000;
+
   constructor(
     private oauthService: OAuthService,
     private router: Router,
     private appConfigService: AppConfigService,
   ) {
     this.configureOAuthService();
+
+    try {
+      window.addEventListener('storage', this.handleStorageEvent.bind(this));
+    } catch (e) {
+      //swallow
+    }
   }
 
   userProfileSubject = new BehaviorSubject<UserProfile>({} as UserProfile);
@@ -32,59 +41,89 @@ export class AuthService {
    */
   configureOAuthService() {
     this.oauthService.configure(authCodeFlowConfig);
+    try {
+      if (
+        typeof localStorage !== 'undefined' &&
+        (this.oauthService as any).setStorage
+      ) {
+        (this.oauthService as any).setStorage(localStorage);
+      }
+    } catch (e) {
+      console.warn(
+        'AuthService: unable to set localStorage for OAuthService',
+        e,
+      );
+    }
+
     this.oauthService.setupAutomaticSilentRefresh();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then((isLoggedIn) => {
-      if (isLoggedIn && this.isAuthenticated()) {
-        if (this.oauthService.hasValidAccessToken()) {
-          this.oauthService.loadUserProfile().then((profile: any) => {
-            const userProfile: UserProfile = {
-              name: profile['info']['name'],
-              email: profile['info']['email'],
-              identifier: profile['info']['sub'],
-              isAuthorized: false,
-            };
-            // Note: commented out as it is not currently necessary, but
-            //       may need to be considered and adapted in the future, but for a different virtual organisation
-            // if (
-            //     profile['info']['eduperson_entitlement'] &&
-            //     profile['info']['eduperson_entitlement']
-            //         .length > 0
-            // ) {
-            //     const vos: string[] =
-            //         this.parseVosFromProfile(
-            //             profile['info'][
-            //                 'eduperson_entitlement'
-            //             ]
-            //         );
-            //     vos.forEach((vo) => {
-            //         if (
-            //             vo.includes(
-            //                 this.appConfigService.voName
-            //             )
-            //         ) {
-            //             userProfile.isAuthorized = true;
-            //         }
-            //     });
-            // }
-            this.userProfileSubject.next(userProfile);
-            if (
-              this.oauthService.state &&
-              this.oauthService.state !== 'undefined' &&
-              this.oauthService.state !== 'null'
-            ) {
-              let stateUrl = this.oauthService.state;
-              if (stateUrl.startsWith('/') === false) {
-                stateUrl = decodeURIComponent(stateUrl);
-              }
-              this.router.navigateByUrl(stateUrl);
-            }
-          });
-        } else {
-          // Force logout as we have no access to refresh tokens without client secret
-          this.logout();
+
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (this.isAuthenticated()) {
+        this.tryLoadProfileFromTokens();
+      } else {
+        const now = Date.now();
+        if (now - this.lastSilentRefreshAt > this.minSilentRefreshIntervalMs) {
+          this.lastSilentRefreshAt = now;
+          this.oauthService
+            .silentRefresh()
+            .then(() => this.tryLoadProfileFromTokens())
+            .catch(() => {
+              // swallow
+            });
         }
       }
     });
+  }
+
+  private async tryLoadProfileFromTokens(): Promise<void> {
+    if (this.isAuthenticated() && this.oauthService.hasValidAccessToken()) {
+      try {
+        const profile: any = await this.oauthService.loadUserProfile();
+        const userProfile: UserProfile = {
+          name: profile['info']['name'],
+          email: profile['info']['email'],
+          identifier: profile['info']['sub'],
+          isAuthorized: false,
+        };
+        this.userProfileSubject.next(userProfile);
+
+        if (
+          this.oauthService.state &&
+          this.oauthService.state !== 'undefined' &&
+          this.oauthService.state !== 'null'
+        ) {
+          let stateUrl = this.oauthService.state;
+          if (stateUrl.startsWith('/') === false) {
+            stateUrl = decodeURIComponent(stateUrl);
+          }
+          this.router.navigateByUrl(stateUrl);
+        }
+      } catch (e) {
+        this.userProfileSubject.next({} as UserProfile);
+      }
+    } else {
+      this.userProfileSubject.next({} as UserProfile);
+    }
+  }
+
+  private handleStorageEvent(event: StorageEvent) {
+    try {
+      if (!event.key) {
+        return;
+      }
+
+      const key = event.key;
+      if (
+        key.includes('access_token') ||
+        key.includes('id_token') ||
+        key.includes('logout') ||
+        key.includes('auth')
+      ) {
+        this.tryLoadProfileFromTokens();
+      }
+    } catch (e) {
+      // swallow
+    }
   }
 
   login(url: string) {
@@ -115,8 +154,9 @@ export class AuthService {
   parseVosFromProfile(entitlements: string[]): string[] {
     const foundVos: string[] = [];
     entitlements.forEach((vo) => {
-      if (vo.match('group:(.+?):')?.[0]) {
-        foundVos.push(vo.match('group:(.+?):')![0]);
+      const m = vo.match('group:(.+?):');
+      if (m && m[0]) {
+        foundVos.push(m[0]);
       }
     });
     return foundVos;
