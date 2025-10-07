@@ -265,13 +265,15 @@
 
   i {
     display: inline-block;
-    transform: scale(2);
+    transform: scale(1.54);
   }
 }
 
 ::ng-deep .aiod-feedback-button .aiod-feedback-text {
   display: inline-block;
   margin-left: 20px;
+  position: relative;
+  bottom: 2px;
 }
 
 ::ng-deep .aiod-feedback-button:hover,
