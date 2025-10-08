@@ -55,10 +55,44 @@
     }
   }
 
+  .mat-sidenav.mat-drawer.mat-drawer-side {
+    @media (min-width: 769px) {
+      position: fixed !important;
+      top: 8rem;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto !important;
+      z-index: 2000;
+    }
+  }
+
+  .sidebar-collapsed .mat-sidenav.mat-drawer.mat-drawer-side {
+    @media (min-width: 769px) {
+      width: 75px !important;
+      min-width: 75px !important;
+      max-width: 75px !important;
+    }
+  }
+
+  .sidebar-expanded .mat-sidenav.mat-drawer.mat-drawer-side {
+    @media (min-width: 769px) {
+      width: 280px !important;
+      min-width: 280px !important;
+      max-width: 280px !important;
+    }
+  }
+
   .sidebar-expanded .mat-sidenav-content.mat-drawer-content {
     @media (min-width: 769px) {
-      width: calc(100vw - 299px);
-      margin-left: 0;
+      margin-left: 280px;
+      width: calc(100vw - 280px);
+    }
+  }
+
+  .sidebar-collapsed .mat-sidenav-content.mat-drawer-content {
+    @media (min-width: 769px) {
+      margin-left: 75px;
+      width: calc(100vw - 75px);
     }
   }
 }
