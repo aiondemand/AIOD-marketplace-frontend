@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle(this.appConfigService.title);
 
-    const theme = getCookie('aiod_theme') || 'light';
+    const theme = getCookie('theme') || 'light';
     document.documentElement.setAttribute('data-theme', theme);
     document.body.dataset['data-theme'] = theme;
   }
@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
       document.body.dataset['data-theme'] === 'dark' ? 'light' : 'dark';
     document.body.dataset['data-theme'] = newTheme;
     document.documentElement.setAttribute('data-theme', newTheme);
-    setCookie('aiod_theme', newTheme);
+    setCookie('theme', newTheme);
   }
 }
