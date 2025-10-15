@@ -96,7 +96,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private searchService: ElasticSearchService,
     private spinnerService: SpinnerService,
   ) {
-    // Listen for theme changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
@@ -105,7 +104,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         ) {
           this.isLightTheme =
             document.documentElement.getAttribute('data-theme');
-          console.log('Theme changed to:', this.isLightTheme);
         }
       });
     });

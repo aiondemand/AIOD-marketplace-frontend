@@ -1,4 +1,3 @@
-import { OnInit } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { VALUE_TYPES } from '@app/shared/constants/value-types';
 import { GenericItem } from '@app/shared/models/generic.model';
@@ -8,7 +7,7 @@ import { GenericItem } from '@app/shared/models/generic.model';
   templateUrl: './generic.component.html',
   styleUrls: ['./generic.component.scss'],
 })
-export class GenericComponent implements OnInit {
+export class GenericComponent {
   readonly VALUE_TYPES = VALUE_TYPES;
 
   isDarkTheme(): boolean {
@@ -24,9 +23,6 @@ export class GenericComponent implements OnInit {
     } catch (e) {
       return false;
     }
-  }
-  ngOnInit(): void {
-    console.log('items:', this.items);
   }
   @Input() items: GenericItem[] = [];
   @Input() columns: string[] = [];
@@ -118,13 +114,17 @@ export class GenericComponent implements OnInit {
     return this.formatObjectValue(value);
   }
   getDistributionName(): string {
-    return this.items[0] && this.items[0]['distribution'][0]
-      ? this.items[0]['distribution'][0].name
-      : '';
+    try {
+      return this.items?.[0]?.['distribution']?.[0]?.name ?? '';
+    } catch (e) {
+      return '';
+    }
   }
   getDistributionDependency(): string {
-    return this.items[0] && this.items[0]['distribution'][0]
-      ? this.items[0]['distribution'][0].dependency
-      : '';
+    try {
+      return this.items?.[0]?.['distribution']?.[0]?.dependency ?? '';
+    } catch (e) {
+      return '';
+    }
   }
 }

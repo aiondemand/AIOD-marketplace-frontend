@@ -65,25 +65,25 @@
                             [style.color]="'#5bc0f7'">expand_more</mat-icon>
                 </div>
                 <div class="media-properties-list dropdown-content" [ngClass]="{'animate-dropdown': obj.showProperties}">
-                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
+                  <div class="media-property" *ngIf="obj.checksum_algorithm" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.checksum_algorithm }}</div>
                     <div class="media-property-label">Checksum Algorithm</div>
                   </div>
-                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
+                  <div class="media-property" *ngIf="obj.content_size_kb" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.content_size_kb }}</div>
                     <div class="media-property-label">Content size (KB)</div>
                   </div>
-                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
+                  <div class="media-property" *ngIf="obj.content_url" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">
-                      <a *ngIf="obj.content_url" [href]="obj.content_url" target="_blank">{{ obj.content_url }}</a>
+                      <a [href]="obj.content_url" target="_blank">{{ obj.content_url }}</a>
                     </div>
                     <div class="media-property-label">Content URL</div>
                   </div>
-                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
+                  <div class="media-property" *ngIf="obj.copyright" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()}">
                     <div class="media-property-value">{{ obj.copyright }}</div>
                     <div class="media-property-label">Copyright</div>
                   </div>
-                  <div class="media-property" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()} ">
+                  <div class="media-property" *ngIf="obj.date_published" [ngClass]="{'dark': isDarkTheme(), 'light': !isDarkTheme()} ">
                     <div class="media-property-value">{{ obj.date_published }}</div>
                     <div class="media-property-label">Date Published</div>
                   </div>
