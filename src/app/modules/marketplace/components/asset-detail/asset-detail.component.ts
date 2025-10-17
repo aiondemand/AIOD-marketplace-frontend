@@ -250,7 +250,10 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       } else {
         // Handle single-level properties normally
         const value = this.getNestedProperty(this.asset, column);
-        assetData[column] = this.formatValue(value);
+        assetData[column] =
+          typeof value === 'object' && value !== null
+            ? value
+            : this.formatValue(value);
       }
     });
 

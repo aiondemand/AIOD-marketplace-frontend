@@ -1,7 +1,7 @@
 export const modelConfig = {
   AIModel: {
     columns: [
-      'description.plain',
+      'description',
       'same_as',
       'distribution',
       'distribution.dependency',
@@ -10,7 +10,7 @@ export const modelConfig = {
   },
   Dataset: {
     columns: [
-      'description.plain',
+      'description',
       'license',
       'same_as',
       'distribution',
@@ -25,8 +25,9 @@ export const modelConfig = {
   },
   Experiment: {
     columns: [
-      'description.plain',
+      'description',
       'media',
+      'media.description',
       'media.checksum',
       'media.checksum_algorithm',
       'media.content_size_kb',
@@ -47,8 +48,9 @@ export const modelConfig = {
   },
   'Educational resource': {
     columns: [
-      'description.plain',
+      'description',
       'media',
+      'media.description',
       'media.name',
       'media.content_url',
       'same_as',
@@ -56,12 +58,12 @@ export const modelConfig = {
     title: 'Educational Resource',
   },
   Publication: {
-    columns: ['description.plain', 'type'],
+    columns: ['description', 'type'],
     title: 'Publication',
   },
   'Case studies': {
     columns: [
-      'description.plain',
+      'description',
       'distribution',
       'distribution.platform',
       'distribution.name',
@@ -70,6 +72,7 @@ export const modelConfig = {
       'distribution.content_url',
       'distribution.encoding_format',
       'media',
+      'media.description',
       'media.checksum',
       'media.checksum_algorithm',
       'media.content_size_kb',
