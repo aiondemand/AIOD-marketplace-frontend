@@ -10,6 +10,7 @@ export interface UserProfile {
   email: string;
   identifier: string;
   isAuthorized: boolean;
+  preferred_username?: string;
 }
 
 @Injectable()
@@ -83,6 +84,7 @@ export class AuthService {
           name: profile['info']['name'],
           email: profile['info']['email'],
           identifier: profile['info']['sub'],
+          preferred_username: profile['info']['preferred_username'],
           isAuthorized: false,
         };
         this.userProfileSubject.next(userProfile);
