@@ -62,8 +62,7 @@ export class GenericComponent {
     if (this.isURL(value)) {
       return VALUE_TYPES.URL;
     }
-
-    if (this.isCommaSeparatedString(value)) {
+    if (typeof value === 'string' && value.includes(',')) {
       return VALUE_TYPES.ARRAY;
     }
 

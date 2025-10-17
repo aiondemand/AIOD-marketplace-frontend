@@ -140,7 +140,7 @@
         color: #41b6e6;
       }
     }
-    .badge.dark p {
+    .asset-property.dark p {
       color: #e6eef7;
     }
   }
@@ -185,8 +185,26 @@
   .object-array-container .table a:hover {
     text-decoration: underline;
   }
-  .badge {
+  .asset-property {
     text-align: left;
+  }
+
+  .asset-property.light {
+    color: #000;
+  }
+
+  .asset-property.dark {
+    color: #c2c2c2;
+  }
+
+  .item-info-body .item-info-container .light {
+    color: #000;
+    font-weight: 400;
+    font-family: Montserrat, sans-serif;
+  }
+
+  .item-info-body .item-info-container .dark {
+    color: #c2c2c2;
   }
   .distribution-entry {
     padding: 16px;

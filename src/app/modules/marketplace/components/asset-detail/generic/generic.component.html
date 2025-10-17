@@ -17,13 +17,12 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ arrayItem }}<span *ngIf="!last">, </span>
             </a>
           </ng-container>
           <ng-template #normalArray>
-            <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="col">
-              {{ arrayItem }}<span *ngIf="!last">, </span>
-            </span>
+        <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">
+            {{ arrayItem }}<span *ngIf="!last" [ngClass]="getThemeClass()">, </span>
+        </span>
           </ng-template>
         </div>
         <!-- Distribution Type -->
@@ -175,13 +174,16 @@
         <div *ngIf="col === 'badge'">
           <markdown
             *ngFor="let badgeItem of getArrayValues(item[col])"
-            class="badge"
+            class="asset-property"
             [ngClass]="getThemeClass()"
           >
             {{ badgeItem }}
           </markdown>
         </div>
-        <markdown *ngIf="col === 'type'" class="badge">
+        <markdown *ngIf="col === 'type'" class="asset-property">
+          {{ item[col] }}
+        </markdown>
+        <markdown *ngIf="getValueType(item[col]) === VALUE_TYPES.TEXT  && col === 'target_group'" class="asset-property">
           {{ item[col] }}
         </markdown>
     </div>
