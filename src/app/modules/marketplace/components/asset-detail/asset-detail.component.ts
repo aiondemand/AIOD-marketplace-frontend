@@ -56,6 +56,27 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
         this.prepareGenericData();
+        // After asset is loaded, check if it's bookmarked
+        const bookmarkSub = this.bookmarkService.getBookmarks().subscribe({
+          next: (bookmarks: AssetsPurchase[] | any) => {
+            try {
+              // The BookmarkService returns an array of items with resource_identifier
+              // In some code paths it may return an Observable-wrapped forkJoin; handle safely
+              const list = Array.isArray(bookmarks) ? bookmarks : [];
+              this.isBookmarked = list.some(
+                (b: any) =>
+                  b && b.resource_identifier === this.asset.identifier,
+              );
+            } catch (e) {
+              this.isBookmarked = false;
+            }
+          },
+          error: (err: any) => {
+            console.error('Error fetching bookmarks for asset detail', err);
+            this.isBookmarked = false;
+          },
+        });
+        this.subscriptions.add(bookmarkSub);
       },
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000);
@@ -147,7 +168,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       const bookmarkedAsset = this.getBookmarkedAsset();
 
       this.bookmarkService.addBookmark(bookmarkedAsset.identifier).subscribe({
-        next: (_bookmarkedAssets: any) => {
+        next: () => {
           // ToDo: change bookmark icon style
         },
         error: (error: any) => console.error('Error bookmarking asset', error),

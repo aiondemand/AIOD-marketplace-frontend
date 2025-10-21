@@ -2,10 +2,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
-import { Observable, map, of, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { EXTERNAL_LINKS } from '@app/shared/constants/external-links';
+import { environment } from '@environments/environment';
+import { Observable, of, map } from 'rxjs';
 
 export enum AssetCategoryShort {
   mdl = 'AIModel',

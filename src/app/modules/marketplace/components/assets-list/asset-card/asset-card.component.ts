@@ -55,6 +55,10 @@ export class AssetCardComponent implements OnInit {
         AssetCategory,
         this.asset.category,
       );
+      // initialize bookmark state from incoming asset (set by parent list)
+      if ((this.asset as any).isBookmarked !== undefined) {
+        this.isBookmarked = !!(this.asset as any).isBookmarked;
+      }
     }
   }
 
@@ -63,9 +67,11 @@ export class AssetCardComponent implements OnInit {
 
     if (!this.isBookmarked) {
       this.addBookmark();
-    } else this.deleteBookmark();
-
-    this.isBookmarked = !this.isBookmarked;
+      this.isBookmarked = true;
+    } else {
+      this.deleteBookmark();
+      this.isBookmarked = false;
+    }
   }
 
   isAuthenticated(): boolean {
