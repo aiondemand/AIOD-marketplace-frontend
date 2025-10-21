@@ -175,7 +175,7 @@ export class GenericComponent {
       return '';
     }
 
-    return description['html'] || description['plain'] || '';
+    return description['plain'] || description['html'] || '';
   }
 
   // Template helper methods
