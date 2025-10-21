@@ -14,7 +14,7 @@ import { AppConfigService } from '@app/core/services/app-config/app-config.servi
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-bookmark-view',
@@ -29,8 +29,6 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService,
   ) {}
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   private subscriptions: Subscription = new Subscription();
   public displayedColumns: string[] = [
     'name',
@@ -39,22 +37,49 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     'delete',
   ];
   public assetsPurchase: AssetsPurchase[] = [];
-  public dataSource = new MatTableDataSource(this.assetsPurchase);
+  public allAssets: AssetsPurchase[] = [];
+  public paginatedAssets: AssetsPurchase[] = [];
+  public dataSource = new MatTableDataSource(this.paginatedAssets);
   public isLoading = false;
   public userProfile!: UserProfile;
   public lengthTable = 0;
+
+  public pageSizeOptions: number[] = [10, 15, 25, 100];
+  public currentPageSize = 10;
+  public currentPage = 0;
+  public assetsSize: number | null = null;
+  public isLightTheme: string | null = null;
 
   private getAssetsPurchases(): void {
     this.isLoading = true;
     const subscribeLib = this.bookmarkService.getBookmarks().subscribe({
       next: (assets: AssetsPurchase[]) => {
-        this.dataSource.data = assets;
-        this.dataSource.filter = 'any';
-        this.lengthTable = this.dataSource.data.length;
+        const incoming = assets ?? [];
+        const validAssets = incoming.filter(
+          (a) => a && a.identifier && (a.name || a.urlMetadata),
+        );
+        this.allAssets = validAssets;
+        this.lengthTable = this.allAssets.length;
+        this.assetsSize = this.allAssets.length;
+        this.updatePaginatedData();
         this.isLoading = false;
       },
       error: (error: any) => {
+        if (error instanceof HttpErrorResponse && error.status === 422) {
+          this.allAssets = [];
+          this.paginatedAssets = [];
+          this.dataSource.data = [];
+          this.lengthTable = 0;
+          this.assetsSize = 0;
+          this.isLoading = false;
+          console.warn('Handled 422 response when getting bookmarks');
+          return;
+        }
+
+        this.allAssets = [];
+        this.paginatedAssets = [];
         this.dataSource.data = [];
+        this.assetsSize = 0;
         setTimeout(() => (this.isLoading = false), 3000);
         console.error('Error to get assets purchases', error);
       },
@@ -62,13 +87,26 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.add(subscribeLib);
   }
 
-  public getColorCategory(category: AssetCategory): string {
+  public getColorCategory(category?: AssetCategory): string {
+    const assetsConfig = this.appConfig?.assets ?? {};
+
+    if (!category) {
+      const first = Object.values(assetsConfig)[0] as any;
+      return first?.color ?? '';
+    }
+
     const key = getKeyCategoryByValue(AssetCategory, category) ?? '';
-    return this.appConfig.assets[key.toLocaleLowerCase()].color;
+    const assetConfig = assetsConfig[key.toLocaleLowerCase()];
+
+    if (!assetConfig || !assetConfig.color) {
+      const first = Object.values(assetsConfig)[0] as any;
+      return first?.color ?? '';
+    }
+
+    return assetConfig.color;
   }
 
   public deleteAssetMyLibrary(asset: AssetsPurchase): void {
-    console.log(asset);
     this.bookmarkService.deleteBookmark(asset.identifier).subscribe({
       next: () => {
         this.getAssetsPurchases();
@@ -79,17 +117,50 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private applyFilter(category: AssetCategory): void {
-    this.dataSource.filterPredicate = (
-      data: AssetsPurchase,
-      filter: string,
-    ) => {
-      return data.category === category || filter === 'any';
-    };
-    this.dataSource.filter = category;
-    this.lengthTable = this.dataSource.paginator?.length ?? 0;
+    this.lengthTable = this.allAssets.length;
+    this.assetsSize = this.allAssets.length;
+    this.currentPage = 0;
+    this.updatePaginatedData();
+  }
+
+  public onPageSizeChange(event: Event): void {
+    this.currentPage = 0;
+    this.updatePaginatedData();
+  }
+
+  public goToPage(page: number): void {
+    if (page >= 0 && page < this.getTotalPages()) {
+      this.currentPage = page;
+      this.updatePaginatedData();
+    }
+  }
+
+  public getTotalPages(): number {
+    if (!this.assetsSize) return 0;
+    return Math.ceil(this.assetsSize / this.currentPageSize);
+  }
+
+  public getRangeLabel(): string {
+    if (!this.assetsSize || this.assetsSize === 0) {
+      return '0 of 0';
+    }
+    const startIndex = this.currentPage * this.currentPageSize + 1;
+    const endIndex = Math.min(
+      (this.currentPage + 1) * this.currentPageSize,
+      this.assetsSize,
+    );
+    return `${startIndex} - ${endIndex} of ${this.assetsSize}`;
+  }
+
+  private updatePaginatedData(): void {
+    const startIndex = this.currentPage * this.currentPageSize;
+    const endIndex = startIndex + this.currentPageSize;
+    this.paginatedAssets = this.allAssets.slice(startIndex, endIndex);
+    this.dataSource.data = this.paginatedAssets;
   }
 
   ngOnInit(): void {
+    this.isLightTheme = document.documentElement.getAttribute('data-theme');
     this.subscriptions.add(
       this.filterState.assetCategorySelected$.subscribe((category) =>
         this.applyFilter(category),
@@ -107,11 +178,6 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // Initialize paginator and then load bookmarks so the table and paginator
-    // are ready when data arrives. Deferring the initial load to the next
-    // macrotask avoids ExpressionChangedAfterItHasBeenCheckedError when the
-    // data source updates synchronously during view initialization.
-    this.dataSource.paginator = this.paginator;
     setTimeout(() => this.getAssetsPurchases());
   }
 

@@ -27,7 +27,7 @@ tr.element-row:hover {
 }
 .mat-column-urlMetadata {
   width: 12.5%;
-  text-align: end;
+  text-align: center;
 }
 
 .mat-column-delete {
@@ -48,6 +48,173 @@ tr.element-row:hover {
   width: 100%;
   font-size: inherit;
   background: inherit;
+}
+
+// Custom paginator styles
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.custom-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-family: $font;
+  font-size: 16px;
+
+  .paginator-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 2rem;
+
+    .page-size-label {
+      font-size: 16px;
+      min-width: 8rem;
+    }
+
+    .page-size-select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 8px;
+      font-family: $font;
+      font-size: 16px;
+      min-width: 50px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        border-bottom-color: $color-primary4;
+      }
+
+      option {
+        background: #1a1a1a;
+        color: $white;
+      }
+    }
+  }
+
+  .paginator-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .range-label {
+      font-size: 14px;
+    }
+
+    .nav-button {
+      background: none;
+      border: none;
+      color: $color-primary4;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 18px;
+      transition: opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+
+      &:hover:not(:disabled) {
+        opacity: 0.7;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      span {
+        line-height: 1;
+      }
+    }
+  }
+}
+
+// Dark theme styles using :host-context
+:host-context([data-theme='dark']) {
+  .custom-paginator {
+    color: $white !important;
+
+    .paginator-left {
+      .page-size-label {
+        color: $white !important;
+      }
+
+      .page-size-select {
+        color: $white !important;
+        border-bottom-color: rgba(255, 255, 255, 0.3);
+
+        option {
+          background: #1a1a1a;
+          color: $white;
+        }
+      }
+    }
+
+    .paginator-right {
+      .range-label {
+        color: $white !important;
+      }
+
+      .nav-button {
+        color: $color-primary4 !important;
+
+        &:disabled {
+          color: $color-default6 !important;
+        }
+      }
+    }
+  }
+}
+
+// Light theme styles using :host-context
+:host-context([data-theme='light']) {
+  .custom-paginator {
+    color: $color-default7 !important;
+
+    .paginator-left {
+      .page-size-label {
+        color: $color-default7 !important;
+      }
+
+      .page-size-select {
+        color: $color-default7 !important;
+        border-bottom-color: rgba(0, 0, 0, 0.3);
+
+        option {
+          background: $white;
+          color: $color-default7;
+        }
+      }
+    }
+
+    .paginator-right {
+      .range-label {
+        color: $color-default7 !important;
+      }
+
+      .nav-button {
+        color: $color-primary2 !important;
+
+        &:disabled {
+          color: $color-default4 !important;
+        }
+      }
+    }
+  }
+}
+
+.custom-spinner {
+  display: inline-block;
+  vertical-align: middle;
   font-family: inherit;
   font-size: inherit;
 }
@@ -114,7 +281,7 @@ tr.element-row:hover {
 
 .mat-column-urlMetadata {
   mat-icon.small-link-icon {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     overflow: visible;
   }
 }

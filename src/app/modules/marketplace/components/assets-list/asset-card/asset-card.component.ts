@@ -38,23 +38,16 @@ export class AssetCardComponent implements OnInit {
   assetIcon = '';
   isBookmarked = false;
 
-  private getBookmarkedAsset(): AssetsPurchase {
-    return {
-      identifier: '' + this.asset.identifier,
-      name: this.asset.name,
-      category: this.asset.category,
-      urlMetadata: this.asset.same_as ?? '',
-      price: 0,
-      addedAt: new Date().getDate(),
-    } as AssetsPurchase;
-  }
-
   ngOnInit(): void {
     if (this.asset) {
       this.categoryKey = getKeyCategoryByValue(
         AssetCategory,
         this.asset.category,
       );
+      // initialize bookmark state from incoming asset (set by parent list)
+      if ((this.asset as any).isBookmarked !== undefined) {
+        this.isBookmarked = !!(this.asset as any).isBookmarked;
+      }
     }
   }
 
@@ -63,9 +56,11 @@ export class AssetCardComponent implements OnInit {
 
     if (!this.isBookmarked) {
       this.addBookmark();
-    } else this.deleteBookmark();
-
-    this.isBookmarked = !this.isBookmarked;
+      this.isBookmarked = true;
+    } else {
+      this.deleteBookmark();
+      this.isBookmarked = false;
+    }
   }
 
   isAuthenticated(): boolean {
