@@ -15,6 +15,7 @@ import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-catego
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-bookmark-view',
@@ -48,12 +49,24 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
     const subscribeLib = this.bookmarkService.getBookmarks().subscribe({
       next: (assets: AssetsPurchase[]) => {
-        this.dataSource.data = assets;
+        const incoming = assets ?? [];
+        const validAssets = incoming.filter(
+          (a) => a && a.identifier && (a.name || a.urlMetadata),
+        );
+        this.dataSource.data = validAssets;
         this.dataSource.filter = 'any';
         this.lengthTable = this.dataSource.data.length;
         this.isLoading = false;
       },
       error: (error: any) => {
+        if (error instanceof HttpErrorResponse && error.status === 422) {
+          this.dataSource.data = [];
+          this.lengthTable = 0;
+          this.isLoading = false;
+          console.warn('Handled 422 response when getting bookmarks');
+          return;
+        }
+
         this.dataSource.data = [];
         setTimeout(() => (this.isLoading = false), 3000);
         console.error('Error to get assets purchases', error);
@@ -62,13 +75,26 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.add(subscribeLib);
   }
 
-  public getColorCategory(category: AssetCategory): string {
+  public getColorCategory(category?: AssetCategory): string {
+    const assetsConfig = this.appConfig?.assets ?? {};
+
+    if (!category) {
+      const first = Object.values(assetsConfig)[0] as any;
+      return first?.color ?? '';
+    }
+
     const key = getKeyCategoryByValue(AssetCategory, category) ?? '';
-    return this.appConfig.assets[key.toLocaleLowerCase()].color;
+    const assetConfig = assetsConfig[key.toLocaleLowerCase()];
+
+    if (!assetConfig || !assetConfig.color) {
+      const first = Object.values(assetsConfig)[0] as any;
+      return first?.color ?? '';
+    }
+
+    return assetConfig.color;
   }
 
   public deleteAssetMyLibrary(asset: AssetsPurchase): void {
-    console.log(asset);
     this.bookmarkService.deleteBookmark(asset.identifier).subscribe({
       next: () => {
         this.getAssetsPurchases();
@@ -83,7 +109,7 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
       data: AssetsPurchase,
       filter: string,
     ) => {
-      return data.category === category || filter === 'any';
+      return filter === 'any';
     };
     this.dataSource.filter = category;
     this.lengthTable = this.dataSource.paginator?.length ?? 0;
@@ -107,10 +133,6 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // Initialize paginator and then load bookmarks so the table and paginator
-    // are ready when data arrives. Deferring the initial load to the next
-    // macrotask avoids ExpressionChangedAfterItHasBeenCheckedError when the
-    // data source updates synchronously during view initialization.
     this.dataSource.paginator = this.paginator;
     setTimeout(() => this.getAssetsPurchases());
   }

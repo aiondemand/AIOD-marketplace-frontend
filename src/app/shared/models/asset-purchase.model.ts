@@ -12,7 +12,7 @@ export class AssetsPurchase {
     this.identifier = data?.resource_identifier ?? '';
     this.category = data.category;
     this.name = data.name;
-    this.urlMetadata = data?.url_metadata ?? '';
+    this.urlMetadata = data?.same_as ?? '';
     this.price = data?.price ?? 0;
     this.addedAt = data?.addedAt ?? 0;
   }
