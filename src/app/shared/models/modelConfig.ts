@@ -1,16 +1,17 @@
 export const modelConfig = {
   AIModel: {
     columns: [
-      'description.plain',
+      'description',
       'same_as',
       'distribution',
       'distribution.dependency',
+      'relevant_link',
     ],
     title: 'AI Model',
   },
   Dataset: {
     columns: [
-      'description.plain',
+      'description',
       'license',
       'same_as',
       'distribution',
@@ -20,13 +21,15 @@ export const modelConfig = {
       'distribution.checksum_algorithm',
       'distribution.content_url',
       'distribution.encoding_format',
+      'relevant_link',
     ],
     title: 'Dataset',
   },
   Experiment: {
     columns: [
-      'description.plain',
+      'description',
       'media',
+      'media.description',
       'media.checksum',
       'media.checksum_algorithm',
       'media.content_size_kb',
@@ -42,26 +45,29 @@ export const modelConfig = {
       'distribution.checksum_algorithm',
       'execution_settings',
       'badge',
+      'relevant_link',
     ],
     title: 'Experiment',
   },
   'Educational resource': {
     columns: [
-      'description.plain',
+      'description',
       'media',
+      'media.description',
       'media.name',
       'media.content_url',
       'same_as',
+      'relevant_link',
     ],
     title: 'Educational Resource',
   },
   Publication: {
-    columns: ['description.plain', 'type'],
+    columns: ['description', 'type'],
     title: 'Publication',
   },
   'Case studies': {
     columns: [
-      'description.plain',
+      'description',
       'distribution',
       'distribution.platform',
       'distribution.name',
@@ -70,6 +76,7 @@ export const modelConfig = {
       'distribution.content_url',
       'distribution.encoding_format',
       'media',
+      'media.description',
       'media.checksum',
       'media.checksum_algorithm',
       'media.content_size_kb',
@@ -77,6 +84,7 @@ export const modelConfig = {
       'media.copyright',
       'media.date_published',
       'same_as',
+      'relevant_link',
     ],
     title: 'Case Studies',
   },

@@ -59,8 +59,9 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
           email: profile.email || '',
           identifier: profile.identifier || '',
           isAuthorized: profile.isAuthorized || false,
+          preferred_username: profile.preferred_username || '',
         };
-        this.preferredUsername = profile.name || '';
+        this.preferredUsername = profile.preferred_username || '';
         localStorage.removeItem('loginPrompted');
       }
     });
