@@ -102,11 +102,12 @@ header {
   }
 
   .header-nav {
-    padding: 41px 0px 37px 37px;
+    padding: 24px 0px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     display: flex;
+    max-height: 143px;
 
     @include max-md {
       height: 120px;
@@ -153,7 +154,8 @@ header {
 
       .logotipo,
       .logotipo-grey {
-        max-width: 120px;
+        max-height: 96px;
+        margin-left: 20px;
       }
 
       .logotipo-cores {
@@ -401,7 +403,7 @@ header {
     }
     .top-bar-buttons {
       width: 55%;
-      margin-left: 100px;
+      margin-left: 40px;
     }
   }
 
@@ -910,8 +912,7 @@ header {
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 9px 11px 11px 11px;
     z-index: 111;
     position: relative;
   }
@@ -988,6 +989,16 @@ input:checked + .slider {
 
   .slider:before {
     opacity: 1;
+  }
+
+  // Ensure logo size matches light theme and doesn't grow in dark mode
+  .header-nav {
+    &-logo {
+      .logotipo,
+      .logotipo-grey {
+        width: auto;
+      }
+    }
   }
 }
 
