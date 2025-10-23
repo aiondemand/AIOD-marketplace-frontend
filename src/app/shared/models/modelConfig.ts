@@ -88,4 +88,21 @@ export const modelConfig = {
     ],
     title: 'Case Studies',
   },
+  'Resource Bundle': {
+    columns: [
+      'description.plain',
+      'distribution',
+      'distribution.dependency',
+      'distribution.platform',
+      'media',
+      'media.checksum',
+      'media.checksum_algorithm',
+      'media.content_size_kb',
+      'media.content_url',
+      'media.copyright',
+      'media.date_published',
+      'same_as',
+    ],
+    title: 'Resource Bundle',
+  },
 };
