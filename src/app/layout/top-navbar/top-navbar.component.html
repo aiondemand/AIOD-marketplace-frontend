@@ -11,18 +11,10 @@
                 <span></span>
               </div>
             </div>
-
-            <div class="corner-ribbon red" *ngIf="environment.develop">Dev</div>
-            <a href="{{ externalLinks.AIOD_HOME }}"
-              ><img
-                src="../assets/img/logo-white.svg"
-                alt=""
-                class="logotipo" /><img
-                src="../assets/img/logo-cinza.svg"
-                alt=""
-                class="logotipo-grey d-none"
-            /></a>
-
+            <a href="{{ externalLinks.AIOD_HOME }}">
+              <img src="../assets/img/logo-dark.png" alt="AIOD logo dark" class="logotipo" />
+              <img src="../assets/img/logo-light.png" alt="AIOD logo light" class="logotipo-grey d-none" />
+            </a>
             <!--not shown on bigger screens-->
             <a
               href=""
@@ -102,8 +94,7 @@
                 <div class="btn btn btn-circle btn-user ml-0 mr-0">
                   <img src="../assets/img/user-image-default.jpg" alt="" />
                 </div>
-             
-                <span style="font-weight: 700;">{{ userProfile?.name }}</span>
+                <span style="font-weight: 700;">{{ userProfile?.preferred_username }}</span>
               </div>
               <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
             </div>
@@ -206,7 +197,7 @@
                         class="dark-icon"
                         width="16"
                         height="16"
-                        viewBox="0 0 16 16"
+                        viewBox="1 1 15 16"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
