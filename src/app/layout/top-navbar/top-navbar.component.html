@@ -101,10 +101,10 @@
           </ng-template>
 
           <ng-template #themeSwitch>
-            <div  (click)="toggleTheme()" class="theme-switch-wrapper">
+            <div   class="theme-switch-wrapper">
               <label  class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox" />
-                <div class="slider round">
+                <div (click)="toggleTheme()" class="slider round">
                   <div class="theme-switch-icons">
                     <div>
                       <svg
