@@ -99,10 +99,10 @@
                 class="user-avatar-button user-avatar d-none d-lg-flex"
                 (click)="sideBarUser = !sideBarUser"
               >
-                <div class="btn btn btn-circle btn-user ml-2">
+                <div class="btn btn btn-circle btn-user ml-0 mr-0">
                   <img src="../assets/img/user-image-default.jpg" alt="" />
-                  <span class="notifications">1</span>
                 </div>
+             
                 <span style="font-weight: 700;">{{ userProfile?.name }}</span>
               </div>
               <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
