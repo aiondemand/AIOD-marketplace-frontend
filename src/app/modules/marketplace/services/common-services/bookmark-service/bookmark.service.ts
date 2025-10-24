@@ -1,105 +1,142 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
-import { UserPurchases } from '@app/shared/models/user.model';
-import { UserModel } from '@app/shared/models/user.model';
+import { forkJoin } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { EXTERNAL_LINKS } from '@app/shared/constants/external-links';
 import { environment } from '@environments/environment';
-import { Observable, map } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 
-const { base, endpoints } = environment.api;
+export enum AssetCategoryShort {
+  mdl = 'AIModel',
+  data = 'Dataset',
+  exp = 'Experiment',
+  serv = 'Service',
+  edu = 'Educational resource',
+  pub = 'Publication',
+}
 
-export interface BookmarkBodyRemove {
-  identifier: string;
-  category: AssetCategory;
+interface BookmarkItem {
+  resource_identifier: string;
+  created_at: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookmarkService {
+  private readonly BOOKMARKS_URL =
+    environment.name === 'dev'
+      ? EXTERNAL_LINKS.BOOKMARKS_TEST
+      : EXTERNAL_LINKS.BOOKMARKS_PROD;
+
+  private readonly ENDPOINT_MAPPING: { [key: string]: string } = {
+    mdl: 'ml_models',
+    data: 'datasets',
+    exp: 'experiments',
+    edu: 'educational_resources',
+    pub: 'publications',
+  };
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
   ) {}
 
+  private getPrefix(identifier: string): string {
+    return identifier.split('_')[0];
+  }
+
+  private getEndpoint(prefix: string): string {
+    return this.ENDPOINT_MAPPING[prefix] || 'ml_models';
+  }
+
+  private getCategoryFromPrefix(prefix: string): string {
+    return (
+      AssetCategoryShort[prefix as keyof typeof AssetCategoryShort] || 'AIModel'
+    );
+  }
+
   private getHttpHeader(): HttpHeaders {
     const authToken = this.authService.getToken();
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
     });
-
-    return headers;
   }
 
-  private parseRequest(items: AssetsPurchase[]): Array<any> {
-    return items.map((item) => {
-      return {
-        identifier: item.identifier,
-        name: item.name,
-        category: item.category,
-        url_metadata: item.urlMetadata,
-        price: item.price,
-        added_at: item.addedAt,
-      };
+  private parseResponseAssetsPurchase(
+    data: any,
+    prefix: string,
+  ): AssetsPurchase {
+    if (!data) {
+      return new AssetsPurchase({});
+    }
+
+    const payload: any = {
+      resource_identifier: data.ai_resource_identifier,
+      addedAt: data.created_at,
+      category: this.getCategoryFromPrefix(prefix),
+      name: data.name || data.category,
+    };
+
+    return new AssetsPurchase(payload);
+  }
+
+  public getBookmarks(): Observable<AssetsPurchase[]> {
+    return this.http
+      .get<BookmarkItem[]>(this.BOOKMARKS_URL, {
+        headers: this.getHttpHeader(),
+      })
+      .pipe(
+        map((response: BookmarkItem[]) => {
+          const requestData = response.map((item) => {
+            const identifier = item.resource_identifier;
+            const prefix = this.getPrefix(identifier);
+            const endpoint = this.getEndpoint(prefix);
+            const url = `https://mylibrary.aiod.eu/api-metadata/${endpoint}/${identifier}`;
+
+            return {
+              request: this.http.get<any>(url).pipe(catchError(() => of(item))),
+              prefix,
+            };
+          });
+
+          return forkJoin(requestData.map((rd) => rd.request)).pipe(
+            map((responses: any[]) =>
+              responses.map((r, i) =>
+                this.parseResponseAssetsPurchase(r, requestData[i].prefix),
+              ),
+            ),
+          );
+        }),
+        catchError((error) => {
+          console.error('Error fetching bookmarks:', error);
+          return of([]);
+        }),
+      )
+      .pipe(
+        map((result) => result as AssetsPurchase[]),
+        catchError((error) => {
+          console.error('Final error in getBookmarks:', error);
+          return of([]);
+        }),
+      );
+  }
+
+  public addBookmark(identifier: string): Observable<string> {
+    return this.http.post<any>(this.BOOKMARKS_URL, null, {
+      params: new HttpParams().set('resource_identifier', identifier),
+      headers: this.getHttpHeader(),
     });
   }
 
-  private parseResponseAssetsPurchase(data: any): AssetsPurchase {
-    return new AssetsPurchase(data);
-  }
-
-  private parseResponseUserPurchases(data: any): UserPurchases {
-    return new UserPurchases(data.data);
-  }
-
-  public getBookmarks(user: UserModel): Observable<AssetsPurchase[]> {
-    const url =
-      `${base}${endpoints.prefixApiLibraries}${endpoints.librariesAssets}`.replace(
-        ':userId',
-        user.id,
-      );
-    return this.http
-      .get<any>(url, { headers: this.getHttpHeader() })
-      .pipe(
-        map((data: any) =>
-          data.data.map((item: any) => this.parseResponseAssetsPurchase(item)),
-        ),
-      );
-  }
-
-  public addBookmark(
-    user: UserModel,
-    items: AssetsPurchase[],
-  ): Observable<UserPurchases> {
-    const url =
-      `${base}${endpoints.prefixApiPayment}${endpoints.payment}`.replace(
-        ':userId',
-        user.id,
-      );
-    const params = new HttpParams().set('user_email', user.email);
-    const headers = this.getHttpHeader();
-
-    return this.http
-      .post<any>(url, this.parseRequest(items), { params, headers })
-      .pipe(map((data) => this.parseResponseUserPurchases(data)));
-  }
-
-  public deleteBookmark(
-    user: UserModel,
-    body: BookmarkBodyRemove,
-  ): Observable<void> {
-    const url =
-      `${base}${endpoints.prefixApiLibraries}${endpoints.librariesAssets}`.replace(
-        ':userId',
-        user.id,
-      );
-    const httpOptions = {
+  public deleteBookmark(identifier: string): Observable<string> {
+    const params = new HttpParams().set('resource_identifier', identifier);
+    return this.http.delete<string>(this.BOOKMARKS_URL, {
+      params,
       headers: this.getHttpHeader(),
-      body,
-    };
-    return this.http.delete<void>(url, httpOptions);
+    });
   }
 }

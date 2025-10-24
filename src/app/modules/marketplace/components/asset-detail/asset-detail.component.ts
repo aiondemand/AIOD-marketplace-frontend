@@ -7,11 +7,7 @@ import { Subscription, switchMap } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
-import {
-  BookmarkBodyRemove,
-  BookmarkService,
-} from '../../services/common-services/bookmark-service/bookmark.service';
-import { UserModel } from '@app/shared/models/user.model';
+import { BookmarkService } from '../../services/common-services/bookmark-service/bookmark.service';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { GenericItem } from '@app/shared/models/generic.model';
 import { modelConfig } from '@app/shared/models/modelConfig';
@@ -60,6 +56,27 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
         this.prepareGenericData();
+        // After asset is loaded, check if it's bookmarked
+        const bookmarkSub = this.bookmarkService.getBookmarks().subscribe({
+          next: (bookmarks: AssetsPurchase[] | any) => {
+            try {
+              // The BookmarkService returns an array of items with resource_identifier
+              // In some code paths it may return an Observable-wrapped forkJoin; handle safely
+              const list = Array.isArray(bookmarks) ? bookmarks : [];
+              this.isBookmarked = list.some(
+                (b: any) =>
+                  b && b.resource_identifier === this.asset.identifier,
+              );
+            } catch (e) {
+              this.isBookmarked = false;
+            }
+          },
+          error: (err: any) => {
+            console.error('Error fetching bookmarks for asset detail', err);
+            this.isBookmarked = false;
+          },
+        });
+        this.subscriptions.add(bookmarkSub);
       },
       error: (error: any) => {
         setTimeout(() => (this.isLoading = false), 3000);
@@ -148,13 +165,9 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
 
   private addBookmark() {
     if (this.userProfile) {
-      const user = new UserModel({
-        id_user: this.userProfile.identifier,
-        user_email: this.userProfile.email,
-      });
       const bookmarkedAsset = this.getBookmarkedAsset();
 
-      this.bookmarkService.addBookmark(user, [bookmarkedAsset]).subscribe({
+      this.bookmarkService.addBookmark(bookmarkedAsset.identifier).subscribe({
         next: () => {
           // ToDo: change bookmark icon style
         },
@@ -165,22 +178,15 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
 
   private deleteBookmark() {
     if (this.userProfile) {
-      const user = new UserModel({
-        id_user: this.userProfile.identifier,
-        user_email: this.userProfile.email,
-      });
-      const deleteBody = {
-        identifier: this.asset.identifier.toString(),
-        category: this.asset.category,
-      } as BookmarkBodyRemove;
-
-      this.bookmarkService.deleteBookmark(user, deleteBody).subscribe({
-        next: () => {
-          // ToDo: change bookmark icon style
-        },
-        error: (error: any) =>
-          console.error('Error deleting asset from bookmarks', error),
-      });
+      this.bookmarkService
+        .deleteBookmark(this.asset.identifier.toString())
+        .subscribe({
+          next: () => {
+            // ToDo: change bookmark icon style
+          },
+          error: (error: any) =>
+            console.error('Error deleting asset from bookmarks', error),
+        });
     }
   }
 

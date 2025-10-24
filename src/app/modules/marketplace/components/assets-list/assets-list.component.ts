@@ -31,6 +31,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PlatformService } from '../../services/common-services/platform.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import {
+  BookmarkService,
+  // BookmarkBodyRemove,
+} from '../../services/common-services/bookmark-service/bookmark.service';
 
 const MAX_ATTEMPTS = 15;
 const EXCLUDED_PLATFORMS = [
@@ -57,6 +61,9 @@ const assetCategoryMapping = {
 export class AssetsListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private enhancedSearchSubscription?: Subscription;
+  private bookmarkSub?: Subscription;
+  private bookmarkIds: Set<string> = new Set();
+  public userProfile: any;
 
   public isLoading = false;
   public assets: AssetModel[] | any[] = [];
@@ -95,6 +102,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private filtersService: FiltersStateService,
     private platformService: PlatformService,
     protected authService: AuthService,
+    private bookmarkService: BookmarkService,
     private route: ActivatedRoute,
     private generalAssetService: GeneralAssetService,
     private filtersStateService: FiltersStateService,
@@ -130,6 +138,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         next: (value) => {
           this.isEnhancedSearch = value;
         },
+      });
+
+    this.authService.userProfileSubject
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((profile) => {
+        this.userProfile = profile;
+        // whenever the user state changes, re-apply bookmarks to current assets
+        this.applyBookmarksToAssets();
       });
 
     const selectedCategory = localStorage.getItem('selectedCategory');
@@ -273,7 +289,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           this.assets = resp.resources.map((asset) => ({
             ...asset,
             category: this.categorySelected,
+            isBookmarked: false,
           }));
+          this.applyBookmarksToAssets();
           this.assetsSize = resp.totalHits;
         },
         error: (error: any) => {
@@ -306,7 +324,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         this.assets = assets.map((asset) => ({
           ...asset,
           category: this.categorySelected,
+          isBookmarked: false,
         }));
+        this.applyBookmarksToAssets();
       },
       error: (error: any) => {
         // this.assets bellow might be used for testing purposes
@@ -538,6 +558,47 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.subscriptions.add(subscribe);
+  }
+
+  private applyBookmarksToAssets(): void {
+    // if there are no assets yet, nothing to apply
+    if (!this.assets || this.assets.length === 0) {
+      return;
+    }
+
+    // if user not logged in/available, clear bookmarked flags
+    if (!this.userProfile || Object.keys(this.userProfile).length === 0) {
+      this.bookmarkIds.clear();
+      this.assets = this.assets.map((a: any) => ({
+        ...a,
+        isBookmarked: false,
+      }));
+      return;
+    }
+
+    // cancel previous bookmark subscription
+    if (this.bookmarkSub) this.bookmarkSub.unsubscribe();
+
+    this.bookmarkSub = this.bookmarkService.getBookmarks().subscribe({
+      next: (bookmarks: any[]) => {
+        this.bookmarkIds = new Set(
+          bookmarks.map((b: any) => '' + b.identifier),
+        );
+        this.assets = this.assets.map((a: any) => ({
+          ...a,
+          isBookmarked: this.bookmarkIds.has('' + a.identifier),
+        }));
+      },
+      error: (err: any) => {
+        // if we can't load bookmarks, ensure false so UI is consistent
+        this.assets = this.assets.map((a: any) => ({
+          ...a,
+          isBookmarked: false,
+        }));
+        console.error('Error loading bookmarks', err);
+      },
+    });
+    this.subscriptions.add(this.bookmarkSub);
   }
 
   public handlePageEvent(e: PageEvent) {
