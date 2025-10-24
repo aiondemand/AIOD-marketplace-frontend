@@ -91,8 +91,14 @@ refactor: extract user validation logic
 ```
 
 ## Visuals
- 
-To update with new screenshots
+
+![Library main view](src/assets/images/readme/mainView.png)
+
+![Asset detail view](src/assets/images/readme/detailView.png)
+
+![Bookmarks view](src/assets/images/readme/bookmarksView.png)
+
+![Add to bookmarks modal](src/assets/images/readme/addToBookmaks.png)
 
 
 ## Configuration and Deployment
@@ -115,5 +121,4 @@ Adaptation of the AI4 Dashboard project and implementation of new features have 
 * Danilo Salaz
 * Pilar Piqueres (ppiqueres@iti.es)
 * Sonia Santiago (ssantiago@iti.es)
-
 
