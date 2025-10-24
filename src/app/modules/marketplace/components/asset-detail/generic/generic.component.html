@@ -26,57 +26,140 @@
           </ng-template>
         </div>
         <!-- Distribution Type -->
-        <div *ngIf="isDistributionType(col)">
-          <!-- Distribution Dependency -->
-          <div *ngIf="getDistributionDependency()" [ngClass]="getDistributionItemClass()">
-            <strong>Dependency:</strong> {{ getDistributionDependency() }}
-          </div>
-          <!-- Distribution Grid -->
-          <div class="distribution-grid">
-            <div *ngFor="let dist of item[col]" class="distribution-entry">
-              <div *ngIf="dist.name" [ngClass]="getDistributionItemClass()">
-                <strong>Name:</strong> {{ dist.name }}
+        <div *ngIf="isDistributionType(col)" class="object-array-media">
+          <div *ngFor="let dist of item[col]" class="media-card">
+            <h3 class="media-title">{{ dist.name || 'Distribution' }}</h3>
+            <div class="media-content">
+              <!-- Description Section -->
+              <div
+                *ngIf="dist.description"
+                class="media-section"
+              >
+                <div 
+                  class="media-header" 
+                  role="button"
+                  tabindex="0"
+                  (click)="toggleState(dist, 'showDescription')"
+                  (keydown.enter)="toggleState(dist, 'showDescription')"
+                  (keydown.space)="$event.preventDefault(); toggleState(dist, 'showDescription')"
+                  style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer">
+                  <span class="media-desc-label">Description</span>
+                  <mat-icon
+                    class="media-desc-arrow"
+                    [attr.aria-label]="getExpandIconLabel(dist.showDescription)"
+                    [style.transform]="getExpandIconTransform(dist.showDescription)"
+                    [style.transition]="'transform 180ms ease'"
+                    [style.color]="'#5bc0f7'"
+                  >
+                    expand_more
+                  </mat-icon>
+                </div>
+                <div class="dropdown-content" [ngClass]="{ 'animate-dropdown': dist.showDescription }">
+                  <p class="media-description">{{ dist.description }}</p>
+                </div>
               </div>
-              <div *ngIf="dist.description" [ngClass]="getDistributionItemClass()">
-                <strong>Description:</strong> {{ dist.description }}
-              </div>
-              <div *ngIf="dist.content_url" [ngClass]="getDistributionItemClass()">
-                <strong>URL:</strong>
-                <a style="color: #41b6e6" [href]="dist.content_url" target="_blank">
-                  {{ dist.content_url }}
-                </a>
-              </div>
-              <div *ngIf="dist.encoding_format" [ngClass]="getDistributionItemClass()">
-                <strong>Encoding Format:</strong> {{ dist.encoding_format }}
-              </div>
-              <div *ngIf="dist.checksum" [ngClass]="getDistributionItemClass()">
-                <strong>Checksum:</strong> {{ dist.checksum }}
-              </div>
-              <div *ngIf="dist.checksum_algorithm" [ngClass]="getDistributionItemClass()">
-                <strong>Checksum Algorithm:</strong> {{ dist.checksum_algorithm }}
+              <!-- Properties Section -->
+              <div
+                class="media-section"
+              >
+                <div 
+                  class="media-header"
+                  role="button"
+                  tabindex="0"
+                  (click)="toggleState(dist, 'showProperties')"
+                  (keydown.enter)="toggleState(dist, 'showProperties')"
+                  (keydown.space)="$event.preventDefault(); toggleState(dist, 'showProperties')"
+                  style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer">
+                  <span class="media-properties-label">Properties</span>
+                  <mat-icon
+                    class="media-properties-arrow"
+                    [attr.aria-label]="getExpandIconLabel(dist.showProperties)"
+                    [style.transform]="getExpandIconTransform(dist.showProperties)"
+                    [style.transition]="'transform 180ms ease'"
+                    [style.color]="'#5bc0f7'"
+                  >
+                    expand_more
+                  </mat-icon>
+                </div>
+                <!-- Properties List -->
+                <div class="media-properties-list dropdown-content" [ngClass]="{ 'animate-dropdown': dist.showProperties }" style="overflow-y: auto;">
+                  <div *ngIf="dist.encoding_format" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.encoding_format }}</div>
+                    <div class="media-property-label">Encoding Format</div>
+                  </div>
+                  <div *ngIf="dist.checksum" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.checksum }}</div>
+                    <div class="media-property-label">Checksum</div>
+                  </div>
+                  <div *ngIf="dist.checksum_algorithm" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.checksum_algorithm }}</div>
+                    <div class="media-property-label">Checksum Algorithm</div>
+                  </div>
+                  <div *ngIf="dist.content_url" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">
+                      <a [href]="dist.content_url" target="_blank">{{ dist.content_url }}</a>
+                    </div>
+                    <div class="media-property-label">Content URL</div>
+                  </div>
+                  <div *ngIf="dist.dependency" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.dependency }}</div>
+                    <div class="media-property-label">Dependency</div>
+                  </div>
+                  <div *ngIf="dist.technology_readiness_level" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.technology_readiness_level }}</div>
+                    <div class="media-property-label">Technology Readiness Level</div>
+                  </div>
+                  <div *ngIf="dist.hardware_requirement" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.hardware_requirement }}</div>
+                    <div class="media-property-label">Hardware Requirement</div>
+                  </div>
+                  <div *ngIf="dist.os_requirement" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.os_requirement }}</div>
+                    <div class="media-property-label">OS Requirement</div>
+                  </div>
+                  <div *ngIf="dist.installation" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.installation }}</div>
+                    <div class="media-property-label">Installation</div>
+                  </div>
+                  <div *ngIf="dist.installation_script" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.installation_script }}</div>
+                    <div class="media-property-label">Installation Script</div>
+                  </div>
+                  <div *ngIf="dist.deployment" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.deployment }}</div>
+                    <div class="media-property-label">Deployment</div>
+                  </div>
+                  <div *ngIf="dist.deployment_script" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.deployment_script }}</div>
+                    <div class="media-property-label">Deployment Script</div>
+                  </div>
+                  <div *ngIf="dist.content_size_kb" class="media-property" [ngClass]="getThemeClass()">
+                    <div class="media-property-value">{{ dist.content_size_kb }}</div>
+                    <div class="media-property-label">Content Size (KB)</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
         <!-- Object Array Type (Media) -->
         <div *ngIf="isObjectArrayType(col, item)" class="object-array-media">
           <div *ngFor="let obj of item[col]" class="media-card">
-            <h3 class="media-title">{{ getDistributionName() }}</h3>
-
+            <h3 class="media-title">{{ getMediaName() }}</h3>
             <div class="media-content">
               <!-- Description Section -->
               <div
                 *ngIf="obj.description"
                 class="media-section"
-                role="button"
-                tabindex="0"
-                (click)="toggleState(obj, 'showDescription')"
-                (keydown.enter)="toggleState(obj, 'showDescription')"
-                (keydown.space)="$event.preventDefault(); toggleState(obj, 'showDescription')"
-                style="cursor: pointer"
               >
-                <div class="media-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%">
+                <div 
+                  class="media-header"
+                  role="button"
+                  tabindex="0"
+                  (click)="toggleState(obj, 'showDescription')"
+                  (keydown.enter)="toggleState(obj, 'showDescription')"
+                  (keydown.space)="$event.preventDefault(); toggleState(obj, 'showDescription')"
+                  style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer">
                   <span class="media-desc-label">Description</span>
                   <mat-icon
                     class="media-desc-arrow"
@@ -97,14 +180,15 @@
               <div
                 *ngIf="hasMediaProperties(obj)"
                 class="media-section"
-                role="button"
-                tabindex="0"
-                (click)="toggleState(obj, 'showProperties')"
-                (keydown.enter)="toggleState(obj, 'showProperties')"
-                (keydown.space)="$event.preventDefault(); toggleState(obj, 'showProperties')"
-                style="cursor: pointer"
               >
-                <div class="media-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%">
+                <div 
+                  class="media-header"
+                  role="button"
+                  tabindex="0"
+                  (click)="toggleState(obj, 'showProperties')"
+                  (keydown.enter)="toggleState(obj, 'showProperties')"
+                  (keydown.space)="$event.preventDefault(); toggleState(obj, 'showProperties')"
+                  style="display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: pointer">
                   <span class="media-properties-label">Properties</span>
                   <mat-icon
                     class="media-properties-arrow"

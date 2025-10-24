@@ -141,6 +141,9 @@ export class GenericComponent {
   getDistributionName(): string {
     return this.getNestedValue(['distribution', 0, 'name'], '');
   }
+  getMediaName(): string {
+    return this.getNestedValue(['media', 0, 'name'], '');
+  }
 
   getDistributionDependency(): string {
     return this.getNestedValue(['distribution', 0, 'dependency'], '');

@@ -28,12 +28,17 @@ import { SearchModel } from '@app/shared/models/search.model';
 import { SpinnerService } from '@app/shared/services/spinner/spinner.service';
 import { hasQuotes } from '../../utils/common.utils';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PlatformService } from '../../services/common-services/platform.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
 const MAX_ATTEMPTS = 15;
-
+const EXCLUDED_PLATFORMS = [
+  'example',
+  'ai4experiments',
+  'aibuilder',
+  'ai4europe_cms',
+];
 const assetCategoryMapping = {
   [AssetCategory.AIModel]: 'ml_models',
   [AssetCategory.Dataset]: 'datasets',
@@ -230,7 +235,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       .getPlatforms()
       .pipe(take(1))
       .subscribe((platforms: any) => {
-        this.platforms = platforms;
+        this.platforms = Array.isArray(platforms)
+          ? platforms.filter((p: any) => {
+              const name = typeof p === 'string' ? p : p?.name ?? '';
+              return !EXCLUDED_PLATFORMS.includes(String(name).toLowerCase());
+            })
+          : [];
       });
   }
 
