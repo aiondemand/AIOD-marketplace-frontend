@@ -260,9 +260,21 @@
           color: #212529 !important;
         }
       }
+
+      .nav-button{
+           color: #0047bb;
+           
+        &:disabled {
+          color: #cccccc;
+        }
+      }
+
+      
     }
 
     .paginator-right {
+
+      
       .range-label {
         color: #212529 !important;
       }
@@ -300,6 +312,15 @@
         color: #212529 !important;
       }
     }
+
+        .nav-button{
+           color: #0047bb;
+           
+        &:disabled {
+          color: #cccccc;
+        }
+      }
+    
   }
 
   .paginator-right {
@@ -307,12 +328,13 @@
       color: #212529 !important;
     }
 
-    .nav-button {
-      color: rgba(255, 237, 0, 1);
-
-      &:disabled {
-        color: #cccccc;
+    .nav-button{
+           color: #0047bb;
+           
+        &:disabled {
+          color: #cccccc;
+        }
       }
     }
-  }
+  
 }
