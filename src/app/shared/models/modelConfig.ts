@@ -51,13 +51,7 @@ export const modelConfig = {
     title: 'Dataset',
   },
   Experiment: {
-    columns: [
-      ...commonColumns,
-      ...distributionColumns,
-      ...mediaColumns,
-      'execution_settings',
-      'badge',
-    ],
+    columns: [...commonColumns, ...distributionColumns, ...mediaColumns, 'execution_settings', 'badge'],
     title: 'Experiment',
   },
   'Educational resource': {
@@ -73,12 +67,7 @@ export const modelConfig = {
     title: 'Educational Resource',
   },
   Publication: {
-    columns: [
-      ...commonColumns,
-      ...distributionColumns,
-      ...mediaColumns,
-      'type',
-    ],
+    columns: [...commonColumns, ...distributionColumns, ...mediaColumns, 'type'],
     title: 'Publication',
   },
   'Case studies': {
