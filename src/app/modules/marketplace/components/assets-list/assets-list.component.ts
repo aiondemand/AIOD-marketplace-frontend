@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { ParamsReqAsset } from '@app/shared/interfaces/asset-service.interface';
 import { AssetModel } from '@app/shared/models/asset.model';
@@ -100,6 +100,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private filtersStateService: FiltersStateService,
     private searchService: ElasticSearchService,
     private spinnerService: SpinnerService,
+    private cdr: ChangeDetectorRef,
   ) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -164,6 +165,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     if (this.screenWidth >= this.widthSmallDevice) {
       this.displayMode(1);
     }
+    this.cdr.detectChanges();
   };
 
   protected selectPlat(platform: any) {
@@ -197,9 +199,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   searchAssets() {
-    const isEnhancedSearch = this.searchFormGroup.get('enhancedSearch')?.value;
-    this.filtersService.setEnhancedSearch(isEnhancedSearch);
-
     const query = this.searchFormGroup.get('search')?.value;
     this.filtersService.setSearchQuery(query);
   }
@@ -214,8 +213,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   onEnhancedSearchChange(event: any) {
-    const isEnhanced = event.checked || event.target?.checked;
-    this.filtersService.setEnhancedSearch(isEnhanced);
+    this.filtersService.setEnhancedSearch(event);
   }
 
   isLoggedIn(): boolean {
