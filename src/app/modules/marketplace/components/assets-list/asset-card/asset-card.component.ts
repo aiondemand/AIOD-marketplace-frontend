@@ -9,7 +9,7 @@ import {
 } from '@app/modules/marketplace/services/common-services/bookmark-service/bookmark.service';
 import { environment } from '@environments/environment';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
-import { Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 
@@ -113,4 +113,12 @@ export class AssetCardComponent implements OnInit {
       });
     }
   }
+
+  openRouteInNewTab(route: string, queryParams: Params) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([route], { queryParams })
+    );
+    window.open(url, '_blank');
+  }
+
 }
