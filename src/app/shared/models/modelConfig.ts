@@ -85,4 +85,8 @@ export const modelConfig = {
     columns: [...commonColumns, ...mediaColumns, ...distributionColumns],
     title: 'Success Stories',
   },
+  'Resource Bundle': {
+    columns: [...commonColumns, ...distributionColumns, ...mediaColumns],
+    title: 'Resource Bundle',
+  },
 };

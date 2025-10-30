@@ -51,6 +51,10 @@ export class ElasticSearchService {
         return endpoints.educationalResources;
       case AssetCategory['Publication']:
         return endpoints.publications;
+      case AssetCategory['Success stories']:
+        return endpoints.caseStudies;
+      case AssetCategory['Resource Bundle']:
+        return endpoints.resourceBundles;
       default:
         throw new Error('Does not exit category selected');
     }

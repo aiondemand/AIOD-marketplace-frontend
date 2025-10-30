@@ -41,6 +41,7 @@ const assetCategoryMapping = {
   [AssetCategory['Educational resource']]: 'educational_resources',
   [AssetCategory['Service']]: 'services',
   [AssetCategory['Publication']]: 'publications',
+  [AssetCategory['Resource Bundle']]: 'resource_bundles',
   [AssetCategory['Success stories']]: 'success_stories',
 };
 
