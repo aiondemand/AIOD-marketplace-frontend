@@ -23,4 +23,7 @@ export const environment = {
   zohoConfig: {
     base: '',
   },
+  MCEConfig: {
+    mceUrl: '',
+  },
 };

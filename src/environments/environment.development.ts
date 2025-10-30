@@ -27,4 +27,7 @@ export const environment = {
   zohoConfig: {
     base: '',
   },
+  MCEConfig: {
+    mceUrl: browserwindow.env?.['MCE_URL_DEV'] || '',
+  },
 };

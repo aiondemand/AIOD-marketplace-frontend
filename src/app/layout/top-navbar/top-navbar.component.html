@@ -12,8 +12,16 @@
               </div>
             </div>
             <a href="{{ externalLinks.AIOD_HOME }}">
-              <img src="../assets/img/logo-dark.png" alt="AIOD logo dark" class="logotipo" />
-              <img src="../assets/img/logo-light.png" alt="AIOD logo light" class="logotipo-grey d-none" />
+              <img
+                src="../assets/img/logo-dark.png"
+                alt="AIOD logo dark"
+                class="logotipo"
+              />
+              <img
+                src="../assets/img/logo-light.png"
+                alt="AIOD logo light"
+                class="logotipo-grey d-none"
+              />
             </a>
             <!--not shown on bigger screens-->
             <a
@@ -30,25 +38,47 @@
           </div>
 
           <div class="top-bar-buttons">
-              <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
-                <li class="menu" *ngFor="let item of menuItems">
-                  <div class="menu-link-mobile" [ngClass]="{'has-submenu': item.children && item.children.length > 0}">
-                    <a class="menu-link" [href]="item.url || '#'" [attr.target]="item.url ? '_blank' : null">
-                      {{ item.title }} <i class="icon-arrow d-block d-lg-none"></i>
-                    </a>
-                  </div>
-                  <div class="sub-menu d-flex flex-column" *ngIf="item.children && item.children.length > 0" [style.margin-left]="item.children.length > 4 ? '-500px' : '0'">
-                      <ul>
-                      <li *ngFor="let child of item.children" [ngClass]="{'highlight': child.isHighlighted}">
-                        <a [href]="child.url || '#'" [attr.target]="child.url ? '_blank' : null">
-                          <span>{{ child.title }}</span>
-                          <p *ngIf="child.description">{{ child.description }}</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
+            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+              <li class="menu" *ngFor="let item of menuItems">
+                <div
+                  class="menu-link-mobile"
+                  [ngClass]="{
+                    'has-submenu': item.children && item.children.length > 0
+                  }"
+                >
+                  <a
+                    class="menu-link"
+                    [href]="item.url || '#'"
+                    [attr.target]="item.url ? '_blank' : null"
+                  >
+                    {{ item.title }}
+                    <i class="icon-arrow d-block d-lg-none"></i>
+                  </a>
+                </div>
+                <div
+                  class="sub-menu d-flex flex-column"
+                  *ngIf="item.children && item.children.length > 0"
+                  [style.margin-left]="
+                    item.children.length > 4 ? '-500px' : '0'
+                  "
+                >
+                  <ul>
+                    <li
+                      *ngFor="let child of item.children"
+                      [ngClass]="{ highlight: child.isHighlighted }"
+                    >
+                      <a
+                        [href]="child.url || '#'"
+                        [attr.target]="child.url ? '_blank' : null"
+                      >
+                        <span>{{ child.title }}</span>
+                        <p *ngIf="child.description">{{ child.description }}</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div
@@ -70,6 +100,14 @@
               (click)="login()"
               >Log In</a
             >
+            <button
+              title="Contribute"
+              class="btn btn-circle not-rotate ml-2 mr-2 btn-circle--yellow"
+              (click)="onClickContribute()"
+              [title]="!isLoggedIn() ? 'Log in to contribute' : 'Contribute'"
+            >
+              <i class="icon-plus"></i>
+            </button>
             <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
           </div>
 
@@ -94,15 +132,25 @@
                 <div class="btn btn btn-circle btn-user ml-0 mr-0">
                   <img src="../assets/img/user-image-default.jpg" alt="" />
                 </div>
-                <span style="font-weight: 700;">{{ userProfile?.preferred_username }}</span>
+              
               </div>
+
+              <button
+                title="Contribute"
+                class="btn btn-circle not-rotate mr-2 btn-circle--blue"
+                (click)="onClickContribute()"
+                [title]="!isLoggedIn() ? 'Log in to contribute' : 'Contribute'"
+              >
+                <i class="icon-plus"></i>
+              </button>
+
               <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
             </div>
           </ng-template>
 
           <ng-template #themeSwitch>
-            <div   class="theme-switch-wrapper">
-              <label  class="theme-switch" for="checkbox">
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox" />
                 <div (click)="toggleTheme()" class="slider round">
                   <div class="theme-switch-icons">
@@ -192,7 +240,7 @@
                       </svg>
                     </div>
 
-                    <div >
+                    <div>
                       <svg
                         class="dark-icon"
                         width="16"

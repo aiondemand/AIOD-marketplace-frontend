@@ -227,4 +227,12 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
       item.open = !item.open;
     }
   }
+
+  onClickContribute() {
+    if (this.isLoggedIn()) {
+      window.location.href = environment.MCEConfig.mceUrl;
+    } else {
+      this.login();
+    }
+  }
 }
