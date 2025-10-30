@@ -81,9 +81,9 @@ export const modelConfig = {
     ],
     title: 'Publication',
   },
-  'Case studies': {
+  'Success stories': {
     columns: [...commonColumns, ...mediaColumns, ...distributionColumns],
-    title: 'Case Studies',
+    title: 'Success Stories',
   },
   'Resource Bundle': {
     columns: [...commonColumns, ...distributionColumns, ...mediaColumns],

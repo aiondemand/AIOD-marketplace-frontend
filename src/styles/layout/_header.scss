@@ -1302,6 +1302,10 @@ $sidebar-collapsed-width: 75px;
     transition: all 300ms ease;
     z-index: 11111;
     transition: right 0.3s ease !important;
+    border: 1px solid #1b2336;
+    border-top: 0 !important;
+    width: 330px;
+    min-width: 330px;
     &.collapsed {
       right: -100%;
     }

@@ -101,12 +101,12 @@
           </ng-template>
 
           <ng-template #themeSwitch>
-            <div class="theme-switch-wrapper">
-              <label class="theme-switch" for="checkbox">
+            <div   class="theme-switch-wrapper">
+              <label  class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox" />
-                <div class="slider round">
+                <div (click)="toggleTheme()" class="slider round">
                   <div class="theme-switch-icons">
-                    <div (click)="toggleTheme()">
+                    <div>
                       <svg
                         class="light-icon"
                         width="20"
@@ -192,7 +192,7 @@
                       </svg>
                     </div>
 
-                    <div (click)="toggleTheme()">
+                    <div >
                       <svg
                         class="dark-icon"
                         width="16"
@@ -224,6 +224,7 @@
   <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'">
     <div class="sidebar sidebar-user" id="sidebar-user">
       <div class="menu">
+        <!--
         <ul>
           <li class="sidebar-link">
             <a href="#">
@@ -238,8 +239,9 @@
             </a>
           </li>
         </ul>
+        -->
       </div>
-      <div class="sidebar-footer">
+      <div class="sidebar-footer user">
         <div class="border-bottom">
           <a
             class="btn btn-success btn-success--blue mt-3 w-100"
