@@ -51,7 +51,7 @@ export class ElasticSearchService {
         return endpoints.educationalResources;
       case AssetCategory['Publication']:
         return endpoints.publications;
-      case AssetCategory['Case studies']:
+      case AssetCategory['Success stories']:
         return endpoints.caseStudies;
       case AssetCategory['Resource Bundle']:
         return endpoints.resourceBundles;
