@@ -27,6 +27,6 @@ export const environment = {
     base: browserwindow.env?.['ZOHO_URL'] || '',
   },
   MCEConfig: {
-    mceUrl: browserwindow.env?.['MCE_URL_PROD'] || 'https://editor.aiod.eu/',
+    mceUrl: browserwindow.env?.['MCE_URL'] || 'https://test.openml.org/mce',
   },
 };
