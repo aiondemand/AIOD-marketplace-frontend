@@ -26,4 +26,7 @@ export const environment = {
   zohoConfig: {
     base: browserwindow.env?.['ZOHO_URL'] || '',
   },
+  MCEConfig: {
+    mceUrl: browserwindow.env?.['MCE_URL'] || 'https://editor.aiod.eu',
+  },
 };

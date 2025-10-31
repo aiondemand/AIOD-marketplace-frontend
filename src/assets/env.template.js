@@ -8,4 +8,5 @@
   window['env']['AIOD_ENHANCED_API'] = '${AIOD_ENHANCED_API}';
   window['env']['ML_REDIRECT_URI'] = '${ML_REDIRECT_URI}';
   window['env']['ZOHO_URL'] = '${ZOHO_URL}';
+  window['env']['MCE_URL'] = '${MCE_URL}';
 })(this);

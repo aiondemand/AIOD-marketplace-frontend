@@ -227,4 +227,8 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
       item.open = !item.open;
     }
   }
+
+  onClickContribute() {
+    window.open(environment.MCEConfig.mceUrl, '_blank');
+  }
 }

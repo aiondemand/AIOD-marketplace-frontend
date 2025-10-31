@@ -28,4 +28,7 @@ export const environment = {
   zohoConfig: {
     base: '',
   },
+  MCEConfig: {
+    mceUrl: browserwindow.env?.['MCE_URL'] || 'https://test.openml.org/mce',
+  },
 };

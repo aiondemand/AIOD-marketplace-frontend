@@ -259,6 +259,13 @@
   display: block;
   box-sizing: border-box;
 }
+::ng-deep .sidebar-footer.user {
+  margin-bottom: 20vh;
+}
+::ng-deep .sidebar-footer.user .border-bottom {
+  margin-top: 70vh;
+}
+
 ::ng-deep .sidebar-footer .menu.p-0 ul li.sidebar-link {
   width: 100%;
   margin-bottom: 0.5rem;
@@ -319,8 +326,8 @@
 @media (max-width: 520px) {
   ::ng-deep .aiod-feedback-button {
     top: auto;
-    bottom: 16px;
-    right: 12px;
+    bottom: 66px;
+    right: 20px;
     border-radius: 8px;
     padding: 10px 12px;
   }

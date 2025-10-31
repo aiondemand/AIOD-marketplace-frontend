@@ -59,7 +59,6 @@ export const modelConfig = {
       ...commonColumns,
       ...distributionColumns,
       ...mediaColumns,
-      'relevant_link',
       'type',
       'target_audience',
       'target_groups',
@@ -70,8 +69,12 @@ export const modelConfig = {
     columns: [...commonColumns, ...distributionColumns, ...mediaColumns, 'type'],
     title: 'Publication',
   },
-  'Case studies': {
+  'Success stories': {
     columns: [...commonColumns, ...mediaColumns, ...distributionColumns],
-    title: 'Case Studies',
+    title: 'Success Stories',
+  },
+  'Resource Bundle': {
+    columns: [...commonColumns, ...distributionColumns, ...mediaColumns],
+    title: 'Resource Bundle',
   },
 };

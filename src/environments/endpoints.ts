@@ -13,6 +13,7 @@ export const endpoints = {
   educationalResources: '/educational_resources',
   publications: '/publications',
   caseStudies: '/case_studies',
+  resourceBundles: '/resource_bundles',
 
   //Payments
   prefixApiPayment: '/api-library/api',

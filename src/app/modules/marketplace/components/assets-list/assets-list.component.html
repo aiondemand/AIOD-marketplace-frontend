@@ -10,35 +10,71 @@
 >
   <div class="featured-products-item-title">{{"ASSETS-LIST.EXPLORE-AI-CATALOGUE" | translate}}</div>
 
-  <form [formGroup]="searchFormGroup" class="search-row d-flex">
-    <div class="search-input">
-      <div class="form-group">
+  <form [formGroup]="searchFormGroup" class="search-row" [ngClass]="{ 'light-theme': isLightTheme === 'light' }" [class.d-flex]="screenWidth >= widthSmallDevice">
+    <i *ngIf="!isEnhancedSearch" class="icon-lupa" style="position:relative; z-index:2; width:10px; color: rgb(156, 163, 175);" [class.d-flex]="screenWidth < widthSmallDevice" [ngStyle]="screenWidth < widthSmallDevice ? {height: '0px', left: '7px', top: '15px'} : {left: '20px', top: '3px'}"></i>
+    <i *ngIf="isEnhancedSearch" style="position:relative; z-index:2; width:10px; rotate: 170deg;" [class.d-flex]="screenWidth < widthSmallDevice" [ngStyle]="screenWidth < widthSmallDevice ? {height: '0px', left: '20px', top: '35px'} : {left: '28px', top: '1px'}">✨</i>
+    <div class="search-input"
+    [class.smartphone]="screenWidth <= widthSmallDevice"
+    [ngClass]="{ 'light-theme': isLightTheme === 'light' }">
+      <div class="">
         <input
           type="text"
           formControlName="search"
-          placeholder="{{ screenWidth >= widthSmallDevice ? 'Find AI resources in your Language' : 'Find Resources' }}"
+          placeholder="{{ !isEnhancedSearch ? 'Search by keyword...' : 'Describe what you\'re looking for...' }}"
           id="name"
           class="form-control"
+          [style.padding-right]="screenWidth <= widthSmallDevice ? '35px' : '0'"
           (input)="onInputChange()"
           (keyup.enter)="searchAssets()"
         />
       </div>
-
-      <a
-        (click)="searchAssets()"
-        class="btn btn btn-circle btn-circle--blue btn-search ml-2 d-lg-flex"
-        ><i class="icon-lupa"></i
-      ></a>
+      <button
+        type="button"
+        mat-icon-button
+        *ngIf="isEnhancedSearch && screenWidth <= widthSmallDevice"
+        #infoTooltip="matTooltip"
+        matTooltip="{{ 'Search for assets by using natural language' }}"
+        matTooltipPosition="above"
+        matTooltipTrigger="manual"
+        matTooltipClass="example-tooltip-uppercase"
+        (click)="toggleInfoTooltip($event)"
+        class="info-button"
+        aria-label="Search info"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
     </div>
     <div class="buttons-container">
-      <mat-checkbox
-        formControlName="enhancedSearch"
-        class="search-type"
-        (change)="onEnhancedSearchChange($event)"
-        [title]="'Click to enable enhanced search'"
+      <div class="search-switch" [class.smartphone]="screenWidth <= widthSmallDevice" [ngClass]="{ 'light-theme': isLightTheme === 'light' }" role="group" aria-label="Search type switch">
+        <button
+          type="button"
+          class="enhanced-search first"
+          [class.enhanced]="!isEnhancedSearch"
+          [ngClass]="{ 'light-theme': isLightTheme === 'light' }"
+          (click)="onEnhancedSearchChange(false)"
+          title="Use keyword search"
+        >
+          Keyword
+        </button>
+
+        <button
+          type="button"
+          class="enhanced-search second"
+          [class.enhanced]="isEnhancedSearch"
+          [class.smartphone]="screenWidth <= widthSmallDevice"
+          (click)="onEnhancedSearchChange(true)"
+          [attr.data-title]="screenWidth >= widthSmallDevice ? 'Search for assets by using natural language' : ''"
+        >
+          <span class="magic-icon">✨</span>
+          AI Mode
+        </button>
+      </div>
+      <div
+        (click)="searchAssets()"
+        class="search-button"
       >
-        {{"ASSETS-LIST.ENHANCED-SEARCH" | translate}}
-      </mat-checkbox>
+        Search
+      </div>
     </div>
   </form>
 
