@@ -23,11 +23,26 @@
           placeholder="{{ !isEnhancedSearch ? 'Search by keyword...' : 'Describe what you\'re looking for...' }}"
           id="name"
           class="form-control"
+          [style.padding-right]="screenWidth <= widthSmallDevice ? '35px' : '0'"
           (input)="onInputChange()"
           (keyup.enter)="searchAssets()"
         />
       </div>
-
+      <button
+        type="button"
+        mat-icon-button
+        *ngIf="isEnhancedSearch && screenWidth <= widthSmallDevice"
+        #infoTooltip="matTooltip"
+        matTooltip="{{ 'Search for assets by using natural language' }}"
+        matTooltipPosition="above"
+        matTooltipTrigger="manual"
+        matTooltipClass="example-tooltip-uppercase"
+        (click)="toggleInfoTooltip($event)"
+        class="info-button"
+        aria-label="Search info"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
     </div>
     <div class="buttons-container">
       <div class="search-switch" [class.smartphone]="screenWidth <= widthSmallDevice" [ngClass]="{ 'light-theme': isLightTheme === 'light' }" role="group" aria-label="Search type switch">
@@ -46,8 +61,9 @@
           type="button"
           class="enhanced-search second"
           [class.enhanced]="isEnhancedSearch"
+          [class.smartphone]="screenWidth <= widthSmallDevice"
           (click)="onEnhancedSearchChange(true)"
-          data-title="Search for assets by using natural language"
+          [attr.data-title]="screenWidth >= widthSmallDevice ? 'Search for assets by using natural language' : ''"
         >
           <span class="magic-icon">✨</span>
           AI Mode
