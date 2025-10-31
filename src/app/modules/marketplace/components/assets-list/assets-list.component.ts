@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+  ViewChild,
+} from '@angular/core';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { ParamsReqAsset } from '@app/shared/interfaces/asset-service.interface';
 import { AssetModel } from '@app/shared/models/asset.model';
@@ -19,6 +25,7 @@ import {
   takeWhile,
   throwError,
 } from 'rxjs';
+import { MatTooltip } from '@angular/material/tooltip';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.interface';
@@ -85,6 +92,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   protected lonelyCategory = false;
   isLightTheme: string | null = 'dark';
   widthSmallDevice = 768;
+  @ViewChild('infoTooltip') infoTooltip?: MatTooltip;
+  infoTooltipVisible = false;
 
   constructor(
     private fb: FormBuilder,
@@ -154,6 +163,23 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       }
     });
     this.isLightTheme = document.documentElement.getAttribute('data-theme');
+    document.addEventListener('click', this.handleDocumentClick);
+  }
+
+  toggleInfoTooltip(event?: Event) {
+    event?.stopPropagation();
+
+    if (!this.infoTooltip) {
+      return;
+    }
+
+    if (this.infoTooltipVisible) {
+      this.infoTooltip.hide();
+      this.infoTooltipVisible = false;
+    } else {
+      this.infoTooltip.show();
+      this.infoTooltipVisible = true;
+    }
   }
 
   onResize = () => {
@@ -731,5 +757,22 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
     this.destroy$.next(null);
     this.destroy$.complete();
+    document.removeEventListener('click', this.handleDocumentClick);
   }
+
+  private handleDocumentClick = (event: Event) => {
+    if (!this.infoTooltipVisible) {
+      return;
+    }
+
+    const target = event.target as HTMLElement | null;
+    if (!target) {
+      return;
+    }
+
+    if (!target.closest('.info-button')) {
+      this.infoTooltip?.hide();
+      this.infoTooltipVisible = false;
+    }
+  };
 }

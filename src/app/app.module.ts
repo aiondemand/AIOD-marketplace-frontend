@@ -20,6 +20,10 @@ import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 import { CoreModule } from './core/core.module';
 import { environment } from '@environments/environment';
 import { MatIconRegistry } from '@angular/material/icon';
+import {
+  MAT_TOOLTIP_DEFAULT_OPTIONS,
+  MatTooltipDefaultOptions,
+} from '@angular/material/tooltip';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { AppConfigService } from './core/services/app-config/app-config.service';
 import { SpinnerModule } from './shared/components/spinner/spinner.module';
@@ -100,6 +104,14 @@ renderer.link = (href, title, text) => {
     }),
   ],
   providers: [
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: <MatTooltipDefaultOptions>{
+        showDelay: 0,
+        hideDelay: 0,
+        touchGestures: 'on',
+      },
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
