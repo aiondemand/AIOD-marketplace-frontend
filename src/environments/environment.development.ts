@@ -28,6 +28,6 @@ export const environment = {
     base: '',
   },
   MCEConfig: {
-    mceUrl: 'https://test.openml.org/mce',
+    mceUrl: browserwindow.env?.['MCE_URL'] || 'https://test.openml.org/mce',
   },
 };

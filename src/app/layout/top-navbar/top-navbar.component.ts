@@ -229,10 +229,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   onClickContribute() {
-    if (this.isLoggedIn()) {
-      window.location.href = environment.MCEConfig.mceUrl;
-    } else {
-      this.login();
-    }
+    window.location.href = environment.MCEConfig.mceUrl;
   }
 }
