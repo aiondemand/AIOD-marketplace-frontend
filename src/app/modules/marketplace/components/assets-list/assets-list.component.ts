@@ -40,12 +40,7 @@ import { PlatformService } from '../../services/common-services/platform.service
 import { AuthService } from '@app/core/services/auth/auth.service';
 
 const MAX_ATTEMPTS = 15;
-const EXCLUDED_PLATFORMS = [
-  'example',
-  'ai4experiments',
-  'aibuilder',
-  'ai4europe_cms',
-];
+const EXCLUDED_PLATFORMS = ['example', 'ai4experiments', 'aibuilder'];
 const assetCategoryMapping = {
   [AssetCategory.AIModel]: 'ml_models',
   [AssetCategory.Dataset]: 'datasets',
