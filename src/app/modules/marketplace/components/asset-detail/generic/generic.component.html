@@ -10,14 +10,9 @@
         <!-- Array Type -->
         <div *ngIf="isArrayType(col, item)">
           <ng-container *ngIf="col === 'relevant_link'; else normalArray">
-            <a
-              *ngFor="let arrayItem of getArrayValues(item[col]); let last = last"
-              [ngClass]="col"
-              [href]="arrayItem"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            </a>
+            <div *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="col" style="margin-bottom: .5rem;">
+              <a style='color: #41b6e6;'[href]="arrayItem" target="_blank" rel="noopener noreferrer">{{ arrayItem }}</a>
+            </div>
           </ng-container>
           <ng-template #normalArray>
         <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">

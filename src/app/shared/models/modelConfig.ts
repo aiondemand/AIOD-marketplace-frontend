@@ -65,7 +65,6 @@ export const modelConfig = {
       ...commonColumns,
       ...distributionColumns,
       ...mediaColumns,
-      'relevant_link',
       'type',
       'target_audience',
       'target_groups',
