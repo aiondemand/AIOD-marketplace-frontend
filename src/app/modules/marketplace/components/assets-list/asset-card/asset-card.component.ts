@@ -116,7 +116,7 @@ export class AssetCardComponent implements OnInit {
 
   openRouteInNewTab(route: string, queryParams: Params) {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['resources', route], { queryParams }),
+      this.router.createUrlTree(['/resources', route], { queryParams }),
     );
     window.open(url, '_blank');
   }
