@@ -36,7 +36,7 @@ export class AssetCardComponent implements OnInit {
   }
 
   @Input() mode = 1;
-  @Input() asset!: AssetModel;
+  @Input() asset!: any;
   categoryColor = '';
   categoryKey!: string | undefined;
   assetIcon = '';
@@ -47,7 +47,7 @@ export class AssetCardComponent implements OnInit {
       identifier: '' + this.asset.identifier,
       name: this.asset.name,
       category: this.asset.category,
-      urlMetadata: this.asset.sameAs,
+      urlMetadata: this.asset.same_as,
       price: 0,
       addedAt: new Date().getDate(),
     } as AssetsPurchase;

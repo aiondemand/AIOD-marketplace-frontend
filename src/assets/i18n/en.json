@@ -9,7 +9,9 @@
     "RESOURCES": "Resources",
     "SDKS-AND-APIS": "SDKs and APIs",
     "SIGN-IN": "Sign in",
-    "FEEDBACK": "Give us your feedback"
+    "FEEDBACK": "Give us your feedback",
+    "COMUNICATION-MATERIALS": "Communication Materials",
+    "SDK-AND-API":"SDKs and APIs"
   },
   "TOP-NAVBAR": {
     "LOGOUT": "Log out",
