@@ -40,7 +40,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   public icon!: string;
   public categoryColor!: string;
   public isLoading = false;
-  public asset!: AssetModel;
+  public asset!: any;
   public category!: AssetCategory;
   public AssetCategory = AssetCategory;
   protected isBookmarked = false;
@@ -55,7 +55,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     this.generalAssetService.setAssetCategory(category);
 
     const subscribe = this.generalAssetService.getAsset(id).subscribe({
-      next: (asset: AssetModel) => {
+      next: (asset: any) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
@@ -160,8 +160,8 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     return {
       identifier: '' + this.asset.identifier,
       name: this.asset.name,
-      category: this.asset.category,
-      urlMetadata: this.asset.sameAs,
+      category: this.category,
+      urlMetadata: this.asset.same_as,
       price: 0,
       addedAt: new Date().getDate(),
     } as AssetsPurchase;
