@@ -1287,13 +1287,13 @@ $sidebar-collapsed-width: 75px;
   &-container {
     position: absolute;
     width: inherit;
-    height: fit-content;
+    height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #010714;
     border: 1px solid #1b2336;
-    overflow-y: inherit;
+    overflow-y: auto;
   }
   &-user {
     position: absolute;
