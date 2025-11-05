@@ -24,10 +24,8 @@
     "RAIL-EXPLORE": " Explore the research contents on the AI on Demand to customise your experiments!"
   },
   "FOOTER": {
-    "RIGHTS": "©2023 All Rights Reserved AIoD",
     "PRIVACY-POLICY": "Privacy Policy",
-    "RESPONSIBLE-DISCLOSURE": "Responsible Disclosure",
-    "TERMS-OF-USE": "Terms of use"
+    "TERMS-OF-USE": "Terms of Use"
   },
   "DEPLOYMENTS": {
     "TITLE": "Deployments",
