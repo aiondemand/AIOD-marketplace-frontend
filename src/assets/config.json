@@ -41,7 +41,15 @@
         },
         "publication": {
             "icon":"book",
-            "color":"#FCDFDC"
+            "color":"#D8FFE9"
+        },
+        "success stories": {
+            "icon":"book",
+            "color":"#9ECFE8"
+        },
+        "resource bundle": {
+            "icon":"book",
+            "color":"#E68270"            
         }
     }
 }
