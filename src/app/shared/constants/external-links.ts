@@ -4,7 +4,6 @@ export const EXTERNAL_LINKS = {
   FEEDBACK: 'https://aiod.eu/feedback/',
   METADATA_CATALOGUE_REST_API: 'https://aiod.eu/metadata-catalogue-rest-api/',
   PRIVACY_POLICY: 'https://aiod.eu/privacy-policy',
-  RESPONSIBLE_DISCLOSURE: 'https://aiod.eu/responsible-disclosure',
   TERMS_CONDITIONS: 'https://aiod.eu/terms-conditions',
   LOBA: 'https://www.loba.com/en',
   AIOD_HOME: 'https://aiod.eu',
