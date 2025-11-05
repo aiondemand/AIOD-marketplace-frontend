@@ -161,7 +161,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       identifier: '' + this.asset.identifier,
       name: this.asset.name,
       category: this.category,
-      urlMetadata: this.asset.same_as,
+      urlMetadata: this.asset.same_as ?? '',
       price: 0,
       addedAt: new Date().getDate(),
     } as AssetsPurchase;

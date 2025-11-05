@@ -42,7 +42,9 @@
 
     <!-- Link Column -->
     <ng-container matColumnDef="urlMetadata">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MY-LIBRARY.DISPLAY-COLUMNS.LINK' | translate }}
+      </th>
       <td mat-cell *matCellDef="let asset">
           <a
           *ngIf="!!asset.urlMetadata"
