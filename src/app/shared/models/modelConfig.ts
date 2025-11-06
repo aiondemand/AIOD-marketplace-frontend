@@ -50,6 +50,10 @@ export const modelConfig = {
     columns: [...commonColumns, ...distributionColumns],
     title: 'Dataset',
   },
+  'Computational asset': {
+    columns: [...commonColumns, ...distributionColumns, ...mediaColumns],
+    title: 'Computational asset',
+  },
   Experiment: {
     columns: [
       ...commonColumns,
