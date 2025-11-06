@@ -57,6 +57,18 @@
           </div>
         </div>
       </div>
+
+      <div *ngIf="!!asset.industrial_sector && asset.industrial_sector.length > 0">
+        <h3>{{ 'ASSETS.ASSET-DETAIL.INDUSTRIAL_SECTOR' | translate }}</h3>
+        <div class="research-area-list space-bottom">
+          <div
+            class="btn btn-success btn-success--blue m-1"
+            *ngFor="let sector of asset.industrial_sector"
+          >
+            {{ sector }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

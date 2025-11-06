@@ -137,6 +137,12 @@
             </div>
           </div>
         </div>
+        <!-- Note Type isNoteType -->
+        <div *ngIf="isNoteType(col)">
+            <div *ngFor="let obj of item[col]">
+              <p [ngClass]="getThemeClass()">{{ obj.value }}</p>
+            </div>
+        </div> 
         <!-- Object Array Type (Media) -->
         <div *ngIf="isObjectArrayType(col, item)" class="object-array-media">
           <div *ngFor="let obj of item[col]" class="media-card">

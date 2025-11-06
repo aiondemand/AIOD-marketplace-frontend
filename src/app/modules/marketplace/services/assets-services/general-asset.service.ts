@@ -43,6 +43,9 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
       case AssetCategory.AIModel:
         this.endpoint = endpoints.aimodels;
         break;
+      case AssetCategory['Computational asset']:
+        this.endpoint = endpoints.computationalAssets;
+        break;
       case AssetCategory['Educational resource']:
         this.endpoint = endpoints.educationalResources;
         break;

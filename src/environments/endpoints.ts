@@ -6,6 +6,7 @@ export const endpoints = {
   prefixByCategories: '/v2',
 
   //Categories
+  computationalAssets: '/computational_assets',
   datasets: '/datasets',
   services: '/services',
   expetiments: '/experiments',
