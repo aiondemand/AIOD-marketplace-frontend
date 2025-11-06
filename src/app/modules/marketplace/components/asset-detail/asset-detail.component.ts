@@ -72,7 +72,22 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     const subscribe = this.route.queryParams
       .pipe(
         switchMap((params: Params) => {
-          const category = params['category'];
+          let category = params['category'];
+          if (typeof category === 'string') {
+            let decoded: string;
+            try {
+              decoded = decodeURIComponent(category).toLowerCase();
+            } catch {
+              decoded = category.toLowerCase();
+            }
+            if (decoded === 'datasets') {
+              category = 'Dataset';
+            } else if (decoded === 'machine learning models') {
+              category = 'AIModel';
+            } else if (decoded === 'computational assets') {
+              category = 'Computational asset';
+            }
+          }
           this.icon = this.appConfig.assets[category.toLocaleLowerCase()]?.icon;
           this.categoryColor =
             this.appConfig.assets[category.toLocaleLowerCase()]?.color;
