@@ -1,5 +1,6 @@
 export const commonColumns = [
   'description',
+  'falls_under_paradigm',
   'license',
   'same_as',
   'relevant_link',
@@ -51,7 +52,13 @@ export const modelConfig = {
     title: 'Dataset',
   },
   'Computational asset': {
-    columns: [...commonColumns, ...distributionColumns, ...mediaColumns],
+    columns: [
+      ...commonColumns,
+      ...distributionColumns,
+      ...mediaColumns,
+      'note',
+      'type',
+    ],
     title: 'Computational asset',
   },
   Experiment: {

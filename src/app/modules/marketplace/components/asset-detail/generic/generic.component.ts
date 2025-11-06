@@ -227,11 +227,15 @@ export class GenericComponent {
     return col === 'distribution' && col.length > 0;
   }
 
+  isNoteType(col: string): boolean {
+    return col === 'note' && col.length > 0;
+  }
+
   isObjectArrayType(col: string, item: GenericItem): boolean {
+    const specialColumns = ['description', 'distribution', 'note'];
     return (
       this.getValueType(item[col]) === VALUE_TYPES.OBJECT_ARRAY &&
-      col !== 'description' &&
-      col !== 'distribution'
+      !specialColumns.includes(col)
     );
   }
 
