@@ -47,6 +47,8 @@ export class ElasticSearchService {
         return endpoints.expetiments;
       case AssetCategory.AIModel:
         return endpoints.aimodels;
+      case AssetCategory['Computational asset']:
+        return endpoints.computationalAssets;
       case AssetCategory['Educational resource']:
         return endpoints.educationalResources;
       case AssetCategory['Publication']:

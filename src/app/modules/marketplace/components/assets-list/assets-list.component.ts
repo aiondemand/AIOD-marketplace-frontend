@@ -43,12 +43,13 @@ const MAX_ATTEMPTS = 15;
 const EXCLUDED_PLATFORMS = ['example', 'ai4experiments', 'aibuilder'];
 const assetCategoryMapping = {
   [AssetCategory.AIModel]: 'ml_models',
+  [AssetCategory['Computational asset']]: 'computational_assets',
   [AssetCategory.Dataset]: 'datasets',
-  [AssetCategory.Experiment]: 'experiments',
   [AssetCategory['Educational resource']]: 'educational_resources',
-  [AssetCategory['Service']]: 'services',
+  [AssetCategory.Experiment]: 'experiments',
   [AssetCategory['Publication']]: 'publications',
   [AssetCategory['Resource Bundle']]: 'resource_bundles',
+  [AssetCategory['Service']]: 'services',
   [AssetCategory['Success stories']]: 'success_stories',
 };
 
