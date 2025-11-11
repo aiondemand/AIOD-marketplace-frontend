@@ -9,21 +9,21 @@ export const environment = {
   develop: true,
   production: false,
   api: {
-    base: browserwindow.env?.['API_URL'] || '',
+    base: browserwindow.env?.['API_URL'] || 'http://localhost:8001',
     endpoints,
     schemas,
   },
   keycloakConfig: {
     baseUrl:
       browserwindow.env?.['KEYCLOAK_URL'] ||
-      'https://auth-aiod-dev.iti.es/aiod-auth',
+      'https://auth.aiod.eu/aiod-auth',
     realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
     clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
     redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
     showDebugInformation: true,
   },
   enhancedApi: {
-    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || '',
+    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || 'http://localhost:8001',
   },
   zohoConfig: {
     base: '',

@@ -114,10 +114,24 @@ export class AssetCardComponent implements OnInit {
     }
   }
 
-  openRouteInNewTab(route: string, queryParams: Params) {
+  handleMouseClick(event: MouseEvent, identifier: string, queryParams: Params) {
+    const buttonPressed = event.button;
+    const url = this.getAssetDetailURL(identifier, queryParams);
+    let target = '_self';
+
+    // User click with mouse wheel or right button
+    if (buttonPressed === 1 || buttonPressed === 2) {
+      target = '_blank';
+    }
+
+    window.open(url, target);
+    event.preventDefault();
+  }
+
+  private getAssetDetailURL(route: string, queryParams: Params) {
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/resources', route], { queryParams }),
     );
-    window.open(url, '_blank');
+    return url;
   }
 }
