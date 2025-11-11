@@ -77,7 +77,7 @@
   <div class="asset-tittle featured-products-item row">
     <div class="col-lg-7">
       <div class="asset-title-row">
-        <h2>{{ asset.name | titlecase }}</h2>
+        <h2>{{ asset.name }}</h2>
         <button
           title="Add to bookmarks"
           class="btn btn-circle not-rotate ml-2"
@@ -124,7 +124,7 @@
     <div class="col-lg-3">
       <div class="row space-between">
         <div class="btn btn-default mr-2">
-          {{ this.category | lowercase }}
+          {{ this.category }}
         </div>
         <div *ngIf="asset.platform" class="btn btn-default">
           {{ asset.platform }}
