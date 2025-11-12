@@ -14,10 +14,25 @@
               <a style='color: #41b6e6;'[href]="arrayItem" target="_blank" rel="noopener noreferrer">{{ arrayItem }}</a>
             </div>
           </ng-container>
+            <ng-container *ngIf="col === 'relevant_to'; else normalArray">
+            <div *ngFor="let relatedAsset of relatedAssets" [ngClass]="col" style="margin-bottom: .5rem;">
+              <div style='margin-bottom: 0.5rem;'>
+              <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.PROJECT_NAME' | translate }}: {{ relatedAsset.name }}</span>
+              </div>
+              <div style='margin-bottom: 0.5rem;'>
+                <span>{{ 'ASSETS.ASSET-DETAIL.PROJECT' | translate }}: </span>
+              <a style='color: #41b6e6; margin-bottom: 0.5rem;' [href]="relatedAsset.id" target="_blank" rel="noopener noreferrer"> {{ relatedAsset.same_as }}</a>
+              </div>
+              <span>{{ 'ASSETS.ASSET-DETAIL.ORGANISATION' | translate }}: </span>
+              <a style='color: #41b6e6; '[href]="relatedAsset.id" target="_blank" rel="noopener noreferrer">{{ relatedAsset.relevant_link }}</a>
+            </div>
+          </ng-container>
           <ng-template #normalArray>
-        <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">
-            {{ arrayItem }}<span *ngIf="!last" [ngClass]="getThemeClass()">, </span>
-        </span>
+          <ng-container *ngIf="col !== 'relevant_link' && col !== 'relevant_to'">
+              <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">
+                {{ arrayItem }}<span *ngIf="!last" [ngClass]="getThemeClass()">, </span>
+              </span>
+            </ng-container>
           </ng-template>
         </div>
         <!-- Distribution Type -->
@@ -137,6 +152,12 @@
             </div>
           </div>
         </div>
+        <!-- Note Type isNoteType -->
+        <div *ngIf="isNoteType(col)">
+            <div *ngFor="let obj of item[col]">
+              <p [ngClass]="getThemeClass()">{{ obj.value }}</p>
+            </div>
+        </div> 
         <!-- Object Array Type (Media) -->
         <div *ngIf="isObjectArrayType(col, item)" class="object-array-media">
           <div *ngFor="let obj of item[col]" class="media-card">
@@ -233,11 +254,20 @@
             </div>
           </div>
         </div>
-
-        <!-- Special Column Types with Markdown -->
-        <markdown *ngIf="col === 'description'" class="markdown-white">
-          {{ getDescription(item) }}
-        </markdown>
+        <!-- Contacts Type -->
+        <div *ngIf="col === 'contacts'" class="contacts-section">
+          <div *ngFor="let contact of item[col]" class="contact-card">
+            <div *ngIf="contact.name" class="contact-name" [ngClass]="getThemeClass()">
+              <strong>{{ contact.name }}</strong>
+            </div>
+            <div *ngIf="contact.email && contact.email.length > 0" class="contact-email" [ngClass]="getThemeClass()">
+              <span *ngFor="let email of contact.email; let last = last">
+                <a [href]="'mailto:' + email" style="color: #41b6e6;">{{ email }}</a><span *ngIf="!last">, </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="col === 'description'" class="description-html" [ngClass]="getThemeClass()" [innerHTML]="getDescription(item)"></div>
 
         <markdown *ngIf="col === 'license'" class="license" style="color: blue">
           {{ item[col] }}

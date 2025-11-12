@@ -12,7 +12,7 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
   private assetCategory: AssetCategory;
 
   constructor(http: HttpClient) {
-    super(http, endpoints.datasets);
+    super(http, endpoints[AssetCategory.Dataset]);
     this.assetCategory = AssetCategory.Dataset;
   }
 
@@ -30,33 +30,6 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
   }
 
   private setEndpoint(): void {
-    switch (this.assetCategory) {
-      case AssetCategory.Dataset:
-        this.endpoint = endpoints.datasets;
-        break;
-      case AssetCategory.Service:
-        this.endpoint = endpoints.services;
-        break;
-      case AssetCategory.Experiment:
-        this.endpoint = endpoints.expetiments;
-        break;
-      case AssetCategory.AIModel:
-        this.endpoint = endpoints.aimodels;
-        break;
-      case AssetCategory['Educational resource']:
-        this.endpoint = endpoints.educationalResources;
-        break;
-      case AssetCategory['Publication']:
-        this.endpoint = endpoints.publications;
-        break;
-      case AssetCategory['Success stories']:
-        this.endpoint = endpoints.caseStudies;
-        break;
-      case AssetCategory['Resource Bundle']:
-        this.endpoint = endpoints.resourceBundles;
-        break;
-      default:
-        throw new Error('Does not exit category selected');
-    }
+    this.endpoint = endpoints[this.assetCategory];
   }
 }

@@ -19,6 +19,10 @@
     "projectUrl": "https://ai4eosc.eu",
     "acknowledgments": "The AI4EOSC dashboard is a service provided by CSIC, co-funded by ",
     "assets": {
+        "computational asset": {
+            "icon":"design_services",
+            "color":"#BBC3C9"
+        },
         "dataset": {
             "icon":"dataset",
             "color":"#B5EAD7"

@@ -18,7 +18,7 @@
           [routerLink]="['/resources', asset.identifier]"
           [queryParams]="{ category: asset.category }"
         >
-          {{ asset.name | titlecase }}
+          {{ asset.name }}
         </a>
       </td>
     </ng-container>
@@ -34,7 +34,7 @@
           [style.background]="getColorCategory(asset.category)"
         >
           <span class="chip-asset-category">
-            {{ asset.category | lowercase }}</span
+            {{ asset.category }}</span
           >
         </mat-chip>
       </td>

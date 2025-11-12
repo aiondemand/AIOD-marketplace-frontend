@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { SearchModel } from '@app/shared/models/search.model';
 import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.interface';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
+import { getEndpoint } from '@app/shared/utils/endpoint-utils';
 
 const { base, endpoints } = environment.api;
 
@@ -38,26 +39,7 @@ export class ElasticSearchService {
   }
 
   private getEndpoint(assetCategory: AssetCategory): string {
-    switch (assetCategory) {
-      case AssetCategory.Dataset:
-        return endpoints.datasets;
-      case AssetCategory.Service:
-        return endpoints.services;
-      case AssetCategory.Experiment:
-        return endpoints.expetiments;
-      case AssetCategory.AIModel:
-        return endpoints.aimodels;
-      case AssetCategory['Educational resource']:
-        return endpoints.educationalResources;
-      case AssetCategory['Publication']:
-        return endpoints.publications;
-      case AssetCategory['Success stories']:
-        return endpoints.caseStudies;
-      case AssetCategory['Resource Bundle']:
-        return endpoints.resourceBundles;
-      default:
-        throw new Error('Does not exit category selected');
-    }
+    return getEndpoint(assetCategory);
   }
 
   public getAssetBySearch(

@@ -9,7 +9,7 @@ import {
 } from '@app/modules/marketplace/services/common-services/bookmark-service/bookmark.service';
 import { environment } from '@environments/environment';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
-import { Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 
@@ -112,5 +112,26 @@ export class AssetCardComponent implements OnInit {
           console.error('Error deleting asset from bookmarks', error),
       });
     }
+  }
+
+  handleMouseClick(event: MouseEvent, identifier: string, queryParams: Params) {
+    const buttonPressed = event.button;
+    const url = this.getAssetDetailURL(identifier, queryParams);
+    let target = '_self';
+
+    // User click with mouse wheel or right button
+    if (buttonPressed === 1 || buttonPressed === 2) {
+      target = '_blank';
+    }
+
+    window.open(url, target);
+    event.preventDefault();
+  }
+
+  private getAssetDetailURL(route: string, queryParams: Params) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/resources', route], { queryParams }),
+    );
+    return url;
   }
 }

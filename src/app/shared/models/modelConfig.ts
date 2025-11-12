@@ -1,8 +1,11 @@
 export const commonColumns = [
   'description',
+  'falls_under_paradigm',
   'license',
   'same_as',
   'relevant_link',
+  'contacts',
+  'relevant_to',
 ];
 
 export const distributionColumns = [
@@ -49,6 +52,16 @@ export const modelConfig = {
   Dataset: {
     columns: [...commonColumns, ...distributionColumns],
     title: 'Dataset',
+  },
+  'Computational asset': {
+    columns: [
+      ...commonColumns,
+      ...distributionColumns,
+      ...mediaColumns,
+      'note',
+      'type',
+    ],
+    title: 'Computational asset',
   },
   Experiment: {
     columns: [

@@ -1,3 +1,5 @@
+import { AssetCategory } from '../app/shared/models/asset-category.model';
+
 export const endpoints = {
   //AIOD
   prefixApiAssets: '/api-metadata',
@@ -6,14 +8,15 @@ export const endpoints = {
   prefixByCategories: '/v2',
 
   //Categories
-  datasets: '/datasets',
-  services: '/services',
-  expetiments: '/experiments',
-  aimodels: '/ml_models',
-  educationalResources: '/educational_resources',
-  publications: '/publications',
-  caseStudies: '/case_studies',
-  resourceBundles: '/resource_bundles',
+  [AssetCategory.Dataset]: '/datasets',
+  [AssetCategory.Service]: '/services',
+  [AssetCategory.Experiment]: '/experiments',
+  [AssetCategory.AIModel]: '/ml_models',
+  [AssetCategory['Computational asset']]: '/computational_assets',
+  [AssetCategory['Educational resource']]: '/educational_resources',
+  [AssetCategory.Publication]: '/publications',
+  [AssetCategory['Success stories']]: '/case_studies',
+  [AssetCategory['Resource Bundle']]: '/resource_bundles',
 
   //Payments
   prefixApiPayment: '/api-library/api',
@@ -26,7 +29,10 @@ export const endpoints = {
 
   //Platforms
   platforms: '/platforms',
-
+  //Projects
+  project: '/projects',
+  //Organisations
+  organisation: '/organisations',
   //Search
   search: '/v2/search',
 
