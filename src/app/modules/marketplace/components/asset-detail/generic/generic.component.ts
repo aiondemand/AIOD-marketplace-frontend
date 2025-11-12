@@ -1,18 +1,33 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { VALUE_TYPES } from '@app/shared/constants/value-types';
 import { GenericItem } from '@app/shared/models/generic.model';
-
+import { ProjectService } from '@app/modules/marketplace/services/common-services/project.service';
+import { OrganisationService } from '@app/modules/marketplace/services/common-services/organisation.service';
 @Component({
   selector: 'app-generic-asset',
   templateUrl: './generic.component.html',
   styleUrls: ['./generic.component.scss'],
 })
-export class GenericComponent {
+export class GenericComponent implements OnInit {
   readonly VALUE_TYPES = VALUE_TYPES;
+  constructor(
+    private ProjectService: ProjectService,
+    private OrganisationService: OrganisationService,
+    private sanitizer: DomSanitizer,
+  ) {}
+
+  ngOnInit(): void {
+    const relevantTo = this.items?.[0]?.['relevant_to'];
+    if (Array.isArray(relevantTo)) {
+      relevantTo.forEach((relevantTo) => this.getGeneralAssetInfo(relevantTo));
+    }
+  }
 
   @Input() items: GenericItem[] = [];
   @Input() columns: string[] = [];
   @Input() title?: string;
+  relatedAssets: any[] = [];
 
   // Theme detection
   isDarkTheme(): boolean {
@@ -170,14 +185,41 @@ export class GenericComponent {
   }
 
   // Description handling
-  getDescription(item: GenericItem): string {
+  private descriptionCache = new Map<string, SafeHtml>();
+
+  getDescription(item: GenericItem): SafeHtml {
+    const cacheKey = JSON.stringify(item['description']);
+
+    if (this.descriptionCache.has(cacheKey)) {
+      const cached = this.descriptionCache.get(cacheKey);
+      if (cached !== undefined) {
+        return cached;
+      }
+    }
+
     const description = item['description'];
 
     if (!description || typeof description !== 'object') {
-      return '';
+      const emptyResult = '';
+      this.descriptionCache.set(cacheKey, emptyResult);
+      return emptyResult;
     }
 
-    return description['plain'] || description['html'] || '';
+    let htmlContent: string;
+    if (
+      description['html'] &&
+      description['plain'] &&
+      description['html'].length > description['plain'].length
+    ) {
+      htmlContent = description['html'];
+    } else if (description['plain']) {
+      htmlContent = description['plain'];
+    } else {
+      htmlContent = '';
+    }
+    const safeHtml = this.sanitizer.bypassSecurityTrustHtml(htmlContent);
+    this.descriptionCache.set(cacheKey, safeHtml);
+    return safeHtml;
   }
 
   // Template helper methods
@@ -235,7 +277,10 @@ export class GenericComponent {
     const specialColumns = ['description', 'distribution', 'note'];
     return (
       this.getValueType(item[col]) === VALUE_TYPES.OBJECT_ARRAY &&
-      !specialColumns.includes(col)
+      !specialColumns.includes(col) &&
+      col !== 'description' &&
+      col !== 'distribution' &&
+      col !== 'contacts'
     );
   }
 
@@ -249,6 +294,24 @@ export class GenericComponent {
 
   getExpandIconLabel(isExpanded: boolean): string {
     return isExpanded ? 'Collapse' : 'Expand';
+  }
+  getGeneralAssetInfo(relevantTo: any): void {
+    const prefixIndex = relevantTo.indexOf('_');
+    const prefix = relevantTo.substring(0, prefixIndex);
+    switch (prefix) {
+      case 'proj':
+        this.ProjectService.getProject(relevantTo).subscribe((project) => {
+          this.relatedAssets.push(project);
+        });
+        break;
+      case 'org':
+        this.OrganisationService.getOrganisation(relevantTo).subscribe(
+          (organisation) => {
+            this.relatedAssets.push(organisation);
+          },
+        );
+        break;
+    }
   }
 
   hasMediaProperties(obj: any): boolean {
