@@ -3,8 +3,7 @@ product-list-developer-card
 -->
 <div
   class="card-news card-numbers card-position asset-card"
-  routerLink="{{ asset.identifier }}"
-  [queryParams]="{ category: categoryKey }"
+  (mousedown)="handleMouseClick($event, asset.identifier, {category: categoryKey})"
 >
   <div class="card-news-container" [ngClass]="mode === 1 ? 'min-height' : ''">
     <div class="card-news-content mt-0">
