@@ -170,7 +170,10 @@
       "DATA_CREATED": "Date Created",
       "VERSION": "Version",
       "CITATION": "Citations",
-      "INDUSTRIAL_SECTOR": "Industrial Sector"
+      "INDUSTRIAL_SECTOR": "Industrial Sector",
+      "PROJECT_NAME": "Project name",
+      "PROJECT": "Project",
+      "ORGANISATION": "Organisation"
     }
   },
   "DATASET": {

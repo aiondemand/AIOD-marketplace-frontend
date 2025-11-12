@@ -4,6 +4,8 @@ export const commonColumns = [
   'license',
   'same_as',
   'relevant_link',
+  'contacts',
+  'relevant_to',
 ];
 
 export const distributionColumns = [

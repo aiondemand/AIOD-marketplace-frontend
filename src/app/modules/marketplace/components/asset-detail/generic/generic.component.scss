@@ -48,6 +48,26 @@
       padding: 0px 24px;
     }
   }
+  .contacts-section {
+    margin: 2rem 0;
+  }
+  .contact-card {
+    background: transparent;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 6px solid #2a5db0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .contact-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .contact-email {
+    font-size: 1rem;
+  }
+
   .media-header {
     color: #41b6e6;
     font-size: 2rem;
@@ -112,9 +132,7 @@
 
   a {
     overflow: hidden;
-  }
-  .item-info-body {
-    margin: 1rem;
+    color: #41b6e6;
   }
 
   .item-info-body .item-info-container {
@@ -133,6 +151,7 @@
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: border 0.3s ease;
+      color: #c2c2c2;
     }
     .execution_settings.dark p {
       color: #e6eef7;
@@ -243,6 +262,30 @@
 
     .item-info-body .item-info-container {
       overflow: scroll;
+    }
+  }
+  .description-html {
+    div {
+      color: black;
+      font-weight: unset;
+      font-family: Jura, sans-serif;
+    }
+    div p {
+      color: black !important;
+      font-weight: unset;
+      font-family: Jura, sans-serif;
+    }
+    &.dark {
+      div {
+        color: #c2c2c2;
+        font-weight: unset;
+        font-family: Jura, sans-serif;
+      }
+      div p {
+        color: #c2c2c2 !important;
+        font-weight: unset;
+        font-family: Jura, sans-serif;
+      }
     }
   }
 }
