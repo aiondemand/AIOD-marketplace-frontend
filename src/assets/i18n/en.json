@@ -11,7 +11,7 @@
     "SIGN-IN": "Sign in",
     "FEEDBACK": "Give us your feedback",
     "COMUNICATION-MATERIALS": "Communication Materials",
-    "SDK-AND-API":"SDKs and APIs"
+    "SDK-AND-API": "SDKs and APIs"
   },
   "TOP-NAVBAR": {
     "LOGOUT": "Log out",
@@ -173,7 +173,9 @@
       "INDUSTRIAL_SECTOR": "Industrial Sector",
       "PROJECT_NAME": "Project name",
       "PROJECT": "Project",
-      "ORGANISATION": "Organisation"
+      "ORGANISATION": "Organisation",
+      "PERSON_NAME": "Person name",
+      "AIOD_ENTRY": "Editors"
     }
   },
   "DATASET": {

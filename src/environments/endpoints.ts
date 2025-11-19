@@ -33,6 +33,8 @@ export const endpoints = {
   project: '/projects',
   //Organisations
   organisation: '/organisations',
+  //Persons
+  persons: '/persons',
   //Search
   search: '/v2/search',
 
