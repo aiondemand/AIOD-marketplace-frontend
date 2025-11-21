@@ -9,6 +9,7 @@ import { environment } from '@environments/environment';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EXTERNAL_LINKS } from '@app/shared/constants/external-links';
+import { setCookie } from '@app/shared/utils/theme-utils';
 
 @Component({
   selector: 'app-top-navbar',
@@ -206,11 +207,11 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    const newTheme =
+      document.body.dataset['theme'] === 'dark' ? 'light' : 'dark';
+    document.body.dataset['theme'] = newTheme;
+    document.documentElement.setAttribute('data-theme', newTheme);
+    setCookie('theme', newTheme);
   }
 
   openMobileMenu() {

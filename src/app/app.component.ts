@@ -21,14 +21,6 @@ export class AppComponent implements OnInit {
 
     const theme = getCookie('theme') || 'light';
     document.documentElement.setAttribute('data-theme', theme);
-    document.body.dataset['data-theme'] = theme;
-  }
-
-  toggleTheme() {
-    const newTheme =
-      document.body.dataset['data-theme'] === 'dark' ? 'light' : 'dark';
-    document.body.dataset['data-theme'] = newTheme;
-    document.documentElement.setAttribute('data-theme', newTheme);
-    setCookie('theme', newTheme);
+    document.body.dataset['theme'] = theme;
   }
 }
