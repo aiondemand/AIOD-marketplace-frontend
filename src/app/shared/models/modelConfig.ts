@@ -81,6 +81,7 @@ export const modelConfig = {
       'type',
       'target_audience',
       'target_groups',
+      'aiod_entry',
     ],
     title: 'Educational Resource',
   },

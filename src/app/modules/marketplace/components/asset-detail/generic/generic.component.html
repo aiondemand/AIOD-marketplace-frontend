@@ -7,28 +7,51 @@
       [ngClass]="getThemeClass()"
     >
       <h3>{{ formatColumnName(col) }}</h3>
-        <!-- Array Type -->
+        <ng-container *ngIf="this.showColumn(col, ['aiod_entry'])">
+          <div *ngIf="relatedAssets?.length === 0" class="related-assets-empty" [ngClass]="getThemeClass()">
+          </div>
+          <ng-container *ngFor="let relatedAsset of relatedAssets; let last = last">
+            <div [ngClass]="col" style="margin-bottom: .5rem;">
+              <div *ngIf="isAssetNameDefined(relatedAsset)" style='margin-bottom: 0.5rem;'>
+                <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.PERSON_NAME' | translate }}: {{ relatedAsset.name }}</span>
+              </div>
+              <div style='margin-bottom: 0.5rem;'>
+                <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.PLATFORM' | translate }}: {{ relatedAsset.platform }}</span>
+              </div>
+              <div *ngIf="relatedAsset.description?.plain" style='margin-bottom: 0.5rem;'>
+                <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.DESCRIPTION' | translate }}: {{ relatedAsset.description.plain }}</span>
+              </div>
+              <div *ngIf="relatedAsset.same_as" style='margin-bottom: 0.5rem;'>
+                <span>{{ 'ASSETS.ASSET-DETAIL.SAMEAS' | translate }}: </span>
+                <a style='margin-bottom: 0.5rem; color: #41b6e6;' [href]="relatedAsset.same_as" target="_blank" rel="noopener noreferrer">{{ relatedAsset.same_as }}</a>
+              </div>
+            </div>
+            <hr *ngIf="!last" style="margin: 1rem 0; border: none; border-top: 1px solid #ccc;">
+          </ng-container>
+        </ng-container>
         <div *ngIf="isArrayType(col, item)">
-          <ng-container *ngIf="col === 'relevant_link'; else normalArray">
+          <ng-container *ngIf="this.showColumn(col, ['relevant_link']); else normalArray">
             <div *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="col" style="margin-bottom: .5rem;">
               <a style='color: #41b6e6;'[href]="arrayItem" target="_blank" rel="noopener noreferrer">{{ arrayItem }}</a>
             </div>
           </ng-container>
-            <ng-container *ngIf="col === 'relevant_to'; else normalArray">
-            <div *ngFor="let relatedAsset of relatedAssets" [ngClass]="col" style="margin-bottom: .5rem;">
-              <div style='margin-bottom: 0.5rem;'>
-              <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.PROJECT_NAME' | translate }}: {{ relatedAsset.name }}</span>
+            <ng-container *ngIf="this.showColumn(col, ['relevant_to']); else normalArray">
+            <ng-container *ngFor="let relatedAsset of relatedAssets">
+              <div [ngClass]="col" style="margin-bottom: .5rem;">
+                <div *ngIf="isAssetNameDefined(relatedAsset)" style='margin-bottom: 0.5rem;'>
+                <span style='margin-bottom: 0.5rem;'>{{ 'ASSETS.ASSET-DETAIL.PROJECT_NAME' | translate }}: {{ relatedAsset.name }}</span>
+                </div>
+                <div style='margin-bottom: 0.5rem;'>
+                  <span>{{ 'ASSETS.ASSET-DETAIL.PROJECT' | translate }}: </span>
+                <a style='color: #41b6e6; margin-bottom: 0.5rem;' [href]="relatedAsset.id" target="_blank" rel="noopener noreferrer"> {{ relatedAsset.same_as }}</a>
+                </div>
+                <span>{{ 'ASSETS.ASSET-DETAIL.ORGANISATION' | translate }}: </span>
+                <a style='color: #41b6e6; '[href]="relatedAsset.id" target="_blank" rel="noopener noreferrer">{{ relatedAsset.relevant_link }}</a>
               </div>
-              <div style='margin-bottom: 0.5rem;'>
-                <span>{{ 'ASSETS.ASSET-DETAIL.PROJECT' | translate }}: </span>
-              <a style='color: #41b6e6; margin-bottom: 0.5rem;' [href]="relatedAsset.id" target="_blank" rel="noopener noreferrer"> {{ relatedAsset.same_as }}</a>
-              </div>
-              <span>{{ 'ASSETS.ASSET-DETAIL.ORGANISATION' | translate }}: </span>
-              <a style='color: #41b6e6; '[href]="relatedAsset.id" target="_blank" rel="noopener noreferrer">{{ relatedAsset.relevant_link }}</a>
-            </div>
+            </ng-container>
           </ng-container>
           <ng-template #normalArray>
-          <ng-container *ngIf="col !== 'relevant_link' && col !== 'relevant_to'">
+          <ng-container *ngIf="!this.showColumn(col, ['relevant_link', 'relevant_to', 'target_audience'])">
               <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">
                 {{ arrayItem }}<span *ngIf="!last" [ngClass]="getThemeClass()">, </span>
               </span>
@@ -255,7 +278,7 @@
           </div>
         </div>
         <!-- Contacts Type -->
-        <div *ngIf="col === 'contacts'" class="contacts-section">
+        <div *ngIf="this.showColumn(col, ['contacts'])" class="contacts-section">
           <div *ngFor="let contact of item[col]" class="contact-card">
             <div *ngIf="contact.name" class="contact-name" [ngClass]="getThemeClass()">
               <strong>{{ contact.name }}</strong>
@@ -267,20 +290,20 @@
             </div>
           </div>
         </div>
-        <div *ngIf="col === 'description'" class="description-html" [ngClass]="getThemeClass()" [innerHTML]="getDescription(item)"></div>
+        <div *ngIf="this.showColumn(col, ['description'])" class="description-html" [ngClass]="getThemeClass()" [innerHTML]="getDescription(item)"></div>
 
-        <markdown *ngIf="col === 'license'" class="license" style="color: blue">
+        <markdown *ngIf="this.showColumn(col, ['license'])" class="license" style="color: blue">
           {{ item[col] }}
         </markdown>
 
-        <markdown *ngIf="col === 'same_as'" class="same_as">
+        <markdown *ngIf="this.showColumn(col, ['same_as'])" class="same_as">
           {{ item[col] }}
         </markdown>
 
-        <markdown *ngIf="col === 'execution_settings'" class="execution_settings" [ngClass]="getThemeClass()">
+        <markdown *ngIf="this.showColumn(col, ['execution_settings'])" class="execution_settings" [ngClass]="getThemeClass()">
           {{ item[col] }}
         </markdown>
-        <div *ngIf="col === 'badge'">
+        <div *ngIf="this.showColumn(col, ['badge'])">
           <markdown
             *ngFor="let badgeItem of getArrayValues(item[col])"
             class="asset-property"
@@ -289,9 +312,19 @@
             {{ badgeItem }}
           </markdown>
         </div>
-        <markdown *ngIf="col === 'type'" class="asset-property">
+        <markdown *ngIf="this.showColumn(col, ['type'])" class="asset-property">
           {{ item[col] }}
         </markdown>
+        <ng-container *ngIf="this.showColumn(col, ['target_audience'])">
+          <markdown *ngIf="getValueType(item[col]) === VALUE_TYPES.TEXT" class="asset-property">
+            {{ item[col] }}
+          </markdown>
+          <div *ngIf="getValueType(item[col]) === VALUE_TYPES.ARRAY" class="asset-property">
+            <span *ngFor="let arrayItem of getArrayValues(item[col]); let last = last" [ngClass]="getThemeClass()">
+              {{ arrayItem }}<span *ngIf="!last" [ngClass]="getThemeClass()">, </span>
+            </span>
+          </div>
+        </ng-container>
         <markdown *ngIf="getValueType(item[col]) === VALUE_TYPES.TEXT  && col === 'target_group'" class="asset-property">
           {{ item[col] }}
         </markdown>

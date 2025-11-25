@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 import { VALUE_TYPES } from '@app/shared/constants/value-types';
 import { GenericItem } from '@app/shared/models/generic.model';
 import { ProjectService } from '@app/modules/marketplace/services/common-services/project.service';
 import { OrganisationService } from '@app/modules/marketplace/services/common-services/organisation.service';
+import { PersonService } from '@app/modules/marketplace/services/common-services/person.service';
+
 @Component({
   selector: 'app-generic-asset',
   templateUrl: './generic.component.html',
@@ -14,13 +17,21 @@ export class GenericComponent implements OnInit {
   constructor(
     private ProjectService: ProjectService,
     private OrganisationService: OrganisationService,
+    private PersonService: PersonService,
     private sanitizer: DomSanitizer,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
     const relevantTo = this.items?.[0]?.['relevant_to'];
+    const aiod_entry = this.items?.[0]?.['aiod_entry'];
     if (Array.isArray(relevantTo)) {
       relevantTo.forEach((relevantTo) => this.getGeneralAssetInfo(relevantTo));
+    }
+    if (Array.isArray(aiod_entry?.editor)) {
+      aiod_entry.editor.forEach((editorId: string) =>
+        this.getGeneralAssetInfo(editorId),
+      );
     }
   }
 
@@ -48,8 +59,14 @@ export class GenericComponent implements OnInit {
     return themeAttr || storageTheme || 'light';
   }
 
-  // Column name formatting
   formatColumnName(columnName: string): string {
+    const translationKey = `ASSETS.ASSET-DETAIL.${columnName.toUpperCase()}`;
+    const translation = this.translate.instant(translationKey);
+
+    if (translation !== translationKey) {
+      return translation;
+    }
+
     const baseName = this.extractBaseName(columnName);
     return this.convertToTitleCase(baseName);
   }
@@ -228,6 +245,10 @@ export class GenericComponent implements OnInit {
       return col.length > 0 && !!this.getDescription(item);
     }
 
+    if (col === 'aiod_entry') {
+      return item['aiod_entry'].editor.length > 0;
+    }
+
     const value = item[col];
 
     // Check if value exists and is not 'N/A' or 'null'
@@ -295,23 +316,43 @@ export class GenericComponent implements OnInit {
   getExpandIconLabel(isExpanded: boolean): string {
     return isExpanded ? 'Collapse' : 'Expand';
   }
-  getGeneralAssetInfo(relevantTo: any): void {
-    const prefixIndex = relevantTo.indexOf('_');
-    const prefix = relevantTo.substring(0, prefixIndex);
+  getGeneralAssetInfo(relatedAsset: any): void {
+    const prefixIndex = relatedAsset.indexOf('_');
+    const prefix = relatedAsset.substring(0, prefixIndex);
     switch (prefix) {
       case 'proj':
-        this.ProjectService.getProject(relevantTo).subscribe((project) => {
+        this.ProjectService.getProject(relatedAsset).subscribe((project) => {
           this.relatedAssets.push(project);
         });
         break;
       case 'org':
-        this.OrganisationService.getOrganisation(relevantTo).subscribe(
+        this.OrganisationService.getOrganisation(relatedAsset).subscribe(
           (organisation) => {
             this.relatedAssets.push(organisation);
           },
         );
         break;
+      case 'prsn':
+        this.PersonService.getPerson(relatedAsset).subscribe((person) => {
+          this.relatedAssets.push(person);
+        });
+        break;
     }
+  }
+  showColumn(column_name: string, accepted_columns: string[]): boolean {
+    return accepted_columns.includes(column_name);
+  }
+
+  isAssetNameDefined(asset: any): boolean {
+    if (!asset) {
+      return false;
+    }
+
+    if (asset.name.length === 0) {
+      return false;
+    }
+
+    return !asset.name.includes('*');
   }
 
   hasMediaProperties(obj: any): boolean {
