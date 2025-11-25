@@ -15,9 +15,6 @@ export interface UserProfile {
 
 @Injectable()
 export class AuthService {
-  private lastSilentRefreshAt = 0;
-  private readonly minSilentRefreshIntervalMs = 100_000;
-
   constructor(
     private oauthService: OAuthService,
     private router: Router,
@@ -61,17 +58,6 @@ export class AuthService {
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
-      } else {
-        const now = Date.now();
-        if (now - this.lastSilentRefreshAt > this.minSilentRefreshIntervalMs) {
-          this.lastSilentRefreshAt = now;
-          this.oauthService
-            .silentRefresh()
-            .then(() => this.tryLoadProfileFromTokens())
-            .catch(() => {
-              // swallow
-            });
-        }
       }
     });
   }
