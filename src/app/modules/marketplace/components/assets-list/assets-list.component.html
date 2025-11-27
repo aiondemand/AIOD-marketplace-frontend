@@ -181,8 +181,8 @@
   </ng-template>
 </div>
 <!--Viewer Selector-->
-<div class="sdk viewer row flex-row-reverse pr-3 pt-3 pb-3">
-  <div class="theme-switch-wrapper">
+<div class="sdk viewer row pr-3 pt-3 pb-3">
+  <div class="theme-switch-wrapper" style="margin-left:20px">
     <label class="theme-switch" for="viewModeCheckbox">
       <input type="checkbox" id="viewModeCheckbox" />
       <div class="slider round">
@@ -270,6 +270,24 @@
         </div>
       </div>
     </label>
+  </div>
+  <div class="sort-selector" *ngIf="!isEnhancedSearch">
+    <div class="sort-options">
+      <label [ngClass]="{ 'light-theme': isLightTheme === 'light' }">Sort by:</label>
+      <select [(ngModel)]="sortField" (change)="onSortFieldChange(sortField)" [ngClass]="{ 'light-theme': isLightTheme === 'light' }">
+        <option [value]="SortField.DateModified">Date Modified</option>
+        <option [value]="SortField.DateCreated">Date Created</option>
+      </select>
+      <button
+        type="button"
+        class="sort-order-btn"
+        [ngClass]="{ 'light-theme': isLightTheme === 'light', 'desc': sortOrder === SortOrder.Desc }"
+        (click)="onSortOrderChange(sortOrder === SortOrder.Asc ? SortOrder.Desc : SortOrder.Asc)"
+        [title]="sortOrder === SortOrder.Asc ? 'Switch to descending' : 'Switch to ascending'"
+      >
+        <svg viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M13.49,7.63l-.16-.16c-.27-.27-.72-.27-.99,0l-3.6,3.6V2.71c0-.32-.26-.58-.58-.58h-.31c-.32,0-.58.26-.58.58v8.35l-3.69-3.68c-.23-.23-.59-.23-.82,0l-.21.21c-.23.23-.23.59,0,.82l5.46,5.46,5.49-5.49c.21-.21.21-.54,0-.75Z"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 

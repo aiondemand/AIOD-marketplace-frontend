@@ -498,3 +498,101 @@ $transition-opacity: opacity 0.3s ease-in-out 0.5s;
     }
   }
 }
+
+.sort-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-left: 20px;
+
+  .sort-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+
+    label {
+      font-weight: 500;
+      color: $dark-text-primary;
+      white-space: nowrap;
+
+      &.light-theme {
+        color: $color-text;
+      }
+    }
+
+    select {
+      padding: 5px 10px;
+      border: 1px solid $border-light;
+      border-radius: $border-radius-sm;
+      background-color: $dark-bg-secondary;
+      color: $dark-text-primary;
+      min-width: 160px;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-blue;
+      }
+
+      &.light-theme {
+        background-color: $light-bg-secondary;
+        color: $light-text-secondary;
+      }
+    }
+
+    .sort-order-btn {
+      padding: 5px 10px;
+      border: 1px solid $border-light;
+      border-radius: $border-radius-sm;
+      background-color: $dark-bg-secondary;
+      color: $dark-text-primary;
+      cursor: pointer;
+      transition: $transition-bg;
+      vertical-align: middle;
+
+      &:hover {
+        background-color: $dark-bg-tertiary;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $primary-blue;
+      }
+
+      &.light-theme {
+        background-color: $light-bg-secondary;
+        color: $light-text-secondary;
+
+        &:hover {
+          background-color: $light-bg-tertiary;
+        }
+      }
+
+      &.desc svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+
+    .sort-options {
+      flex-direction: column;
+      gap: 5px;
+      white-space: normal;
+    }
+  }
+}
+
+.sdk.viewer.row .sort-selector,
+.sdk.viewer.row .theme-switch-wrapper {
+  flex: 0 0 auto;
+}
+
+.sdk.viewer.row {
+  justify-content: space-between;
+}

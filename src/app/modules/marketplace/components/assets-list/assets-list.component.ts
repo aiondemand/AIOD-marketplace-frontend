@@ -6,7 +6,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
-import { ParamsReqAsset } from '@app/shared/interfaces/asset-service.interface';
+import {
+  ParamsReqAsset,
+  SortField,
+  SortOrder,
+} from '@app/shared/interfaces/asset-service.interface';
 import { AssetModel } from '@app/shared/models/asset.model';
 import {
   Subject,
@@ -78,6 +82,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   protected displayModeValue = 1; //normally on several labels per line
   protected screenWidth: number = window.innerWidth;
   destroy$ = new Subject<any>();
+
+  public sortField: SortField = SortField.DateModified;
+  public sortOrder: SortOrder = SortOrder.Desc;
+
+  public SortField = SortField;
+  public SortOrder = SortOrder;
 
   assetCategories!: any;
   searchFormGroup!: FormGroup;
@@ -280,6 +290,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       limit: this.pageSize,
       page: this.currentPage,
       platforms: platformsSelected,
+      sort_field: this.sortField,
+      sort_order: this.sortOrder,
     };
 
     if (hasQuotes(query)) {
@@ -311,7 +323,12 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   private getAssets(): void {
     this.isLoading = true;
-    const parms: ParamsReqAsset = { offset: this.offset, limit: this.pageSize };
+    const parms: ParamsReqAsset = {
+      offset: this.offset,
+      limit: this.pageSize,
+      sort_field: this.sortField,
+      sort_order: this.sortOrder,
+    };
     this.generalAssetService.setAssetCategory(this.categorySelected);
 
     const serviceObs = this.platformSelected
@@ -748,6 +765,24 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   protected displayMode(mode: number): void {
     this.displayModeValue = mode;
+  }
+
+  public onSortFieldChange(field: SortField): void {
+    this.sortField = field;
+    this.currentPage = 0;
+    this.offset = 0;
+    if (!this.isEnhancedSearch) {
+      this.getAssets();
+    }
+  }
+
+  public onSortOrderChange(order: SortOrder): void {
+    this.sortOrder = order;
+    this.currentPage = 0;
+    this.offset = 0;
+    if (!this.isEnhancedSearch) {
+      this.getAssets();
+    }
   }
 
   ngOnDestroy(): void {
