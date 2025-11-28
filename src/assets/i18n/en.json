@@ -8,14 +8,14 @@
     "REGISTER": "Register",
     "RESOURCES": "Resources",
     "SDKS-AND-APIS": "SDKs and APIs",
-    "SIGN-IN": "Sign in",
+    "SIGN-IN": "Login / Sign Up",
     "FEEDBACK": "Give us your feedback",
     "COMUNICATION-MATERIALS": "Communication Materials",
-    "SDK-AND-API":"SDKs and APIs"
+    "SDK-AND-API": "SDKs and APIs"
   },
   "TOP-NAVBAR": {
     "LOGOUT": "Log out",
-    "LOGIN": "Log in",
+    "LOGIN": "Login / Sign Up",
     "RESOURCES": "Resources",
     "TOOLS": "Tools",
     "MOST-POPULAR-TOOLS": "Most Popular Tools",
@@ -173,7 +173,9 @@
       "INDUSTRIAL_SECTOR": "Industrial Sector",
       "PROJECT_NAME": "Project name",
       "PROJECT": "Project",
-      "ORGANISATION": "Organisation"
+      "ORGANISATION": "Organisation",
+      "PERSON_NAME": "Person name",
+      "AIOD_ENTRY": "Editors"
     }
   },
   "DATASET": {
