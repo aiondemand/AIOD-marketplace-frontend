@@ -8,14 +8,14 @@
     "REGISTER": "Register",
     "RESOURCES": "Resources",
     "SDKS-AND-APIS": "SDKs and APIs",
-    "SIGN-IN": "Sign in",
+    "SIGN-IN": "Login / Sign Up",
     "FEEDBACK": "Give us your feedback",
     "COMUNICATION-MATERIALS": "Communication Materials",
     "SDK-AND-API": "SDKs and APIs"
   },
   "TOP-NAVBAR": {
     "LOGOUT": "Log out",
-    "LOGIN": "Log in",
+    "LOGIN": "Login / Sign Up",
     "RESOURCES": "Resources",
     "TOOLS": "Tools",
     "MOST-POPULAR-TOOLS": "Most Popular Tools",
