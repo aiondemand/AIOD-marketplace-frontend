@@ -29,10 +29,19 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
   protected abstract parseRequest(item: T): any;
 
   private buildHttpParams(paramsAsset: ParamsReqAsset): HttpParams {
-    return new HttpParams()
-      .set('schema', paramsAsset.schama ?? schemas.aiod)
+    let params = new HttpParams()
+      .set('schema', paramsAsset.schema ?? schemas.aiod)
       .set('offset', paramsAsset.offset)
       .set('limit', paramsAsset.limit);
+
+    if (paramsAsset.sort_field) {
+      params = params.set('sort', paramsAsset.sort_field);
+    }
+    if (paramsAsset.sort_order) {
+      params = params.set('direction', paramsAsset.sort_order);
+    }
+
+    return params;
   }
 
   public getAssets(paramsAsset: ParamsReqAsset): Observable<T[]> {

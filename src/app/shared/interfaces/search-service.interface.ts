@@ -1,3 +1,5 @@
+import { SortField, SortOrder } from './asset-service.interface';
+
 export interface ParamsReqSearchAsset {
   platforms?: string[];
   searchQuery: string;
@@ -5,4 +7,6 @@ export interface ParamsReqSearchAsset {
   limit: number;
   page: number;
   exact_match?: boolean;
+  sort_field?: SortField;
+  sort_order?: SortOrder;
 }

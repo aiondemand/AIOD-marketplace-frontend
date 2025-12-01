@@ -1,9 +1,21 @@
 import { Observable } from 'rxjs';
 
+export enum SortField {
+  DateModified = 'date_modified',
+  DateCreated = 'date_created',
+}
+
+export enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
 export interface ParamsReqAsset {
   offset: number;
   limit: number;
-  schama?: string;
+  schema?: string;
+  sort_field?: SortField;
+  sort_order?: SortOrder;
 }
 
 export interface AssetService<T> {
