@@ -219,10 +219,10 @@
     }
   },
   "ASSETS-LIST": {
-    "CHECK-SDKS-APIS": "Check the SDKs and APIs",
-    "CHECK-NOW": "Check now",
-    "EXPLORE-AI-CATALOGUE": "Explore AI Catalogue",
-    "ITEMS-PER-PAGE": "Items per page",
-    "ENHANCED-SEARCH": "Enhanced Search"
+    "DATE_CREATED": "Date created",
+    "DATE_MODIFIED": "Date modified",
+    "EXPLORE_AI_CATALOGUE": "Explore AI Catalogue",
+    "ITEMS_PER_PAGE": "Items per page",
+    "SORT_BY": "Sort by"
   }
 }

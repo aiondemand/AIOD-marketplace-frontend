@@ -8,7 +8,7 @@
 <div
   class="featured-products-item mt-3 pt-3 pb-3 align-items-center justify-content-between"
 >
-  <div class="featured-products-item-title">{{"ASSETS-LIST.EXPLORE-AI-CATALOGUE" | translate}}</div>
+  <div class="featured-products-item-title">{{"ASSETS-LIST.EXPLORE_AI_CATALOGUE" | translate}}</div>
 
   <form [formGroup]="searchFormGroup" class="search-row" [ngClass]="{ 'light-theme': isLightTheme === 'light' }" [class.d-flex]="screenWidth >= widthSmallDevice">
     <i *ngIf="!isEnhancedSearch" class="icon-lupa" style="position:relative; z-index:2; width:10px; color: rgb(156, 163, 175);" [class.d-flex]="screenWidth < widthSmallDevice" [ngStyle]="screenWidth < widthSmallDevice ? {height: '0px', left: '7px', top: '15px'} : {left: '20px', top: '3px'}"></i>
@@ -273,10 +273,10 @@
   </div>
   <div class="sort-selector" *ngIf="!isEnhancedSearch">
     <div class="sort-options">
-      <label [ngClass]="{ 'light-theme': isLightTheme === 'light' }">Sort by:</label>
+      <label [ngClass]="{ 'light-theme': isLightTheme === 'light' }">{{"ASSETS-LIST.SORT_BY" | translate}}:</label>
       <select [(ngModel)]="sortField" (change)="onSortFieldChange(sortField)" [ngClass]="{ 'light-theme': isLightTheme === 'light' }">
-        <option [value]="SortField.DateModified">Date Modified</option>
-        <option [value]="SortField.DateCreated">Date Created</option>
+        <option [value]="SortField.DateModified">{{"ASSETS-LIST.DATE_MODIFIED" | translate}}</option>
+        <option [value]="SortField.DateCreated">{{"ASSETS-LIST.DATE_CREATED" | translate}}</option>
       </select>
       <button
         type="button"
@@ -325,7 +325,7 @@
       [ngClass]="{ 'light-theme': isLightTheme === 'light' }"
     >
       <div class="paginator-left">
-        <span class="page-size-label">{{ 'ASSETS-LIST.ITEMS-PER-PAGE' | translate }}:</span>
+        <span class="page-size-label">{{ 'ASSETS-LIST.ITEMS_PER_PAGE' | translate }}:</span>
         <select
           class="page-size-select"
           [(ngModel)]="currentPageSize"
