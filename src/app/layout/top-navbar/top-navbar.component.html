@@ -268,8 +268,7 @@
     </div>
   </div>
 
-  <!-- <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'"> -->
-   <main class="sideBarUser d-flex">
+  <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'">
     <div class="sidebar sidebar-user" id="sidebar-user">
       <div class="menu">
         <ul>
