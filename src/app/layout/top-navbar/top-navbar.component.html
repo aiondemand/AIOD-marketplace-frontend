@@ -271,29 +271,27 @@
   <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'">
     <div class="sidebar sidebar-user" id="sidebar-user">
       <div class="menu">
-        <!--
         <ul>
           <li class="sidebar-link">
-            <a href="#">
-              <i class="icon-settings"></i>
-              <span>Settings</span>
+            <a href="{{environment.MCEConfig.mceUrl}}">
+              <i class="icon-plus"></i>
+              <span>{{ 'TOP-NAVBAR.DASHBOARD' | translate }}</span>
             </a>
           </li>
           <li class="sidebar-link">
-            <a href="#">
-              <i class="icon-notifications"></i>
-              <span>Notifications</span>
+            <a href="{{ externalLinks.USER_SETTINGS }}">
+              <i class="icon-settings"></i>
+              <span>{{ 'TOP-NAVBAR.SETTINGS' | translate }}</span>
             </a>
           </li>
         </ul>
-        -->
       </div>
       <div class="sidebar-footer user">
         <div class="border-bottom">
           <a
             class="btn btn-success btn-success--blue mt-3 w-100"
             (click)="logout()"
-            >Sign Out</a
+            >{{ 'TOP-NAVBAR.SIGNOUT' | translate }}</a
           >
         </div>
       </div>
