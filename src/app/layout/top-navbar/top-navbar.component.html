@@ -268,18 +268,19 @@
     </div>
   </div>
 
-  <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'">
+  <!-- <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'"> -->
+   <main class="sideBarUser d-flex">
     <div class="sidebar sidebar-user" id="sidebar-user">
       <div class="menu">
         <ul>
           <li class="sidebar-link">
-            <a href="{{environment.MCEConfig.mceUrl}}">
+            <a href="{{environment.MCEConfig.mceUrl}}" target="_blank">
               <i class="icon-plus"></i>
               <span>{{ 'TOP-NAVBAR.DASHBOARD' | translate }}</span>
             </a>
           </li>
           <li class="sidebar-link">
-            <a href="{{ externalLinks.USER_SETTINGS }}">
+            <a href="{{ externalLinks.USER_SETTINGS }}" target="_blank">
               <i class="icon-settings"></i>
               <span>{{ 'TOP-NAVBAR.SETTINGS' | translate }}</span>
             </a>

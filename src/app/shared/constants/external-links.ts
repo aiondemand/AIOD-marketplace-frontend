@@ -18,5 +18,5 @@ export const EXTERNAL_LINKS = {
   TOOLS: 'https://aiod.eu/tools',
   RAIL: 'https://rail.aiod.eu',
   USER_SETTINGS:
-    env_keycloak.baseUrl + '/realms' + env_keycloak.realm + '/account/#/',
+    env_keycloak.baseUrl + '/realms/' + env_keycloak.realm + '/account/#/',
 } as const;
