@@ -14,9 +14,11 @@
     "SDK-AND-API": "SDKs and APIs"
   },
   "TOP-NAVBAR": {
-    "LOGOUT": "Log out",
+    "DASHBOARD": "Dashboard",
+    "SIGNOUT": "Sign out",
     "LOGIN": "Login / Sign Up",
     "RESOURCES": "Resources",
+    "SETTINGS": "Settings",
     "TOOLS": "Tools",
     "MOST-POPULAR-TOOLS": "Most Popular Tools",
     "EXPLORE": "Explore the research contents on the AI on Demand to customise your experiments!",

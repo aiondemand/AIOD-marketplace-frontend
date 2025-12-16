@@ -1,3 +1,7 @@
+import { environment } from '@environments/environment';
+
+const env_keycloak = environment.keycloakConfig;
+
 // Centralized external links used across the app
 export const NAVIGATION_URL = 'https://aiod.eu/wp-json/aiod/v1/navigation';
 export const EXTERNAL_LINKS = {
@@ -13,4 +17,6 @@ export const EXTERNAL_LINKS = {
     'https://aiod.eu/ai-on-demand-communication-and-dissemination-materials/',
   TOOLS: 'https://aiod.eu/tools',
   RAIL: 'https://rail.aiod.eu',
+  USER_SETTINGS:
+    env_keycloak.baseUrl + '/realms/' + env_keycloak.realm + '/account/#/',
 } as const;
