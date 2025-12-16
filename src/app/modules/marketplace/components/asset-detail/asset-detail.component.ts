@@ -15,6 +15,8 @@ import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { GenericItem } from '@app/shared/models/generic.model';
 import { modelConfig } from '@app/shared/models/modelConfig';
+import { MatDialog } from '@angular/material/dialog';
+import { ReportDialogComponent } from '@app/shared/components/report-dialog/report-dialog.component';
 @Component({
   selector: 'app-asset-detail',
   templateUrl: './asset-detail.component.html',
@@ -30,6 +32,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private bookmarkService: BookmarkService,
     private generalAssetService: GeneralAssetService,
+    private dialog: MatDialog,
   ) {
     this.authService.userProfileSubject.subscribe((profile) => {
       this.userProfile = profile;
@@ -96,6 +99,16 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     } else this.deleteBookmark();
 
     this.isBookmarked = !this.isBookmarked;
+  }
+
+  protected onClickReport(): void {
+    const dialogRef = this.dialog.open(ReportDialogComponent, {
+      width: '50rem',
+      data: {
+        assetName: this.asset.name,
+        assetId: this.asset.identifier,
+      },
+    });
   }
 
   public isURL(value: string): boolean {

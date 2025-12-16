@@ -178,3 +178,12 @@ a {
     max-width: 350px;
   }
 }
+
+.btn-circle--red {
+  background-color: #ff1001b3 !important;
+  color: white !important;
+  &:hover {
+    background-color: darken(#ff1001b3, 10%) !important;
+    color: white !important;
+  }
+}

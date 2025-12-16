@@ -224,5 +224,17 @@
     "EXPLORE_AI_CATALOGUE": "Explore AI Catalogue",
     "ITEMS_PER_PAGE": "Items per page",
     "SORT_BY": "Sort by"
+  },
+  "SHARED": {
+    "REPORT_DIALOG": {
+      "TITLE": "Report Asset",
+      "INTRO": "Please complete this form to let us know why this asset is incorrect or inappropriate, and our team will review it. Thank you for your assistance.",
+      "PLACEHOLDER": "Tell us what's wrong with this asset.",
+      "PRIVACY_ACCEPTANCE": "I read and accept the Privacy Policy.",
+      "SUBMIT_SUCCESS": "Your report has been submitted. Thank you.",
+      "SUBMIT_ERROR": "There was an error submitting your report. Please try again later.",
+      "NOT_AVAILABLE": "Reporting via the UI is not available for this asset.",
+      "EMAIL_INSTRUCTIONS": "To flag this asset, please send an e-mail to <a href=\"mailto:info@aiod.eu\">info@aiod.eu</a> with the subject:<br>FLAG: <strong>{{assetName}}</strong> and describe the problem providing the asset identifier: <strong>{{assetId}}</strong> in the message."
+    }
   }
 }

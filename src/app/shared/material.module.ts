@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
@@ -28,6 +29,7 @@ const materialModules = [
   MatButtonModule,
   MatToolbarModule,
   MatInputModule,
+  MatFormFieldModule,
   MatSidenavModule,
   MatCardModule,
   MatListModule,
