@@ -260,10 +260,18 @@
   box-sizing: border-box;
 }
 ::ng-deep .sidebar-footer.user {
-  margin-bottom: 20vh;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  margin-top: auto;
+  width: 100%;
 }
 ::ng-deep .sidebar-footer.user .border-bottom {
-  margin-top: 70vh;
+  display: inline-flex;
+  align-self: flex-end;
+  flex-direction: column;
+  width: 100%;
+  margin-top: auto;
 }
 
 ::ng-deep .sidebar-footer .menu.p-0 ul li.sidebar-link {
@@ -354,4 +362,9 @@
   color: $color-primary2;
   box-shadow: 0 2px 8px rgba(#0047bb, 0.08);
   border-color: rgb(248, 252, 2);
+}
+
+::ng-deep .sideBarUser {
+  flex-direction: column;
+  width: 100%;
 }

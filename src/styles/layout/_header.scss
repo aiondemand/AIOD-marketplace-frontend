@@ -1306,6 +1306,10 @@ $sidebar-collapsed-width: 75px;
     border-top: 0 !important;
     width: 330px;
     min-width: 330px;
+    height: calc(100vh - 145px);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
     &.collapsed {
       right: -100%;
     }
