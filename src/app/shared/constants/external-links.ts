@@ -17,6 +17,7 @@ export const EXTERNAL_LINKS = {
     'https://aiod.eu/ai-on-demand-communication-and-dissemination-materials/',
   TOOLS: 'https://aiod.eu/tools',
   RAIL: 'https://rail.aiod.eu',
+  USER_PROFILE: 'http://aiod.eu/profile',
   USER_SETTINGS:
     env_keycloak.baseUrl + '/realms/' + env_keycloak.realm + '/account/#/',
 } as const;
