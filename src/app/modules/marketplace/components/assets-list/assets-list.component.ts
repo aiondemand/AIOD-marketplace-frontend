@@ -30,6 +30,7 @@ import {
   throwError,
 } from 'rxjs';
 import { MatTooltip } from '@angular/material/tooltip';
+import { HttpClient } from '@angular/common/http';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.interface';
@@ -105,6 +106,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   widthSmallDevice = 768;
   @ViewChild('infoTooltip') infoTooltip?: MatTooltip;
   infoTooltipVisible = false;
+  public isLoadingTopAssets = false;
+  public trendingActive = false;
+  private _lastSeenCategory: AssetCategory | null = null;
+  private _lastSeenPlatform: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -117,6 +122,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private searchService: ElasticSearchService,
     private spinnerService: SpinnerService,
     private cdr: ChangeDetectorRef,
+    private http: HttpClient,
   ) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -152,7 +158,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const selectedCategory = localStorage.getItem('selectedCategory');
     if (selectedCategory && this.isValidAssetCategory(selectedCategory)) {
       this.categorySelected = selectedCategory as AssetCategory;
-      this.selectCat(this.categorySelected);
+      this.selectCat(this.categorySelected, false);
     }
 
     this.filtersStateService.searchQuery$
@@ -201,10 +207,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   };
 
-  protected selectPlat(platform: any) {
+  protected selectPlat(platform: any, userAction?: boolean) {
     this.platformSelected = platform;
     this.filtersService.setPlatformSelected(this.platformSelected);
+    if (userAction) {
+      this.trendingActive = false;
+    }
   }
+
   protected unSelectPlat(id: number) {
     //TODO MAKE THEM UNSElECTED
   }
@@ -212,14 +222,19 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.platformSelected = '';
     this.searchAssets();
   }
-  protected selectCat(category: any) {
+  protected selectCat(category: any, userAction?: boolean) {
     this.categorySelected = category;
     localStorage.setItem('selectedCategory', category);
     this.filtersService.setAssetCategorySelected(this.categorySelected);
+    if (userAction) {
+      this.trendingActive = false;
+    }
   }
+
   protected unSelectCat(id: number) {
     //TODO MAKE THEM UNSElECTED
   }
+
   protected selectAllCat() {
     throw new Error('Method not implemented.');
   }
@@ -542,6 +557,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const subscribe = this.filtersStateService.assetCategorySelected$
       .pipe(
         switchMap((category: AssetCategory) => {
+          if (
+            this._lastSeenCategory !== null &&
+            this._lastSeenCategory !== category
+          ) {
+            this.trendingActive = false;
+          }
+          this._lastSeenCategory = category;
+
           if (!this.isValidAssetCategory(this.categorySelected)) {
             this.categorySelected = AssetCategory.Dataset;
             this.filtersStateService.setAssetCategorySelected(
@@ -553,6 +576,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           return this.filtersStateService.platformSelected$;
         }),
         switchMap((platform: string) => {
+          if (
+            this._lastSeenPlatform !== null &&
+            this._lastSeenPlatform !== platform
+          ) {
+            this.trendingActive = false;
+          }
+          this._lastSeenPlatform = platform;
+
           this.platformSelected = platform;
           return combineLatest([
             this.filtersStateService.searchQuery$,
@@ -639,6 +670,53 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
   initSpinner() {
     this.spinnerService.show('Initializing enhanced search...');
+  }
+
+  public loadTopComputationalAssets(): void {
+    this.trendingActive = true;
+    this.isLoadingTopAssets = true;
+
+    const selectedCategory =
+      this.categorySelected ??
+      (AssetCategory['Computational asset'] as AssetCategory);
+    const statsAssetType =
+      assetCategoryMapping[selectedCategory] ?? 'computational_assets';
+    this.generalAssetService.setAssetCategory(selectedCategory);
+    this.generalAssetService
+      .getTopAssets(statsAssetType, 10)
+      .pipe(take(1))
+      .subscribe({
+        next: (assets: any[]) => {
+          this.assets = assets.map((asset) => ({
+            ...asset,
+            category: selectedCategory,
+          }));
+          this.assetsSize = assets.length;
+          this.currentPage = 0;
+          this.offset = 0;
+          this.isLoadingTopAssets = false;
+        },
+        error: (err: any) => {
+          console.error('Error fetching top assets', err);
+          this.isLoadingTopAssets = false;
+          this.trendingActive = false;
+        },
+      });
+  }
+
+  public getTopButtonLabel(): string {
+    const selectedCategory =
+      this.categorySelected ??
+      (AssetCategory['Computational asset'] as AssetCategory);
+    const statsAssetType =
+      assetCategoryMapping[selectedCategory] ?? 'computational_assets';
+    return (
+      'Trending ' +
+      statsAssetType
+        .split('_')
+        .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+        .join(' ')
+    );
   }
 
   private enhancedSearch(query: string): void {

@@ -271,7 +271,25 @@
       </div>
     </label>
   </div>
-  <div class="sort-selector" *ngIf="!isEnhancedSearch">
+  <div class="top-assets-button-wrapper" style="margin-left:8px; display:flex; align-items:center;">
+    <button
+      type="button"
+      [ngClass]="!trendingActive ? 'btn btn-success btn-success--blue m-1' : 'btn btn-default m-1'"
+      (click)="loadTopComputationalAssets()"
+      [disabled]="isLoadingTopAssets"
+      title="Load top assets for current category"
+    >
+      {{ getTopButtonLabel() }}
+    </button>
+    <mat-progress-spinner
+      diameter="20"
+      mode="indeterminate"
+      style="margin-left:8px;"
+      [style.visibility]="isLoadingTopAssets ? 'visible' : 'hidden'"
+      [attr.aria-hidden]="!isLoadingTopAssets"
+    ></mat-progress-spinner>
+  </div>
+  <div class="sort-selector" *ngIf="!isEnhancedSearch" style="margin-left:auto">
     <div class="sort-options">
       <label [ngClass]="{ 'light-theme': isLightTheme === 'light' }">{{"ASSETS-LIST.SORT_BY" | translate}}:</label>
       <select [(ngModel)]="sortField" (change)="onSortFieldChange(sortField)" [ngClass]="{ 'light-theme': isLightTheme === 'light' }">

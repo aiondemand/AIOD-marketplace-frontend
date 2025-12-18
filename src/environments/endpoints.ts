@@ -6,6 +6,7 @@ export const endpoints = {
   prefixCount: '/v2/counts',
   prefixByPlatfoms: '/v2/platforms',
   prefixByCategories: '/v2',
+  prefixTopTen: '/stats/top/',
 
   //Categories
   [AssetCategory.Dataset]: '/datasets',
