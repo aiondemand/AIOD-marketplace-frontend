@@ -1,13 +1,12 @@
 <header id="header" class="">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" [style.background-color]="mobileOpened ? '#0047bb' : 'transparent'">
       <div class="col-12">
         <div class="header-nav">
           <div class="header-nav-logo">
             <div class="open-mobile-menu" (click)="openMobileMenu()">
               <i class="icon-menu"></i>
-
-              <div class="hamburguer d-lg-none d-xl-none">
+              <div [ngClass]="mobileOpened ? 'hamburguer-close d-lg-none d-xl-none' : 'hamburguer d-lg-none d-xl-none'">
                 <span></span>
               </div>
             </div>
@@ -16,29 +15,27 @@
                 src="../assets/img/logo-dark.png"
                 alt="AIOD logo dark"
                 class="logotipo"
+                [style.display]="mobileOpened ? 'flex !important' : ''"
               />
               <img
                 src="../assets/img/logo-light.png"
                 alt="AIOD logo light"
                 class="logotipo-grey d-none"
+                [style.display]="mobileOpened ? 'none !important' : ''"
+
               />
             </a>
             <!--not shown on bigger screens-->
             <a
-              href=""
-              class="btn btn btn-circle btn-circle--blue btn-search ml-5 mr-0 d-flex d-lg-none d-xl-none d-xs-none"
-              ><i class="icon-lupa"></i
-            ></a>
-
-            <a
               class="btn btn-success btn-success--white mr-0 d-flex d-lg-none"
               href=""
+              [style.color]="mobileOpened ? 'white !important' : ''"
+              [style.borderColor]="mobileOpened ? 'white !important' : ''"
               >{{ 'TOP-NAVBAR.LOGIN' | translate }}</a
             >
           </div>
-
           <div class="top-bar-buttons">
-            <ul class="main-menu" [ngClass]="mobileOpened ? '' : 'd-none'">
+            <ul class="main-menu" [ngClass]="{ 'mobile': mobileOpened, 'd-none': isSmallDevice && !mobileOpened }">
               <li class="menu" *ngFor="let item of menuItems">
                 <div
                   class="menu-link-mobile"
@@ -75,8 +72,21 @@
                         <p *ngIf="child.description">{{ child.description }}</p>
                       </a>
                     </li>
-                  </ul>
+                  </ul> 
                 </div>
+              </li>
+              <li style="display: flex;" *ngIf="mobileOpened">
+                   <button
+                  title="Contribute"
+                  class="btn btn-circle not-rotate ml-2 btn-circle--yellow"
+                  (click)="onClickContribute()"
+                  [title]="
+                    !isLoggedIn() ? 'Log in to contribute' : 'Contribute'
+                  "
+                >
+                  <i class="icon-plus"></i>
+                </button>
+                <ng-container *ngTemplateOutlet="themeSwitch"></ng-container>
               </li>
             </ul>
           </div>
@@ -148,7 +158,8 @@
           </ng-template>
 
           <ng-template #themeSwitch>
-            <div class="theme-switch-wrapper">
+            <div [style.margin-top]="mobileOpened ? '0px' : ''" 
+            [style.margin-left]="mobileOpened ? '10px' : ''" class="theme-switch-wrapper">
               <label class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox" />
                 <div (click)="toggleTheme()" class="slider round">
