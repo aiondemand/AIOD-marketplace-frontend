@@ -9,7 +9,7 @@ export const environment = {
   develop: true,
   production: false,
   api: {
-    base: browserwindow.env?.['API_URL'] || '',
+    base: 'https://mylibrary.aiod.eu',
     endpoints,
     schemas,
   },
@@ -19,11 +19,12 @@ export const environment = {
       'https://auth-aiod-dev.iti.es/aiod-auth',
     realm: browserwindow.env?.['KEYCLOAK_REALM'] || 'aiod',
     clientId: browserwindow.env?.['KEYCLOAK_CLIENT_ID'] || 'marketplace',
-    redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '/',
+    redirectUri: browserwindow.env?.['ML_REDIRECT_URI'] || '',
     showDebugInformation: true,
   },
   enhancedApi: {
-    baseEnhanced: browserwindow.env?.['AIOD_ENHANCED_API'] || '',
+    baseEnhanced:
+      browserwindow.env?.['AIOD_ENHANCED_API'] || 'https://mylibrary.aiod.eu/2',
   },
   zohoConfig: {
     base: '',
