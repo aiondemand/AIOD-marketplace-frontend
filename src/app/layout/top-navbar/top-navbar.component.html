@@ -268,7 +268,8 @@
     </div>
   </div>
 
-  <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'">
+  <!-- <main *ngIf="isLoggedIn()" [ngClass]="sideBarUser ? 'd-flex' : 'd-none'"> -->
+  <main class="sideBarUser d-flex">
     <div class="sidebar sidebar-user" id="sidebar-user">
       <div class="menu">
         <ul>
@@ -280,7 +281,7 @@
           </li>
           <li class="sidebar-link">
             <a href="{{ externalLinks.USER_PROFILE }}">
-              <i class="icon-grid"></i>
+              <i class="icon-user"></i>
               <span>{{ 'TOP-NAVBAR.PROFILE' | translate }}</span>
             </a>
           </li>
