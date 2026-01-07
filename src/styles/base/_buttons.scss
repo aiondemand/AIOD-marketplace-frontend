@@ -306,8 +306,7 @@
 
   &:hover,
   &:focus,
-  &:active {
-   
+  &:active {   
       @if $buttonSuccessBorder !=0 {
         border: $buttonSuccessBorderHover;
       }
@@ -315,9 +314,6 @@
       color: $white;
       border-color: $white;
       background-color: transparent !important;
-
-      
-    
   }
 
   
@@ -593,8 +589,6 @@
   .btn-success{
  &:hover,
     &.active {
-
-     
       border-color: #0047bb;
     }
 
