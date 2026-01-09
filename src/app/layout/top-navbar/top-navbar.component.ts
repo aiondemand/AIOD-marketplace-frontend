@@ -39,10 +39,6 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   private navSub?: Subscription;
 
   ngOnInit() {
-    if (window.innerWidth >= this.widthSmallDevice) {
-      this.mobileOpened = true;
-    }
-
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     darkMediaQuery.addEventListener('change', (event) => {
       if (event.matches) {

@@ -54,7 +54,7 @@ const assetCategoryMapping = {
   [AssetCategory['Publication']]: 'publications',
   [AssetCategory['Resource Bundle']]: 'resource_bundles',
   [AssetCategory['Service']]: 'services',
-  [AssetCategory['Success stories']]: 'success_stories',
+  [AssetCategory['Success stories']]: 'case_studies',
 };
 
 @Component({
