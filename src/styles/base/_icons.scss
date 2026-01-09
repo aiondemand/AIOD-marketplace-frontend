@@ -332,3 +332,10 @@ $icon-upload: unquote('"\\e930"');
     content: $icon-upload;
   }
 }
+
+.icon-user {
+  &:before {
+    content: url('../../assets/icons/user.svg');
+    padding-right: 7px;
+  }
+}

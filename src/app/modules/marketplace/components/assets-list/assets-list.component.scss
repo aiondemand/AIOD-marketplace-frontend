@@ -160,6 +160,10 @@ $transition-opacity: opacity 0.3s ease-in-out 0.5s;
   display: flex;
   align-items: center;
   gap: 5px;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 }
 .search-switch {
   display: inline-flex;
@@ -260,6 +264,12 @@ $transition-opacity: opacity 0.3s ease-in-out 0.5s;
 
   &.smartphone {
     margin-left: 0;
+    width: 100%;
+    
+  }
+  &.smartphone button {
+    width: 50%;
+    
   }
 }
 

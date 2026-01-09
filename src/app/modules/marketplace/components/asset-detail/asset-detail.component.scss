@@ -27,6 +27,11 @@ ul {
 
 .btn.btn-default {
   cursor: default;
+  color:$white;
+}
+
+.btn-default:hover{
+  background-color: #0047bb;
 }
 .btn-success .btn-success--blue {
   cursor: default;

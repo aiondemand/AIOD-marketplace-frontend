@@ -14,14 +14,17 @@
     "SDK-AND-API": "SDKs and APIs"
   },
   "TOP-NAVBAR": {
-    "LOGOUT": "Log out",
-    "LOGIN": "Login / Sign Up",
-    "RESOURCES": "Resources",
-    "TOOLS": "Tools",
-    "MOST-POPULAR-TOOLS": "Most Popular Tools",
+    "DASHBOARD": "Dashboard",
     "EXPLORE": "Explore the research contents on the AI on Demand to customise your experiments!",
+    "LOGIN": "Login / Sign Up",
+    "MOST-POPULAR-TOOLS": "Most Popular Tools",
+    "PROFILE": "My Profile",
     "RAIL": "Rail",
-    "RAIL-EXPLORE": " Explore the research contents on the AI on Demand to customise your experiments!"
+    "RAIL-EXPLORE": " Explore the research contents on the AI on Demand to customise your experiments!",
+    "RESOURCES": "Resources",
+    "SETTINGS": "Settings",
+    "SIGNOUT": "Sign out",
+    "TOOLS": "Tools"
   },
   "FOOTER": {
     "PRIVACY-POLICY": "Privacy Policy",

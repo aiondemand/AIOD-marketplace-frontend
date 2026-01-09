@@ -6,7 +6,26 @@
   <mat-progress-spinner mode="indeterminate"> </mat-progress-spinner>
 </div>
 
-<div class="mt-3 pt-3 pt-3 featured-products-item">
+<div class="mt-3 pt-3 pb-3 featured-products-item">
+  <!-- Category Filters -->
+  <div class="filters-row d-flex pb-3">
+    <div *ngFor="let category of assetCategories">
+      <a
+        [id]="category"
+        class="btn m-2"
+        [ngClass]="
+          categorySelected === category
+            ? 'btn-default'
+            : 'btn-success btn-success--blue'
+        "
+        (click)="selectCategory(category)"
+        title="Click to filter by category"
+      >
+        {{ category }}
+      </a>
+    </div>
+  </div>
+
   <table class="" *ngIf="!isLoading" mat-table [dataSource]="dataSource">
     <!-- Name Column -->
     <ng-container matColumnDef="name">

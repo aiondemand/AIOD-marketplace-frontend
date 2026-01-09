@@ -306,16 +306,21 @@
 
   &:hover,
   &:focus,
-  &:active {
-    @include min-lg {
+  &:active {   
       @if $buttonSuccessBorder !=0 {
         border: $buttonSuccessBorderHover;
       }
 
       color: $white;
       border-color: $white;
-      background-color: transparent;
-    }
+      background-color: transparent !important;
+  }
+
+  
+  &:active {
+    color: $white;
+    border-color: $white !important;
+    background-color: transparent !important;
   }
 
   &--grey {
@@ -579,5 +584,13 @@
     &:focus {
       box-shadow: none;
     }
+  }
+
+  .btn-success{
+ &:hover,
+    &.active {
+      border-color: #0047bb;
+    }
+
   }
 }

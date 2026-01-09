@@ -11,6 +11,50 @@ tr.element-row:hover {
   background: whitesmoke;
 }
 
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: inherit;
+
+  &:hover {
+    border-color: #3b82f6;
+  }
+
+  &.btn-default {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+
+    &:hover {
+      background-color: #2563eb;
+      border-color: #2563eb;
+    }
+  }
+
+  &.btn-success--blue {
+    background: transparent;
+    color: #3b82f6;
+    border-color: #3b82f6;
+
+    &:hover {
+      background-color: #f0f4ff;
+    }
+  }
+}
+
 .mat-column-name {
   text-align: start;
   width: 25%;

@@ -50,6 +50,8 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   public isLoading = false;
   public userProfile!: UserProfile;
   public lengthTable = 0;
+  public assetCategories: AssetCategory[] = Object.values(AssetCategory);
+  public categorySelected: AssetCategory = AssetCategory.Dataset;
 
   private getAssetsPurchases(): void {
     this.isLoading = true;
@@ -77,6 +79,11 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
   public getColorCategory(category: AssetCategory): string {
     const key = getKeyCategoryByValue(AssetCategory, category) ?? '';
     return this.appConfig.assets[key.toLocaleLowerCase()].color;
+  }
+
+  public selectCategory(category: AssetCategory): void {
+    this.categorySelected = category;
+    this.filterState.setAssetCategorySelected(this.categorySelected);
   }
 
   public deleteAssetMyLibrary(asset: AssetsPurchase): void {
@@ -120,7 +127,7 @@ export class MyListComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.isAuthenticated()) this.getAssetsPurchases();
       },
     );
-    // this.subscriptions.add(subscribe);
+    this.subscriptions.add(subscribe);
     this.subscriptions.add(subscribeUser);
   }
   ngOnDestroy(): void {
