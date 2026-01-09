@@ -15,15 +15,16 @@
   },
   "TOP-NAVBAR": {
     "DASHBOARD": "Dashboard",
-    "SIGNOUT": "Sign out",
+    "EXPLORE": "Explore the research contents on the AI on Demand to customise your experiments!",
     "LOGIN": "Login / Sign Up",
+    "MOST-POPULAR-TOOLS": "Most Popular Tools",
+    "PROFILE": "My Profile",
+    "RAIL": "Rail",
+    "RAIL-EXPLORE": " Explore the research contents on the AI on Demand to customise your experiments!",
     "RESOURCES": "Resources",
     "SETTINGS": "Settings",
-    "TOOLS": "Tools",
-    "MOST-POPULAR-TOOLS": "Most Popular Tools",
-    "EXPLORE": "Explore the research contents on the AI on Demand to customise your experiments!",
-    "RAIL": "Rail",
-    "RAIL-EXPLORE": " Explore the research contents on the AI on Demand to customise your experiments!"
+    "SIGNOUT": "Sign out",
+    "TOOLS": "Tools"
   },
   "FOOTER": {
     "PRIVACY-POLICY": "Privacy Policy",
