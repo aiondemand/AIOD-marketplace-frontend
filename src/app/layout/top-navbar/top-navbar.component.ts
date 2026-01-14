@@ -37,8 +37,21 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   private widthSmallDevice = 768;
   protected menuItems: any[] = [];
   private navSub?: Subscription;
+  protected isSmallDevice = true;
+
+  private handleResize = (): void => {
+    if (window.innerWidth >= this.widthSmallDevice) {
+      this.mobileOpened = false;
+      this.isSmallDevice = false;
+    } else {
+      this.isSmallDevice = true;
+    }
+  };
 
   ngOnInit() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+
     const darkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     darkMediaQuery.addEventListener('change', (event) => {
       if (event.matches) {
@@ -73,6 +86,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    window.removeEventListener('resize', this.handleResize);
     this.navSub?.unsubscribe();
   }
 
