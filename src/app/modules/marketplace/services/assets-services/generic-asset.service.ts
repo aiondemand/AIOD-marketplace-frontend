@@ -12,6 +12,7 @@ import {
   map,
   of,
   reduce,
+  switchMap,
 } from 'rxjs';
 import { chunkArray, removeTrailingSlash } from '../../utils/common.utils';
 
@@ -163,5 +164,57 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
         ),
       ),
     ).pipe(reduce((acc: T[], curr: T[]) => [...acc, ...curr], []));
+  }
+
+  public getTopAssets(statsAssetType: string, limit = 10): Observable<T[]> {
+    const statsUrl = `${base}${endpoints.prefixApiAssets}${endpoints.prefixTopTen}${statsAssetType}?limit=${limit}`;
+
+    return this.http.get<any[]>(statsUrl, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => response.body || []),
+      switchMap((resp: any[]) => {
+        const ids = Array.isArray(resp)
+          ? resp.map((r) => r.asset_id).filter(Boolean)
+          : [];
+
+        const hitsMap: Record<string, number> = {};
+        if (Array.isArray(resp)) {
+          resp.forEach((r) => {
+            if (r && r.asset_id) {
+              hitsMap[String(r.asset_id)] = Number(r.hits) || 0;
+            }
+          });
+        }
+
+        if (!ids.length) {
+          return of([] as T[]);
+        }
+
+        return this.getMultipleAssets(ids).pipe(
+          map((assets: any[]) =>
+            assets.map((asset: any) => {
+              let hits = 0;
+              const candidates = [
+                asset.asset_id,
+                asset.platform_resource_identifier,
+                asset.identifier,
+                asset.name,
+              ];
+              for (const c of candidates) {
+                if (c == null) continue;
+                const key = String(c);
+                if (Object.prototype.hasOwnProperty.call(hitsMap, key)) {
+                  hits = hitsMap[key];
+                  break;
+                }
+              }
+              return {
+                ...asset,
+                hits,
+              } as T;
+            }),
+          ),
+        );
+      }),
+    );
   }
 }
