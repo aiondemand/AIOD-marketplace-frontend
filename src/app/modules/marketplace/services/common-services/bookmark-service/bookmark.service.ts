@@ -1,105 +1,149 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
-import { UserPurchases } from '@app/shared/models/user.model';
-import { UserModel } from '@app/shared/models/user.model';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import { Observable, map } from 'rxjs';
-
 const { base, endpoints } = environment.api;
 
-export interface BookmarkBodyRemove {
-  identifier: string;
-  category: AssetCategory;
+export enum AssetCategoryShort {
+  mdl = 'AIModel',
+  data = 'Dataset',
+  exp = 'Experiment',
+  serv = 'Service',
+  edu = 'Educational resource',
+  pub = 'Publication',
+}
+
+interface BookmarkItem {
+  resource_identifier: string;
+  created_at: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookmarkService {
+  private readonly ENDPOINT_MAPPING: { [key: string]: string } = {
+    mdl: 'ml_models',
+    data: 'datasets',
+    exp: 'experiments',
+    edu: 'educational_resources',
+    pub: 'publications',
+    comp: 'computational_assets',
+    srv: 'services',
+    res: 'resource_bundles',
+  };
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
   ) {}
 
+  private getPrefix(identifier: string): string {
+    return identifier.split('_')[0];
+  }
+
+  private getEndpoint(prefix: string): string {
+    return this.ENDPOINT_MAPPING[prefix] || 'ml_models';
+  }
+
+  private getCategoryFromPrefix(prefix: string): string {
+    return (
+      AssetCategoryShort[prefix as keyof typeof AssetCategoryShort] || 'AIModel'
+    );
+  }
+
   private getHttpHeader(): HttpHeaders {
     const authToken = this.authService.getToken();
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
     });
-
-    return headers;
   }
 
-  private parseRequest(items: AssetsPurchase[]): Array<any> {
-    return items.map((item) => {
-      return {
-        identifier: item.identifier,
-        name: item.name,
-        category: item.category,
-        url_metadata: item.urlMetadata,
-        price: item.price,
-        added_at: item.addedAt,
-      };
-    });
-  }
+  private parseResponseAssetsPurchase(
+    data: any,
+    prefix: string,
+  ): AssetsPurchase {
+    if (!data) {
+      return new AssetsPurchase({});
+    }
 
-  private parseResponseAssetsPurchase(data: any): AssetsPurchase {
-    return new AssetsPurchase(data);
-  }
-
-  private parseResponseUserPurchases(data: any): UserPurchases {
-    return new UserPurchases(data.data);
-  }
-
-  public getBookmarks(user: UserModel): Observable<AssetsPurchase[]> {
-    const url =
-      `${base}${endpoints.prefixApiLibraries}${endpoints.librariesAssets}`.replace(
-        ':userId',
-        user.id,
-      );
-    return this.http
-      .get<any>(url, { headers: this.getHttpHeader() })
-      .pipe(
-        map((data: any) =>
-          data.data.map((item: any) => this.parseResponseAssetsPurchase(item)),
-        ),
-      );
-  }
-
-  public addBookmark(
-    user: UserModel,
-    items: AssetsPurchase[],
-  ): Observable<UserPurchases> {
-    const url =
-      `${base}${endpoints.prefixApiPayment}${endpoints.payment}`.replace(
-        ':userId',
-        user.id,
-      );
-    const params = new HttpParams().set('user_email', user.email);
-    const headers = this.getHttpHeader();
-
-    return this.http
-      .post<any>(url, this.parseRequest(items), { params, headers })
-      .pipe(map((data) => this.parseResponseUserPurchases(data)));
-  }
-
-  public deleteBookmark(
-    user: UserModel,
-    body: BookmarkBodyRemove,
-  ): Observable<void> {
-    const url =
-      `${base}${endpoints.prefixApiLibraries}${endpoints.librariesAssets}`.replace(
-        ':userId',
-        user.id,
-      );
-    const httpOptions = {
-      headers: this.getHttpHeader(),
-      body,
+    const payload: any = {
+      resource_identifier: data.ai_resource_identifier,
+      addedAt: data.created_at,
+      category: this.getCategoryFromPrefix(prefix),
+      name: data.name || data.category,
+      same_as: data.same_as,
     };
-    return this.http.delete<void>(url, httpOptions);
+
+    return new AssetsPurchase(payload);
+  }
+
+  public getBookmarks(): Observable<AssetsPurchase[]> {
+    return this.http
+      .get<BookmarkItem[]>(
+        `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=0&limit=10`,
+        {
+          headers: this.getHttpHeader(),
+        },
+      )
+      .pipe(
+        switchMap((response: BookmarkItem[]) => {
+          if (!response || response.length === 0) {
+            return of([]);
+          }
+
+          const requests = response.map((item) => {
+            const identifier = item.resource_identifier;
+            const prefix = this.getPrefix(identifier);
+            const endpoint = this.getEndpoint(prefix);
+            const url = `${base}${endpoints.prefixApiAssets}/${endpoint}/${identifier}`;
+
+            return {
+              request: this.http
+                .get<any>(url, { headers: this.getHttpHeader() })
+                .pipe(catchError(() => of(null))),
+              prefix,
+            };
+          });
+
+          return forkJoin(requests.map((rd) => rd.request)).pipe(
+            map((responses: any[]) =>
+              responses.map((r, i) =>
+                this.parseResponseAssetsPurchase(r, requests[i].prefix),
+              ),
+            ),
+          );
+        }),
+        catchError((error) => {
+          console.error('Error fetching bookmarks:', error);
+          return of([] as AssetsPurchase[]);
+        }),
+      );
+  }
+
+  public addBookmark(identifier: string): Observable<string> {
+    return this.http.post<any>(
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      null,
+      {
+        params: new HttpParams().set('resource_identifier', identifier),
+        headers: this.getHttpHeader(),
+      },
+    );
+  }
+
+  public deleteBookmark(identifier: string): Observable<string> {
+    const params = new HttpParams().set('resource_identifier', identifier);
+    return this.http.delete<string>(
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      {
+        params,
+        headers: this.getHttpHeader(),
+      },
+    );
   }
 }
