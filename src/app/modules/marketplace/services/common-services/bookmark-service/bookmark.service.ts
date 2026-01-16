@@ -5,6 +5,7 @@ import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { AssetCategory } from '@app/shared/models/asset-category.model';
 const { base, endpoints } = environment.api;
 
 export enum AssetCategoryShort {
@@ -14,6 +15,9 @@ export enum AssetCategoryShort {
   serv = 'Service',
   edu = 'Educational resource',
   pub = 'Publication',
+  comp = 'Computational asset',
+  res = 'Resource Bundle',
+  case = 'Success stories',
 }
 
 interface BookmarkItem {
@@ -32,8 +36,9 @@ export class BookmarkService {
     edu: 'educational_resources',
     pub: 'publications',
     comp: 'computational_assets',
-    srv: 'services',
+    srvc: 'services',
     res: 'resource_bundles',
+    case: 'case_studies',
   };
 
   constructor(
@@ -127,7 +132,7 @@ export class BookmarkService {
 
   public addBookmark(identifier: string): Observable<string> {
     return this.http.post<any>(
-      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       null,
       {
         params: new HttpParams().set('resource_identifier', identifier),
@@ -139,7 +144,7 @@ export class BookmarkService {
   public deleteBookmark(identifier: string): Observable<string> {
     const params = new HttpParams().set('resource_identifier', identifier);
     return this.http.delete<string>(
-      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       {
         params,
         headers: this.getHttpHeader(),
