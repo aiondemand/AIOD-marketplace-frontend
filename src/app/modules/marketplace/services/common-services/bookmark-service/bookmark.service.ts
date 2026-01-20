@@ -11,9 +11,12 @@ export enum AssetCategoryShort {
   mdl = 'AIModel',
   data = 'Dataset',
   exp = 'Experiment',
-  serv = 'Service',
+  srvc = 'Service',
   edu = 'Educational resource',
   pub = 'Publication',
+  comp = 'Computational asset',
+  res = 'Resource Bundle',
+  case = 'Success stories',
 }
 
 interface BookmarkItem {
@@ -32,8 +35,9 @@ export class BookmarkService {
     edu: 'educational_resources',
     pub: 'publications',
     comp: 'computational_assets',
-    srv: 'services',
+    srvc: 'services',
     res: 'resource_bundles',
+    case: 'case_studies',
   };
 
   constructor(
@@ -46,12 +50,13 @@ export class BookmarkService {
   }
 
   private getEndpoint(prefix: string): string {
-    return this.ENDPOINT_MAPPING[prefix] || 'ml_models';
+    return this.ENDPOINT_MAPPING[prefix] || this.ENDPOINT_MAPPING['mdl'];
   }
 
   private getCategoryFromPrefix(prefix: string): string {
     return (
-      AssetCategoryShort[prefix as keyof typeof AssetCategoryShort] || 'AIModel'
+      AssetCategoryShort[prefix as keyof typeof AssetCategoryShort] ||
+      AssetCategoryShort.mdl
     );
   }
 
@@ -136,7 +141,7 @@ export class BookmarkService {
 
   public addBookmark(identifier: string): Observable<string> {
     return this.http.post<any>(
-      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       null,
       {
         params: new HttpParams().set('resource_identifier', identifier),
@@ -148,7 +153,7 @@ export class BookmarkService {
   public deleteBookmark(identifier: string): Observable<string> {
     const params = new HttpParams().set('resource_identifier', identifier);
     return this.http.delete<string>(
-      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}/`,
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       {
         params,
         headers: this.getHttpHeader(),
