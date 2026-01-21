@@ -126,12 +126,20 @@ export class AuthService {
     return !!this.oauthService.getIdToken();
   }
 
-  getProfile() {
+  async getProfile() {
+    // return {
+    //   name:
+    //     (this.getToken().idTokenParsed as any)?.name ||
+    //     (this.getToken().idTokenParsed as any)?.preferred_username,
+    //   avatar: (this.getToken().idTokenParsed as any)?.avatar_url,
+    // };
+    // Wait for the token to be resolved
+    const token = await this.getToken();
+    const parsedToken = token?.idTokenParsed as any;
+
     return {
-      name:
-        (this.getToken().idTokenParsed as any)?.name ||
-        (this.getToken().idTokenParsed as any)?.preferred_username,
-      avatar: (this.getToken().idTokenParsed as any)?.avatar_url,
+      name: parsedToken?.name || parsedToken?.preferred_username,
+      avatar: parsedToken?.avatar_url,
     };
   }
 
