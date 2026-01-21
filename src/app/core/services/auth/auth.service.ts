@@ -135,7 +135,11 @@ export class AuthService {
     };
   }
 
-  getToken(): any {
+  async getToken(): Promise<any> {
+    // return this.oauthService?.getAccessToken() ?? undefined;
+    if (this.oauthService && !this.oauthService.hasValidAccessToken()) {
+      await this.oauthService.refreshToken();
+    }
     return this.oauthService?.getAccessToken() ?? undefined;
   }
 
