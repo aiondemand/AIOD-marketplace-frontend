@@ -163,7 +163,7 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authService.userProfileSubject.subscribe((profile) => {
         this.userProfile = profile;
-        if (!this.isAuthenticated()) this.getAssetsPurchases();
+        if (this.isAuthenticated()) this.getAssetsPurchases();
       }),
     );
   }
@@ -172,6 +172,7 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
   }
 
   private isAuthenticated(): boolean {
-    return this.userProfile && Object.keys(this.userProfile).length > 0;
+    // return this.userProfile && Object.keys(this.userProfile).length > 0;
+    return this.authService.isAuthenticated();
   }
 }
