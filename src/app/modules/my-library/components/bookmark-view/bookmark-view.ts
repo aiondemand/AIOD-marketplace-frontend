@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
 import { Subscription } from 'rxjs';
@@ -21,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './bookmark-view.html',
   styleUrls: ['./bookmark-view.scss'],
 })
-export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BookmarkViewComponent implements OnInit, OnDestroy {
   constructor(
     private appConfig: AppConfigService,
     private filterState: FiltersStateService,
@@ -175,10 +169,6 @@ export class BookmarkViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => this.getAssetsPurchases());
   }
 
   private isAuthenticated(): boolean {

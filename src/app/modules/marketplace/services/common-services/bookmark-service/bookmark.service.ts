@@ -87,10 +87,10 @@ export class BookmarkService {
     return new AssetsPurchase(payload);
   }
 
-  public getBookmarks(): Observable<AssetsPurchase[]> {
+  public getBookmarks(offset = 0, limit = 100): Observable<AssetsPurchase[]> {
     return this.http
       .get<BookmarkItem[]>(
-        `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=0&limit=10`,
+        `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=${offset}&limit=${limit}`,
         {
           headers: this.getHttpHeader(),
         },
@@ -132,7 +132,7 @@ export class BookmarkService {
 
   public getBookmarksList(): Observable<BookmarkItem[]> {
     return this.http.get<BookmarkItem[]>(
-      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=0&limit=10`,
+      `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=0&limit=100`,
       {
         headers: this.getHttpHeader(),
       },
