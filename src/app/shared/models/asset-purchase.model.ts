@@ -9,9 +9,10 @@ export class AssetsPurchase {
   addedAt: number;
 
   constructor(data: any) {
-    this.identifier = data?.identifier ?? '';
-    (this.name = data?.name ?? ''), (this.category = data?.category);
-    this.urlMetadata = data?.url_metadata ?? '';
+    this.identifier = data?.resource_identifier ?? '';
+    this.category = data.category;
+    this.name = data.name;
+    this.urlMetadata = data?.same_as ?? '';
     this.price = data?.price ?? 0;
     this.addedAt = data?.addedAt ?? 0;
   }
