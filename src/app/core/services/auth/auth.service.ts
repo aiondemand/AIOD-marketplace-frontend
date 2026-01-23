@@ -53,11 +53,10 @@ export class AuthService {
       );
     }
 
-    this.oauthService.setupAutomaticSilentRefresh();
-
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
+        this.oauthService.setupAutomaticSilentRefresh();
       }
     });
   }
@@ -126,6 +125,15 @@ export class AuthService {
     return !!this.oauthService.getIdToken();
   }
 
+  isAuthActiveUser(): boolean {
+    return (
+      this.isAuthenticated() &&
+      !!this.oauthService.getAccessToken() &&
+      this.oauthService.hasValidAccessToken() &&
+      this.oauthService.hasValidIdToken()
+    );
+  }
+
   getProfile() {
     return {
       name:
@@ -136,7 +144,7 @@ export class AuthService {
   }
 
   getToken(): any {
-    return this.oauthService?.getAccessToken() ?? undefined;
+    return this.oauthService?.getAccessToken();
   }
 
   parseVosFromProfile(entitlements: string[]): string[] {
