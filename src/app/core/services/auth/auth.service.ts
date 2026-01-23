@@ -53,11 +53,10 @@ export class AuthService {
       );
     }
 
-    this.oauthService.setupAutomaticSilentRefresh();
-
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
+        this.oauthService.setupAutomaticSilentRefresh();
       }
     });
   }
@@ -127,7 +126,20 @@ export class AuthService {
   }
 
   isAuthActiveUser(): boolean {
-    return this.isAuthenticated() && this.oauthService.hasValidAccessToken();
+    console.log('+ [authService] isAuthenticated', this.isAuthenticated());
+    console.log(
+      '+ [authService] hasValidAccessToken',
+      this.oauthService.hasValidAccessToken(),
+    );
+    console.log(
+      '+ [authService] hasValidIdToken',
+      this.oauthService.hasValidIdToken(),
+    );
+    return (
+      this.isAuthenticated() &&
+      this.oauthService.hasValidAccessToken() &&
+      this.oauthService.hasValidIdToken()
+    );
   }
 
   async getProfile() {
@@ -150,7 +162,7 @@ export class AuthService {
   async getToken(): Promise<any> {
     // return this.oauthService?.getAccessToken() ?? undefined;
     if (this.oauthService && !this.oauthService.hasValidAccessToken()) {
-      await this.oauthService.refreshToken();
+      return await this.oauthService.refreshToken();
     }
     return this.oauthService?.getAccessToken() ?? undefined;
   }

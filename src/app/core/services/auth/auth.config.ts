@@ -24,11 +24,12 @@ export const authCodeFlowConfig: AuthConfig = {
 
   showDebugInformation: environment.keycloakConfig.showDebugInformation,
   useSilentRefresh: true,
-  silentRefreshRedirectUri:
-    window.location.origin + '/' + environment.keycloakConfig.redirectUri,
+  // silentRefreshRedirectUri:
+  //   window.location.origin + '/' + environment.keycloakConfig.redirectUri,
+  silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
   silentRefreshTimeout: 5000,
-  sessionChecksEnabled: false,
+  sessionChecksEnabled: true,
   timeoutFactor: 0.75,
 
-  requireHttps: false,
+  requireHttps: environment.production ? true : false,
 };
