@@ -25,6 +25,7 @@ import {
   MatTooltipDefaultOptions,
 } from '@angular/material/tooltip';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { AppConfigService } from './core/services/app-config/app-config.service';
 import { SpinnerModule } from './shared/components/spinner/spinner.module';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -115,6 +116,11 @@ renderer.link = (href, title, text) => {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpAuthInterceptor,
       multi: true,
     },
     {

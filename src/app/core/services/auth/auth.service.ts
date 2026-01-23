@@ -15,12 +15,17 @@ export interface UserProfile {
 
 @Injectable()
 export class AuthService {
+  private refreshInProgress = false;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
   constructor(
     private oauthService: OAuthService,
     private router: Router,
     private appConfigService: AppConfigService,
   ) {
     this.configureOAuthService();
+    this.monitorTokenEvents();
 
     try {
       window.addEventListener('storage', this.handleStorageEvent.bind(this));
@@ -112,6 +117,80 @@ export class AuthService {
       // swallow
     }
   }
+  private monitorTokenEvents() {
+    this.oauthService.events.subscribe((event) => {
+      console.log('OAuth Event:', event.type);
+
+      switch (event.type) {
+        case 'token_received':
+          console.log('Token refreshed successfully');
+          this.isAuthenticatedSubject.next(true);
+          break;
+
+        case 'token_refresh_error':
+          console.error('Token refresh failed:', event);
+          this.handleRefreshError();
+          break;
+
+        case 'silent_refresh_error':
+          console.error('Silent refresh error:', event);
+          this.handleRefreshError();
+          break;
+
+        case 'silent_refresh_timeout':
+          console.error('Silent refresh timeout');
+          this.handleRefreshError();
+          break;
+
+        case 'session_terminated':
+          console.warn('Session terminated');
+          this.handleSessionTerminated();
+          break;
+      }
+    });
+  }
+
+  private handleRefreshError() {
+    console.warn('Attempting manual token refresh...');
+
+    // Try one manual refresh before giving up
+    if (!this.refreshInProgress) {
+      this.refreshInProgress = true;
+
+      this.oauthService
+        .refreshToken()
+        .then(() => {
+          console.log('✅ Manual refresh succeeded');
+          this.refreshInProgress = false;
+          this.isAuthenticatedSubject.next(true);
+        })
+        .catch((error) => {
+          console.error('❌ Manual refresh also failed:', error);
+          this.refreshInProgress = false;
+          this.handleSessionExpired();
+        });
+    }
+  }
+
+  private handleSessionExpired() {
+    console.error('Session expired, user must re-authenticate');
+    this.isAuthenticatedSubject.next(false);
+
+    // Clear tokens
+    this.oauthService.logOut(true); // true = revoke tokens
+
+    // Redirect to login with return URL
+    const returnUrl = this.router.url;
+    this.router.navigate(['/login'], {
+      queryParams: { returnUrl },
+    });
+  }
+
+  private handleSessionTerminated() {
+    console.warn('Session terminated in another tab');
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/login']);
+  }
 
   login(url: string) {
     this.oauthService.initLoginFlow(url);
@@ -119,6 +198,8 @@ export class AuthService {
 
   logout() {
     this.oauthService.logOut();
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/resources']);
   }
 
   isAuthenticated(): boolean {
@@ -156,5 +237,24 @@ export class AuthService {
       }
     });
     return foundVos;
+  }
+
+  async tryRefreshToken(): Promise<boolean> {
+    if (this.refreshInProgress) {
+      console.log('Refresh already in progress, waiting...');
+      return false;
+    }
+
+    try {
+      this.refreshInProgress = true;
+      await this.oauthService.refreshToken();
+      this.refreshInProgress = false;
+      return true;
+    } catch (error) {
+      console.error('Manual refresh failed:', error);
+      this.refreshInProgress = false;
+      this.handleSessionExpired();
+      return false;
+    }
   }
 }

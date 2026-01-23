@@ -39,7 +39,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             errorMessage = `Error ${error.status}: ${error.statusText} ${error.url}`;
           }
 
-          if (error.status === 401 || error.status === 403) {
+          if (/*error.status === 401 || */ error.status === 403) {
             this.router.navigate(['forbidden', { errorMessage: errorMessage }]);
           }
 

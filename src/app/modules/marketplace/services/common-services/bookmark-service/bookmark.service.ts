@@ -124,7 +124,15 @@ export class BookmarkService {
           );
         }),
         catchError((error) => {
-          console.error('Error fetching bookmarks:', error);
+          // console.error('Error fetching bookmarks:', error);
+          // The interceptor already handled 401 and retry
+          // If we still get an error here, the session is truly dead
+          if (error.status === 401 || error.message === 'Session expired') {
+            console.error('Session expired, please login again');
+            // The auth service already redirected to login
+          } else {
+            console.error('Error loading bookmarks', error);
+          }
           return of([] as AssetsPurchase[]);
         }),
       );
