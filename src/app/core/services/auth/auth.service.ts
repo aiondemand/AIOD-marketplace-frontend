@@ -25,7 +25,6 @@ export class AuthService {
     private appConfigService: AppConfigService,
   ) {
     this.configureOAuthService();
-    this.monitorTokenEvents();
 
     try {
       window.addEventListener('storage', this.handleStorageEvent.bind(this));
@@ -59,6 +58,8 @@ export class AuthService {
     }
 
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      this.monitorTokenEvents();
+
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
         this.oauthService.setupAutomaticSilentRefresh();
