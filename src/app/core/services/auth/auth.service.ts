@@ -160,11 +160,7 @@ export class AuthService {
   }
 
   async getToken(): Promise<any> {
-    // return this.oauthService?.getAccessToken() ?? undefined;
-    if (this.oauthService && !this.oauthService.hasValidAccessToken()) {
-      return await this.oauthService.refreshToken();
-    }
-    return this.oauthService?.getAccessToken() ?? undefined;
+    return this.oauthService?.getAccessToken();
   }
 
   parseVosFromProfile(entitlements: string[]): string[] {
