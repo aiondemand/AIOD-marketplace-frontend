@@ -269,7 +269,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   async getBookmarks() {
-    if (!this.authService.isAuthenticated()) {
+    // if (!this.authService.isAuthenticated()) {
+    //   return;
+    // }
+    if (!this.authService.isAuthActiveUser()) {
       return;
     }
     this.bookmarkSub = (
@@ -312,7 +315,8 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    // return this.authService.isAuthenticated();
+    return this.authService.isAuthActiveUser();
   }
 
   subscriptionAssetCategory() {

@@ -126,6 +126,10 @@ export class AuthService {
     return !!this.oauthService.getIdToken();
   }
 
+  isAuthActiveUser(): boolean {
+    return this.isAuthenticated() && this.oauthService.hasValidAccessToken();
+  }
+
   async getProfile() {
     // return {
     //   name:
