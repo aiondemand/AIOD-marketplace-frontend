@@ -67,31 +67,32 @@ export class AssetCardComponent implements OnInit {
     return this.userProfile && Object.keys(this.userProfile).length > 0;
   }
 
-  private addBookmark() {
+  private async addBookmark() {
     if (this.userProfile) {
-      this.bookmarkService
-        .addBookmark(this.asset.identifier.toString())
-        .subscribe({
-          next: (_bookmarkedAssets: any) => {
-            // ToDo: change bookmark icon style
-          },
-          error: (error: any) =>
-            console.error('Error bookmarking asset', error),
-        });
+      (
+        await this.bookmarkService.addBookmark(this.asset.identifier.toString())
+      ).subscribe({
+        next: (_bookmarkedAssets: any) => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) => console.error('Error bookmarking asset', error),
+      });
     }
   }
 
-  private deleteBookmark() {
+  private async deleteBookmark() {
     if (this.userProfile) {
-      this.bookmarkService
-        .deleteBookmark(this.asset.identifier.toString())
-        .subscribe({
-          next: () => {
-            // ToDo: change bookmark icon style
-          },
-          error: (error: any) =>
-            console.error('Error deleting asset from bookmarks', error),
-        });
+      (
+        await this.bookmarkService.deleteBookmark(
+          this.asset.identifier.toString(),
+        )
+      ).subscribe({
+        next: () => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) =>
+          console.error('Error deleting asset from bookmarks', error),
+      });
     }
   }
 

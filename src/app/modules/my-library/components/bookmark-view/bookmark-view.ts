@@ -44,9 +44,9 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
   public assetsSize: number | null = null;
   public isLightTheme: string | null = null;
 
-  private getAssetsPurchases(): void {
+  private async getAssetsPurchases(): Promise<void> {
     this.isLoading = true;
-    const subscribeLib = this.bookmarkService.getBookmarks().subscribe({
+    const subscribeLib = (await this.bookmarkService.getBookmarks()).subscribe({
       next: (assets: AssetsPurchase[]) => {
         const incoming = assets ?? [];
         const validAssets = incoming.filter(
@@ -100,8 +100,8 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
     return assetConfig.color;
   }
 
-  public deleteAssetMyLibrary(asset: AssetsPurchase): void {
-    this.bookmarkService.deleteBookmark(asset.identifier).subscribe({
+  public async deleteAssetMyLibrary(asset: AssetsPurchase): Promise<void> {
+    (await this.bookmarkService.deleteBookmark(asset.identifier)).subscribe({
       next: () => {
         this.getAssetsPurchases();
       },

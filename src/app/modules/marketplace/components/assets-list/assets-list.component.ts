@@ -268,11 +268,13 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.filtersService.setSearchQuery(query);
   }
 
-  getBookmarks() {
+  async getBookmarks() {
     if (!this.authService.isAuthenticated()) {
       return;
     }
-    this.bookmarkSub = this.bookmarkService.getBookmarksList().subscribe({
+    this.bookmarkSub = (
+      await this.bookmarkService.getBookmarksList()
+    ).subscribe({
       next: (bookmarks: any[]) => {
         this.bookmarkList = bookmarks;
         this.bookmarkIds = new Set(

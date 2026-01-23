@@ -51,13 +51,15 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     this.generalAssetService.setAssetCategory(category);
 
     const subscribe = this.generalAssetService.getAsset(id).subscribe({
-      next: (asset: any) => {
+      next: async (asset: any) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
         this.prepareGenericData();
         // After asset is loaded, check if it's bookmarked
-        const bookmarkSub = this.bookmarkService.getBookmarksList().subscribe({
+        const bookmarkSub = (
+          await this.bookmarkService.getBookmarksList()
+        ).subscribe({
           next: (bookmarks: AssetsPurchase[] | any) => {
             try {
               const list = Array.isArray(bookmarks) ? bookmarks : [];
@@ -133,11 +135,13 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     return this.userProfile && Object.keys(this.userProfile).length > 0;
   }
 
-  private addBookmark() {
+  private async addBookmark() {
     if (this.userProfile) {
       const bookmarkedAsset = this.getBookmarkedAsset();
 
-      this.bookmarkService.addBookmark(bookmarkedAsset.identifier).subscribe({
+      (
+        await this.bookmarkService.addBookmark(bookmarkedAsset.identifier)
+      ).subscribe({
         next: () => {
           // ToDo: change bookmark icon style
         },
@@ -146,17 +150,19 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  private deleteBookmark() {
+  private async deleteBookmark() {
     if (this.userProfile) {
-      this.bookmarkService
-        .deleteBookmark(this.asset.identifier.toString())
-        .subscribe({
-          next: () => {
-            // ToDo: change bookmark icon style
-          },
-          error: (error: any) =>
-            console.error('Error deleting asset from bookmarks', error),
-        });
+      (
+        await this.bookmarkService.deleteBookmark(
+          this.asset.identifier.toString(),
+        )
+      ).subscribe({
+        next: () => {
+          // ToDo: change bookmark icon style
+        },
+        error: (error: any) =>
+          console.error('Error deleting asset from bookmarks', error),
+      });
     }
   }
 

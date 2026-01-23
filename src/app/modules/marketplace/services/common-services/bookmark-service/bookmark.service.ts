@@ -60,8 +60,8 @@ export class BookmarkService {
     );
   }
 
-  private getHttpHeader(): HttpHeaders {
-    const authToken = this.authService.getToken();
+  private async getHttpHeader(): Promise<HttpHeaders> {
+    const authToken = await this.authService.getToken();
     return new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
@@ -87,12 +87,17 @@ export class BookmarkService {
     return new AssetsPurchase(payload);
   }
 
-  public getBookmarks(offset = 0, limit = 100): Observable<AssetsPurchase[]> {
+  public async getBookmarks(
+    offset = 0,
+    limit = 100,
+  ): Promise<Observable<AssetsPurchase[]>> {
+    const headers = await this.getHttpHeader();
+
     return this.http
       .get<BookmarkItem[]>(
         `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=${offset}&limit=${limit}`,
         {
-          headers: this.getHttpHeader(),
+          headers: headers,
         },
       )
       .pipe(
@@ -108,9 +113,7 @@ export class BookmarkService {
             const url = `${base}${endpoints.prefixApiAssets}/${endpoint}/${identifier}`;
 
             return {
-              request: this.http
-                .get<any>(url, { headers: this.getHttpHeader() })
-                .pipe(catchError(() => of(null))),
+              request: this.http.get<any>(url).pipe(catchError(() => of(null))),
               prefix,
             };
           });
@@ -130,33 +133,38 @@ export class BookmarkService {
       );
   }
 
-  public getBookmarksList(): Observable<BookmarkItem[]> {
+  public async getBookmarksList(): Promise<Observable<BookmarkItem[]>> {
+    const headers = await this.getHttpHeader();
+
     return this.http.get<BookmarkItem[]>(
       `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}?offset=0&limit=100`,
       {
-        headers: this.getHttpHeader(),
+        headers: headers,
       },
     );
   }
 
-  public addBookmark(identifier: string): Observable<string> {
+  public async addBookmark(identifier: string): Promise<Observable<string>> {
+    const headers = await this.getHttpHeader();
     return this.http.post<any>(
       `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       null,
       {
         params: new HttpParams().set('resource_identifier', identifier),
-        headers: this.getHttpHeader(),
+        headers: headers,
       },
     );
   }
 
-  public deleteBookmark(identifier: string): Observable<string> {
+  public async deleteBookmark(identifier: string): Promise<Observable<string>> {
     const params = new HttpParams().set('resource_identifier', identifier);
+    const headers = await this.getHttpHeader();
+
     return this.http.delete<string>(
       `${base}${endpoints.prefixApiAssets}${endpoints.bookmarks}`,
       {
         params,
-        headers: this.getHttpHeader(),
+        headers: headers,
       },
     );
   }
