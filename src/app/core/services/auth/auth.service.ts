@@ -15,14 +15,13 @@ export interface UserProfile {
 
 @Injectable()
 export class AuthService {
-  private refreshInProgress = false;
+  // private refreshInProgress = false;
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(
     private oauthService: OAuthService,
-    private router: Router,
-    private appConfigService: AppConfigService,
+    private router: Router, // private appConfigService: AppConfigService,
   ) {
     this.configureOAuthService();
 
@@ -58,7 +57,7 @@ export class AuthService {
     }
 
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      this.monitorTokenEvents();
+      // this.monitorTokenEvents();
 
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
@@ -118,6 +117,8 @@ export class AuthService {
       // swallow
     }
   }
+
+  /*
   private monitorTokenEvents() {
     this.oauthService.events.subscribe((event) => {
       console.log('OAuth Event:', event.type);
@@ -149,8 +150,9 @@ export class AuthService {
           break;
       }
     });
-  }
+  }*/
 
+  /*
   private handleRefreshError() {
     console.warn('Attempting manual token refresh...');
 
@@ -192,6 +194,7 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
   }
+  */
 
   login(url: string) {
     this.oauthService.initLoginFlow(url);
@@ -238,24 +241,5 @@ export class AuthService {
       }
     });
     return foundVos;
-  }
-
-  async tryRefreshToken(): Promise<boolean> {
-    if (this.refreshInProgress) {
-      console.log('Refresh already in progress, waiting...');
-      return false;
-    }
-
-    try {
-      this.refreshInProgress = true;
-      await this.oauthService.refreshToken();
-      this.refreshInProgress = false;
-      return true;
-    } catch (error) {
-      console.error('Manual refresh failed:', error);
-      this.refreshInProgress = false;
-      this.handleSessionExpired();
-      return false;
-    }
   }
 }
