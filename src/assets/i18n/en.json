@@ -228,13 +228,24 @@
   "SHARED": {
     "REPORT_DIALOG": {
       "TITLE": "Report Asset",
+      "CANCEL": "Cancel",
+      "EMAIL": "Email",
+      "EMAIL_INVALID": "Please, provide a valid e-mail",
       "INTRO": "Please complete this form to let us know why this asset is incorrect or inappropriate, and our team will review it. Thank you for your assistance.",
+      "NAME": "Name",
+      "NAME_REQUIRED": "Name required",
       "PLACEHOLDER": "Tell us what's wrong with this asset.",
-      "PRIVACY_ACCEPTANCE": "I read and accept the Privacy Policy.",
+      "READ_ACCEPT": "I read and accept the ",
+      "REPORT": "Report",
+      "REPORT_REQUIRED": "Report description required",
+      "PRIVACY_ACCEPTANCE_REQUIRED": "You must accept the Privacy Policy to submit",
+      "PRIVACY_POLICY": "Privacy Policy",
+      "SUBJECT": "Subject",
+      "SUBJECT_REQUIRED": "Subject required",
+      "SUBMIT_REPORT": "Submit report",
       "SUBMIT_SUCCESS": "Your report has been submitted. Thank you.",
       "SUBMIT_ERROR": "There was an error submitting your report. Please try again later.",
-      "NOT_AVAILABLE": "Reporting via the UI is not available for this asset.",
-      "EMAIL_INSTRUCTIONS": "To flag this asset, please send an e-mail to <a href=\"mailto:info@aiod.eu\">info@aiod.eu</a> with the subject:<br>FLAG: <strong>{{assetName}}</strong> and describe the problem providing the asset identifier: <strong>{{assetId}}</strong> in the message."
+      "EMAIL_INSTRUCTIONS": "To flag this asset as innapropriate, please, send an e-mail to <a href=\"mailto:info@aiod.eu\">info@aiod.eu</a> with the subject:<br>FLAG: <strong>{{assetName}}</strong> and describe the problem. Do not forget to provide the asset's identifier: <strong>{{assetId}}</strong> in the message."
     }
   }
 }

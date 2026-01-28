@@ -20,7 +20,7 @@ export interface ReportData {
 export class ReportDialogComponent {
   reportForm: FormGroup;
   public readonly EXTERNAL_LINKS = EXTERNAL_LINKS;
-  public isAssetReportAvailable = false; //To change when LOBA sets the endpoint to report assets
+  public isAssetReportAvailable = false; // Change to true whenever there is an endpoint available to process innapropriate asset messages.
 
   constructor(
     public dialog: MatDialogRef<ReportDialogComponent>,
