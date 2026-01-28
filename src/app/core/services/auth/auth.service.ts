@@ -57,7 +57,7 @@ export class AuthService {
     }
 
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      this.oauthService.setupAutomaticSilentRefresh();
+      this.monitorTokenEvents();
 
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
