@@ -400,10 +400,15 @@ header {
           }
         }
       }
+      &.mobile {
+        width: 100vw;
+        height: 100vh;
+        margin-left: -15px;
+        z-index: -1;  
+      }
     }
     .top-bar-buttons {
       width: 55%;
-      margin-left: 40px;
     }
   }
 
@@ -779,7 +784,6 @@ header {
 }
 
 .hamburguer-close {
-  display: none;
   position: relative;
   right: 30px;
   top: 35%;

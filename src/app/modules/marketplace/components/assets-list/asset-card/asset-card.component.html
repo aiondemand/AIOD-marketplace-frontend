@@ -48,6 +48,10 @@ product-list-developer-card
             : 'Delete bookmark'
         "
       >
+      <div class="hits-badge" *ngIf="asset?.hits">
+          <i class="icon-like"></i>
+          <span class="hits-count">{{ asset.hits }}</span>
+        </div>
         <div
           (click)="onClickBookmark(); $event.stopPropagation()"
           (mousedown)="$event.stopPropagation()"

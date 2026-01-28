@@ -3,14 +3,14 @@
   width: 100%;
 }
 
-.bookmark-btn-column{
-    position: relative;
-    display: flex;
-    justify-content: right;
-    margin-top:2rem;
+.bookmark-btn-column {
+  position: relative;
+  display: flex;
+  justify-content: right;
+  margin-top: 2rem;
 }
 
-.bookmark-btn-row{
+.bookmark-btn-row {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
@@ -56,4 +56,28 @@ h3 {
 
 .disabled {
   opacity: 0.5;
+}
+
+.hits-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  color: #0099ff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.hits-badge .icon-like:before {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.hits-count {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bookmark-btn-column .btn-circle i {
+  font-size: 1.2rem;
 }
