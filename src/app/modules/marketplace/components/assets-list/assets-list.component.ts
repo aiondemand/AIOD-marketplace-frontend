@@ -254,7 +254,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   getBookmarks() {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.isAuthActiveUser()) {
       return;
     }
     this.bookmarkSub = this.bookmarkService.getBookmarksList().subscribe({

@@ -15,10 +15,13 @@ export interface UserProfile {
 
 @Injectable()
 export class AuthService {
+  private refreshInProgress = false;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
   constructor(
     private oauthService: OAuthService,
     private router: Router,
-    private appConfigService: AppConfigService,
   ) {
     this.configureOAuthService();
 
@@ -53,11 +56,12 @@ export class AuthService {
       );
     }
 
-    this.oauthService.setupAutomaticSilentRefresh();
-
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      this.oauthService.setupAutomaticSilentRefresh();
+
       if (this.isAuthenticated()) {
         this.tryLoadProfileFromTokens();
+        this.oauthService.setupAutomaticSilentRefresh();
       }
     });
   }
@@ -114,16 +118,88 @@ export class AuthService {
     }
   }
 
+  private monitorTokenEvents() {
+    this.oauthService.events.subscribe((event) => {
+      switch (event.type) {
+        case 'token_received':
+          this.isAuthenticatedSubject.next(true);
+          break;
+
+        case 'token_refresh_error':
+          console.error('Token refresh failed:', event);
+          this.handleRefreshError();
+          break;
+
+        case 'silent_refresh_error':
+          console.error('Silent refresh error:', event);
+          this.handleRefreshError();
+          break;
+
+        case 'silent_refresh_timeout':
+          console.error('Silent refresh timeout');
+          this.handleRefreshError();
+          break;
+
+        case 'session_terminated':
+          this.handleSessionTerminated();
+          break;
+      }
+    });
+  }
+
+  private handleRefreshError() {
+    if (!this.refreshInProgress) {
+      this.refreshInProgress = true;
+
+      this.oauthService
+        .refreshToken()
+        .then(() => {
+          this.refreshInProgress = false;
+          this.isAuthenticatedSubject.next(true);
+        })
+        .catch((error) => {
+          console.error('Manual refresh also failed:', error);
+          this.refreshInProgress = false;
+          this.handleSessionExpired();
+        });
+    }
+  }
+
+  private handleSessionExpired() {
+    this.isAuthenticatedSubject.next(false);
+    // Clear and revoke tokens
+    this.oauthService.logOut(true);
+
+    const fullPath = window.location.pathname + window.location.search;
+    this.login(fullPath);
+  }
+
+  private handleSessionTerminated() {
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/resources']);
+  }
+
   login(url: string) {
     this.oauthService.initLoginFlow(url);
   }
 
   logout() {
-    this.oauthService.logOut();
+    this.oauthService.logOut(true);
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/resources']);
   }
 
   isAuthenticated(): boolean {
     return !!this.oauthService.getIdToken();
+  }
+
+  isAuthActiveUser(): boolean {
+    return (
+      this.isAuthenticated() &&
+      !!this.oauthService.getAccessToken() &&
+      this.oauthService.hasValidAccessToken() &&
+      this.oauthService.hasValidIdToken()
+    );
   }
 
   getProfile() {
@@ -136,17 +212,6 @@ export class AuthService {
   }
 
   getToken(): any {
-    return this.oauthService?.getAccessToken() ?? undefined;
-  }
-
-  parseVosFromProfile(entitlements: string[]): string[] {
-    const foundVos: string[] = [];
-    entitlements.forEach((vo) => {
-      const m = vo.match('group:(.+?):');
-      if (m && m[0]) {
-        foundVos.push(m[0]);
-      }
-    });
-    return foundVos;
+    return this.oauthService?.getAccessToken();
   }
 }
