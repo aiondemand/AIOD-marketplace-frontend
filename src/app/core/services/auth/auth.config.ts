@@ -9,7 +9,6 @@ export const authCodeFlowConfig: AuthConfig = {
     environment.keycloakConfig.realm,
 
   // URL of the SPA to redirect the user to after login
-  //redirectUri: window.location.origin,
   redirectUri:
     window.location.origin + '/' + environment.keycloakConfig.redirectUri,
 
