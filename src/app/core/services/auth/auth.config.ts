@@ -19,7 +19,7 @@ export const authCodeFlowConfig: AuthConfig = {
   responseType: 'code',
 
   // set the scope for the permissions the client should request
-  scope: 'openid profile microprofile-jwt email  offline_access',
+  scope: 'openid profile microprofile-jwt email offline_access',
 
   showDebugInformation: environment.keycloakConfig.showDebugInformation,
   useSilentRefresh: true,
