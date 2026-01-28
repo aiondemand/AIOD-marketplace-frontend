@@ -121,7 +121,6 @@ export class AuthService {
 
   private monitorTokenEvents() {
     this.oauthService.events.subscribe((event) => {
-
       switch (event.type) {
         case 'token_received':
           this.isAuthenticatedSubject.next(true);
