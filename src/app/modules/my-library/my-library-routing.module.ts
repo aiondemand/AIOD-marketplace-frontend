@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyListComponent } from './components/my-list/my-list.component';
+import { BookmarkViewComponent } from './components/bookmark-view/bookmark-view';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyListComponent,
+    component: BookmarkViewComponent,
     data: { breadcrumb: '> Bookmarks' },
   },
 ];

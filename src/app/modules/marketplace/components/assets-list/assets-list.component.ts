@@ -43,6 +43,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PlatformService } from '../../services/common-services/platform.service';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import {
+  BookmarkService,
+  // BookmarkBodyRemove,
+} from '../../services/common-services/bookmark-service/bookmark.service';
 
 const MAX_ATTEMPTS = 15;
 const EXCLUDED_PLATFORMS = ['example', 'ai4experiments', 'aibuilder'];
@@ -66,6 +70,9 @@ const assetCategoryMapping = {
 export class AssetsListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private enhancedSearchSubscription?: Subscription;
+  private bookmarkSub?: Subscription;
+  private bookmarkIds: Set<string> = new Set();
+  public userProfile: any;
 
   public isLoading = false;
   public assets: AssetModel[] | any[] = [];
@@ -79,6 +86,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   public offset = 0;
   public pageSizeOptions = [15, 20, 50, 100];
   public currentPage = 0;
+  public bookmarkList: any[] = [];
 
   protected displayModeValue = 1; //normally on several labels per line
   protected screenWidth: number = window.innerWidth;
@@ -116,6 +124,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     private filtersService: FiltersStateService,
     private platformService: PlatformService,
     protected authService: AuthService,
+    private bookmarkService: BookmarkService,
     private route: ActivatedRoute,
     private generalAssetService: GeneralAssetService,
     private filtersStateService: FiltersStateService,
@@ -145,6 +154,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.getPlatforms();
     this.subscription?.add(this.subscriptionAssetCategory());
     this.getFilters();
+    this.getBookmarks();
     window.addEventListener('resize', this.onResize);
 
     this.filtersStateService.isEnhancedSerach$
@@ -153,6 +163,13 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         next: (value) => {
           this.isEnhancedSearch = value;
         },
+      });
+
+    this.authService.userProfileSubject
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((profile) => {
+        this.userProfile = profile;
+        // whenever the user state changes, re-apply bookmarks to current assets
       });
 
     const selectedCategory = localStorage.getItem('selectedCategory');
@@ -251,6 +268,34 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.filtersService.setSearchQuery(query);
   }
 
+  getBookmarks() {
+    if (!this.authService.isAuthenticated()) {
+      return;
+    }
+    this.bookmarkSub = this.bookmarkService.getBookmarksList().subscribe({
+      next: (bookmarks: any[]) => {
+        this.bookmarkList = bookmarks;
+        this.bookmarkIds = new Set(
+          bookmarks.map((b: any) => b.resource_identifier),
+        );
+        this.assets = this.assets.map((a: any) => ({
+          ...a,
+          isBookmarked: this.bookmarkIds.has(a.identifier),
+        }));
+      },
+      error: (err: any) => {
+        this.bookmarkList = [];
+        this.assets = this.assets.map((a: any) => ({
+          ...a,
+          isBookmarked: false,
+        }));
+        console.error('Error loading bookmarks', err);
+      },
+    });
+
+    this.subscriptions.add(this.bookmarkSub);
+  }
+
   onInputChange() {
     const searchValue = this.searchFormGroup.get('search')?.value;
     this.searchFormGroup.get('enhancedSearch')?.enable();
@@ -321,8 +366,10 @@ export class AssetsListComponent implements OnInit, OnDestroy {
           this.assets = resp.resources.map((asset) => ({
             ...asset,
             category: this.categorySelected,
+            isBookmarked: false,
           }));
           this.assetsSize = resp.totalHits;
+          this.applyBookmarksToAssets();
         },
         error: (error: any) => {
           setTimeout(() => (this.isLoading = false), 5000);
@@ -359,7 +406,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
         this.assets = assets.map((asset) => ({
           ...asset,
           category: this.categorySelected,
+          isBookmarked: false,
         }));
+        this.applyBookmarksToAssets();
       },
       error: (error: any) => {
         // this.assets bellow might be used for testing purposes
@@ -818,6 +867,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
             category: this.categorySelected,
           }));
           this.assetsSize = assets.length;
+          this.applyBookmarksToAssets();
           this.spinnerService.hide();
         },
         error: (error: any) => {
@@ -839,6 +889,16 @@ export class AssetsListComponent implements OnInit, OnDestroy {
 
     this.spinnerService.hide();
     return '';
+  }
+
+  private applyBookmarksToAssets(): void {
+    if (!this.assets || !Array.isArray(this.assets)) {
+      return;
+    }
+    this.assets = this.assets.map((a: any) => ({
+      ...a,
+      isBookmarked: this.bookmarkIds.has(a.identifier),
+    }));
   }
 
   protected displayMode(mode: number): void {
