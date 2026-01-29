@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AssetDetailComponent } from './asset-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -30,6 +31,10 @@ describe('AssetDetailComponent', () => {
             getToken: jest.fn(),
             userProfileSubject: new BehaviorSubject<any>({}), // <-- Mock real
           },
+        },
+        {
+          provide: MatDialog,
+          useValue: { open: jest.fn() },
         },
       ],
     }).compileComponents();
