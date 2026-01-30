@@ -1,4 +1,4 @@
-<div *ngIf="asset">
+<div *ngIf="!loadingError && asset; else errorTemplate">
   <div class="m-3 asset-header">
     <div class="paths"><xng-breadcrumb separator=">"></xng-breadcrumb></div>
   </div>
@@ -9,17 +9,33 @@
   </div>
 </div>
 
+<ng-template #errorTemplate>
+  <div class="container p-5 text-center" *ngIf="loadingError">
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Unable to Load Asset</h4>
+      <p>
+        There was a problem retrieving the asset details. The resource may have
+        been deleted or is temporarily unavailable.
+      </p>
+      <hr />
+      <div class="d-flex justify-content-center">
+        <a href="/" class="btn btn-outline-danger">Return to Home</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 <ng-template #assetBody>
   <div class="asset-body">
     <div class="asset-body-container col-lg-10 col-md-12 col-sm-12">
-              <app-generic-asset
-                [items]="genericData"
-                [columns]="genericColumns"
-                [title]="genericTitle"
-              ></app-generic-asset>
+      <app-generic-asset
+        [items]="genericData"
+        [columns]="genericColumns"
+        [title]="genericTitle"
+      ></app-generic-asset>
     </div>
 
-    <div class="asset-body-keywords col-lg-2 col-md-12 col-sm-12"  >
+    <div class="asset-body-keywords col-lg-2 col-md-12 col-sm-12">
       <div *ngIf="!!asset.keyword && asset.keyword.length > 0">
         <h3>{{ 'ASSETS.ASSET-DETAIL.KEYWORDS' | translate }}</h3>
         <div class="keywords-list space-bottom">
@@ -58,7 +74,9 @@
         </div>
       </div>
 
-      <div *ngIf="!!asset.industrial_sector && asset.industrial_sector.length > 0">
+      <div
+        *ngIf="!!asset.industrial_sector && asset.industrial_sector.length > 0"
+      >
         <h3>{{ 'ASSETS.ASSET-DETAIL.INDUSTRIAL_SECTOR' | translate }}</h3>
         <div class="research-area-list space-bottom">
           <div
@@ -107,7 +125,9 @@
           {{ 'ASSETS.ASSET-DETAIL.DATE_PUBLISHED' | translate }} :
           {{ asset.date_published | date: 'mediumDate' }}
         </span>
-        <span *ngIf="asset.date_published && asset.aiod_entry?.date_modified">|</span>
+        <span *ngIf="asset.date_published && asset.aiod_entry?.date_modified"
+          >|</span
+        >
         <span *ngIf="asset.aiod_entry?.date_modified">
           {{ 'ASSETS.ASSET-DETAIL.DATA_CREATED' | translate }} :
           {{ asset.aiod_entry?.date_modified | date: 'mediumDate' }}

@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
-import { AssetModel } from '@app/shared/models/asset.model';
 import { Subscription, switchMap } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
@@ -15,6 +14,7 @@ import { UserModel } from '@app/shared/models/user.model';
 import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 import { GenericItem } from '@app/shared/models/generic.model';
 import { modelConfig } from '@app/shared/models/modelConfig';
+
 @Component({
   selector: 'app-asset-detail',
   templateUrl: './asset-detail.component.html',
@@ -40,6 +40,10 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   public icon!: string;
   public categoryColor!: string;
   public isLoading = false;
+
+  // ADDED: Flag to track if the API call failed
+  public loadingError = false;
+
   public asset!: any;
   public category!: AssetCategory;
   public AssetCategory = AssetCategory;
@@ -52,6 +56,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
 
   public getAsset(id: string, category: AssetCategory): void {
     this.isLoading = true;
+    this.loadingError = false; // Reset error state before fetching
     this.generalAssetService.setAssetCategory(category);
 
     const subscribe = this.generalAssetService.getAsset(id).subscribe({
@@ -62,8 +67,10 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.prepareGenericData();
       },
       error: (error: any) => {
-        setTimeout(() => (this.isLoading = false), 3000);
         console.error('Error get asset', error);
+        // CHANGED: Set error flag instead of fake asset
+        this.loadingError = true;
+        this.isLoading = false;
       },
     });
   }
@@ -73,16 +80,22 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params: Params) => {
           const category = params['category'];
-          this.icon = this.appConfig.assets[category.toLocaleLowerCase()]?.icon;
-          this.categoryColor =
-            this.appConfig.assets[category.toLocaleLowerCase()]?.color;
-          this.category = AssetCategory[category as keyof typeof AssetCategory];
+          if (category) {
+            this.icon =
+              this.appConfig.assets[category.toLocaleLowerCase()]?.icon;
+            this.categoryColor =
+              this.appConfig.assets[category.toLocaleLowerCase()]?.color;
+            this.category =
+              AssetCategory[category as keyof typeof AssetCategory];
+          }
           return this.route.params;
         }),
       )
       .subscribe((params: Params) => {
         const id = params['id'];
-        this.getAsset(id, this.category);
+        if (id && this.category) {
+          this.getAsset(id, this.category);
+        }
       });
 
     this.subscriptions.add(subscribe);
@@ -202,6 +215,8 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   private prepareGenericData(): void {
     const categoryKey = this.category as keyof typeof modelConfig;
     const config = modelConfig[categoryKey];
+
+    if (!config) return;
 
     this.genericColumns = config.columns;
     this.genericTitle = config.title;
