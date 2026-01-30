@@ -15,9 +15,11 @@
         
         var message = location.hash || location.search;
         
-        if (window.parent && message) {
-            window.parent.postMessage(message, targetOrigin);
-        }
+        try{
+            if (window.parent && message) {
+                window.parent.postMessage(message, targetOrigin);
+            }
+        } catch (e) {}
     </script>
 </body>
 </html>
