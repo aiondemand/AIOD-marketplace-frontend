@@ -124,7 +124,13 @@ export class BookmarkService {
           );
         }),
         catchError((error) => {
-          console.error('Error fetching bookmarks:', error);
+          if (error.status === 401 || error.message === 'Session expired') {
+            console.error(
+              'Error fetching bookmarks. Session expired, please login again',
+            );
+          } else {
+            console.error('Error loading bookmarks', error);
+          }
           return of([] as AssetsPurchase[]);
         }),
       );

@@ -9,7 +9,6 @@ export const authCodeFlowConfig: AuthConfig = {
     environment.keycloakConfig.realm,
 
   // URL of the SPA to redirect the user to after login
-  //redirectUri: window.location.origin,
   redirectUri:
     window.location.origin + '/' + environment.keycloakConfig.redirectUri,
 
@@ -20,14 +19,13 @@ export const authCodeFlowConfig: AuthConfig = {
   responseType: 'code',
 
   // set the scope for the permissions the client should request
-  scope: 'openid profile microprofile-jwt email',
+  scope: 'openid profile microprofile-jwt email offline_access',
 
   showDebugInformation: environment.keycloakConfig.showDebugInformation,
   useSilentRefresh: true,
-  silentRefreshRedirectUri:
-    window.location.origin + '/' + environment.keycloakConfig.redirectUri,
+  silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
   silentRefreshTimeout: 5000,
-  sessionChecksEnabled: false,
+  sessionChecksEnabled: true,
   timeoutFactor: 0.75,
 
   requireHttps: false,

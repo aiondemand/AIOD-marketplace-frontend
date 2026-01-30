@@ -163,7 +163,7 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authService.userProfileSubject.subscribe((profile) => {
         this.userProfile = profile;
-        if (!this.isAuthenticated()) this.getAssetsPurchases();
+        if (this.isAuthenticated()) this.getAssetsPurchases();
       }),
     );
   }
