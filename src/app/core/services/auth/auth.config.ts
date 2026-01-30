@@ -22,14 +22,6 @@ export const authCodeFlowConfig: AuthConfig = {
   scope: 'openid profile microprofile-jwt email offline_access',
 
   showDebugInformation: environment.keycloakConfig.showDebugInformation,
-  useSilentRefresh: true,
-  silentRefreshRedirectUri:
-    window.location.origin +
-    '/silent-refresh.html?origin=' +
-    encodeURIComponent(window.location.origin),
-  silentRefreshTimeout: 5000,
-  sessionChecksEnabled: true,
   timeoutFactor: 0.75,
-
   requireHttps: false,
 };

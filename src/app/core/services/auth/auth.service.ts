@@ -186,7 +186,7 @@ export class AuthService {
   logout() {
     this.oauthService.logOut(true);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/resources']);
+    window.location.href = '/resources';
   }
 
   isAuthenticated(): boolean {
