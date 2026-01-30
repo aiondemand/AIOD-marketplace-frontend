@@ -6,7 +6,18 @@
 </head>
 <body>
     <script>
-        parent.postMessage(location.hash || location.search, location.origin);
+        var targetOrigin = (new URL(window.location.href)).searchParams.get('origin');
+        
+        if (!targetOrigin) {
+            // Fallback to the current origin
+            targetOrigin = window.location.origin;
+        }
+        
+        var message = location.hash || location.search;
+        
+        if (window.parent && message) {
+            window.parent.postMessage(message, targetOrigin);
+        }
     </script>
 </body>
 </html>

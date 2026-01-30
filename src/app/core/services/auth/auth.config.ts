@@ -23,7 +23,10 @@ export const authCodeFlowConfig: AuthConfig = {
 
   showDebugInformation: environment.keycloakConfig.showDebugInformation,
   useSilentRefresh: true,
-  silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
+  silentRefreshRedirectUri:
+    window.location.origin +
+    '/silent-refresh.html?origin=' +
+    encodeURIComponent(window.location.origin),
   silentRefreshTimeout: 5000,
   sessionChecksEnabled: true,
   timeoutFactor: 0.75,
