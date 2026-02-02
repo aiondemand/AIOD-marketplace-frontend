@@ -66,7 +66,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
   projectUrl = '';
 
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return this.authService.isAuthActiveUser();
   }
 
   login() {

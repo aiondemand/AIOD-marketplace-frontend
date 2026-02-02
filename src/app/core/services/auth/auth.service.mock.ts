@@ -10,7 +10,7 @@ export class AuthServiceMock {
 
   static instance() {
     const instance = jasmine.createSpyObj('AuthService', [
-      'isAuthenticated',
+      'isAuthActiveUser',
       'getHeader',
       'getProfile',
       'getEmail',
@@ -20,7 +20,7 @@ export class AuthServiceMock {
       'setLoggedInUserEmail',
     ]);
 
-    instance.isAuthenticated.and.returnValue(true);
+    instance.isAuthActiveUser.and.returnValue(true);
     instance.getHeader.and.returnValue({});
     instance.getProfile.and.returnValue({});
     instance.getEmail.and.returnValue('emailMock');

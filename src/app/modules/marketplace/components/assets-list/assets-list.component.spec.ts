@@ -21,6 +21,7 @@ describe('AssetsListComponent', () => {
           useValue: {
             getToken: jest.fn(),
             userProfileSubject: new BehaviorSubject<any>({}), // <-- Mock real
+            isAuthActiveUser: jest.fn().mockReturnValue(false),
           },
         },
         {

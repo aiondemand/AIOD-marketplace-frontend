@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 
 const mockedAuthService: any = {
-  isAuthenticated: jest.fn(),
+  isAuthActiveUser: jest.fn(),
   userProfileSubject: of({}),
 };
 const mockedMediaQueryList: MediaQueryList = {
