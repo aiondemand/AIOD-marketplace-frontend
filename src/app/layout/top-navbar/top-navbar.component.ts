@@ -63,7 +63,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
 
     this.navSub = new Subscription();
     const authSub = this.authService.userProfileSubject.subscribe((profile) => {
-      if (this.authService.isAuthenticated()) {
+      if (this.authService.isAuthActiveUser()) {
         this.userProfile = {
           name: profile.name || '',
           email: profile.email || '',
@@ -132,7 +132,7 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return this.authService.isAuthActiveUser();
   }
 
   menuEnter() {
