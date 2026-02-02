@@ -59,7 +59,7 @@ export class AuthService {
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       this.monitorTokenEvents();
 
-      if (this.isAuthenticated()) {
+      if (this.isAuthActiveUser()) {
         this.tryLoadProfileFromTokens();
         this.oauthService.setupAutomaticSilentRefresh();
       }
@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   private async tryLoadProfileFromTokens(): Promise<void> {
-    if (this.isAuthenticated() && this.oauthService.hasValidAccessToken()) {
+    if (this.isAuthActiveUser()) {
       try {
         const profile: any = await this.oauthService.loadUserProfile();
         const userProfile: UserProfile = {
@@ -186,16 +186,12 @@ export class AuthService {
   logout() {
     this.oauthService.logOut(true);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/resources']);
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.oauthService.getIdToken();
+    window.location.href = '/resources';
   }
 
   isAuthActiveUser(): boolean {
     return (
-      this.isAuthenticated() &&
+      !!this.oauthService.getIdToken() &&
       !!this.oauthService.getAccessToken() &&
       this.oauthService.hasValidAccessToken() &&
       this.oauthService.hasValidIdToken()

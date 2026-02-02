@@ -310,7 +310,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return this.authService.isAuthActiveUser();
   }
 
   subscriptionAssetCategory() {

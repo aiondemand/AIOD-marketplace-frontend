@@ -10,7 +10,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const mockedConfigService: any = {};
 const mockedAuthService: any = {
-  isAuthenticated: jest.fn(),
+  isAuthActiveUser: jest.fn(),
 };
 const mockedMediaQueryList: MediaQueryList = {
   matches: true,
