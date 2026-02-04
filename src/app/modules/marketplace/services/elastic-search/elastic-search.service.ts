@@ -17,7 +17,7 @@ export class ElasticSearchService {
 
   private buildParamsSearch(paramsSearch: ParamsReqSearchAsset): HttpParams {
     let params = new HttpParams()
-      .set('page', paramsSearch.page)
+      .set('offset', paramsSearch.offset)
       .set('limit', paramsSearch.limit)
       .set('search_query', paramsSearch.searchQuery);
 
