@@ -59,6 +59,9 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
         this.prepareGenericData();
+
+        if (!this.authService.isAuthActiveUser()) return;
+
         // After asset is loaded, check if it's bookmarked
         const bookmarkSub = this.bookmarkService.getBookmarksList().subscribe({
           next: (bookmarks: AssetsPurchase[] | any) => {
@@ -107,7 +110,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   }
 
   protected onClickBookmark(): void {
-    if (!this.isAuthenticated()) return;
+    if (!this.authService.isAuthActiveUser()) return;
 
     if (!this.isBookmarked) {
       this.addBookmark();
@@ -143,11 +146,11 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   }
 
   isAuthenticated(): boolean {
-    return this.userProfile && Object.keys(this.userProfile).length > 0;
+    return this.authService.isAuthActiveUser();
   }
 
   private addBookmark() {
-    if (this.userProfile) {
+    if (this.authService.isAuthActiveUser()) {
       const bookmarkedAsset = this.getBookmarkedAsset();
 
       this.bookmarkService.addBookmark(bookmarkedAsset.identifier).subscribe({
@@ -160,7 +163,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   }
 
   private deleteBookmark() {
-    if (this.userProfile) {
+    if (this.authService.isAuthActiveUser()) {
       this.bookmarkService
         .deleteBookmark(this.asset.identifier.toString())
         .subscribe({
