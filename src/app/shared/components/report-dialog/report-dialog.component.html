@@ -1,62 +1,72 @@
-<h1 mat-dialog-title class="dialog-title">{{ 'SHARED.REPORT_DIALOG.TITLE' | translate }}</h1>
-<div mat-dialog-content>
-  <ng-container *ngIf="isAssetReportAvailable; else emailInfo">
-    <p class="dialog-intro">{{ 'SHARED.REPORT_DIALOG.INTRO' | translate }}</p>
-    <form [formGroup]="reportForm" (ngSubmit)="submitReport()">
-      <mat-form-field appearance="outline" class="full-width name-field">
-        <mat-label>{{ 'SHARED.REPORT_DIALOG.NAME' | translate }}</mat-label>
-        <input matInput formControlName="name" required>
-        <mat-error *ngIf="reportForm.get('name')?.hasError('required')">
-          {{ 'SHARED.REPORT_DIALOG.NAME_REQUIRED' | translate }}
-        </mat-error>
-      </mat-form-field>
+<div class="modal-overlay" (click)="closeDialog()">
+  <div class="modal-wrapper" (click)="$event.stopPropagation()">
+    <div class="dialog-container">
+      <h1 class="dialog-title">{{ 'SHARED.REPORT_DIALOG.TITLE' | translate }}</h1>
+      <div class="dialog-content">
+        <ng-container *ngIf="isAssetReportAvailable; else emailInfo">
+          <p class="dialog-intro">{{ 'SHARED.REPORT_DIALOG.INTRO' | translate }}</p>
+          <form [formGroup]="reportForm" (ngSubmit)="submitReport()">
+            <div class="form-field full-width name-field">
+              <label class="form-label">{{ 'SHARED.REPORT_DIALOG.NAME' | translate }}</label>
+              <input type="text" class="form-input" formControlName="name" required>
+              <div class="form-error" *ngIf="reportForm.get('name')?.hasError('required') && reportForm.get('name')?.touched">
+                {{ 'SHARED.REPORT_DIALOG.NAME_REQUIRED' | translate }}
+              </div>
+            </div>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SHARED.REPORT_DIALOG.EMAIL' | translate }}</mat-label>
-        <input matInput formControlName="email" type="email">
-        <mat-error *ngIf="reportForm.get('email')?.hasError('email')">
-          {{ 'SHARED.REPORT_DIALOG.EMAIL_INVALID' | translate }}
-        </mat-error>
-      </mat-form-field>
+            <div class="form-field full-width">
+              <label class="form-label">{{ 'SHARED.REPORT_DIALOG.EMAIL' | translate }}</label>
+              <input type="email" class="form-input" formControlName="email">
+              <div class="form-error" *ngIf="reportForm.get('email')?.hasError('email') && reportForm.get('email')?.touched">
+                {{ 'SHARED.REPORT_DIALOG.EMAIL_INVALID' | translate }}
+              </div>
+            </div>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SHARED.REPORT_DIALOG.SUBJECT' | translate }}</mat-label>
-        <input matInput formControlName="subject" required>
-        <mat-error *ngIf="reportForm.get('subject')?.hasError('required')">
-          {{ 'SHARED.REPORT_DIALOG.SUBJECT_REQUIRED' | translate }}
-        </mat-error>
-      </mat-form-field>
+            <div class="form-field full-width">
+              <label class="form-label">{{ 'SHARED.REPORT_DIALOG.SUBJECT' | translate }}</label>
+              <input type="text" class="form-input" formControlName="subject" required>
+              <div class="form-error" *ngIf="reportForm.get('subject')?.hasError('required') && reportForm.get('subject')?.touched">
+                {{ 'SHARED.REPORT_DIALOG.SUBJECT_REQUIRED' | translate }}
+              </div>
+            </div>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>{{ 'SHARED.REPORT_DIALOG.REPORT' | translate }}</mat-label>
-        <textarea matInput formControlName="report" rows="4" required placeholder="{{ 'SHARED.REPORT_DIALOG.PLACEHOLDER' | translate }}"></textarea>
-        <mat-error *ngIf="reportForm.get('report')?.hasError('required')">
-          {{ 'SHARED.REPORT_DIALOG.REPORT_REQUIRED' | translate }}
-        </mat-error>
-      </mat-form-field>
-      <div class="privacy-acceptance" style="margin-top:8px;">
-        <mat-checkbox formControlName="privacyAccepted" aria-label="Accept privacy policy">
-          {{ 'SHARED.REPORT_DIALOG.READ_ACCEPT' | translate }} 
-          <a [href]="EXTERNAL_LINKS.PRIVACY_POLICY" target="_blank" rel="noopener" style="color:#1976d2;">
-            {{ 'SHARED.REPORT_DIALOG.PRIVACY_POLICY' | translate }}
-          </a>.
-        </mat-checkbox>
-        <mat-error *ngIf="reportForm.get('privacyAccepted')?.hasError('required') && (reportForm.get('privacyAccepted')?.touched || reportForm.touched)">
-          {{ 'SHARED.REPORT_DIALOG.PRIVACY_ACCEPTANCE_REQUIRED' | translate }}
-        </mat-error>
+            <div class="form-field full-width">
+              <label class="form-label">{{ 'SHARED.REPORT_DIALOG.REPORT' | translate }}</label>
+              <textarea class="form-textarea" formControlName="report" rows="4" required placeholder="{{ 'SHARED.REPORT_DIALOG.PLACEHOLDER' | translate }}"></textarea>
+              <div class="form-error" *ngIf="reportForm.get('report')?.hasError('required') && reportForm.get('report')?.touched">
+                {{ 'SHARED.REPORT_DIALOG.REPORT_REQUIRED' | translate }}
+              </div>
+            </div>
+            
+            <div class="privacy-acceptance">
+              <label class="checkbox-container">
+                <input type="checkbox" formControlName="privacyAccepted" aria-label="Accept privacy policy">
+                <span class="checkbox-label">
+                  {{ 'SHARED.REPORT_DIALOG.READ_ACCEPT' | translate }}&nbsp;
+                  <a [href]="EXTERNAL_LINKS.PRIVACY_POLICY" target="_blank" rel="noopener" class="privacy-link">
+                    {{ 'SHARED.REPORT_DIALOG.PRIVACY_POLICY' | translate }}
+                  </a>.
+                </span>
+              </label>
+              <div class="form-error" *ngIf="reportForm.get('privacyAccepted')?.hasError('required') && (reportForm.get('privacyAccepted')?.touched || reportForm.touched)">
+                {{ 'SHARED.REPORT_DIALOG.PRIVACY_ACCEPTANCE_REQUIRED' | translate }}
+              </div>
+            </div>
+          </form>
+        </ng-container>
+
+        <ng-template #emailInfo>
+          <p [innerHTML]="'SHARED.REPORT_DIALOG.EMAIL_INSTRUCTIONS' | translate:{ assetName: this.data.assetName, assetId: this.data.assetId }"></p>
+        </ng-template>
       </div>
-    </form>
-  </ng-container>
-
-  <ng-template #emailInfo>
-    <p [innerHTML]="'SHARED.REPORT_DIALOG.EMAIL_INSTRUCTIONS' | translate:{ assetName: this.data.assetName, assetId: this.data.assetId }"></p>
-  </ng-template>
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">
-    {{ 'SHARED.REPORT_DIALOG.CANCEL' | translate }}
-  </button>
-  <button *ngIf="isAssetReportAvailable" mat-raised-button color="warn" (click)="submitReport()" [disabled]="!reportForm.valid">
-    {{ 'SHARED.REPORT_DIALOG.SUBMIT_REPORT' | translate }}
-  </button>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" (click)="closeDialog()">
+          {{ 'SHARED.REPORT_DIALOG.CANCEL' | translate }}
+        </button>
+        <button *ngIf="isAssetReportAvailable" class="btn btn-primary" (click)="submitReport()" [disabled]="!reportForm.valid">
+          {{ 'SHARED.REPORT_DIALOG.SUBMIT_REPORT' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
