@@ -32,7 +32,6 @@ import {
 import { MatTooltip } from '@angular/material/tooltip';
 import { HttpClient } from '@angular/common/http';
 import { FiltersStateService } from '@app/shared/services/sidenav/filters-state.service';
-import { PageEvent } from '@angular/material/paginator';
 import { ParamsReqSearchAsset } from '@app/shared/interfaces/search-service.interface';
 import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
 import { ElasticSearchService } from '../../services/elastic-search/elastic-search.service';
@@ -348,7 +347,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const params: ParamsReqSearchAsset = {
       searchQuery: query,
       limit: this.pageSize,
-      page: this.currentPage,
+      offset: this.currentPage,
       platforms: platformsSelected,
       sort_field: this.sortField,
       sort_order: this.sortOrder,
@@ -658,17 +657,6 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(subscribe);
   }
 
-  public handlePageEvent(e: PageEvent) {
-    this.offset = e.pageIndex * e.pageSize;
-    this.pageSize = e.pageSize;
-    this.currentPage = e.pageIndex;
-    if (!this.isEnhancedSearch) {
-      this.getAssets();
-    } else if (this.searchQueryValue) {
-      this.enhancedSearch(this.searchQueryValue);
-    }
-  }
-
   // Custom paginator methods
   public currentPageSize = 15;
 
@@ -679,7 +667,9 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.currentPage = 0;
     this.offset = 0;
 
-    if (!this.isEnhancedSearch) {
+    if (!this.isEnhancedSearch && this.isKeywordSearchActive()) {
+      this.basicSearch();
+    } else if (!this.isEnhancedSearch) {
       this.getAssets();
     } else if (this.searchQueryValue) {
       this.enhancedSearch(this.searchQueryValue);
@@ -687,14 +677,26 @@ export class AssetsListComponent implements OnInit, OnDestroy {
   }
 
   public goToPage(pageIndex: number) {
+    if (pageIndex < 0 || pageIndex >= this.getTotalPages()) {
+      return;
+    }
     this.currentPage = pageIndex;
     this.offset = pageIndex * this.pageSize;
 
-    if (!this.isEnhancedSearch) {
+    if (!this.isEnhancedSearch && this.isKeywordSearchActive()) {
+      this.basicSearch();
+    } else if (!this.isEnhancedSearch) {
       this.getAssets();
     } else if (this.searchQueryValue) {
       this.enhancedSearch(this.searchQueryValue);
     }
+  }
+
+  private isKeywordSearchActive(): boolean {
+    return !!(
+      this.searchQueryValue?.trim() ||
+      this.filtersStateService.searchQuery?.trim()
+    );
   }
 
   public getTotalPages(): number {
