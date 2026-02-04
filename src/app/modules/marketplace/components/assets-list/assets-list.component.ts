@@ -347,7 +347,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     const params: ParamsReqSearchAsset = {
       searchQuery: query,
       limit: this.pageSize,
-      offset: this.currentPage,
+      offset: this.currentPage * this.pageSize,
       platforms: platformsSelected,
       sort_field: this.sortField,
       sort_order: this.sortOrder,
@@ -667,13 +667,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.currentPage = 0;
     this.offset = 0;
 
-    if (!this.isEnhancedSearch && this.isKeywordSearchActive()) {
-      this.basicSearch();
-    } else if (!this.isEnhancedSearch) {
-      this.getAssets();
-    } else if (this.searchQueryValue) {
-      this.enhancedSearch(this.searchQueryValue);
-    }
+    this.performSearch();
   }
 
   public goToPage(pageIndex: number) {
@@ -683,13 +677,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     this.currentPage = pageIndex;
     this.offset = pageIndex * this.pageSize;
 
-    if (!this.isEnhancedSearch && this.isKeywordSearchActive()) {
-      this.basicSearch();
-    } else if (!this.isEnhancedSearch) {
-      this.getAssets();
-    } else if (this.searchQueryValue) {
-      this.enhancedSearch(this.searchQueryValue);
-    }
+    this.performSearch();
   }
 
   private isKeywordSearchActive(): boolean {
@@ -951,4 +939,14 @@ export class AssetsListComponent implements OnInit, OnDestroy {
       this.infoTooltipVisible = false;
     }
   };
+
+  private performSearch() {
+    if (!this.isEnhancedSearch && this.isKeywordSearchActive()) {
+      this.basicSearch();
+    } else if (!this.isEnhancedSearch) {
+      this.getAssets();
+    } else if (this.searchQueryValue) {
+      this.enhancedSearch(this.searchQueryValue);
+    }
+  }
 }
