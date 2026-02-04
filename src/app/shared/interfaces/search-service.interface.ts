@@ -5,7 +5,7 @@ export interface ParamsReqSearchAsset {
   searchQuery: string;
   searchFields?: string[];
   limit: number;
-  page: number;
+  offset: number;
   exact_match?: boolean;
   sort_field?: SortField;
   sort_order?: SortOrder;
