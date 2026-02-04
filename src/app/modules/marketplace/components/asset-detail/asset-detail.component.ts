@@ -119,6 +119,11 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   protected onClickReport(): void {
     const dialogRef = this.dialog.open(ReportDialogComponent, {
       width: '50rem',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      hasBackdrop: true,
+      disableClose: false,
+      panelClass: 'report-dialog-panel',
       data: {
         assetName: this.asset.name,
         assetId: this.asset.identifier,
