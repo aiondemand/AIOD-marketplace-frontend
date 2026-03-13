@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const { base, endpoints } = environment.api;
 

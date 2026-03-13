@@ -20,7 +20,7 @@ export class GeneralAssetService extends GenericAssetService<AssetModel> {
     return new AssetModel(item, this.assetCategory);
   }
 
-  protected override parseRequest(item: any): AssetModel {
+  protected override parseRequest(_item: any): AssetModel {
     throw new Error('Method not implemented.');
   }
 

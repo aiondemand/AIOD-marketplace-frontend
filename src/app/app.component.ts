@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AppConfigService } from './core/services/app-config/app-config.service';
-import { getCookie, setCookie } from './shared/utils/theme-utils';
+import { getCookie } from './shared/utils/theme-utils';
 
 @Component({
   selector: 'app-root',

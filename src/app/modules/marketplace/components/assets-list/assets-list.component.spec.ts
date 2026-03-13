@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient } from '@angular/common/http';
+
 import { AssetsListComponent } from './assets-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 describe('AssetsListComponent', () => {
   let component: AssetsListComponent;
   let fixture: ComponentFixture<AssetsListComponent>;
-  let httpClient: HttpClient;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,7 +36,7 @@ describe('AssetsListComponent', () => {
 
     fixture = TestBed.createComponent(AssetsListComponent);
     component = fixture.componentInstance;
-    httpClient = TestBed.inject(HttpClient);
+
     fixture.detectChanges();
   });
 

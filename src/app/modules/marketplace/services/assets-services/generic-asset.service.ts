@@ -83,11 +83,11 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
       .pipe(map((item) => this.parseResponse(item)));
   }
 
-  public createAsset(asset: T): Observable<T> {
+  public createAsset(_asset: T): Observable<T> {
     throw new Error('Method not implemented.');
   }
 
-  public updateAsset(asset: T): Observable<T> {
+  public updateAsset(_asset: T): Observable<T> {
     throw new Error('Method not implemented.');
   }
 
@@ -97,7 +97,7 @@ export abstract class GenericAssetService<T> implements AssetService<T> {
     );
   }
 
-  public deleteAsset(id: string | number): Observable<void> {
+  public deleteAsset(_id: string | number): Observable<void> {
     throw new Error('Method not implemented.');
   }
 

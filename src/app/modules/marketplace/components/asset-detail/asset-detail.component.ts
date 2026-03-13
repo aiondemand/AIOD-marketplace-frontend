@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 import { AssetCategory } from '@app/shared/models/asset-category.model';
-import { AssetModel } from '@app/shared/models/asset.model';
+
 import { Subscription, switchMap } from 'rxjs';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { GeneralAssetService } from '../../services/assets-services/general-asset.service';
@@ -53,7 +53,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.generalAssetService.setAssetCategory(category);
 
-    const subscribe = this.generalAssetService.getAsset(id).subscribe({
+    const _subscribe = this.generalAssetService.getAsset(id).subscribe({
       next: (asset: any) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
@@ -120,7 +120,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   }
 
   protected onClickReport(): void {
-    const dialogRef = this.dialog.open(ReportDialogComponent, {
+    const _dialogRef = this.dialog.open(ReportDialogComponent, {
       width: '50rem',
       maxWidth: '90vw',
       maxHeight: '90vh',

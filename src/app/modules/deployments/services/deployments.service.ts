@@ -9,7 +9,7 @@ import { TrainModuleRequest } from '@app/shared/interfaces/module.interface';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
-const { base, endpoints } = environment.api;
+const { base: _base, endpoints: _endpoints } = environment.api;
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class DeploymentsService {
     });
   }
 
-  getDeploymentByUUID(deploymentUUID: string): Observable<Deployment> {
+  getDeploymentByUUID(_deploymentUUID: string): Observable<Deployment> {
     //  const url = `${base}${endpoints.deploymentByUUID.replace(
 
     //':deploymentUUID',
@@ -58,7 +58,7 @@ export class DeploymentsService {
     });
   }
 
-  deleteDeploymentByUUID(deploymentUUID: string): Observable<statusReturn> {
+  deleteDeploymentByUUID(_deploymentUUID: string): Observable<statusReturn> {
     // const url = `${base}${endpoints.deploymentByUUID.replace(
     //   ':deploymentUUID',
 

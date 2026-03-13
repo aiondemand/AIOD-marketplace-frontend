@@ -110,14 +110,14 @@ export class BookmarkViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  private applyFilter(category: AssetCategory): void {
+  private applyFilter(_category: AssetCategory): void {
     this.lengthTable = this.allAssets.length;
     this.assetsSize = this.allAssets.length;
     this.currentPage = 0;
     this.updatePaginatedData();
   }
 
-  public onPageSizeChange(event: Event): void {
+  public onPageSizeChange(_event: Event): void {
     this.currentPage = 0;
     this.updatePaginatedData();
   }
