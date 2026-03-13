@@ -53,7 +53,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.generalAssetService.setAssetCategory(category);
 
-    const _subscribe = this.generalAssetService.getAsset(id).subscribe({
+    const assetSub = this.generalAssetService.getAsset(id).subscribe({
       next: (asset: any) => {
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
@@ -87,6 +87,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         console.error('Error get asset', error);
       },
     });
+    this.subscriptions.add(assetSub);
   }
 
   private getParams(): void {
