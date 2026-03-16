@@ -1,4 +1,11 @@
-<div *ngIf="asset">
+<div *ngIf="errorMessage" class="error-container">
+  <div class="alert alert-danger m-4" role="alert">
+    <i class="icon-flag mr-2"></i>
+    {{ errorMessage }}
+  </div>
+</div>
+
+<div *ngIf="asset && !errorMessage">
   <div class="m-3 asset-header">
     <div class="paths"><xng-breadcrumb separator=">"></xng-breadcrumb></div>
   </div>
