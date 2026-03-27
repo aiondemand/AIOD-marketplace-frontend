@@ -9,14 +9,14 @@ import {
   OAuthService,
   UrlHelperService,
 } from 'angular-oauth2-oidc';
-import { HttpClient } from '@angular/common/http';
+
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
 
 describe('ContentLayoutComponent', () => {
   let component: ContentLayoutComponent;
   let fixture: ComponentFixture<ContentLayoutComponent>;
-  let httpClient: HttpClient;
+
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
@@ -48,7 +48,6 @@ describe('ContentLayoutComponent', () => {
 
     fixture = TestBed.createComponent(ContentLayoutComponent);
     component = fixture.componentInstance;
-    httpClient = TestBed.inject(HttpClient);
   });
 
   it('should create', () => {

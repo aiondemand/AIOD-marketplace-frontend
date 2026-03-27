@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppConfigService } from '@app/core/services/app-config/app-config.service';
-import { AssetModel } from '@app/shared/models/asset.model';
+
 import { AssetCategory } from '@app/shared/models/asset-category.model';
 import { AuthService, UserProfile } from '@app/core/services/auth/auth.service';
 import { BookmarkService } from '@app/modules/marketplace/services/common-services/bookmark-service/bookmark.service';
 import { environment } from '@environments/environment';
 import { getKeyCategoryByValue } from '@app/modules/marketplace/utils/key-category.utils';
 import { Params, Router } from '@angular/router';
-import { AssetsPurchase } from '@app/shared/models/asset-purchase.model';
 
 @Component({
   selector: 'app-asset-card',

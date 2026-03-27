@@ -5,7 +5,7 @@ import { AppConfigService } from '@app/core/services/app-config/app-config.servi
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
+
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const mockedConfigService: any = {};
@@ -29,8 +29,6 @@ const mockedMediaMatcher: any = {
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
   let fixture: ComponentFixture<SidenavComponent>;
-  let appConfigService: AppConfigService;
-  let httpClient: HttpClient;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -45,7 +43,7 @@ describe('SidenavComponent', () => {
 
     fixture = TestBed.createComponent(SidenavComponent);
     component = fixture.componentInstance;
-    httpClient = TestBed.inject(HttpClient);
+
     fixture.detectChanges();
   });
 

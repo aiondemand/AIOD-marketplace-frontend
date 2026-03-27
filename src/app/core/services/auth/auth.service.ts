@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { BehaviorSubject } from 'rxjs';
 import { authCodeFlowConfig } from './auth.config';
-import { AppConfigService } from '../app-config/app-config.service';
 
 export interface UserProfile {
   name: string;

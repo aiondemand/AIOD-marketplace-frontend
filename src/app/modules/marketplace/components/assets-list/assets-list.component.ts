@@ -231,7 +231,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected unSelectPlat(id: number) {
+  protected unSelectPlat(_id: number) {
     //TODO MAKE THEM UNSElECTED
   }
   protected selectAllPlat() {
@@ -247,7 +247,7 @@ export class AssetsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected unSelectCat(id: number) {
+  protected unSelectCat(_id: number) {
     //TODO MAKE THEM UNSElECTED
   }
 

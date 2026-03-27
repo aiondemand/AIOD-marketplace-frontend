@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient } from '@angular/common/http';
+
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AssetDetailComponent } from './asset-detail.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,6 @@ import { AuthService } from '@app/core/services/auth/auth.service';
 describe('AssetDetailComponent', () => {
   let component: AssetDetailComponent;
   let fixture: ComponentFixture<AssetDetailComponent>;
-  let httpClient: HttpClient;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -40,7 +39,7 @@ describe('AssetDetailComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(AssetDetailComponent);
     component = fixture.componentInstance;
-    httpClient = TestBed.inject(HttpClient);
+
     fixture.detectChanges();
   });
 
