@@ -40,6 +40,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
   public categoryColor!: string;
   public isLoading = false;
   public asset!: any;
+  public errorMessage: string | null = null;
   public category!: AssetCategory;
   public AssetCategory = AssetCategory;
   protected isBookmarked = false;
@@ -55,6 +56,7 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
 
     const subscribe = this.generalAssetService.getAsset(id).subscribe({
       next: (asset: any) => {
+        this.errorMessage = null;
         this.asset = asset;
         this.breadcrumbService.set('@assetName', this.asset.name);
         this.isLoading = false;
@@ -83,7 +85,9 @@ export class AssetDetailComponent implements OnInit, OnDestroy {
         this.subscriptions.add(bookmarkSub);
       },
       error: (error: any) => {
-        setTimeout(() => (this.isLoading = false), 3000);
+        this.isLoading = false;
+        this.errorMessage =
+          'An error occurred while fetching the asset details. Please try again later.';
         console.error('Error get asset', error);
       },
     });
