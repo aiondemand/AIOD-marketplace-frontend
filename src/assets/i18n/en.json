@@ -248,7 +248,7 @@
       "SUBMIT_REPORT": "Submit report",
       "SUBMIT_SUCCESS": "Your report has been submitted. Thank you.",
       "SUBMIT_ERROR": "There was an error submitting your report. Please try again later.",
-      "EMAIL_INSTRUCTIONS": "To flag this asset as innapropriate, please, send an e-mail to <a href=\"mailto:info@aiod.eu\">info@aiod.eu</a> with the subject:<br>FLAG: <strong>{{assetName}}</strong> and describe the problem. Do not forget to provide the asset's identifier: <strong>{{assetId}}</strong> in the message."
+      "EMAIL_INSTRUCTIONS": "To flag this asset as innapropriate, please, send an e-mail to <a href=\"mailto:contact@deployaiproject.eu\">contact@deployaiproject.eu</a> with the subject:<br>FLAG: <strong>{{assetName}}</strong> and describe the problem. Do not forget to provide the asset's identifier: <strong>{{assetId}}</strong> in the message."
     }
   }
 }
