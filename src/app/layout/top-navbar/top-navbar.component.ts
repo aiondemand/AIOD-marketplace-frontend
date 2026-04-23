@@ -38,6 +38,11 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   protected menuItems: any[] = [];
   private navSub?: Subscription;
   protected isSmallDevice = true;
+  private readonly fallbackMenuItems = [
+    { title: 'Get Started', url: EXTERNAL_LINKS.GET_STARTED, children: [] },
+    { title: 'Tools', url: EXTERNAL_LINKS.TOOLS, children: [] },
+    { title: 'Resources', url: EXTERNAL_LINKS.MY_LIBRARY, children: [] },
+  ];
 
   private handleResize = (): void => {
     if (window.innerWidth >= this.widthSmallDevice) {
@@ -80,9 +85,34 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
     const navigationSub = this.navigationService
       .getNavigation()
       .subscribe((items: any[]) => {
-        this.menuItems = items || [];
+        this.menuItems = this.normalizeMenuItems(items);
+      }, () => {
+        this.menuItems = this.fallbackMenuItems;
       });
     this.navSub.add(navigationSub);
+  }
+
+  private normalizeMenuItems(items: any): any[] {
+    if (!Array.isArray(items) || items.length === 0) {
+      return this.fallbackMenuItems;
+    }
+
+    // Some deployments return already-hierarchical menu data.
+    const hasChildren = items.some((it) => Array.isArray(it?.children));
+    const hasParentField = items.some((it) => Object.prototype.hasOwnProperty.call(it, 'parent'));
+    if (hasChildren && !hasParentField) {
+      return items;
+    }
+
+    const normalized = items.map((it: any, idx: number) => ({
+      ...it,
+      id: Number(it?.id ?? idx + 1),
+      parent: Number(it?.parent ?? 0),
+      children: Array.isArray(it?.children) ? it.children : [],
+    }));
+
+    const built = this.buildMenu(normalized);
+    return built.length ? built : this.fallbackMenuItems;
   }
 
   ngOnDestroy(): void {
@@ -95,7 +125,10 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
 
     const map = new Map<number, any>();
     items.forEach((it) => {
-      map.set(it.id, { ...it, children: [] });
+      map.set(it.id, {
+        ...it,
+        children: Array.isArray(it.children) ? [...it.children] : [],
+      });
     });
 
     const roots: any[] = [];

@@ -75,7 +75,7 @@
                   </ul> 
                 </div>
               </li>
-              <li style="display: flex;" *ngIf="mobileOpened">
+              <li class="mobile-actions" *ngIf="mobileOpened">
                    <button
                   title="Contribute"
                   class="btn btn-circle not-rotate ml-2 btn-circle--yellow"
@@ -158,8 +158,10 @@
           </ng-template>
 
           <ng-template #themeSwitch>
-            <div [style.margin-top]="mobileOpened ? '0px' : ''" 
-            [style.margin-left]="mobileOpened ? '10px' : ''" class="theme-switch-wrapper">
+            <div
+              class="theme-switch-wrapper"
+              [ngClass]="{ 'theme-switch-wrapper--mobile': mobileOpened }"
+            >
               <label class="theme-switch" for="checkbox">
                 <input type="checkbox" id="checkbox" />
                 <div (click)="toggleTheme()" class="slider round">

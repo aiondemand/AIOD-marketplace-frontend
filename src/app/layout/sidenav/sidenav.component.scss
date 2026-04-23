@@ -58,9 +58,9 @@
   .mat-sidenav.mat-drawer.mat-drawer-side {
     @media (min-width: 769px) {
       position: fixed !important;
-      top: 8rem;
+      top: 110px;
       left: 0;
-      height: 100vh;
+      height: calc(100vh - 110px);
       overflow-y: auto !important;
       z-index: 2000;
     }
@@ -133,6 +133,7 @@
   display: flex;
   align-items: center;
   color: $color-default;
+
   & .mat-icon {
     transform: scale(0.7);
   }
@@ -259,6 +260,7 @@
   display: block;
   box-sizing: border-box;
 }
+
 ::ng-deep .sidebar-footer.user {
   display: flex;
   height: 100%;
@@ -266,6 +268,7 @@
   margin-top: auto;
   width: 100%;
 }
+
 ::ng-deep .sidebar-footer.user .border-bottom {
   display: inline-flex;
   align-self: flex-end;
@@ -297,12 +300,10 @@
   z-index: 2000;
   transform: translateY(-50%);
   padding: 24px;
-  background: radial-gradient(
-    43.6% 43.6% at 49.98% 100.45%,
-    #41b6e6 0,
-    #0047bb 55%,
-    #039 100%
-  );
+  background: radial-gradient(43.6% 43.6% at 49.98% 100.45%,
+      #41b6e6 0,
+      #0047bb 55%,
+      #039 100%);
   color: #fff !important;
   border-radius: 100px;
   font-weight: 700;
@@ -351,6 +352,7 @@
   border-color: $color-primary2;
   box-shadow: none;
 }
+
 ::ng-deep [data-theme='light'] .login-message {
   color: $color-primary2;
   border-color: $color-primary2;

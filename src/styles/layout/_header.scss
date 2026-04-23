@@ -4,8 +4,17 @@ html {
 }
 
 .menu-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
   @include max-lg {
     display: none !important;
+  }
+
+  > * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -106,6 +115,7 @@ header {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     display: flex;
     max-height: 143px;
 
@@ -179,6 +189,7 @@ header {
       padding-left: 0;
       align-items: flex-end;
       margin-bottom: 0;
+      gap: 12px;
       transition: margin 300ms ease-in-out;
 
       @include max-md {
@@ -189,7 +200,7 @@ header {
       }
 
       .menu {
-        margin-right: 20px;
+        margin-right: 0;
         position: relative;
 
         &:before {
@@ -204,7 +215,7 @@ header {
         }
 
         @include max-lg {
-          margin-right: 5px;
+          margin-right: 0;
         }
 
         @include max-md {
@@ -404,11 +415,23 @@ header {
         width: 100vw;
         height: 100vh;
         margin-left: -15px;
-        z-index: -1;  
+        z-index: -1;
+      }
+
+      .mobile-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .btn,
+        .theme-switch-wrapper {
+          margin: 0 !important;
+        }
       }
     }
     .top-bar-buttons {
       width: 55%;
+      min-width: 0;
     }
   }
 
@@ -897,6 +920,10 @@ header {
   @include max-md {
     margin-left: 0;
   }
+}
+
+.theme-switch-wrapper--mobile {
+  margin-left: 10px;
 }
 
 .theme-switch {
